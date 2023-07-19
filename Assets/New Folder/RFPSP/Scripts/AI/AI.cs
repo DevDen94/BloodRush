@@ -1028,7 +1028,7 @@ public class AI : MonoBehaviour {
 	//set navmesh destination and set NPC speed
 	void TravelToPoint( Vector3 position  ){
 		if(attackFinished){
-			agent.SetDestination(position);
+			agent.SetDestination(playerObj.transform.position);
 			agent.isStopped = false;
 			agent.speed = speedAmt;
 			SetSpeed(speedAmt);
