@@ -241,8 +241,11 @@ public class AI : MonoBehaviour {
 	[HideInInspector]
 	public RaycastHit attackHit;
 
-	void Start(){
-	
+	public Animator anim;
+	void Start()
+	{
+
+		
 		NPCMgrObj = GameObject.Find("NPC Manager");
 		NPCRegistryComponent = NPCMgrObj.GetComponent<NPCRegistry>();
 		NPCRegistryComponent.Npcs.Add(myTransform.gameObject.GetComponent<AI>());//register this active NPC with the NPCRegistry
@@ -1028,7 +1031,7 @@ public class AI : MonoBehaviour {
 	//set navmesh destination and set NPC speed
 	void TravelToPoint( Vector3 position  ){
 		if(attackFinished){
-			agent.SetDestination(playerObj.transform.position);
+			agent.SetDestination(position);
 			agent.isStopped = false;
 			agent.speed = speedAmt;
 			SetSpeed(speedAmt);
