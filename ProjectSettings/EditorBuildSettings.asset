@@ -5,16 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/New Folder/RFPSP/Obstacle Course Test.unity
-    guid: 120ed6e4e4a092f48bed6f27e5c14d48
-  - enabled: 0
-    path: Assets/New Folder/RFPSP/FPS Prefab Sandbox.unity
-    guid: 8f29cf88cce3e8d43967c9e421110bdf
-  - enabled: 0
-    path: Assets/New Folder/RFPSP/TerrainTest.unity
-    guid: c5a2d8713a02e624daf3c98dd517520b
   - enabled: 1
-    path: Assets/New Folder/StarterAssets/ThirdPersonController/Scenes/Playground.unity
-    guid: e9017d5f96b9f09489b4b37e1d6eb914
+    path: Assets/New Folder/StarterAssets/ThirdPersonController/Scenes/Playground_Zee.unity
+    guid: b7a42cd29d148f8419ea682efc2061cb
   m_configObjects: {}
