@@ -88,7 +88,7 @@ public class AI : MonoBehaviour {
 	public bool patrolOnce;
 	[Tooltip("True if NPC should walk on patrol, will run on patrol if false.")]
 	public bool walkOnPatrol = true;
-	private  Transform curWayPoint;
+	public Transform curWayPoint;
 	[Tooltip("Drag the parent waypoint object with the WaypointGroup.cs script attached here. If none, NPC will stand watch instead of patrolling.")]
 	public WaypointGroup waypointGroup;
 	[Tooltip("The number of the waypoint in the waypoint group which should be followed first.")]
@@ -241,8 +241,11 @@ public class AI : MonoBehaviour {
 	[HideInInspector]
 	public RaycastHit attackHit;
 
-	void Start(){
-	
+	public Animator anim;
+	void Start()
+	{
+		Patrollling = false;
+		Jump = false;
 		NPCMgrObj = GameObject.Find("NPC Manager");
 		NPCRegistryComponent = NPCMgrObj.GetComponent<NPCRegistry>();
 		NPCRegistryComponent.Npcs.Add(myTransform.gameObject.GetComponent<AI>());//register this active NPC with the NPCRegistry
@@ -354,6 +357,7 @@ public class AI : MonoBehaviour {
 					speedAmt = runSpeed;
 					startPosition = curWayPoint.position;
 					TravelToPoint(curWayPoint.position);
+					
 					StartCoroutine(Patrol());
 				}else{
 					TravelToPoint(startPosition);
@@ -505,118 +509,216 @@ public class AI : MonoBehaviour {
 			}
 		}
 		
+	}bool enter = false;
+	void Reset_ZombieMovement()
+    {
+		followPlayer = true;
+		huntPlayer = true;
+		AnimatorComponent.SetInteger("AnimState", 0);
+		waypointGroup = curWayPoint.GetComponent<CheckWindow>().New_WayPointGroup;
+		Patrollling = false;
+		curWayPoint = waypointGroup.wayPoints[0];
+		StartCoroutine(Patrol());
 	}
-	
-	IEnumerator Patrol(){
-		while (true) {
-		
-			if(huntPlayer){
-				StartCoroutine(SpawnNPC());
-				yield break;
+	IEnumerator Jumpp()
+	{
+		if (!Patrollling)
+		{
+			if (!Jump)
+			{
+				AnimatorComponent.SetInteger("AnimState", 3);
+				AnimatorComponent.SetTrigger("Attack");
+				gameObject.transform.LookAt(curWayPoint.GetComponent<CheckWindow>().window.transform);
 			}
-			
-			if(curWayPoint && waypointGroup){//patrol if NPC has a current waypoint, otherwise stand watch
-				Vector3 waypointPosition = curWayPoint.position;
-				float waypointDist = Vector3.Distance(waypointPosition, myTransform.position);
-				int waypointNumber = waypointGroup.wayPoints.IndexOf(curWayPoint);
+			else
+			{
+				if (!enter)
+				{
+					agent.speed = 3f;
+					agent.SetDestination(JumpP.transform.position);
+					AnimatorComponent.SetInteger("AnimState", 3);
+					AnimatorComponent.SetTrigger("Jump");
+					enter = true;
+					Invoke("Reset_ZombieMovement", 1f);
+                }
+                else
+                {
+					yield break;
+				}
+			}
+        }
+        else
+        {
+			Patrollling = true;
+			yield break;
+        }
+		
+		
+	}
+	public bool Patrollling;
+	public bool Jump;
+	public GameObject JumpP;
+	IEnumerator Patrol(){
 
-				//if NPC is close to a waypoint, pick the next one
-				if((patrolOnce && waypointNumber == waypointGroup.wayPoints.Count - 1)){
-					if(waypointDist < pickNextDestDist){
-						speedAmt = 0.0f;
-						startPosition = waypointPosition;
-						StartCoroutine(StandWatch());
-						yield break;//cancel patrol if patrolOnce var is true
-					}
-				}else{	
-					if(waypointDist < pickNextDestDist){
-						if(waypointGroup.wayPoints.Count == 1){
+		while (true) {
+			if (curWayPoint.GetComponent<CheckWindow>() != null)
+			{
+				StartCoroutine(Jumpp());
+			}
+			else
+			{
+				if (huntPlayer)
+				{
+					StartCoroutine(SpawnNPC());
+					yield break;
+				}
+
+				if (curWayPoint && waypointGroup)
+				{//patrol if NPC has a current waypoint, otherwise stand watch
+					Vector3 waypointPosition = curWayPoint.position;
+					float waypointDist = Vector3.Distance(waypointPosition, myTransform.position);
+					int waypointNumber = waypointGroup.wayPoints.IndexOf(curWayPoint);
+
+					//if NPC is close to a waypoint, pick the next one
+					if ((patrolOnce && waypointNumber == waypointGroup.wayPoints.Count - 1))
+					{
+						if (waypointDist < pickNextDestDist)
+						{
 							speedAmt = 0.0f;
 							startPosition = waypointPosition;
 							StartCoroutine(StandWatch());
-							yield break;//cancel patrol if NPC has reached their only waypoint
-						}
-						curWayPoint = PickNextWaypoint (curWayPoint, waypointNumber);
-						if(spawned && Vector3.Distance(waypointPosition, myTransform.position) < pickNextDestDist){
-							walkOnPatrol = true;//make spawned NPCs run to their first waypoint, but walk on the patrol
+							yield break;//cancel patrol if patrolOnce var is true
 						}
 					}
-				}
-
-				//expand search radius if attacked
-				if(attackedTime + 6.0f > Time.time){
-					attackRangeAmt = attackRange * 6.0f;//expand enemy search radius if attacked to defend against sniping
-				}else{
-					attackRangeAmt = attackRange;
-				}
-				
-				//allow player to push friendly NPCs out of their way
-				if(playerObj.activeInHierarchy && !collisionState && FPSWalker.capsule){
-					foreach(Collider col in colliders){
-						Physics.IgnoreCollision(col, FPSWalker.capsule, true);
-					}
-					collisionState = true;
-				}
-
-				//determine if player is within sight of NPC
-				CanSeeTarget();
-				if((target && targetVisible) || heardPlayer || heardTarget){
-					yield return StartCoroutine(AttackTarget());
-				}else{
-					if(NPCRegistryComponent){
-						NPCRegistryComponent.FindClosestTarget(myTransform.gameObject, this, myTransform.position, attackRangeAmt, factionNum);
-					}
-					// Move towards our target
-					if(attackTime < Time.time){
-						if(orderedMove && !followPlayer){
-							if(Vector3.Distance(startPosition, myTransform.position) > pickNextDestDist){
-								speedAmt = runSpeed;
-								TravelToPoint(startPosition);
-							}else{
-								//play idle animation
+					else
+					{
+						if (waypointDist < pickNextDestDist)
+						{
+							if (waypointGroup.wayPoints.Count == 1)
+							{
 								speedAmt = 0.0f;
-								agent.isStopped = true;
-								SetSpeed(speedAmt);
-
-								if(attackFinished && attackTime < Time.time){
-									AnimatorComponent.SetInteger("AnimState", 0);
-								}
-								
-								StartCoroutine(StandWatch());//npc reached player-designated position, stop patrolling and wait here
-								yield break;
+								startPosition = waypointPosition;
+								StartCoroutine(StandWatch());
+								yield break;//cancel patrol if NPC has reached their only waypoint
 							}
-						}else if(!orderedMove && followPlayer){
-							if(Vector3.Distance(playerObj.transform.position, myTransform.position) > pickNextDestDist){
-								if(Vector3.Distance(playerObj.transform.position, myTransform.position) > pickNextDestDist * 2f){
+
+
+							curWayPoint = PickNextWaypoint(curWayPoint, waypointNumber);
+							if (spawned && Vector3.Distance(waypointPosition, myTransform.position) < pickNextDestDist)
+							{
+								walkOnPatrol = true;//make spawned NPCs run to their first waypoint, but walk on the patrol
+
+							}
+
+
+						}
+
+					}
+
+					//expand search radius if attacked
+					if (attackedTime + 6.0f > Time.time)
+					{
+						attackRangeAmt = attackRange * 6.0f;//expand enemy search radius if attacked to defend against sniping
+					}
+					else
+					{
+						attackRangeAmt = attackRange;
+					}
+
+					//allow player to push friendly NPCs out of their way
+					if (playerObj.activeInHierarchy && !collisionState && FPSWalker.capsule)
+					{
+						foreach (Collider col in colliders)
+						{
+							Physics.IgnoreCollision(col, FPSWalker.capsule, true);
+						}
+						collisionState = true;
+					}
+
+					//determine if player is within sight of NPC
+					CanSeeTarget();
+					if ((target && targetVisible) || heardPlayer || heardTarget)
+					{
+						yield return StartCoroutine(AttackTarget());
+					}
+					else
+					{
+						if (NPCRegistryComponent)
+						{
+							NPCRegistryComponent.FindClosestTarget(myTransform.gameObject, this, myTransform.position, attackRangeAmt, factionNum);
+						}
+						// Move towards our target
+						if (attackTime < Time.time)
+						{
+							if (orderedMove && !followPlayer)
+							{
+								if (Vector3.Distance(startPosition, myTransform.position) > pickNextDestDist)
+								{
 									speedAmt = runSpeed;
-									lastRunTime = Time.time;
-								}else{
-									if(lastRunTime + 2.0f < Time.time){
-										speedAmt = walkSpeed;
-									}
+									TravelToPoint(startPosition);
 								}
-								TravelToPoint(playerObj.transform.position);
-							}else{
-								//play idle animation
-								speedAmt = 0.0f;
-								agent.isStopped = true;
-								SetSpeed(speedAmt);
+								else
+								{
+									//play idle animation
+									speedAmt = 0.0f;
+									agent.isStopped = true;
+									SetSpeed(speedAmt);
 
-								if(attackFinished && attackTime < Time.time){
-									AnimatorComponent.SetInteger("AnimState", 0);
+									if (attackFinished && attackTime < Time.time)
+									{
+										AnimatorComponent.SetInteger("AnimState", 0);
+									}
+
+									StartCoroutine(StandWatch());//npc reached player-designated position, stop patrolling and wait here
+									yield break;
 								}
-								
 							}
-						}else{
-							//determine if NPC should walk or run on patrol
-							if(walkOnPatrol){speedAmt = walkSpeed;}else{speedAmt = runSpeed;}
-							TravelToPoint(waypointPosition);
+							else if (!orderedMove && followPlayer)
+							{
+								if (Vector3.Distance(playerObj.transform.position, myTransform.position) > pickNextDestDist)
+								{
+									if (Vector3.Distance(playerObj.transform.position, myTransform.position) > pickNextDestDist * 2f)
+									{
+										speedAmt = runSpeed;
+										lastRunTime = Time.time;
+									}
+									else
+									{
+										if (lastRunTime + 2.0f < Time.time)
+										{
+											speedAmt = walkSpeed;
+										}
+									}
+									TravelToPoint(playerObj.transform.position);
+								}
+								else
+								{
+									//play idle animation
+									speedAmt = 0.0f;
+									agent.isStopped = true;
+									SetSpeed(speedAmt);
+
+									if (attackFinished && attackTime < Time.time)
+									{
+										AnimatorComponent.SetInteger("AnimState", 0);
+									}
+
+								}
+							}
+							else
+							{
+								//determine if NPC should walk or run on patrol
+								if (walkOnPatrol) { speedAmt = walkSpeed; } else { speedAmt = runSpeed; }
+								TravelToPoint(waypointPosition);
+							}
 						}
 					}
 				}
-			}else{
-				StartCoroutine(StandWatch());//don't patrol if we have no waypoints
-				yield break;
+				else
+				{
+					StartCoroutine(StandWatch());//don't patrol if we have no waypoints
+					yield break;
+				}
 			}
 			yield return new WaitForSeconds(0.3f);
 		}
@@ -1028,7 +1130,7 @@ public class AI : MonoBehaviour {
 	//set navmesh destination and set NPC speed
 	void TravelToPoint( Vector3 position  ){
 		if(attackFinished){
-			agent.SetDestination(playerObj.transform.position);
+			agent.SetDestination(position);
 			agent.isStopped = false;
 			agent.speed = speedAmt;
 			SetSpeed(speedAmt);

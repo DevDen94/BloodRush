@@ -18,6 +18,7 @@ TagManager:
   - Flesh
   - Stone
   - metal
+  - Hand
   layers:
   - Default
   - TransparentFX

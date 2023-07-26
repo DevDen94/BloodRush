@@ -18,22 +18,54 @@ public class LocationDamage : MonoBehaviour {
 	public float sloMoKillChance = 0.0f;
 	[Tooltip("Duration of slow motion time in seconds if slo mo kill chance check is successful.")]
 	public float sloMoTime = 0.9f;
-
+	public Animator anim;
+	public GameObject ObjectDisbale;
+	public GameObject ObjectDisable_Child;
 	private Transform myTransform;
 	private Rigidbody thisRigidBody;
-	
+	public GameObject ActiveRigid;
+	public GameObject Active_Child;
+	public GameObject Active_Child_Header;
+
+	public GameObject Objects;
+	public bool IsLegs;
 	void OnEnable (){
 		myTransform = transform;
 		headShotState = false;
 		thisRigidBody = myTransform.GetComponent<Rigidbody>();
 		Mathf.Clamp01(sloMoKillChance);
+		anim = AIComponent.gameObject.GetComponent<Animator>();
 	}
 	
 	//damage NPC
 	public void ApplyDamage ( float damage, Vector3 attackDir, Vector3 attackerPos, Transform attacker, bool isPlayer, bool isExplosion  ){
 		if(AIComponent && AIComponent.CharacterDamageComponent){
 			if(isPlayer){//if attack is from player, pass damage info to main CharacterDamage.cs component
-			
+				if (ObjectDisbale != null)
+				{
+					ObjectDisbale.GetComponent<SkinnedMeshRenderer>().enabled=false;
+					gameObject.SetActive(false);
+                    if (ActiveRigid != null)
+                    {
+						ActiveRigid.gameObject.SetActive(true);
+					    ActiveRigid.GetComponent<Rigidbody>().isKinematic = false;
+					    ActiveRigid.transform.parent = Objects.transform;
+                    }
+					
+                    if (Active_Child != null)
+                    {
+						Active_Child_Header.GetComponent<SkinnedMeshRenderer>().enabled = false;
+						Active_Child.gameObject.SetActive(true);
+						Active_Child.GetComponent<Rigidbody>().isKinematic = false;
+						Active_Child.transform.parent = Objects.transform;
+					}
+					
+					
+                    if (IsLegs)
+                    {
+						anim.runtimeAnimatorController = Resources.Load("CrawlController") as RuntimeAnimatorController;
+					}
+				}
 				AIComponent.CharacterDamageComponent.ApplyDamage(damage * damageMultiplier, attackDir, attackerPos, attacker, isPlayer, isExplosion, thisRigidBody, damageForce);
 				
 				if (headShot 
@@ -59,10 +91,12 @@ public class LocationDamage : MonoBehaviour {
 	
 	void OnCollisionEnter(Collision hit){
 		if(AIComponent.enabled){
+          
 			LocationDamage hitLocationDamage = hit.collider.GetComponent<LocationDamage>();
 			if(hitLocationDamage){
 				if(!hitLocationDamage.AIComponent.enabled){
 					Physics.IgnoreCollision(hit.collider, myTransform.GetComponent<Collider>(), true);
+					
 				}
 			}
 		}

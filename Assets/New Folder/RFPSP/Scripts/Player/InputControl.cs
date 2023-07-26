@@ -1,4 +1,4 @@
-﻿//InputControl.cs by Azuline Studios© All Rights Reserved
+//InputControl.cs by Azuline Studios© All Rights Reserved
 //Manages button and axis input to be read by the other scripts.
 using UnityEngine;
 using System.Collections;
@@ -164,10 +164,10 @@ public class InputControl : MonoBehaviour {
 		if(FPSPlayerComponent && !FPSPlayerComponent.restarting){
 		
 			//player movement buttons
-			leftHold = ControlFreak2.CF2Input.GetButton("Left");
-			rightHold = ControlFreak2.CF2Input.GetButton("Right");
-			forwardHold = ControlFreak2.CF2Input.GetButton("Forward");
-			backHold = ControlFreak2.CF2Input.GetButton("Back");
+			leftHold = Input.GetButton("Left");
+			rightHold = Input.GetButton("Right");
+			forwardHold = Input.GetButton("Forward");
+			backHold = Input.GetButton("Back");
 			
 			//cancel player movement if opposite buttons are held at the same time
 			if(leftHold && !rightHold){
@@ -187,14 +187,14 @@ public class InputControl : MonoBehaviour {
 			}
 			
 			//scaled radial deadzone for joysticks for smooth player movement ramp from deadzone
-			moveInput = new Vector2(ControlFreak2.CF2Input.GetAxis("Joystick Move X"), ControlFreak2.CF2Input.GetAxis("Joystick Move Y"));
+			moveInput = new Vector2(Input.GetAxis("Joystick Move X"), Input.GetAxis("Joystick Move Y"));
 			if(moveInput.magnitude < deadzone){
 				moveInput = Vector2.zero;
 			}else{
 				moveInput = moveInput.normalized * ((moveInput.magnitude - deadzone) / (1 - deadzone));
 			}
 			
-			lookInput = new Vector2(AccelerateInput(ControlFreak2.CF2Input.GetAxis("Joystick Look X")), AccelerateInput(ControlFreak2.CF2Input.GetAxis("Joystick Look Y")));
+			lookInput = new Vector2(AccelerateInput(Input.GetAxis("Joystick Look X")), AccelerateInput(Input.GetAxis("Joystick Look Y")));
 			if(lookInput.magnitude < deadzone){
 				lookInput = Vector2.zero;
 			}else{
@@ -206,24 +206,24 @@ public class InputControl : MonoBehaviour {
 			moveY = Mathf.Clamp(moveYButton + moveInput.y, -1.0f, 1.0f);
 			
 			//combine mouse and axis input for player looking (accelerate axis input)
-			lookX = ControlFreak2.CF2Input.GetAxisRaw("Mouse X") + /*AccelerateInput(*/lookInput.x;
-			lookY = ControlFreak2.CF2Input.GetAxisRaw("Mouse Y") + /*AccelerateInput(*/lookInput.y;
+			lookX = Input.GetAxisRaw("Mouse X") + /*AccelerateInput(*/lookInput.x;
+			lookY = Input.GetAxisRaw("Mouse Y") + /*AccelerateInput(*/lookInput.y;
 			
 			//manage zoom and fire inputs and determine if xbox 360 triggers have been pressed or held
-			if(ControlFreak2.CF2Input.GetAxisRaw("Xbox R Trigger") > 0.1f || ControlFreak2.CF2Input.GetButton("Fire")){
+			if(Input.GetAxisRaw("Xbox R Trigger") > 0.1f || Input.GetButton("Fire")){
 				fireHold = true;
 			}else{
 				fireHold = false;	
 			}
 			
-			if(ControlFreak2.CF2Input.GetAxisRaw("Xbox L Trigger") > 0.1f || ControlFreak2.CF2Input.GetButton("Zoom")){
+			if(Input.GetAxisRaw("Xbox L Trigger") > 0.1f || Input.GetButton("Zoom")){
 				zoomHold = true;
 			}else{
 				zoomHold = false;	
 			}
 					
 			//determine if the Xbox 360 dpad buttons have been pressed or held
-			if(ControlFreak2.CF2Input.GetAxis("Xbox Dpad X") > 0.0f){
+			if(Input.GetAxis("Xbox Dpad X") > 0.0f){
 				xboxDpadRightHold = true;
 				xboxDpadLeftHold = false;
 				xbdpLstate = false;
@@ -233,7 +233,7 @@ public class InputControl : MonoBehaviour {
 				}else{
 					xboxDpadRightPress = false;
 				}
-			}else if(ControlFreak2.CF2Input.GetAxis("Xbox Dpad X") < 0.0f){
+			}else if(Input.GetAxis("Xbox Dpad X") < 0.0f){
 				xboxDpadRightHold = false;
 				xboxDpadLeftHold = true;
 				xbdpRstate = false;
@@ -252,7 +252,7 @@ public class InputControl : MonoBehaviour {
 				xbdpRstate = false;
 			}
 			
-			if(ControlFreak2.CF2Input.GetAxis("Xbox Dpad Y") > 0.0f){
+			if(Input.GetAxis("Xbox Dpad Y") > 0.0f){
 				xboxDpadUpHold = true;
 				xboxDpadDownHold = false;
 				xbdpDstate = false;
@@ -262,7 +262,7 @@ public class InputControl : MonoBehaviour {
 				}else{
 					xboxDpadUpPress = false;
 				}
-			}else if(ControlFreak2.CF2Input.GetAxis("Xbox Dpad Y") < 0.0f){
+			}else if(Input.GetAxis("Xbox Dpad Y") < 0.0f){
 				xboxDpadUpHold = false;
 				xboxDpadDownHold = true;
 				xbdpUstate = false;
@@ -282,47 +282,47 @@ public class InputControl : MonoBehaviour {
 			}
 			
 			//read button input and set the button state vars for use by the other scripts
-			mouseWheel = ControlFreak2.CF2Input.GetAxis("Mouse Scroll Wheel");
+			mouseWheel = Input.GetAxis("Mouse Scroll Wheel");
 			
-			firePress = ControlFreak2.CF2Input.GetButtonDown("Fire");
-			zoomPress = ControlFreak2.CF2Input.GetButtonDown("Zoom");
-			reloadPress = ControlFreak2.CF2Input.GetButtonDown("Reload");
-			fireModePress = ControlFreak2.CF2Input.GetButtonDown("Fire Mode");
-			jumpHold = ControlFreak2.CF2Input.GetButton("Jump");
-			jumpPress = ControlFreak2.CF2Input.GetButtonDown("Jump");
-			crouchHold = ControlFreak2.CF2Input.GetButton("Crouch");
-			proneHold = ControlFreak2.CF2Input.GetButton("Prone");
-			sprintHold = ControlFreak2.CF2Input.GetButton("Sprint");
-			leanLeftHold = ControlFreak2.CF2Input.GetButton("Lean Left");
-			leanRightHold = ControlFreak2.CF2Input.GetButton("Lean Right");
-			useHold = ControlFreak2.CF2Input.GetButton("Use");
-			usePress = ControlFreak2.CF2Input.GetButtonDown("Use");
-			usePressUp = ControlFreak2.CF2Input.GetButtonUp("Use");
-			toggleCameraHold = ControlFreak2.CF2Input.GetButton("Toggle Camera");
-			toggleCameraDown = ControlFreak2.CF2Input.GetButtonDown("Toggle Camera");
-			grenadeHold = ControlFreak2.CF2Input.GetButton("Throw Grenade");
-			meleePress = ControlFreak2.CF2Input.GetButtonDown("Melee Attack");
-			flashlightPress = ControlFreak2.CF2Input.GetButtonDown("Toggle Flashlight");
-			holsterPress = ControlFreak2.CF2Input.GetButtonDown("Holster Weapon");
-			dropPress = ControlFreak2.CF2Input.GetButtonDown("Drop Weapon");
-			bulletTimePress = ControlFreak2.CF2Input.GetButtonDown("Bullet Time");
-			deadzonePress = ControlFreak2.CF2Input.GetButtonDown("Toggle Deadzone Aiming");
-			helpPress = ControlFreak2.CF2Input.GetButtonDown("Help");
-			menuPress = ControlFreak2.CF2Input.GetButtonDown("Main Menu");
-			pausePress = ControlFreak2.CF2Input.GetButtonDown("Pause");
-			selectNextPress = ControlFreak2.CF2Input.GetButtonDown("Select Next Weapon");
-			selectPrevPress = ControlFreak2.CF2Input.GetButtonDown("Select Previous Weapon");
-			selectGrenPress = ControlFreak2.CF2Input.GetButtonDown("Select Next Grenade");
-			selectWeap1Press = ControlFreak2.CF2Input.GetButtonDown("Select Weapon 1");
-			selectWeap2Press = ControlFreak2.CF2Input.GetButtonDown("Select Weapon 2");
-			selectWeap3Press = ControlFreak2.CF2Input.GetButtonDown("Select Weapon 3");
-			selectWeap4Press = ControlFreak2.CF2Input.GetButtonDown("Select Weapon 4");
-			selectWeap5Press = ControlFreak2.CF2Input.GetButtonDown("Select Weapon 5");
-			selectWeap6Press = ControlFreak2.CF2Input.GetButtonDown("Select Weapon 6");
-			selectWeap7Press = ControlFreak2.CF2Input.GetButtonDown("Select Weapon 7");
-			selectWeap8Press = ControlFreak2.CF2Input.GetButtonDown("Select Weapon 8");
-			selectWeap9Press = ControlFreak2.CF2Input.GetButtonDown("Select Weapon 9");
-			selectWeap0Press = ControlFreak2.CF2Input.GetButtonDown("Select Weapon 0");
+			firePress = Input.GetButtonDown("Fire");
+			zoomPress = Input.GetButtonDown("Zoom");
+			reloadPress = Input.GetButtonDown("Reload");
+			fireModePress = Input.GetButtonDown("Fire Mode");
+			jumpHold = Input.GetButton("Jump");
+			jumpPress = Input.GetButtonDown("Jump");
+			crouchHold = Input.GetButton("Crouch");
+			proneHold = Input.GetButton("Prone");
+			sprintHold = Input.GetButton("Sprint");
+			leanLeftHold = Input.GetButton("Lean Left");
+			leanRightHold = Input.GetButton("Lean Right");
+			useHold = Input.GetButton("Use");
+			usePress = Input.GetButtonDown("Use");
+			usePressUp = Input.GetButtonUp("Use");
+			toggleCameraHold = Input.GetButton("Toggle Camera");
+			toggleCameraDown = Input.GetButtonDown("Toggle Camera");
+			grenadeHold = Input.GetButton("Throw Grenade");
+			meleePress = Input.GetButtonDown("Melee Attack");
+			flashlightPress = Input.GetButtonDown("Toggle Flashlight");
+			holsterPress = Input.GetButtonDown("Holster Weapon");
+			dropPress = Input.GetButtonDown("Drop Weapon");
+			bulletTimePress = Input.GetButtonDown("Bullet Time");
+			deadzonePress = Input.GetButtonDown("Toggle Deadzone Aiming");
+			helpPress = Input.GetButtonDown("Help");
+			menuPress = Input.GetButtonDown("Main Menu");
+			pausePress = Input.GetButtonDown("Pause");
+			selectNextPress = Input.GetButtonDown("Select Next Weapon");
+			selectPrevPress = Input.GetButtonDown("Select Previous Weapon");
+			selectGrenPress = Input.GetButtonDown("Select Next Grenade");
+			selectWeap1Press = Input.GetButtonDown("Select Weapon 1");
+			selectWeap2Press = Input.GetButtonDown("Select Weapon 2");
+			selectWeap3Press = Input.GetButtonDown("Select Weapon 3");
+			selectWeap4Press = Input.GetButtonDown("Select Weapon 4");
+			selectWeap5Press = Input.GetButtonDown("Select Weapon 5");
+			selectWeap6Press = Input.GetButtonDown("Select Weapon 6");
+			selectWeap7Press = Input.GetButtonDown("Select Weapon 7");
+			selectWeap8Press = Input.GetButtonDown("Select Weapon 8");
+			selectWeap9Press = Input.GetButtonDown("Select Weapon 9");
+			selectWeap0Press = Input.GetButtonDown("Select Weapon 0");
 
 		}else{
 			fireHold = false;//stop shooting if level is restarting

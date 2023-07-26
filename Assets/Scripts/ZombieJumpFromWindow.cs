@@ -62,7 +62,7 @@ public class ZombieJumpFromWindow : MonoBehaviour
 
         private void SetDisabler()
         {
-        NavigationBaker.Instance.Disable();
+       // NavigationBaker.Instance.Disable();
 
         }
 

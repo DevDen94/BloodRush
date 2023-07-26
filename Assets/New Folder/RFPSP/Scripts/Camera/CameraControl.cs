@@ -1,4 +1,4 @@
-﻿//CameraControl.cs by Azuline Studios© All Rights Reserved
+//CameraControl.cs by Azuline Studios© All Rights Reserved
 //Camera positioning and angle management for smooth camera kicks and animations.
 using UnityEngine;
 using System.Collections;
@@ -354,7 +354,7 @@ public class CameraControl : MonoBehaviour {
 							zoomState = false;
 						}
 						if(rotating){
-							zoomDistance = Mathf.Clamp(zoomDistance - ControlFreak2.CF2Input.GetAxis("Mouse Scroll Wheel") * 5f, minZoom, maxZoom);
+							zoomDistance = Mathf.Clamp(zoomDistance - Input.GetAxis("Mouse Scroll Wheel") * 5f, minZoom, maxZoom);
 						}
 					}else{
 						if(!zoomState){
