@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: dffa50cfe77e0434bbfa71245b3dd529
 ModelImporter:
-  serializedVersion: 22
+  serializedVersion: 23
   fileIDToRecycleName:
     100000: Chest
     100002: chestProxy_geo
@@ -502,24 +502,8 @@ ModelImporter:
       improve retargeting quality.\n\t'Hips' has translation animation that will be
       discarded.\n\t'Hips' is inbetween humanoid transforms and has rotation animation
       that will be discarded.\n"
-    animationRetargetingWarnings: "\nRetargeting quality report for clip 'Take 001':\n\tLeftLowerLeg
-      average position error 27.4 mm and maximum position error 87.1 mm at time 18:
-      4 (43.4%) Frame 436\n\tLeftFoot average position error 28.7 mm and maximum position
-      error 87.4 mm at time 12: 3 (24.9%) Frame 291\n\tRightLowerLeg average position
-      error 29.8 mm and maximum position error 84.5 mm at time 12: 2 (24.7%) Frame
-      290\n\tRightFoot average position error 28.8 mm and maximum position error 87.5
-      mm at time 12: 3 (24.9%) Frame 291\n\tLeftUpperArm average position error 27.9
-      mm and maximum position error 85.4 mm at time 12: 3 (24.9%) Frame 291\n\tLeftLowerArm
-      average position error 28.6 mm and maximum position error 88.6 mm at time 12:
-      3 (24.9%) Frame 291\n\tLeftHand average position error 28.7 mm and maximum position
-      error 87.5 mm at time 12: 3 (24.9%) Frame 291\n\tRightUpperArm average position
-      error 27.9 mm and maximum position error 85.4 mm at time 12: 3 (24.9%) Frame
-      291\n\tRightLowerArm average position error 28.0 mm and maximum position error
-      86.1 mm at time 12: 3 (24.9%) Frame 291\n\tRightHand average position error
-      28.7 mm and maximum position error 87.4 mm at time 12: 3 (24.9%) Frame 291\n\tHead
-      average position error 27.9 mm and maximum position error 85.4 mm at time 12:
-      3 (24.9%) Frame 291\n"
-    animationDoRetargetingWarnings: 1
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
     animationCompression: 1
@@ -533,8 +517,8 @@ ModelImporter:
     - serializedVersion: 16
       name: Idle
       takeName: _87_a_U1_M_P_idle_Neutral__Fb_p0_No_1
-      firstFrame: 96
-      lastFrame: 880
+      firstFrame: 445
+      lastFrame: 517
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -543,7 +527,7 @@ ModelImporter:
       hasAdditiveReferencePose: 0
       loopTime: 1
       loopBlend: 1
-      loopBlendOrientation: 0
+      loopBlendOrientation: 1
       loopBlendPositionY: 1
       loopBlendPositionXZ: 1
       keepOriginalOrientation: 0
@@ -564,12 +548,13 @@ ModelImporter:
     globalScale: 0.01
     meshCompression: 0
     addColliders: 0
+    useSRGBMaterialColor: 1
     importVisibility: 0
     importBlendShapes: 1
     importCameras: 0
     importLights: 0
     swapUVChannels: 0
-    generateSecondaryUV: 1
+    generateSecondaryUV: 0
     useFileUnits: 1
     optimizeMeshForGPU: 1
     keepQuads: 0
@@ -581,11 +566,16 @@ ModelImporter:
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 0
+    previousCalculatedGlobalScale: 0.01
+    hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 4
     normalCalculationMode: 0
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 1
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
   importAnimation: 1
   copyAvatar: 0
   humanDescription:
@@ -1427,12 +1417,10 @@ ModelImporter:
     legStretch: 0.05
     feetSpacing: 0
     rootMotionBoneName: 
-    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 0
-  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: e8914d097ece7cc48a83d5fccd4098c0,
-    type: 3}
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
   animationType: 3
   humanoidOversampling: 1
   additionalBone: 0

@@ -37,7 +37,7 @@ public class PlayerWeapons : MonoBehaviour {
 	public int grenadeWeapon;//index of grenade in grenade order array for offhand throw
 	[HideInInspector]
 	public int totalWeapons;
-
+	[HideInInspector]
 	public int currentWeapon;//index of weaponOrder array that corresponds to current weapon 
 	[HideInInspector]
 	public int currentGrenade;//index of weaponOrder array that corresponds to current weapon 
@@ -495,11 +495,11 @@ public class PlayerWeapons : MonoBehaviour {
 			}
 		}
 	}
-
+	
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//Select Weapons
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	public bool isBlade;
+	
 	public IEnumerator SelectWeapon ( int index, bool isOffhandThrow = false, bool endOffhandThrow = false){
 
 		CameraAnimatorComponent = Camera.main.GetComponent<Animator>();

@@ -67,13 +67,13 @@ public class MovePlayerAndCamera : MonoBehaviour {
 //			if(testAI && movePos && Input.GetKeyDown(KeyCode.Comma)){
 //				testAI.GoToPosition(movePos.position);//move npc to a particular place
 //			}
-			if(movePos && Input.GetKeyDown(KeyCode.Insert)){
+			if(movePos && ControlFreak2.CF2Input.GetKeyDown(KeyCode.Insert)){
 				MovePlayer(movePos.position + (Vector3.up * FPSWalkerComponent.capsule.height * 0.5f), moveCamYaw, moveCamPitch);//move player with camera
 			}
-			if(Input.GetKeyDown(KeyCode.Delete) && CinemaCameraObj){
+			if(ControlFreak2.CF2Input.GetKeyDown(KeyCode.Delete) && CinemaCameraObj){
 				ReleaseMainCamera();//release main camera from RFPSP control, for cinematics or other purposes
 			}
-			if(movePos && Input.GetKeyDown(KeyCode.End) && CinemaCameraObj){
+			if(movePos && ControlFreak2.CF2Input.GetKeyDown(KeyCode.End) && CinemaCameraObj){
 				ReleaseMainCameraAndMovePlayer();//release main camera from RFPSP control, for cinematics or other purposes, then reposition player and set camera angles afterwards
 			}
 		}

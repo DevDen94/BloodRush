@@ -1,4 +1,4 @@
-//SmoothMouseLook.cs by Azuline Studios© All Rights Reserved
+﻿//SmoothMouseLook.cs by Azuline Studios© All Rights Reserved
 //Smoothes mouse input, manages angle limits, enables/unlocks cursor on pause, and compensates for non-recovering weapon recoil. 
 using UnityEngine;
 using System.Collections;
@@ -71,14 +71,14 @@ public class SmoothMouseLook : MonoBehaviour {
 		sensitivityAmt = sensitivity;//initialize sensitivity amount from var set by player
 		
 		//Hide the cursor
-		Cursor.visible = false;
+		ControlFreak2.CFCursor.visible = false;
     }
 
 	#if UNITY_EDITOR || UNITY_WEBPLAYER
 	void OnGUI(){//lock cursor - don't use OnGUI in standalone for performance reasons
 		if(Time.timeScale > 0.0f && FPSPlayerComponent.pauseHidesCursor){
-			Cursor.lockState = CursorLockMode.Locked;
-			Cursor.visible = false;
+			ControlFreak2.CFCursor.lockState = CursorLockMode.Locked;
+			ControlFreak2.CFCursor.visible = false;
 		}
 	}
 	#endif
@@ -88,8 +88,8 @@ public class SmoothMouseLook : MonoBehaviour {
 		if(Time.timeScale > 0.0f && Time.smoothDeltaTime > 0.0f){//allow pausing by setting timescale to 0
 
 			//Hide the cursor
-			Cursor.lockState = CursorLockMode.Locked;
-			Cursor.visible = false;
+			ControlFreak2.CFCursor.lockState = CursorLockMode.Locked;
+			ControlFreak2.CFCursor.visible = false;
 
 			horizontalDelta = rotationX;//old rotationX
 
@@ -137,8 +137,8 @@ public class SmoothMouseLook : MonoBehaviour {
 			
 		}else{
 			//Show the cursor
-			Cursor.lockState = CursorLockMode.None;
-			Cursor.visible = true;
+			ControlFreak2.CFCursor.lockState = CursorLockMode.None;
+			ControlFreak2.CFCursor.visible = true;
 		}
 		
     }

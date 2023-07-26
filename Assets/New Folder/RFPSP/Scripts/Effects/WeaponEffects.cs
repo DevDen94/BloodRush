@@ -70,8 +70,6 @@ public class WeaponEffects : MonoBehaviour {
 
 	private int markObjID;
 
-	public AudioClip BladeSnd;
-
 	//impact sound effects for different materials
 	[Tooltip("Sounds to use for default impacts.")]
 	public AudioClip[] defaultImpactSounds;
@@ -146,16 +144,8 @@ public class WeaponEffects : MonoBehaviour {
 			rotateParticle = true;
 			if(!meleeAttack){
 				if(metalImpactSounds[0]){
-                        if (PlayerWeaponsComponent.currentWeapon == 3)
-                        {
-							hitSound = BladeSnd;
-                        }
-                        else
-                        {
-							hitSound = metalImpactSounds[Random.Range(0, metalImpactSounds.Length)];//select random impact sound for this surface type
-
-						}
-					}
+					hitSound = metalImpactSounds[Random.Range(0, metalImpactSounds.Length)];//select random impact sound for this surface type
+				}
 			}else{
 				if(metalImpactSoundsMelee[0]){
 					hitSound = metalImpactSoundsMelee[Random.Range(0, metalImpactSoundsMelee.Length)];//select random impact sound for this surface type

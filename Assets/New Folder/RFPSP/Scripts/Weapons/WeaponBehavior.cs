@@ -224,7 +224,7 @@ public class WeaponBehavior : MonoBehaviour {
 	[HideInInspector]
 	public float lastMeleeTime;
 	private bool meleeBlendState; 
-	
+	[HideInInspector]
 	public bool meleeActive;
 
 	[Header ("Camera and Zooming", order = 8)]
@@ -2354,8 +2354,7 @@ public class WeaponBehavior : MonoBehaviour {
 		}else{
 			shellEjectPos = shellEjectPositionTP;
 		}
-
-		print(shellRBPoolIndex);
+		
 		//get rigidbody shell object from object pool and calculate position and rotation (invisible w/ no mesh)
 		shell = AzuObjectPool.instance.SpawnPooledObj(shellRBPoolIndex,
 		                                              shellEjectPos.position,

@@ -6,22 +6,40 @@ using UnityEngine.AI;
 public class NavigationBaker : MonoBehaviour
 {
 
-    public NavMeshSurface[] surfaces;
-    public Transform[] objectsToRotate;
+    public static NavigationBaker Instance;
 
-    // Use this for initialization
-    void Update()
+
+    private void Awake()
     {
-
-        for (int j = 0; j < objectsToRotate.Length; j++)
-        {
-            objectsToRotate[j].localRotation = Quaternion.Euler(new Vector3(0, 50 * Time.deltaTime, 0) + objectsToRotate[j].localRotation.eulerAngles);
-        }
-
-        for (int i = 0; i < surfaces.Length; i++)
-        {
-            surfaces[i].BuildNavMesh();
-        }
+        Instance = this;
     }
 
+    private void Start()
+    {
+        Invoke(nameof(Enabler), 1f);
+    }
+    public void Enabler()
+    {
+        GetComponent<AI>().enabled = false;
+        GetComponent<CharacterDamage>().enabled = false;
+        GetComponent<NPCAttack>().enabled = false;
+        GetComponent<NavMeshAgent>().enabled = false;
+        GetComponent<RemoveBody>().enabled = false;
+    }
+
+    public void WindowBreakerAnimation()
+    {
+        
+        transform.GetChild(0).GetComponent<Animator>().SetInteger("AnimState", 3);
+    }
+
+    public void Disable()
+    {
+        GetComponent<AI>().enabled = true;
+        GetComponent<CharacterDamage>().enabled = true;
+        GetComponent<NPCAttack>().enabled = true;
+        GetComponent<NavMeshAgent>().enabled = true;
+        //GetComponent<RemoveBody>().enabled = true;
+        GetComponent<SWS.splineMove>().enabled = false;
+    }
 }
