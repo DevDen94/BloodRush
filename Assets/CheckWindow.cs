@@ -8,8 +8,11 @@ public class CheckWindow : MonoBehaviour
     public GameObject window;
     public GameObject[] WindowPanels;
     public Slider Windowslider;
-    private bool panel1, panel2, panel3, jum;
-    public AI Zombie;
+    private bool panel1, panel2, panel3,panel4, jum;
+    public AI[] Zombie;
+    public GameObject JumpP;
+    public bool IS_door;
+    public int Index_C;
     // Start is called before the first frame update
     void Start()
     {
@@ -44,24 +47,49 @@ public class CheckWindow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Windowslider.value <= 70 && panel1==false)
+        if (Windowslider.value <= 90 && panel1==false)
         {
+            if (IS_door)
+            {
+                WindowPanels[0].transform.rotation = Quaternion.Euler(2f, 0, 0);
+            }
             WindowPanels[0].GetComponent<Rigidbody>().isKinematic = false;
             panel1 = true;
         }
-        if (Windowslider.value <= 40 && panel2 == false)
+        if (Windowslider.value <= 75 && panel2 == false)
         {
+            if (IS_door)
+            {
+                WindowPanels[1].transform.rotation = Quaternion.Euler(2f, 0, 0);
+            }
             WindowPanels[1].GetComponent<Rigidbody>().isKinematic = false;
             panel2 = true;
         }
-        if (Windowslider.value <= 10 && panel3 == false)
+        if (Windowslider.value <= 50 && panel3 == false)
         {
+            if (IS_door)
+            {
+                WindowPanels[2].transform.rotation = Quaternion.Euler(2f, 0, 0);
+            }
             WindowPanels[2].GetComponent<Rigidbody>().isKinematic = false;
             panel3 = true;
         }
-        if (Windowslider.value <= 0 && jum == false)
+        if (Windowslider.value <= 30 && panel4 == false)
         {
-            Zombie.Jump = true;
+            if (IS_door)
+            {
+                WindowPanels[3].transform.rotation = Quaternion.Euler(2f, 0, 0);
+            }
+            WindowPanels[3].GetComponent<Rigidbody>().isKinematic = false;
+            panel4 = true;
+        }
+        if (Windowslider.value <= 0 && jum == false )
+        {
+            for(int i = 0; i <Zombie.Length; i++)
+            {
+                Zombie[i].Jump = true;
+            }
+
             jum = true;
 
         }

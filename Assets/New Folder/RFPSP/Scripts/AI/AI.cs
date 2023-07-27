@@ -512,12 +512,11 @@ public class AI : MonoBehaviour {
 	}bool enter = false;
 	void Reset_ZombieMovement()
     {
-		followPlayer = true;
-		huntPlayer = true;
+		
 		AnimatorComponent.SetInteger("AnimState", 0);
 		waypointGroup = curWayPoint.GetComponent<CheckWindow>().New_WayPointGroup;
 		Patrollling = false;
-		curWayPoint = waypointGroup.wayPoints[0];
+		curWayPoint = waypointGroup.wayPoints[curWayPoint.GetComponent<CheckWindow>().Index_C];
 		StartCoroutine(Patrol());
 	}
 	IEnumerator Jumpp()
@@ -534,13 +533,23 @@ public class AI : MonoBehaviour {
 			{
 				if (!enter)
 				{
-					agent.speed = 3f;
-					agent.SetDestination(JumpP.transform.position);
-					AnimatorComponent.SetInteger("AnimState", 3);
-					AnimatorComponent.SetTrigger("Jump");
+                    if (curWayPoint.GetComponent<CheckWindow>().IS_door)
+                    {
+						agent.SetDestination(curWayPoint.GetComponent<CheckWindow>().JumpP.transform.position);
+						AnimatorComponent.SetInteger("AnimState", 1);
+						Invoke("Reset_ZombieMovement", 6f);
+					}
+                    else
+                    {
+						agent.SetDestination(curWayPoint.GetComponent<CheckWindow>().JumpP.transform.position);
+						AnimatorComponent.SetInteger("AnimState", 3);
+						AnimatorComponent.SetTrigger("Jump");
+						Invoke("Reset_ZombieMovement", 3f);
+					}
 					enter = true;
-					Invoke("Reset_ZombieMovement", 1f);
-                }
+					
+
+				}
                 else
                 {
 					yield break;
@@ -557,7 +566,7 @@ public class AI : MonoBehaviour {
 	}
 	public bool Patrollling;
 	public bool Jump;
-	public GameObject JumpP;
+	
 	IEnumerator Patrol(){
 
 		while (true) {
