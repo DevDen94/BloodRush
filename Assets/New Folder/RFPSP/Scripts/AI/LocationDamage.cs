@@ -29,6 +29,7 @@ public class LocationDamage : MonoBehaviour {
 
 	public GameObject Objects;
 	public bool IsLegs;
+	public bool IsMeshCut;
 	void OnEnable (){
 		myTransform = transform;
 		headShotState = false;
@@ -36,9 +37,14 @@ public class LocationDamage : MonoBehaviour {
 		Mathf.Clamp01(sloMoKillChance);
 		anim = AIComponent.gameObject.GetComponent<Animator>();
 	}
-	
-	//damage NPC
-	public void ApplyDamage ( float damage, Vector3 attackDir, Vector3 attackerPos, Transform attacker, bool isPlayer, bool isExplosion  ){
+    private void Start()
+    {
+        if (IsMeshCut) {
+			Objects = GameManager.instance.ObjectDisable;
+		}
+    }
+    //damage NPC
+    public void ApplyDamage ( float damage, Vector3 attackDir, Vector3 attackerPos, Transform attacker, bool isPlayer, bool isExplosion  ){
 		if(AIComponent && AIComponent.CharacterDamageComponent){
 			if(isPlayer){//if attack is from player, pass damage info to main CharacterDamage.cs component
 				if (ObjectDisbale != null)

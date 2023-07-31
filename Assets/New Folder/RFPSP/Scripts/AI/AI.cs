@@ -240,7 +240,7 @@ public class AI : MonoBehaviour {
 	
 	[HideInInspector]
 	public RaycastHit attackHit;
-
+	public bool AttackMode;
 	public Animator anim;
 	void Start()
 	{
@@ -364,6 +364,7 @@ public class AI : MonoBehaviour {
 					StartCoroutine(StandWatch());
 				}
 			}else{
+               
 				//hunt the player accross the map
 				factionNum = 2;
 				target = playerTransform;
@@ -439,6 +440,8 @@ public class AI : MonoBehaviour {
 	}
 	
 	IEnumerator StandWatch(){
+		
+
 		while (true) {
 
 			if(huntPlayer){
@@ -919,6 +922,11 @@ public class AI : MonoBehaviour {
 	}
 	
 	IEnumerator AttackTarget(){
+		if (!AttackMode)
+		{
+			yield break;
+		}
+
 		while (true) {
 		
 			if(Time.timeSinceLevelLoad < 1f){//add small delay before checking target visibility
@@ -1138,7 +1146,9 @@ public class AI : MonoBehaviour {
 
 	//set navmesh destination and set NPC speed
 	void TravelToPoint( Vector3 position  ){
-		if(attackFinished){
+		
+
+		if (attackFinished){
 			agent.SetDestination(position);
 			agent.isStopped = false;
 			agent.speed = speedAmt;
