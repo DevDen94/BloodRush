@@ -83,15 +83,23 @@ public class CheckWindow : MonoBehaviour
             WindowPanels[3].GetComponent<Rigidbody>().isKinematic = false;
             panel4 = true;
         }
-        if (Windowslider.value <= 0 && jum == false )
+
+        if (PlayerPrefs.GetInt("WaveNo") >= 1)
         {
-            for(int i = 0; i <Zombie.Length; i++)
+            return;
+        }
+        else
+        {
+            if (Windowslider.value <= 0 && jum == false)
             {
-                Zombie[i].Jump = true;
+                for (int i = 0; i < Zombie.Length; i++)
+                {
+                    Zombie[i].Jump = true;
+                }
+
+                jum = true;
+
             }
-
-            jum = true;
-
         }
     }
 }

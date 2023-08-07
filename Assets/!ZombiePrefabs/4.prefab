@@ -2112,7 +2112,7 @@ MonoBehaviour:
     m_Bits: 0
   anim: {fileID: 0}
   PathIndex: 3
-  AttackMode: 0
+  AttackMode: 1
   Patrollling: 0
   Jump: 0
 --- !u!114 &6263679218962662533

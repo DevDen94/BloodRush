@@ -248,6 +248,12 @@ public class CharacterDamage : MonoBehaviour {
 		// Play a dying audio clip
 		if (dieSound){
 			PlayAudioAtPos.PlayClipAt(dieSound, transform.position, 1.0f);
+			GameManager.instance.ZombieDeathCount--;
+            if (GameManager.instance.ZombieDeathCount == 0)
+            {
+				GameManager.instance.NextWave_Enter = true;
+            }
+
 		}
 
 		AIComponent.NPCRegistryComponent.UnregisterNPC(AIComponent);//unregister NPC from main NPC registry

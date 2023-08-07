@@ -257,6 +257,10 @@ public class AI : MonoBehaviour {
     }
     void Start()
 	{
+		if (PlayerPrefs.GetInt("WaveNo") >= 1)
+		{
+			waypointGroup = GameManager.instance.OuterPath;
+		}
 		isCheck = false;
 		Patrollling = false;
 		Jump = false;
