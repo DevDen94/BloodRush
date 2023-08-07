@@ -4,14 +4,19 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject[] platforms;
-    public GameObject brickedprefab;
-    public int chanceToBricked = 10;
+    public static GameManager instance;
 
-    public int platformCount = 300;
-    // Start is called before the first frame update
-    void Start()
+    public GameObject ObjectDisable;
+    public bool BrokenEnable;
+    public GameObject ZombieContainerr;
+    public WaypointGroup[] BrokenPaths;
+    private void Start()
     {
-
+        instance = this;
+        Invoke("After1sec", 3f);
+    }
+    void After1sec()
+    {
+        ZombieContainerr.SetActive(true);
     }
 }

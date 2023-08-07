@@ -240,12 +240,27 @@ public class AI : MonoBehaviour {
 	
 	[HideInInspector]
 	public RaycastHit attackHit;
-
+	
 	public Animator anim;
-	void Start()
+	public int PathIndex;
+	bool isCheck;
+	public bool AttackMode;
+    private void Update()
+    {
+        if (GameManager.instance.BrokenEnable && !isCheck)
+        {
+			waypointGroup = GameManager.instance.BrokenPaths[PathIndex];
+			curWayPoint = waypointGroup.wayPoints[0];
+			firstWaypoint = 0;
+			isCheck = true;
+        }
+    }
+    void Start()
 	{
+		isCheck = false;
 		Patrollling = false;
 		Jump = false;
+		AttackMode = false;
 		NPCMgrObj = GameObject.Find("NPC Manager");
 		NPCRegistryComponent = NPCMgrObj.GetComponent<NPCRegistry>();
 		NPCRegistryComponent.Npcs.Add(myTransform.gameObject.GetComponent<AI>());//register this active NPC with the NPCRegistry
@@ -364,6 +379,7 @@ public class AI : MonoBehaviour {
 					StartCoroutine(StandWatch());
 				}
 			}else{
+               
 				//hunt the player accross the map
 				factionNum = 2;
 				target = playerTransform;
@@ -439,6 +455,8 @@ public class AI : MonoBehaviour {
 	}
 	
 	IEnumerator StandWatch(){
+		
+
 		while (true) {
 
 			if(huntPlayer){
@@ -517,6 +535,7 @@ public class AI : MonoBehaviour {
 		waypointGroup = curWayPoint.GetComponent<CheckWindow>().New_WayPointGroup;
 		Patrollling = false;
 		curWayPoint = waypointGroup.wayPoints[curWayPoint.GetComponent<CheckWindow>().Index_C];
+		AttackMode = true;
 		StartCoroutine(Patrol());
 	}
 	IEnumerator Jumpp()
@@ -736,8 +755,11 @@ public class AI : MonoBehaviour {
 
 
 	void CanSeeTarget(){
-	
-		if(spawnTime + 1f > Time.time){//add small delay before checking target visibility
+		/*if (AttackMode)
+		{
+			return;
+		}*/
+		if (spawnTime + 1f > Time.time){//add small delay before checking target visibility
 			return;
 		}
 		
@@ -886,7 +908,10 @@ public class AI : MonoBehaviour {
 	}
 	
 	IEnumerator Shoot(){
-
+		/*if (AttackMode)
+		{
+			yield break;
+		}*/
 		attackFinished = false;
 
 		//don't move during attack
@@ -919,6 +944,11 @@ public class AI : MonoBehaviour {
 	}
 	
 	IEnumerator AttackTarget(){
+		if (!AttackMode)
+		{
+			yield break;
+		}
+
 		while (true) {
 		
 			if(Time.timeSinceLevelLoad < 1f){//add small delay before checking target visibility
@@ -1138,7 +1168,9 @@ public class AI : MonoBehaviour {
 
 	//set navmesh destination and set NPC speed
 	void TravelToPoint( Vector3 position  ){
-		if(attackFinished){
+		
+
+		if (attackFinished){
 			agent.SetDestination(position);
 			agent.isStopped = false;
 			agent.speed = speedAmt;
