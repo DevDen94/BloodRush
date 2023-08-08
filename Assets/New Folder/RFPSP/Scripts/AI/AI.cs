@@ -257,14 +257,16 @@ public class AI : MonoBehaviour {
     }
     void Start()
 	{
+		AttackMode = false;
 		if (PlayerPrefs.GetInt("WaveNo") >= 1)
 		{
 			waypointGroup = GameManager.instance.OuterPath;
+			AttackMode = true;
 		}
 		isCheck = false;
 		Patrollling = false;
 		Jump = false;
-		AttackMode = false;
+		
 		NPCMgrObj = GameObject.Find("NPC Manager");
 		NPCRegistryComponent = NPCMgrObj.GetComponent<NPCRegistry>();
 		NPCRegistryComponent.Npcs.Add(myTransform.gameObject.GetComponent<AI>());//register this active NPC with the NPCRegistry

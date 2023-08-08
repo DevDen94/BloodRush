@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     public WaypointGroup[] BrokenPaths;
     public WaypointGroup OuterPath;
     public GameObject[] Zombies;
- 
+    public GameObject[] Default_Zombies;
     public int[] Instainated_Count;
 
   
@@ -42,6 +42,11 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            ZombieContainer.SetActive(true);
+            foreach(GameObject a in Default_Zombies)
+            {
+                a.SetActive(false);
+            }
             for (int i = 0; i <= Instainated_Count[PlayerPrefs.GetInt("WaveNo")]; i++)
             {
                 GameObject temp = Instantiate(Zombies[i], SpawnPoints[i].transform.position, SpawnPoints[i].transform.rotation);
@@ -53,7 +58,7 @@ public class GameManager : MonoBehaviour
     {
         if (ZombieDeathCount == 0 && NextWave_Enter)
         {
- 
+            PlayerPrefs.SetInt("WaveNo", PlayerPrefs.GetInt("WaveNo")+1);
             ZombieDeathCount = Instainated_Count[PlayerPrefs.GetInt("WaveNo")];
             Invoke("Instaniate_Zombies", 15f);
             NextWave_Enter = false;
