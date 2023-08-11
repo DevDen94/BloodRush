@@ -43,7 +43,7 @@ public class Splash : MonoBehaviour
             if (activeScene.name == "Splash")
                 SceneManager.LoadScene("MainMenu");
             else if (activeScene.name == "MainMenu")
-                Debug.Log("SceneCallHere");
+                SceneManager.LoadScene("GamePlay");
         }
         else
         {

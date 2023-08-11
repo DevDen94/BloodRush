@@ -12,6 +12,6 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 9bd4be52844f05e48aacf60174718ed4
   - enabled: 1
-    path: Assets/New Folder/StarterAssets/ThirdPersonController/Scenes/Playground_Zee.unity
-    guid: b7a42cd29d148f8419ea682efc2061cb
+    path: Assets/!Scene/GamePlay.unity
+    guid: 0a7eafcd05585de419de581ed9bfbc0f
   m_configObjects: {}

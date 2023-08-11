@@ -27,6 +27,11 @@ public class LocationDamage : MonoBehaviour {
 	public GameObject Active_Child;
 	public GameObject Active_Child_Header;
 
+	public GameObject BloodEffect;
+	public GameObject MainCamera;
+
+	public Transform ParentObject;
+
 	public GameObject Objects;
 	public bool IsLegs;
 	public bool IsMeshCut;
@@ -42,11 +47,27 @@ public class LocationDamage : MonoBehaviour {
         if (IsMeshCut) {
 			Objects = GameManager.instance.ObjectDisable;
 		}
-    }
-    //damage NPC
-    public void ApplyDamage ( float damage, Vector3 attackDir, Vector3 attackerPos, Transform attacker, bool isPlayer, bool isExplosion  ){
+		MainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+
+		BloodEffect = blood.Instance.BloodEffect;
+	}
+
+	
+
+
+
+	
+
+
+	//damage NPC
+	public void ApplyDamage ( float damage, Vector3 attackDir, Vector3 attackerPos, Transform attacker, bool isPlayer, bool isExplosion  ){
 		if(AIComponent && AIComponent.CharacterDamageComponent){
-			if(isPlayer){//if attack is from player, pass damage info to main CharacterDamage.cs component
+
+
+
+			StartCoroutine(waitforBlood());
+			if(isPlayer){
+				//if attack is from player, pass damage info to main CharacterDamage.cs component
 				if (ObjectDisbale != null)
 				{
 					ObjectDisbale.GetComponent<SkinnedMeshRenderer>().enabled=false;
@@ -94,13 +115,26 @@ public class LocationDamage : MonoBehaviour {
 			Debug.Log("<color=red>LocationDamage.cs:</color> NPC body part hit without reference to its main AI.cs script component, please set reference in inspector.");
 		}
 	}
-	
+
+	IEnumerator waitforBlood()
+	{
+		BloodEffect.gameObject.SetActive(true);
+		BloodEffect.transform.LookAt(MainCamera.transform);
+		yield return new WaitForSeconds(0.5f);
+
+		BloodEffect.gameObject.SetActive(false);
+
+	}
+
+
 	void OnCollisionEnter(Collision hit){
 		if(AIComponent.enabled){
-          
+			//StartCoroutine(waitforBlood());
+			
 			LocationDamage hitLocationDamage = hit.collider.GetComponent<LocationDamage>();
 			if(hitLocationDamage){
-				if(!hitLocationDamage.AIComponent.enabled){
+				
+				if (!hitLocationDamage.AIComponent.enabled){
 					Physics.IgnoreCollision(hit.collider, myTransform.GetComponent<Collider>(), true);
 					
 				}
