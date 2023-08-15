@@ -181,7 +181,7 @@ public class ArrowObject : MonoBehaviour {
 					FPSPlayerComponent.UpdateHitTime();//used for hitmarker
 				}
 				if(hitCol.gameObject.GetComponent<LocationDamage>() && hitCol.gameObject.GetComponent<LocationDamage>().AIComponent.enabled){
-					hitCol.gameObject.GetComponent<LocationDamage>().ApplyDamage(damage + damageAddAmt, transform.forward,  Camera.main.transform.position, transform, true, false);
+					hitCol.gameObject.GetComponent<LocationDamage>().ApplyDamage(2 , transform.forward,  Camera.main.transform.position, transform, true, false);
 					FPSPlayerComponent.UpdateHitTime();//used for hitmarker
 				}
 				//move arrow more towards center of collider to compensate for body part colliders that are slightly larger than character mesh (prevents floating, stuck arrows)

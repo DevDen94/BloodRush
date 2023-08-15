@@ -21,7 +21,9 @@ public class WeaponBehavior : MonoBehaviour {
 	public GameObject playerObj;
 	[HideInInspector]
 	public GameObject weaponObj;
-	
+
+	public int Weapon_Number;
+
 	[HideInInspector]
 	public GameObject ammoUiObj;
 	[HideInInspector]
@@ -2146,7 +2148,7 @@ public class WeaponBehavior : MonoBehaviour {
 		case 1://hit object is an object with transparent effects like a window
 			if(hit.collider.gameObject.GetComponent<BreakableObject>()){
 				hit.collider.gameObject.GetComponent<BreakableObject>().ApplyDamage(damageAmt);
-				FPSPlayerComponent.UpdateHitTime();//used for hitmarker
+				FPSPlayerComponent.UpdateHitTime();//used for hitmarkerss
 			}	
 			break;
 		case 13://hit object is an NPC
@@ -2155,7 +2157,7 @@ public class WeaponBehavior : MonoBehaviour {
 				FPSPlayerComponent.UpdateHitTime();//used for hitmarker
 			}
 			if(hit.collider.gameObject.GetComponent<LocationDamage>() && hit.collider.gameObject.GetComponent<LocationDamage>().AIComponent.enabled){
-				hit.collider.gameObject.GetComponent<LocationDamage>().ApplyDamage(damageAmt, directionArg, mainCamTransform.position, myTransform, true, false);
+				hit.collider.gameObject.GetComponent<LocationDamage>().ApplyDamage(Weapon_Number, directionArg, mainCamTransform.position, myTransform, true, false);
 				FPSPlayerComponent.UpdateHitTime();//used for hitmarker
 			}
 			break;

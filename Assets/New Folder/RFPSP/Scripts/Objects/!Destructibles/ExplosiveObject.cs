@@ -108,7 +108,7 @@ public class ExplosiveObject : MonoBehaviour {
 								hitCollider.gameObject.GetComponent<CharacterDamage>().ApplyDamage(explosionDamageAmt, Vector3.zero, myTransform.position, myTransform, false, true);
 							}
 							if(hitCollider.gameObject.GetComponent<LocationDamage>()){
-								hitCollider.gameObject.GetComponent<LocationDamage>().ApplyDamage(explosionDamageAmt, Vector3.zero, myTransform.position, myTransform, false, true);
+								hitCollider.gameObject.GetComponent<LocationDamage>().ApplyDamage(2, Vector3.zero, myTransform.position, myTransform, false, true);
 							}
 							break;
 						case 0://hit object

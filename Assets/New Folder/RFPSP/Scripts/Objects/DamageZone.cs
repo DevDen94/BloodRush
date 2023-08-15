@@ -7,7 +7,7 @@ public class DamageZone : MonoBehaviour {
 	[Tooltip("Amount of damage to apply to player while in damage trigger.")]
 	public float damage = 1.0f;
 	[Tooltip("Amount of damage to gradually apply to NPCs while in damage trigger.")]
-	public float NpcDamage = 0.0f;
+	public int NpcDamage = 0;
 	[Tooltip("Delay before player is damaged again by this damage zone.")]
 	public float delay = 1.75f;
 	private float damageTime;

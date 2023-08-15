@@ -4,6 +4,8 @@ using UnityEngine;
 using System.Collections;
 
 public class LocationDamage : MonoBehaviour {
+
+	public WeaponDamageCount DamageCount;
 	[Tooltip("Set to Ai.cs component in main NPC object (drag main object from hierachry window into this field).")]
 	public AI AIComponent;
 	[Tooltip("Amount to increase or decrease base damage of weapon hit on this collider (increase for head shots, decrease for limb hits).")]
@@ -26,7 +28,7 @@ public class LocationDamage : MonoBehaviour {
 	public GameObject ActiveRigid;
 	public GameObject Active_Child;
 	public GameObject Active_Child_Header;
-
+	
 	public GameObject Objects;
 	public bool IsLegs;
 	public bool IsMeshCut;
@@ -44,7 +46,7 @@ public class LocationDamage : MonoBehaviour {
 		}
     }
     //damage NPC
-    public void ApplyDamage ( float damage, Vector3 attackDir, Vector3 attackerPos, Transform attacker, bool isPlayer, bool isExplosion  ){
+    public void ApplyDamage ( int weaponNumber, Vector3 attackDir, Vector3 attackerPos, Transform attacker, bool isPlayer, bool isExplosion  ){
 		if(AIComponent && AIComponent.CharacterDamageComponent){
 			if(isPlayer){//if attack is from player, pass damage info to main CharacterDamage.cs component
 				if (ObjectDisbale != null)
@@ -72,7 +74,7 @@ public class LocationDamage : MonoBehaviour {
 						anim.runtimeAnimatorController = Resources.Load("CrawlController") as RuntimeAnimatorController;
 					}
 				}
-				AIComponent.CharacterDamageComponent.ApplyDamage(damage * damageMultiplier, attackDir, attackerPos, attacker, isPlayer, isExplosion, thisRigidBody, damageForce);
+				AIComponent.CharacterDamageComponent.ApplyDamage(DamageCount.Damage[weaponNumber] * damageMultiplier, attackDir, attackerPos, attacker, isPlayer, isExplosion, thisRigidBody, damageForce);
 				
 				if (headShot 
 				&& !headShotState 
@@ -87,7 +89,7 @@ public class LocationDamage : MonoBehaviour {
 				}
 				
 			}else{//attack is not from player, pass damage info to main CharacterDamage.cs component
-				AIComponent.CharacterDamageComponent.ApplyDamage(damage, attackDir, attackerPos, attacker, isPlayer, isExplosion, thisRigidBody, damageForce);
+				AIComponent.CharacterDamageComponent.ApplyDamage(DamageCount.Damage[weaponNumber], attackDir, attackerPos, attacker, isPlayer, isExplosion, thisRigidBody, damageForce);
 			}
 		}else{
 			//body part collider hit without reference to its main AI.cs component

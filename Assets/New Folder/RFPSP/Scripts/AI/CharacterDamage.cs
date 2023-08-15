@@ -125,7 +125,7 @@ public class CharacterDamage : MonoBehaviour {
 	
 	//damage NPC
 	public void ApplyDamage ( float damage, Vector3 attackDir, Vector3 attackerPos, Transform attacker, bool isPlayer, bool isExplosion, Rigidbody hitBody = null, float bodyForce = 0.0f ){
-
+		Debug.LogError(damage);
 		if (hitPoints <= 0.0f){
 			return;
 		}
@@ -164,6 +164,7 @@ public class CharacterDamage : MonoBehaviour {
 				}
 			}else{
 				hitPoints -= damage;
+
 			}
 		}else{
 			hitPoints = 0.0f;	

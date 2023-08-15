@@ -8,7 +8,7 @@ public class NPCAttack : MonoBehaviour {
 	private	WeaponEffects WeaponEffectsComponent;
 	private FPSRigidBodyWalker FPSWalker;
 	private GameObject playerObj;
-
+	public int WeaponNumber;
 	private Transform myTransform;
 	private Vector3 targetPos;
 	[Tooltip("Maximum range of NPC attack.")]
@@ -234,7 +234,7 @@ public class NPCAttack : MonoBehaviour {
 							hit.collider.gameObject.GetComponent<CharacterDamage>().ApplyDamage(damageAmt, Vector3.zero, myTransform.position, myTransform, false, false);
 						}
 						if(hit.collider.gameObject.GetComponent<LocationDamage>()){
-							hit.collider.gameObject.GetComponent<LocationDamage>().ApplyDamage(damageAmt, Vector3.zero, myTransform.position, myTransform, false, false);
+							hit.collider.gameObject.GetComponent<LocationDamage>().ApplyDamage(WeaponNumber, Vector3.zero, myTransform.position, myTransform, false, false);
 						}
 						break;
 					case 11://hit object is player

@@ -162,7 +162,7 @@ public class MineExplosion : MonoBehaviour {
 							hitColliders[i].GetComponent<Collider>().gameObject.GetComponent<CharacterDamage>().ApplyDamage(explosionDamage, Vector3.zero, myTransform.position, null, false, true);
 						}
 						if(hitColliders[i].GetComponent<Collider>().gameObject.GetComponent<LocationDamage>()){
-							hitColliders[i].GetComponent<Collider>().gameObject.GetComponent<LocationDamage>().ApplyDamage(explosionDamage, Vector3.zero, myTransform.position, null, false, true);
+							hitColliders[i].GetComponent<Collider>().gameObject.GetComponent<LocationDamage>().ApplyDamage(2, Vector3.zero, myTransform.position, null, false, true);
 						}
 					break;
 					default:

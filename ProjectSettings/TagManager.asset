@@ -44,8 +44,8 @@ TagManager:
   - Player Clip
   - drop
   - 
-  - 
-  - 
+  - PlayerExit
+  - PathTrigger
   - 
   - 
   - 

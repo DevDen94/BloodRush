@@ -188,7 +188,7 @@ public class AI : MonoBehaviour {
 	public float sneakRangeMod = 0.4f;
 	private float shootAngle = 3.0f;
 	[Tooltip("Time before atack starts, to allow weapon to be raised before firing.")]
-	public float delayShootTime = 0.35f;
+	public float delayShootTime = 1f;
 	[Tooltip("Random delay between NPC attacks.")]
 	public float randShotDelay = 0.75f;
 	[Tooltip("Height of rayCast origin which detects targets (can be raised if NPC origin is at their feet).")]
@@ -258,11 +258,6 @@ public class AI : MonoBehaviour {
     void Start()
 	{
 		AttackMode = false;
-		if (PlayerPrefs.GetInt("WaveNo") >= 1)
-		{
-			waypointGroup = GameManager.instance.OuterPath;
-			AttackMode = true;
-		}
 		isCheck = false;
 		Patrollling = false;
 		Jump = false;
@@ -552,7 +547,8 @@ public class AI : MonoBehaviour {
 			{
 				AnimatorComponent.SetInteger("AnimState", 3);
 				AnimatorComponent.SetTrigger("Attack");
-				gameObject.transform.LookAt(curWayPoint.GetComponent<CheckWindow>().window.transform);
+				
+				
 			}
 			else
 			{
@@ -597,7 +593,9 @@ public class AI : MonoBehaviour {
 		while (true) {
 			if (curWayPoint.GetComponent<CheckWindow>() != null)
 			{
+				gameObject.transform.LookAt(curWayPoint.GetComponent<CheckWindow>().window.transform);
 				StartCoroutine(Jumpp());
+				yield return new WaitForSeconds(1.7f);
 			}
 			else
 			{
@@ -913,6 +911,8 @@ public class AI : MonoBehaviour {
 	
 	}
 	
+
+
 	IEnumerator Shoot(){
 		/*if (AttackMode)
 		{
@@ -1066,7 +1066,8 @@ public class AI : MonoBehaviour {
 				if(distance < shootRange && angle < shootAngle){
 					if(attackFinished){
 						yield return StartCoroutine(Shoot());
-					}else{
+					}
+					else{
 						speedAmt = 0.0f;
 						SetSpeed(speedAmt);
 						agent.isStopped = true;
