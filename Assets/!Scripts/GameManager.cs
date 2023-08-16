@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
@@ -18,7 +19,7 @@ public class GameManager : MonoBehaviour
     public bool ZombieJump_Bool;
     public bool NextWave_Enter;
     public int ZombieDeathCount;
-
+    public Text Wave;
     [Header("Zombies")]
     public GameObject[] NormalZombies;
     public GameObject DoctorZombie;
@@ -59,6 +60,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        Wave.text = "Way " + PlayerPrefs.GetInt("WaveNo") + "  Remaining Zombies " + ZombieDeathCount;
         if (ZombieDeathCount == 0 && NextWave_Enter)
         {
             PlayerPrefs.SetInt("WaveNo", PlayerPrefs.GetInt("WaveNo") + 1);
