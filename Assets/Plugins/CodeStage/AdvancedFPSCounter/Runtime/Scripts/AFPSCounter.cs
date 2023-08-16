@@ -1094,7 +1094,7 @@ namespace CodeStage.AdvancedFPSCounter
 			{
 				var modifiersPressed = true;
 
-				if (hotKeyCtrl)
+				/*if (hotKeyCtrl)
 				{
 					modifiersPressed &= AFPSInputProxy.GetControlKey();
 				}
@@ -1107,7 +1107,7 @@ namespace CodeStage.AdvancedFPSCounter
 				if (hotKeyShift)
 				{
 					modifiersPressed &= AFPSInputProxy.GetShiftKey();
-				}
+				}*/
 
 				if (modifiersPressed)
 				{
@@ -1120,21 +1120,21 @@ namespace CodeStage.AdvancedFPSCounter
 		{
 			var pointsCount = gesturePoints.Count;
 
-			if (Input.GetMouseButton(0))
+			/*if (ControlFreak2.CF2Input.GetMouseButton(0))
 			{
-				Vector2 mousePosition = Input.mousePosition;
+				Vector2 mousePosition = ControlFreak2.CF2Input.mousePosition;
 				if (pointsCount == 0 || (mousePosition - gesturePoints[pointsCount - 1]).magnitude > 10)
 				{
 					gesturePoints.Add(mousePosition);
 					pointsCount++;
 				}
 			}
-			else if (Input.GetMouseButtonUp(0))
+			else if (ControlFreak2.CF2Input.GetMouseButtonUp(0))
 			{
 				pointsCount = 0;
 				gestureCount = 0;
 				gesturePoints.Clear();
-			}
+			}*/
 
 			if (pointsCount < 10)
 				return false;

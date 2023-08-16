@@ -1,0 +1,240 @@
+Converting script [1 / 24]	[\Scripts\PlayerController.cs]
+	Fragments : 1
+		[ 0] : Line:   24	InputMethod   GetAxis             	("Horizontal")
+
+Converting script [2 / 24]	[\New Folder\StarterAssets\InputSystem\StarterAssetsInputs.cs]
+	Fragments : 1
+		[ 0] : Line:   76	Other mod.	[Cursor.lockState]
+
+Converting script [3 / 24]	[\Shatter Toolkit\Examples\Triangulator\OutlineCreator.cs]
+	Fragments : 5
+		[ 0] : Line:   38	InputMethod   GetMouseButtonDown  	(0)
+		[ 1] : Line:   46	InputProperty mousePosition       
+		[ 2] : Line:   46	InputProperty mousePosition       
+		[ 3] : Line:   61	InputMethod   GetMouseButtonDown  	(1)
+		[ 4] : Line:   77	InputMethod   GetKeyDown          	(KeyCode.Space)
+
+Converting script [4 / 24]	[\Shatter Toolkit\Helpers\Mouse\MouseForce.cs]
+	Fragments : 5
+		[ 0] : Line:   32	InputMethod   GetMouseButtonDown  	(0)
+		[ 1] : Line:   36	InputProperty mousePosition       
+		[ 2] : Line:   54	InputMethod   GetMouseButtonUp    	(0)
+		[ 3] : Line:   66	InputProperty mousePosition       
+		[ 4] : Line:   66	InputProperty mousePosition       
+
+Converting script [5 / 24]	[\Shatter Toolkit\Helpers\Mouse\MouseInstantiate.cs]
+	Fragments : 2
+		[ 0] : Line:   15	InputMethod   GetMouseButtonDown  	(0)
+		[ 1] : Line:   17	InputProperty mousePosition       
+
+Converting script [6 / 24]	[\Shatter Toolkit\Helpers\Mouse\MouseShatter.cs]
+	Fragments : 2
+		[ 0] : Line:   11	InputMethod   GetMouseButtonDown  	(0)
+		[ 1] : Line:   15	InputProperty mousePosition       
+
+Converting script [7 / 24]	[\Shatter Toolkit\Helpers\Mouse\MouseSplit.cs]
+	Fragments : 4
+		[ 0] : Line:   16	InputMethod   GetMouseButtonDown  	(0)
+		[ 1] : Line:   18	InputProperty mousePosition       
+		[ 2] : Line:   23	InputMethod   GetMouseButtonUp    	(0)
+		[ 3] : Line:   25	InputProperty mousePosition       
+
+Converting script [8 / 24]	[\EffectCore\packs\WebDemoAssets\scripts\EffectActor.cs]
+	Fragments : 4
+		[ 0] : Line:   39	InputMethod   GetKeyDown          	(KeyCode.Q)
+		[ 1] : Line:   43	InputMethod   GetButtonDown       	("Fire2")
+		[ 2] : Line:   43	InputMethod   GetKeyDown          	(KeyCode.E)
+		[ 3] : Line:   48	InputMethod   GetButtonDown       	("Fire1")
+
+Converting script [9 / 24]	[\EffectCore\packs\WebDemoAssets\scripts\projectileActor.cs]
+	Fragments : 7
+		[ 0] : Line:   74	InputMethod   GetButton           	("Horizontal")
+		[ 1] : Line:   76	InputMethod   GetAxis             	("Horizontal")
+		[ 2] : Line:   87	InputMethod   GetKeyDown          	(KeyCode.Q)
+		[ 3] : Line:   91	InputMethod   GetButtonDown       	("Fire2")
+		[ 4] : Line:   91	InputMethod   GetKeyDown          	(KeyCode.E)
+		[ 5] : Line:   96	InputMethod   GetButtonDown       	("Fire1")
+		[ 6] : Line:  101	InputMethod   GetButtonUp         	("Fire1")
+
+Converting script [10 / 24]	[\Env\Flooded_Grounds\Scripts\FPSController\CharController_Motor.cs]
+	Fragments : 5
+		[ 0] : Line:   39	InputMethod   GetAxis             	("Horizontal")
+		[ 1] : Line:   40	InputMethod   GetAxis             	("Vertical")
+		[ 2] : Line:   42	InputMethod   GetAxis             	("Mouse X")
+		[ 3] : Line:   43	InputMethod   GetAxis             	("Mouse Y")
+		[ 4] : Line:   56	InputMethod   GetKey              	(KeyCode.Mouse0)
+
+Converting script [11 / 24]	[\New Folder\RFPSP\Scripts\Camera\CameraControl.cs]
+	Fragments : 1
+		[ 0] : Line:  357	InputMethod   GetAxis             	("Mouse Scroll Wheel")
+
+Converting script [12 / 24]	[\New Folder\RFPSP\Scripts\Camera\MovePlayerAndCamera.cs]
+	Fragments : 3
+		[ 0] : Line:   70	InputMethod   GetKeyDown          	(KeyCode.Insert)
+		[ 1] : Line:   73	InputMethod   GetKeyDown          	(KeyCode.Delete)
+		[ 2] : Line:   76	InputMethod   GetKeyDown          	(KeyCode.End)
+
+Converting script [13 / 24]	[\New Folder\RFPSP\Scripts\Camera\SmoothMouseLook.cs]
+	Fragments : 7
+		[ 0] : Line:   74	Other mod.	[Cursor.visible]
+		[ 1] : Line:   80	Other mod.	[Cursor.lockState]
+		[ 2] : Line:   81	Other mod.	[Cursor.visible]
+		[ 3] : Line:   91	Other mod.	[Cursor.lockState]
+		[ 4] : Line:   92	Other mod.	[Cursor.visible]
+		[ 5] : Line:  140	Other mod.	[Cursor.lockState]
+		[ 6] : Line:  141	Other mod.	[Cursor.visible]
+
+Converting script [14 / 24]	[\New Folder\RFPSP\Scripts\Player\InputControl.cs]
+	Fragments : 58
+		[ 0] : Line:  167	InputMethod   GetButton           	("Left")
+		[ 1] : Line:  168	InputMethod   GetButton           	("Right")
+		[ 2] : Line:  169	InputMethod   GetButton           	("Forward")
+		[ 3] : Line:  170	InputMethod   GetButton           	("Back")
+		[ 4] : Line:  190	InputMethod   GetAxis             	("Joystick Move X")
+		[ 5] : Line:  190	InputMethod   GetAxis             	("Joystick Move Y")
+		[ 6] : Line:  197	InputMethod   GetAxis             	("Joystick Look X")
+		[ 7] : Line:  197	InputMethod   GetAxis             	("Joystick Look Y")
+		[ 8] : Line:  209	InputMethod   GetAxisRaw          	("Mouse X")
+		[ 9] : Line:  210	InputMethod   GetAxisRaw          	("Mouse Y")
+		[10] : Line:  213	InputMethod   GetAxisRaw          	("Xbox R Trigger")
+		[11] : Line:  213	InputMethod   GetButton           	("Fire")
+		[12] : Line:  219	InputMethod   GetAxisRaw          	("Xbox L Trigger")
+		[13] : Line:  219	InputMethod   GetButton           	("Zoom")
+		[14] : Line:  226	InputMethod   GetAxis             	("Xbox Dpad X")
+		[15] : Line:  236	InputMethod   GetAxis             	("Xbox Dpad X")
+		[16] : Line:  255	InputMethod   GetAxis             	("Xbox Dpad Y")
+		[17] : Line:  265	InputMethod   GetAxis             	("Xbox Dpad Y")
+		[18] : Line:  285	InputMethod   GetAxis             	("Mouse Scroll Wheel")
+		[19] : Line:  287	InputMethod   GetButtonDown       	("Fire")
+		[20] : Line:  288	InputMethod   GetButtonDown       	("Zoom")
+		[21] : Line:  289	InputMethod   GetButtonDown       	("Reload")
+		[22] : Line:  290	InputMethod   GetButtonDown       	("Fire Mode")
+		[23] : Line:  291	InputMethod   GetButton           	("Jump")
+		[24] : Line:  292	InputMethod   GetButtonDown       	("Jump")
+		[25] : Line:  293	InputMethod   GetButton           	("Crouch")
+		[26] : Line:  294	InputMethod   GetButton           	("Prone")
+		[27] : Line:  295	InputMethod   GetButton           	("Sprint")
+		[28] : Line:  296	InputMethod   GetButton           	("Lean Left")
+		[29] : Line:  297	InputMethod   GetButton           	("Lean Right")
+		[30] : Line:  298	InputMethod   GetButton           	("Use")
+		[31] : Line:  299	InputMethod   GetButtonDown       	("Use")
+		[32] : Line:  300	InputMethod   GetButtonUp         	("Use")
+		[33] : Line:  301	InputMethod   GetButton           	("Toggle Camera")
+		[34] : Line:  302	InputMethod   GetButtonDown       	("Toggle Camera")
+		[35] : Line:  303	InputMethod   GetButton           	("Throw Grenade")
+		[36] : Line:  304	InputMethod   GetButtonDown       	("Melee Attack")
+		[37] : Line:  305	InputMethod   GetButtonDown       	("Toggle Flashlight")
+		[38] : Line:  306	InputMethod   GetButtonDown       	("Holster Weapon")
+		[39] : Line:  307	InputMethod   GetButtonDown       	("Drop Weapon")
+		[40] : Line:  308	InputMethod   GetButtonDown       	("Bullet Time")
+		[41] : Line:  309	InputMethod   GetButtonDown       	("Toggle Deadzone Aiming")
+		[42] : Line:  310	InputMethod   GetButtonDown       	("Help")
+		[43] : Line:  311	InputMethod   GetButtonDown       	("Main Menu")
+		[44] : Line:  312	InputMethod   GetButtonDown       	("Pause")
+		[45] : Line:  313	InputMethod   GetButtonDown       	("Select Next Weapon")
+		[46] : Line:  314	InputMethod   GetButtonDown       	("Select Previous Weapon")
+		[47] : Line:  315	InputMethod   GetButtonDown       	("Select Next Grenade")
+		[48] : Line:  316	InputMethod   GetButtonDown       	("Select Weapon 1")
+		[49] : Line:  317	InputMethod   GetButtonDown       	("Select Weapon 2")
+		[50] : Line:  318	InputMethod   GetButtonDown       	("Select Weapon 3")
+		[51] : Line:  319	InputMethod   GetButtonDown       	("Select Weapon 4")
+		[52] : Line:  320	InputMethod   GetButtonDown       	("Select Weapon 5")
+		[53] : Line:  321	InputMethod   GetButtonDown       	("Select Weapon 6")
+		[54] : Line:  322	InputMethod   GetButtonDown       	("Select Weapon 7")
+		[55] : Line:  323	InputMethod   GetButtonDown       	("Select Weapon 8")
+		[56] : Line:  324	InputMethod   GetButtonDown       	("Select Weapon 9")
+		[57] : Line:  325	InputMethod   GetButtonDown       	("Select Weapon 0")
+
+Converting script [15 / 24]	[\New Folder\RFPSP\Scripts\Weapons\WeaponPivot.cs]
+	Fragments : 4
+		[ 0] : Line:  111	Other mod.	[Cursor.lockState]
+		[ 1] : Line:  112	Other mod.	[Cursor.visible]
+		[ 2] : Line:  256	Other mod.	[Cursor.lockState]
+		[ 3] : Line:  257	Other mod.	[Cursor.visible]
+
+Converting script [16 / 24]	[\_Resources\Dark MainMenu\Scripts\Character\PlayerLook.cs]
+	Fragments : 3
+		[ 0] : Line:   24	Other mod.	[Cursor.lockState]
+		[ 1] : Line:   34	InputMethod   GetAxis             	(mouseXInputName)
+		[ 2] : Line:   35	InputMethod   GetAxis             	(mouseYInputName)
+
+Converting script [17 / 24]	[\_Resources\Dark MainMenu\Scripts\Menu\GamePauseMenu.cs]
+	Fragments : 4
+		[ 0] : Line:   21	InputMethod   GetKeyDown          	(KeyCode.Escape)
+		[ 1] : Line:   26	Other mod.	[Cursor.lockState]
+		[ 2] : Line:   27	Other mod.	[Cursor.visible]
+		[ 3] : Line:   45	Other mod.	[Cursor.visible]
+
+Converting script [18 / 24]	[\Plugins\CodeStage\AdvancedFPSCounter\Runtime\Scripts\AFPSCounter.cs]
+	Fragments : 3
+		[ 0] : Line: 1123	InputMethod   GetMouseButton      	(0)
+		[ 1] : Line: 1125	InputProperty mousePosition       
+		[ 2] : Line: 1132	InputMethod   GetMouseButtonUp    	(0)
+
+Converting script [19 / 24]	[\Plugins\CodeStage\AdvancedFPSCounter\Runtime\Scripts\AFPSInputProxy.cs]
+	Fragments : 10
+		[ 0] : Line:   46	InputMethod   GetKeyDown          	(key)
+		[ 1] : Line:   48	InputMethod   GetKeyDown          	(key)
+		[ 2] : Line:   58	InputMethod   GetKey              	(KeyCode.LeftControl)
+		[ 3] : Line:   58	InputMethod   GetKey              	(KeyCode.RightControl)
+		[ 4] : Line:   58	InputMethod   GetKey              	(KeyCode.LeftCommand)
+		[ 5] : Line:   58	InputMethod   GetKey              	(KeyCode.RightCommand)
+		[ 6] : Line:   67	InputMethod   GetKey              	(KeyCode.LeftAlt)
+		[ 7] : Line:   67	InputMethod   GetKey              	(KeyCode.RightAlt)
+		[ 8] : Line:   76	InputMethod   GetKey              	(KeyCode.LeftShift)
+		[ 9] : Line:   76	InputMethod   GetKey              	(KeyCode.RightShift)
+
+Converting script [20 / 24]	[\_Resources\Dark MainMenu\Scripts\Menu\GraphicsManager\QualitySettingsMenu.cs]
+	Fragments : 2
+		[ 0] : Line:   51	Other mod.	[Screen.fullScreen]
+		[ 1] : Line:  265	Other mod.	[Screen.SetResolution(resolutionsList[resolutions.value].width, resolutionsList[resolutions.value].height, fullscreenToggle.isOn)]
+
+Converting script [21 / 24]	[\_Resources\Dark MainMenu\Scripts\Menu\InputManager\GameInput.cs]
+	Fragments : 3
+		[ 0] : Line:  105	InputMethod   GetKey              	(FindKey(name)
+		[ 1] : Line:  110	InputMethod   GetKeyDown          	(FindKey(name)
+		[ 2] : Line:  115	InputMethod   GetKeyUp            	(FindKey(name)
+
+Converting script [22 / 24]	[\_Resources\Dark MainMenu\Scripts\Menu\InputManager\InputComponent.cs]
+	Fragments : 3
+		[ 0] : Line:   47	InputMethod   GetKeyDown          	(KeyCode.Escape)
+		[ 1] : Line:   55	InputMethod   GetKeyDown          	(k)
+		[ 2] : Line:   55	InputMethod   GetKeyDown          	(KeyCode.Escape)
+
+Converting script [23 / 24]	[\_Resources\Dark MainMenu\Scripts\Menu\LoadingSystem\GameLoading.cs]
+	Fragments : 1
+		[ 0] : Line:   24	InputMethod   GetKeyDown          	(_keyCode)
+
+Converting script [24 / 24]	[\Plugins\CodeStage\AdvancedFPSCounter\Runtime\Scripts\CountersData\DeviceInfoCounterData.cs]
+	Fragments : 1
+		[ 0] : Line:  488	Other mod.	[Screen.dpi]
+
+
+24 scripts modified!
+Overwriting actual scripts...
+	[0 / 24] from  [E:/Projects/BloodRush/BloodRush/CF2-Data/Script-Backups/2023-08-16-18-57\Assets-After/\Scripts\PlayerController.cs] to [E:/Projects/BloodRush/BloodRush/Assets/\Scripts\PlayerController.cs]
+	[1 / 24] from  [E:/Projects/BloodRush/BloodRush/CF2-Data/Script-Backups/2023-08-16-18-57\Assets-After/\New Folder\StarterAssets\InputSystem\StarterAssetsInputs.cs] to [E:/Projects/BloodRush/BloodRush/Assets/\New Folder\StarterAssets\InputSystem\StarterAssetsInputs.cs]
+	[2 / 24] from  [E:/Projects/BloodRush/BloodRush/CF2-Data/Script-Backups/2023-08-16-18-57\Assets-After/\Shatter Toolkit\Examples\Triangulator\OutlineCreator.cs] to [E:/Projects/BloodRush/BloodRush/Assets/\Shatter Toolkit\Examples\Triangulator\OutlineCreator.cs]
+	[3 / 24] from  [E:/Projects/BloodRush/BloodRush/CF2-Data/Script-Backups/2023-08-16-18-57\Assets-After/\Shatter Toolkit\Helpers\Mouse\MouseForce.cs] to [E:/Projects/BloodRush/BloodRush/Assets/\Shatter Toolkit\Helpers\Mouse\MouseForce.cs]
+	[4 / 24] from  [E:/Projects/BloodRush/BloodRush/CF2-Data/Script-Backups/2023-08-16-18-57\Assets-After/\Shatter Toolkit\Helpers\Mouse\MouseInstantiate.cs] to [E:/Projects/BloodRush/BloodRush/Assets/\Shatter Toolkit\Helpers\Mouse\MouseInstantiate.cs]
+	[5 / 24] from  [E:/Projects/BloodRush/BloodRush/CF2-Data/Script-Backups/2023-08-16-18-57\Assets-After/\Shatter Toolkit\Helpers\Mouse\MouseShatter.cs] to [E:/Projects/BloodRush/BloodRush/Assets/\Shatter Toolkit\Helpers\Mouse\MouseShatter.cs]
+	[6 / 24] from  [E:/Projects/BloodRush/BloodRush/CF2-Data/Script-Backups/2023-08-16-18-57\Assets-After/\Shatter Toolkit\Helpers\Mouse\MouseSplit.cs] to [E:/Projects/BloodRush/BloodRush/Assets/\Shatter Toolkit\Helpers\Mouse\MouseSplit.cs]
+	[7 / 24] from  [E:/Projects/BloodRush/BloodRush/CF2-Data/Script-Backups/2023-08-16-18-57\Assets-After/\EffectCore\packs\WebDemoAssets\scripts\EffectActor.cs] to [E:/Projects/BloodRush/BloodRush/Assets/\EffectCore\packs\WebDemoAssets\scripts\EffectActor.cs]
+	[8 / 24] from  [E:/Projects/BloodRush/BloodRush/CF2-Data/Script-Backups/2023-08-16-18-57\Assets-After/\EffectCore\packs\WebDemoAssets\scripts\projectileActor.cs] to [E:/Projects/BloodRush/BloodRush/Assets/\EffectCore\packs\WebDemoAssets\scripts\projectileActor.cs]
+	[9 / 24] from  [E:/Projects/BloodRush/BloodRush/CF2-Data/Script-Backups/2023-08-16-18-57\Assets-After/\Env\Flooded_Grounds\Scripts\FPSController\CharController_Motor.cs] to [E:/Projects/BloodRush/BloodRush/Assets/\Env\Flooded_Grounds\Scripts\FPSController\CharController_Motor.cs]
+	[10 / 24] from  [E:/Projects/BloodRush/BloodRush/CF2-Data/Script-Backups/2023-08-16-18-57\Assets-After/\New Folder\RFPSP\Scripts\Camera\CameraControl.cs] to [E:/Projects/BloodRush/BloodRush/Assets/\New Folder\RFPSP\Scripts\Camera\CameraControl.cs]
+	[11 / 24] from  [E:/Projects/BloodRush/BloodRush/CF2-Data/Script-Backups/2023-08-16-18-57\Assets-After/\New Folder\RFPSP\Scripts\Camera\MovePlayerAndCamera.cs] to [E:/Projects/BloodRush/BloodRush/Assets/\New Folder\RFPSP\Scripts\Camera\MovePlayerAndCamera.cs]
+	[12 / 24] from  [E:/Projects/BloodRush/BloodRush/CF2-Data/Script-Backups/2023-08-16-18-57\Assets-After/\New Folder\RFPSP\Scripts\Camera\SmoothMouseLook.cs] to [E:/Projects/BloodRush/BloodRush/Assets/\New Folder\RFPSP\Scripts\Camera\SmoothMouseLook.cs]
+	[13 / 24] from  [E:/Projects/BloodRush/BloodRush/CF2-Data/Script-Backups/2023-08-16-18-57\Assets-After/\New Folder\RFPSP\Scripts\Player\InputControl.cs] to [E:/Projects/BloodRush/BloodRush/Assets/\New Folder\RFPSP\Scripts\Player\InputControl.cs]
+	[14 / 24] from  [E:/Projects/BloodRush/BloodRush/CF2-Data/Script-Backups/2023-08-16-18-57\Assets-After/\New Folder\RFPSP\Scripts\Weapons\WeaponPivot.cs] to [E:/Projects/BloodRush/BloodRush/Assets/\New Folder\RFPSP\Scripts\Weapons\WeaponPivot.cs]
+	[15 / 24] from  [E:/Projects/BloodRush/BloodRush/CF2-Data/Script-Backups/2023-08-16-18-57\Assets-After/\_Resources\Dark MainMenu\Scripts\Character\PlayerLook.cs] to [E:/Projects/BloodRush/BloodRush/Assets/\_Resources\Dark MainMenu\Scripts\Character\PlayerLook.cs]
+	[16 / 24] from  [E:/Projects/BloodRush/BloodRush/CF2-Data/Script-Backups/2023-08-16-18-57\Assets-After/\_Resources\Dark MainMenu\Scripts\Menu\GamePauseMenu.cs] to [E:/Projects/BloodRush/BloodRush/Assets/\_Resources\Dark MainMenu\Scripts\Menu\GamePauseMenu.cs]
+	[17 / 24] from  [E:/Projects/BloodRush/BloodRush/CF2-Data/Script-Backups/2023-08-16-18-57\Assets-After/\Plugins\CodeStage\AdvancedFPSCounter\Runtime\Scripts\AFPSCounter.cs] to [E:/Projects/BloodRush/BloodRush/Assets/\Plugins\CodeStage\AdvancedFPSCounter\Runtime\Scripts\AFPSCounter.cs]
+	[18 / 24] from  [E:/Projects/BloodRush/BloodRush/CF2-Data/Script-Backups/2023-08-16-18-57\Assets-After/\Plugins\CodeStage\AdvancedFPSCounter\Runtime\Scripts\AFPSInputProxy.cs] to [E:/Projects/BloodRush/BloodRush/Assets/\Plugins\CodeStage\AdvancedFPSCounter\Runtime\Scripts\AFPSInputProxy.cs]
+	[19 / 24] from  [E:/Projects/BloodRush/BloodRush/CF2-Data/Script-Backups/2023-08-16-18-57\Assets-After/\_Resources\Dark MainMenu\Scripts\Menu\GraphicsManager\QualitySettingsMenu.cs] to [E:/Projects/BloodRush/BloodRush/Assets/\_Resources\Dark MainMenu\Scripts\Menu\GraphicsManager\QualitySettingsMenu.cs]
+	[20 / 24] from  [E:/Projects/BloodRush/BloodRush/CF2-Data/Script-Backups/2023-08-16-18-57\Assets-After/\_Resources\Dark MainMenu\Scripts\Menu\InputManager\GameInput.cs] to [E:/Projects/BloodRush/BloodRush/Assets/\_Resources\Dark MainMenu\Scripts\Menu\InputManager\GameInput.cs]
+	[21 / 24] from  [E:/Projects/BloodRush/BloodRush/CF2-Data/Script-Backups/2023-08-16-18-57\Assets-After/\_Resources\Dark MainMenu\Scripts\Menu\InputManager\InputComponent.cs] to [E:/Projects/BloodRush/BloodRush/Assets/\_Resources\Dark MainMenu\Scripts\Menu\InputManager\InputComponent.cs]
+	[22 / 24] from  [E:/Projects/BloodRush/BloodRush/CF2-Data/Script-Backups/2023-08-16-18-57\Assets-After/\_Resources\Dark MainMenu\Scripts\Menu\LoadingSystem\GameLoading.cs] to [E:/Projects/BloodRush/BloodRush/Assets/\_Resources\Dark MainMenu\Scripts\Menu\LoadingSystem\GameLoading.cs]
+	[23 / 24] from  [E:/Projects/BloodRush/BloodRush/CF2-Data/Script-Backups/2023-08-16-18-57\Assets-After/\Plugins\CodeStage\AdvancedFPSCounter\Runtime\Scripts\CountersData\DeviceInfoCounterData.cs] to [E:/Projects/BloodRush/BloodRush/Assets/\Plugins\CodeStage\AdvancedFPSCounter\Runtime\Scripts\CountersData\DeviceInfoCounterData.cs]
+
+Overwriting COMPLETED!

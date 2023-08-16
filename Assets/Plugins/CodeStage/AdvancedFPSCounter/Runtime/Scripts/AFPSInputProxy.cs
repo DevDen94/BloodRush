@@ -1,4 +1,4 @@
-#region copyright
+﻿#region copyright
 // --------------------------------------------------------------
 //  Copyright (C) Dmitriy Yukhanov - focus [http://codestage.net]
 // --------------------------------------------------------------
@@ -42,40 +42,40 @@ namespace CodeStage.AdvancedFPSCounter
 			result = Keyboard.current[cachedHotKey].wasPressedThisFrame;
 #elif USING_INPUT_SYSTEM_NO_INPUT_SYSTEM_PACKAGE
 			Debug.LogError("Looks like you have Input System enabled but no Input System package installed!");
-#elif ENABLE_LEGACY_INPUT_MANAGER
-			result = Input.GetKeyDown(key);
-#else
-			result = Input.GetKeyDown(key);
+/*#elif ENABLE_LEGACY_INPUT_MANAGER
+			result = ControlFreak.CF2Input.GetKeyDown(key);*/
+//#else
+		//	result = ControlFreak.CF2Input.GetKeyDown(key);
 #endif
 			return result;
 		}
 		
-		public static bool GetControlKey()
-		{
-#if USING_INPUT_SYSTEM
-			return Keyboard.current.leftCtrlKey.isPressed || Keyboard.current.rightCtrlKey.isPressed || Keyboard.current.leftCommandKey.isPressed || Keyboard.current.rightCommandKey.isPressed;
-#else
-			return Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl) || Input.GetKey(KeyCode.LeftCommand) || Input.GetKey(KeyCode.RightCommand);
-#endif
-		}
+		//public static bool GetControlKey()
+		//{
+//#if USING_INPUT_SYSTEM
+		//	return Keyboard.current.leftCtrlKey.isPressed || Keyboard.current.rightCtrlKey.isPressed || Keyboard.current.leftCommandKey.isPressed || Keyboard.current.rightCommandKey.isPressed;
+//#else
+			//return ControlFreak2.CF2Input.GetKey(KeyCode.LeftControl) || ControlFreak2.CF2Input.GetKey(KeyCode.RightControl) || ControlFreak2.CF2Input.GetKey(KeyCode.LeftCommand) || ControlFreak2.CF2Input.GetKey(KeyCode.RightCommand);
+//#endif
+		//}
 		
-		public static bool GetAltKey()
+		/*public static bool GetAltKey()
 		{
 #if USING_INPUT_SYSTEM
 			return Keyboard.current.leftAltKey.isPressed || Keyboard.current.rightAltKey.isPressed;
 #else
-			return Input.GetKey(KeyCode.LeftAlt) || Input.GetKey(KeyCode.RightAlt);
+			return ControlFreak2.CF2Input.GetKey(KeyCode.LeftAlt) || ControlFreak2.CF2Input.GetKey(KeyCode.RightAlt);
 #endif
-		}
+		}*/
 		
-		public static bool GetShiftKey()
+	/*	public static bool GetShiftKey()
 		{
 #if USING_INPUT_SYSTEM
 			return Keyboard.current.leftShiftKey.isPressed || Keyboard.current.rightShiftKey.isPressed;
 #else
-			return Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
+			return ControlFreak2.CF2Input.GetKey(KeyCode.LeftShift) || ControlFreak2.CF2Input.GetKey(KeyCode.RightShift);
 #endif
-		}
+		}*/
 		
 #if USING_INPUT_SYSTEM
 		private static Key ConvertLegacyKeyCode(KeyCode keyCode)

@@ -1412,7 +1412,7 @@ MonoBehaviour:
   burstShots: 0
   randomShots: 0
   force: 20
-  damage: 13
+  damage: 9
   isMeleeAttack: 1
   muzzleFlash: {fileID: 0}
   firesnd: {fileID: 8300000, guid: 83a2da9af041ae24180eb970d61b7c9f, type: 3}

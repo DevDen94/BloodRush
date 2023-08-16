@@ -485,7 +485,7 @@ namespace CodeStage.AdvancedFPSCounter.CountersData
 #endif
 				text.Append("SCR: ").Append(res.width).Append("x").Append(res.height).Append("@").Append(refreshRate).Append("Hz [window size: ").Append(Screen.width).Append("x").Append(Screen.height);
 				
-				var dpi = Screen.dpi;
+			/*	var dpi = ControlFreak2.CFScreen.dpi;
 				if (dpi > 0)
 				{
 					text.Append(", DPI: ").Append(dpi).Append("]");
@@ -494,7 +494,7 @@ namespace CodeStage.AdvancedFPSCounter.CountersData
 				{
 					text.Append("]");
 				}
-                hasContent = true;
+                hasContent = true;*/
             }
 
 		    if (deviceModel)

@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
@@ -39,7 +39,6 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         ZombieJump_Bool = false;
-        PlayerPrefs.SetInt("WaveNo", 1);
         instance = this;
         NextWave_Enter = false;
         if (!PlayerPrefs.HasKey("START"))
@@ -62,10 +61,12 @@ public class GameManager : MonoBehaviour
     {
         if (ZombieDeathCount == 0 && NextWave_Enter)
         {
-            PlayerPrefs.SetInt("WaveNo", PlayerPrefs.GetInt("WaveNo")+1);
-            ZombieDeathCount = Instainated_Count[PlayerPrefs.GetInt("WaveNo")];
+            PlayerPrefs.SetInt("WaveNo", PlayerPrefs.GetInt("WaveNo") + 1);
+            SceneManager.LoadScene("GamePlay");
+           
+            /*ZombieDeathCount = Instainated_Count[PlayerPrefs.GetInt("WaveNo")];
             Invoke("Instaniate_Zombies", 15f);
-            NextWave_Enter = false;
+            NextWave_Enter = false;*/
         }
     }
 
