@@ -462,7 +462,7 @@ public class FPSRigidBodyWalker : MonoBehaviour {
 			sprintDelay = 0.0f;
 			break;
 		case sprintType.toggle:
-			sprintDelay = 999.0f;//time allowed between button down and release to activate toggle
+			sprintDelay = 999f;//time allowed between button down and release to activate toggle
 			break;
 		}	
 	}

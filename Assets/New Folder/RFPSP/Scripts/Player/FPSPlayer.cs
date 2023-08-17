@@ -1337,8 +1337,8 @@ public class FPSPlayer : MonoBehaviour {
 		GameManager.instance.LevelFailed.SetActive(true);
 		//call FadeAndLoadLevel function with fadein argument set to false 
 		//in levelLoadFadeObj to restart level and fade screen out from black on level load
-		levelLoadFadeRef.StopAllCoroutines();
-		levelLoadFadeRef.FadeAndLoadLevel(Color.black, 1.2f, false);
+	//	levelLoadFadeRef.StopAllCoroutines();
+		//levelLoadFadeRef.FadeAndLoadLevel(Color.black, 1.2f, false);
 		
 	}
 	

@@ -28,7 +28,7 @@ public class LocationDamage : MonoBehaviour {
 	public GameObject ActiveRigid;
 	public GameObject Active_Child;
 	public GameObject Active_Child_Header;
-	
+
 	public GameObject Objects;
 	public bool IsLegs;
 	public bool IsMeshCut;
@@ -47,8 +47,10 @@ public class LocationDamage : MonoBehaviour {
     }
     //damage NPC
     public void ApplyDamage ( int weaponNumber, Vector3 attackDir, Vector3 attackerPos, Transform attacker, bool isPlayer, bool isExplosion  ){
+        
 		if(AIComponent && AIComponent.CharacterDamageComponent){
 			if(isPlayer){//if attack is from player, pass damage info to main CharacterDamage.cs component
+				AIComponent.HitCount++;
 				if (ObjectDisbale != null)
 				{
 					ObjectDisbale.GetComponent<SkinnedMeshRenderer>().enabled=false;

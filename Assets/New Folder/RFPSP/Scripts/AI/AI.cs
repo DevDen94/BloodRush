@@ -245,6 +245,8 @@ public class AI : MonoBehaviour {
 	public int PathIndex;
 	bool isCheck;
 	public bool AttackMode;
+	public int HitCount;
+
     private void Update()
     {
         if (GameManager.instance.BrokenEnable && !isCheck)
@@ -257,6 +259,7 @@ public class AI : MonoBehaviour {
     }
     void Start()
 	{
+		isTile = false;
 		AttackMode = false;
 		isCheck = false;
 		Patrollling = false;
@@ -454,80 +457,120 @@ public class AI : MonoBehaviour {
 			animInit = false;
 		}
 	}
-	
+	public bool isTile;
+	public void HitEffect()
+    {
+		isTile = true;
+		//AnimatorComponent.SetInteger("AnimState", 5);
+		AnimatorComponent.SetBool("Hitt",true);
+		Invoke("Delay1", 2f);
+	}
 	IEnumerator StandWatch(){
-		
+		if (HitCount >= 3 && !isTile)
+		{
+			HitEffect();
+		}
+		else
+		{
 
-		while (true) {
+			while (true)
+			{
 
-			if(huntPlayer){
-				StartCoroutine(SpawnNPC());
-				yield break;
-			}
-			
-			//expand search radius if attacked
-			if(attackedTime + 6.0f > Time.time){
-				attackRangeAmt = attackRange * 6.0f;//expand enemy search radius if attacked to defend against sniping
-			}else{
-				attackRangeAmt = attackRange;
-			}
-
-			//allow player to push friendly NPCs out of their way
-			if(playerObj.activeInHierarchy && !collisionState && FPSWalker.capsule){
-				foreach(Collider col in colliders){
-					Physics.IgnoreCollision(col, FPSWalker.capsule, true);
+				if (huntPlayer)
+				{
+					StartCoroutine(SpawnNPC());
+					yield break;
 				}
-				collisionState = true;
-			}
 
-			CanSeeTarget();
-			if ((target && targetVisible) || heardPlayer || heardTarget){
-				yield return StartCoroutine(AttackTarget());
-			}else{
-				if(NPCRegistryComponent){
-					NPCRegistryComponent.FindClosestTarget(myTransform.gameObject, this, myTransform.position, attackRangeAmt, factionNum);
+				//expand search radius if attacked
+				if (attackedTime + 6.0f > Time.time)
+				{
+					attackRangeAmt = attackRange * 6.0f;//expand enemy search radius if attacked to defend against sniping
 				}
-			}
-			if(attackTime < Time.time){
-				if((!followPlayer || orderedMove) && Vector3.Distance(startPosition, myTransform.position) > pickNextDestDist){
-					if(!orderedMove){
-						speedAmt = walkSpeed;//walk to next patrol point, designated position, or starting point
-					}else{
-						speedAmt = runSpeed;//run to position designated by player
+				else
+				{
+					attackRangeAmt = attackRange;
+				}
+
+				//allow player to push friendly NPCs out of their way
+				if (playerObj.activeInHierarchy && !collisionState && FPSWalker.capsule)
+				{
+					foreach (Collider col in colliders)
+					{
+						Physics.IgnoreCollision(col, FPSWalker.capsule, true);
 					}
-					InitializeAnim();
-					TravelToPoint(startPosition);//
-				}else if(followPlayer && !orderedMove && Vector3.Distance(playerObj.transform.position, myTransform.position) > pickNextDestDist){
-					if(followPlayer && Vector3.Distance(playerObj.transform.position, myTransform.position) > pickNextDestDist * 2f){
+					collisionState = true;
+				}
+
+				CanSeeTarget();
+				if ((target && targetVisible) || heardPlayer || heardTarget)
+				{
+					yield return StartCoroutine(AttackTarget());
+				}
+				else
+				{
+					if (NPCRegistryComponent)
+					{
+						NPCRegistryComponent.FindClosestTarget(myTransform.gameObject, this, myTransform.position, attackRangeAmt, factionNum);
+					}
+				}
+				if (attackTime < Time.time)
+				{
+					if ((!followPlayer || orderedMove) && Vector3.Distance(startPosition, myTransform.position) > pickNextDestDist)
+					{
+						if (!orderedMove)
+						{
+							speedAmt = walkSpeed;//walk to next patrol point, designated position, or starting point
+						}
+						else
+						{
+							speedAmt = runSpeed;//run to position designated by player
+						}
+						InitializeAnim();
+						TravelToPoint(startPosition);//
+					}
+					else if (followPlayer && !orderedMove && Vector3.Distance(playerObj.transform.position, myTransform.position) > pickNextDestDist)
+					{
+						if (followPlayer && Vector3.Distance(playerObj.transform.position, myTransform.position) > pickNextDestDist * 2f)
+						{
 							speedAmt = runSpeed;//run to player if NPC is following and player is far away
 							lastRunTime = Time.time;
-					}else{
-						if(lastRunTime + 2.0f < Time.time){
-							speedAmt = walkSpeed;//walk to player if within walking distance
 						}
+						else
+						{
+							if (lastRunTime + 2.0f < Time.time)
+							{
+								speedAmt = walkSpeed;//walk to player if within walking distance
+							}
+						}
+						InitializeAnim();
+						TravelToPoint(playerObj.transform.position);
 					}
-					InitializeAnim();
-					TravelToPoint(playerObj.transform.position);
-				}else{
-					//play idle animation
-					speedAmt = 0.0f;
-					agent.isStopped = true;
-					SetSpeed(speedAmt);
+					else
+					{
+						//play idle animation
+						speedAmt = 0.0f;
+						agent.isStopped = true;
+						SetSpeed(speedAmt);
 
-					if(attackFinished && attackTime < Time.time){
-						AnimatorComponent.SetInteger("AnimState", 0);
+						if (attackFinished && attackTime < Time.time)
+						{
+							AnimatorComponent.SetInteger("AnimState", 0);
+						}
+
 					}
-					
+				}
+				if (animInit)
+				{
+					//only wait one frame till next pass so animations will be initialized now, instead of in 0.3 second normal AI calculation delay
+					yield return null;
+				}
+				else
+				{
+					yield return new WaitForSeconds(0.3f);//wait 0.3 seconds (not every frame) untill next AI calculation (for efficiency)
 				}
 			}
-			if(animInit){
-				//only wait one frame till next pass so animations will be initialized now, instead of in 0.3 second normal AI calculation delay
-				yield return null;
-			}else{
-				yield return new WaitForSeconds(0.3f);//wait 0.3 seconds (not every frame) untill next AI calculation (for efficiency)
-			}
 		}
-		
 	}bool enter = false;
 	void Reset_ZombieMovement()
     {
@@ -589,587 +632,718 @@ public class AI : MonoBehaviour {
 	public bool Jump;
 	
 	IEnumerator Patrol(){
-
-		while (true) {
-			if (curWayPoint.GetComponent<CheckWindow>() != null)
+		if (HitCount >= 3 && !isTile)
+		{
+			HitEffect();
+		}
+		else
+		{
+			while (true)
 			{
-				gameObject.transform.LookAt(curWayPoint.GetComponent<CheckWindow>().window.transform);
-				StartCoroutine(Jumpp());
-				yield return new WaitForSeconds(1.7f);
-			}
-			else
-			{
-				if (huntPlayer)
+				if (curWayPoint.GetComponent<CheckWindow>() != null)
 				{
-					StartCoroutine(SpawnNPC());
-					yield break;
+					gameObject.transform.LookAt(curWayPoint.GetComponent<CheckWindow>().window.transform);
+					StartCoroutine(Jumpp());
+					yield return new WaitForSeconds(1.7f);
 				}
-
-				if (curWayPoint && waypointGroup)
-				{//patrol if NPC has a current waypoint, otherwise stand watch
-					Vector3 waypointPosition = curWayPoint.position;
-					float waypointDist = Vector3.Distance(waypointPosition, myTransform.position);
-					int waypointNumber = waypointGroup.wayPoints.IndexOf(curWayPoint);
-
-					//if NPC is close to a waypoint, pick the next one
-					if ((patrolOnce && waypointNumber == waypointGroup.wayPoints.Count - 1))
+				else
+				{
+					if (huntPlayer)
 					{
-						if (waypointDist < pickNextDestDist)
-						{
-							speedAmt = 0.0f;
-							startPosition = waypointPosition;
-							StartCoroutine(StandWatch());
-							yield break;//cancel patrol if patrolOnce var is true
-						}
+						StartCoroutine(SpawnNPC());
+						yield break;
 					}
-					else
-					{
-						if (waypointDist < pickNextDestDist)
+
+					if (curWayPoint && waypointGroup)
+					{//patrol if NPC has a current waypoint, otherwise stand watch
+						Vector3 waypointPosition = curWayPoint.position;
+						float waypointDist = Vector3.Distance(waypointPosition, myTransform.position);
+						int waypointNumber = waypointGroup.wayPoints.IndexOf(curWayPoint);
+
+						//if NPC is close to a waypoint, pick the next one
+						if ((patrolOnce && waypointNumber == waypointGroup.wayPoints.Count - 1))
 						{
-							if (waypointGroup.wayPoints.Count == 1)
+							if (waypointDist < pickNextDestDist)
 							{
 								speedAmt = 0.0f;
 								startPosition = waypointPosition;
 								StartCoroutine(StandWatch());
-								yield break;//cancel patrol if NPC has reached their only waypoint
+								yield break;//cancel patrol if patrolOnce var is true
 							}
-
-
-							curWayPoint = PickNextWaypoint(curWayPoint, waypointNumber);
-							if (spawned && Vector3.Distance(waypointPosition, myTransform.position) < pickNextDestDist)
+						}
+						else
+						{
+							if (waypointDist < pickNextDestDist)
 							{
-								walkOnPatrol = true;//make spawned NPCs run to their first waypoint, but walk on the patrol
-
-							}
-
-
-						}
-
-					}
-
-					//expand search radius if attacked
-					if (attackedTime + 6.0f > Time.time)
-					{
-						attackRangeAmt = attackRange * 6.0f;//expand enemy search radius if attacked to defend against sniping
-					}
-					else
-					{
-						attackRangeAmt = attackRange;
-					}
-
-					//allow player to push friendly NPCs out of their way
-					if (playerObj.activeInHierarchy && !collisionState && FPSWalker.capsule)
-					{
-						foreach (Collider col in colliders)
-						{
-							Physics.IgnoreCollision(col, FPSWalker.capsule, true);
-						}
-						collisionState = true;
-					}
-
-					//determine if player is within sight of NPC
-					CanSeeTarget();
-					if ((target && targetVisible) || heardPlayer || heardTarget)
-					{
-						yield return StartCoroutine(AttackTarget());
-					}
-					else
-					{
-						if (NPCRegistryComponent)
-						{
-							NPCRegistryComponent.FindClosestTarget(myTransform.gameObject, this, myTransform.position, attackRangeAmt, factionNum);
-						}
-						// Move towards our target
-						if (attackTime < Time.time)
-						{
-							if (orderedMove && !followPlayer)
-							{
-								if (Vector3.Distance(startPosition, myTransform.position) > pickNextDestDist)
+								if (waypointGroup.wayPoints.Count == 1)
 								{
-									speedAmt = runSpeed;
-									TravelToPoint(startPosition);
-								}
-								else
-								{
-									//play idle animation
 									speedAmt = 0.0f;
-									agent.isStopped = true;
-									SetSpeed(speedAmt);
-
-									if (attackFinished && attackTime < Time.time)
-									{
-										AnimatorComponent.SetInteger("AnimState", 0);
-									}
-
-									StartCoroutine(StandWatch());//npc reached player-designated position, stop patrolling and wait here
-									yield break;
+									startPosition = waypointPosition;
+									StartCoroutine(StandWatch());
+									yield break;//cancel patrol if NPC has reached their only waypoint
 								}
-							}
-							else if (!orderedMove && followPlayer)
-							{
-								if (Vector3.Distance(playerObj.transform.position, myTransform.position) > pickNextDestDist)
+
+
+								curWayPoint = PickNextWaypoint(curWayPoint, waypointNumber);
+								if (spawned && Vector3.Distance(waypointPosition, myTransform.position) < pickNextDestDist)
 								{
-									if (Vector3.Distance(playerObj.transform.position, myTransform.position) > pickNextDestDist * 2f)
+									walkOnPatrol = true;//make spawned NPCs run to their first waypoint, but walk on the patrol
+
+								}
+
+
+							}
+
+						}
+
+						//expand search radius if attacked
+						if (attackedTime + 6.0f > Time.time)
+						{
+							attackRangeAmt = attackRange * 6.0f;//expand enemy search radius if attacked to defend against sniping
+						}
+						else
+						{
+							attackRangeAmt = attackRange;
+						}
+
+						//allow player to push friendly NPCs out of their way
+						if (playerObj.activeInHierarchy && !collisionState && FPSWalker.capsule)
+						{
+							foreach (Collider col in colliders)
+							{
+								Physics.IgnoreCollision(col, FPSWalker.capsule, true);
+							}
+							collisionState = true;
+						}
+
+						//determine if player is within sight of NPC
+						CanSeeTarget();
+						if ((target && targetVisible) || heardPlayer || heardTarget)
+						{
+							yield return StartCoroutine(AttackTarget());
+						}
+						else
+						{
+							if (NPCRegistryComponent)
+							{
+								NPCRegistryComponent.FindClosestTarget(myTransform.gameObject, this, myTransform.position, attackRangeAmt, factionNum);
+							}
+							// Move towards our target
+							if (attackTime < Time.time)
+							{
+								if (orderedMove && !followPlayer)
+								{
+									if (Vector3.Distance(startPosition, myTransform.position) > pickNextDestDist)
 									{
 										speedAmt = runSpeed;
-										lastRunTime = Time.time;
+										TravelToPoint(startPosition);
 									}
 									else
 									{
-										if (lastRunTime + 2.0f < Time.time)
+										//play idle animation
+										speedAmt = 0.0f;
+										agent.isStopped = true;
+										SetSpeed(speedAmt);
+
+										if (attackFinished && attackTime < Time.time)
 										{
-											speedAmt = walkSpeed;
+											AnimatorComponent.SetInteger("AnimState", 0);
 										}
+
+										StartCoroutine(StandWatch());//npc reached player-designated position, stop patrolling and wait here
+										yield break;
 									}
-									TravelToPoint(playerObj.transform.position);
+								}
+								else if (!orderedMove && followPlayer)
+								{
+									if (Vector3.Distance(playerObj.transform.position, myTransform.position) > pickNextDestDist)
+									{
+										if (Vector3.Distance(playerObj.transform.position, myTransform.position) > pickNextDestDist * 2f)
+										{
+											speedAmt = runSpeed;
+											lastRunTime = Time.time;
+										}
+										else
+										{
+											if (lastRunTime + 2.0f < Time.time)
+											{
+												speedAmt = walkSpeed;
+											}
+										}
+										TravelToPoint(playerObj.transform.position);
+									}
+									else
+									{
+										//play idle animation
+										speedAmt = 0.0f;
+										agent.isStopped = true;
+										SetSpeed(speedAmt);
+
+										if (attackFinished && attackTime < Time.time)
+										{
+											AnimatorComponent.SetInteger("AnimState", 0);
+										}
+
+									}
 								}
 								else
 								{
-									//play idle animation
-									speedAmt = 0.0f;
-									agent.isStopped = true;
-									SetSpeed(speedAmt);
-
-									if (attackFinished && attackTime < Time.time)
-									{
-										AnimatorComponent.SetInteger("AnimState", 0);
-									}
-
+									//determine if NPC should walk or run on patrol
+									if (walkOnPatrol) { speedAmt = walkSpeed; } else { speedAmt = runSpeed; }
+									TravelToPoint(waypointPosition);
 								}
-							}
-							else
-							{
-								//determine if NPC should walk or run on patrol
-								if (walkOnPatrol) { speedAmt = walkSpeed; } else { speedAmt = runSpeed; }
-								TravelToPoint(waypointPosition);
 							}
 						}
 					}
+					else
+					{
+						StartCoroutine(StandWatch());//don't patrol if we have no waypoints
+						yield break;
+					}
 				}
-				else
-				{
-					StartCoroutine(StandWatch());//don't patrol if we have no waypoints
-					yield break;
-				}
+				yield return new WaitForSeconds(0.3f);
 			}
-			yield return new WaitForSeconds(0.3f);
 		}
-
 	}
 
 
 	void CanSeeTarget(){
-		/*if (AttackMode)
+		if (HitCount >= 3 && !isTile)
 		{
-			return;
-		}*/
-		if (spawnTime + 1f > Time.time){//add small delay before checking target visibility
-			return;
+			HitEffect();
 		}
-		
-		//stop tracking target if it is deactivated
-		if((TargetAIComponent && !TargetAIComponent.enabled) || (target && !target.gameObject.activeInHierarchy)){
-			target = null;
-			TargetAIComponent = null;
-			targetVisible = false;
-			heardTarget = false;
-			return;
-		}
+		else
+		{
+			if (spawnTime + 1f > Time.time)
+			{//add small delay before checking target visibility
+				return;
+			}
 
-		//target player
-		if((factionNum != 1 || playerAttacked) && FPSWalker.capsule){
+			//stop tracking target if it is deactivated
+			if ((TargetAIComponent && !TargetAIComponent.enabled) || (target && !target.gameObject.activeInHierarchy))
+			{
+				target = null;
+				TargetAIComponent = null;
+				targetVisible = false;
+				heardTarget = false;
+				return;
+			}
 
-			float playerDistance = Vector3.Distance(myTransform.position + (upVec * eyeHeight), playerTransform.position + (upVec * FPSWalker.capsule.height * 0.25f));
+			//target player
+			if ((factionNum != 1 || playerAttacked) && FPSWalker.capsule)
+			{
 
-			//listen for player attacks
-			if(!heardPlayer && !huntPlayer && FPSWalker.dropTime + 2.5f < Time.time){
-				if(playerDistance < listenRange && (target == playerTransform || target == FPSWalker.leanObj.transform || target == null)){
-					if(PlayerWeaponsComponent && PlayerWeaponsComponent.CurrentWeaponBehaviorComponent){
-						WeaponBehaviorComponent = PlayerWeaponsComponent.CurrentWeaponBehaviorComponent;
-						if(WeaponBehaviorComponent.shootStartTime + 2.0f > Time.time && !WeaponBehaviorComponent.silentShots){
-							if(target == FPSWalker.leanObj.transform){
-								targetEyeHeight = 0.0f;
-								target = FPSWalker.leanObj.transform;
-								pursueTarget = true;
-							}else{
-								targetEyeHeight = FPSWalker.capsule.height * 0.25f;
-								target = playerTransform;
+				float playerDistance = Vector3.Distance(myTransform.position + (upVec * eyeHeight), playerTransform.position + (upVec * FPSWalker.capsule.height * 0.25f));
+
+				//listen for player attacks
+				if (!heardPlayer && !huntPlayer && FPSWalker.dropTime + 2.5f < Time.time)
+				{
+					if (playerDistance < listenRange && (target == playerTransform || target == FPSWalker.leanObj.transform || target == null))
+					{
+						if (PlayerWeaponsComponent && PlayerWeaponsComponent.CurrentWeaponBehaviorComponent)
+						{
+							WeaponBehaviorComponent = PlayerWeaponsComponent.CurrentWeaponBehaviorComponent;
+							if (WeaponBehaviorComponent.shootStartTime + 2.0f > Time.time && !WeaponBehaviorComponent.silentShots)
+							{
+								if (target == FPSWalker.leanObj.transform)
+								{
+									targetEyeHeight = 0.0f;
+									target = FPSWalker.leanObj.transform;
+									pursueTarget = true;
+								}
+								else
+								{
+									targetEyeHeight = FPSWalker.capsule.height * 0.25f;
+									target = playerTransform;
+								}
+								timeout = Time.time + 6.0f;
+								heardPlayer = true;
+								return;
 							}
-							timeout = Time.time + 6.0f;
-							heardPlayer = true;
-							return;
 						}
 					}
 				}
-			}
 
-			if(huntPlayer){
-				targetEyeHeight = FPSWalker.capsule.height * 0.25f;
-				target = playerTransform;
-			}
-
-			if(playerDistance < attackRangeAmt){
-
-				//target lean collider if player is leaning around a corner
-				if(Mathf.Abs(FPSWalker.leanAmt) > 0.1f 
-				&& playerDistance > 2.0f && target == playerTransform 
-				&& (attackedTime + 6.0f > Time.time || heardPlayer)){//allow player to peek around corners undetected if they haven't attacked this npc
-					targetEyeHeight = 0.0f;
-					target = FPSWalker.leanObj.transform;
-				}
-				//target main player object if they are not leaning
-				if((Mathf.Abs(FPSWalker.leanAmt) < 0.1f || playerDistance < 2.0f) && target == FPSWalker.leanObj.transform){
+				if (huntPlayer)
+				{
 					targetEyeHeight = FPSWalker.capsule.height * 0.25f;
 					target = playerTransform;
 				}
 
+				if (playerDistance < attackRangeAmt)
+				{
+
+					//target lean collider if player is leaning around a corner
+					if (Mathf.Abs(FPSWalker.leanAmt) > 0.1f
+					&& playerDistance > 2.0f && target == playerTransform
+					&& (attackedTime + 6.0f > Time.time || heardPlayer))
+					{//allow player to peek around corners undetected if they haven't attacked this npc
+						targetEyeHeight = 0.0f;
+						target = FPSWalker.leanObj.transform;
+					}
+					//target main player object if they are not leaning
+					if ((Mathf.Abs(FPSWalker.leanAmt) < 0.1f || playerDistance < 2.0f) && target == FPSWalker.leanObj.transform)
+					{
+						targetEyeHeight = FPSWalker.capsule.height * 0.25f;
+						target = playerTransform;
+					}
+
+				}
+
 			}
 
-		}
+			//calculate range and LOS to target
+			if (target == playerTransform || target == FPSWalker.leanObj.transform || (TargetAIComponent && TargetAIComponent.enabled && target != null))
+			{
+				Vector3 myPos = myTransform.position + (upVec * eyeHeight);
+				targetPos = target.position + (target.up * targetEyeHeight);
 
-		//calculate range and LOS to target
-		if(target == playerTransform || target == FPSWalker.leanObj.transform || (TargetAIComponent && TargetAIComponent.enabled && target != null)){
-			Vector3 myPos = myTransform.position + (upVec * eyeHeight);
-			targetPos = target.position + (target.up * targetEyeHeight);
+				targetDistance = Vector3.Distance(myPos, targetPos);
+				targetDirection = (targetPos - myPos).normalized;
 
-			targetDistance = Vector3.Distance(myPos, targetPos);
-			targetDirection = (targetPos - myPos).normalized;
+				Vector3 targetDirPerp = Vector3.Cross(targetDirection, Vector3.forward);
+				targetDirPerp.Normalize();
 
-			Vector3 targetDirPerp = Vector3.Cross (targetDirection, Vector3.forward);
-			targetDirPerp.Normalize();
-
-			if(targetDistance > attackRangeAmt){
-				sightBlocked = true;
-				targetVisible = false;
-				return;//don't continue to check LOS if target is not within attack range
-			}
-
-			//check LOS with raycast
-			hits = Physics.RaycastAll (myPos, targetDirection, targetDistance, searchMask);
-
-			sightBlocked = false;
-
-			//detect if target is behind NPC
-			if(!huntPlayer 
-			&& timeout < Time.time
-			&& attackedTime + 6.0f < Time.time
-			&& ((target == playerTransform || target == FPSWalker.leanCol) && !heardPlayer)
-			&& !FPSWalker.sprintActive){
-				Vector3 toTarget = (targetPos - myPos).normalized;
-				if(Vector3.Dot(toTarget, transform.forward) < -0.45f){
+				if (targetDistance > attackRangeAmt)
+				{
 					sightBlocked = true;
-					playerIsBehind = true;
+					targetVisible = false;
+					return;//don't continue to check LOS if target is not within attack range
+				}
+
+				//check LOS with raycast
+				hits = Physics.RaycastAll(myPos, targetDirection, targetDistance, searchMask);
+
+				sightBlocked = false;
+
+				//detect if target is behind NPC
+				if (!huntPlayer
+				&& timeout < Time.time
+				&& attackedTime + 6.0f < Time.time
+				&& ((target == playerTransform || target == FPSWalker.leanCol) && !heardPlayer)
+				&& !FPSWalker.sprintActive)
+				{
+					Vector3 toTarget = (targetPos - myPos).normalized;
+					if (Vector3.Dot(toTarget, transform.forward) < -0.45f)
+					{
+						sightBlocked = true;
+						playerIsBehind = true;
+						targetVisible = false;
+						return;
+					}
+				}
+
+				playerIsBehind = false;
+
+				//check if NPC can see their target
+				for (int i = 0; i < hits.Length; i++)
+				{
+					if ((!hits[i].transform.IsChildOf(target)//hit is not target
+					&& !hits[i].transform.IsChildOf(myTransform))//hit is not NPC's own colliders
+					|| (!playerAttacked//attack player if they attacked us (friendly fire)
+						&& (factionNum == 1 && target != playerObj && (hits[i].collider == FPSWalker.capsule//try not to shoot the player if we are a friendly NPC
+							|| hits[i].collider == FPSWalker.leanCol)))
+					)
+					{
+						sightBlocked = true;
+						break;
+					}
+					if (hits[i].transform.IsChildOf(target))
+					{
+						attackHit = hits[i];
+						break;
+					}
+				}
+
+				if (!sightBlocked)
+				{
+					if (target != FPSWalker.leanObj.transform)
+					{
+						pursueTarget = false;
+						targetVisible = true;
+						return;
+					}
+					else
+					{
+						pursueTarget = true;//true when NPC has seen only the player leaning around a corner
+						targetVisible = true;
+						return;
+					}
+				}
+				else
+				{
+					if (TargetAIComponent && !huntPlayer)
+					{
+						if (TargetAIComponent.attackTime > Time.time && Vector3.Distance(myTransform.position, target.position) < listenRange)
+						{
+							timeout = Time.time + 6.0f;
+							heardTarget = true;
+						}
+					}
 					targetVisible = false;
 					return;
 				}
-			}
-			
-			playerIsBehind = false;
 
-			//check if NPC can see their target
-			for(int i = 0; i < hits.Length; i++){
-				if((!hits[i].transform.IsChildOf(target)//hit is not target
-				&& !hits[i].transform.IsChildOf(myTransform))//hit is not NPC's own colliders
-			    || (!playerAttacked//attack player if they attacked us (friendly fire)
-			    	&& (factionNum == 1 && target != playerObj && (hits[i].collider == FPSWalker.capsule//try not to shoot the player if we are a friendly NPC
-                   		|| hits[i].collider == FPSWalker.leanCol)))
-				){
-					sightBlocked = true;
-					break;
-				}
-				if(hits[i].transform.IsChildOf(target)){
-					attackHit = hits[i];
-					break;
-				}
 			}
-			
-			if(!sightBlocked){
-				if(target != FPSWalker.leanObj.transform){
-					pursueTarget = false;
-					targetVisible = true;
-					return;
-				}else{
-					pursueTarget = true;//true when NPC has seen only the player leaning around a corner
-					targetVisible = true;
-					return;
-				}
-			}else{
-				if(TargetAIComponent && !huntPlayer){
-					if(TargetAIComponent.attackTime > Time.time && Vector3.Distance(myTransform.position, target.position) < listenRange ){
-						timeout = Time.time + 6.0f;
-						heardTarget = true;
-					}
-				}
+			else
+			{
 				targetVisible = false;
 				return;
 			}
-			
-		}else{
-			targetVisible = false;
-			return;
 		}
-	
 	}
 	
 
 
 	IEnumerator Shoot(){
-		/*if (AttackMode)
+		if (HitCount >= 3 && !isTile)
 		{
-			yield break;
-		}*/
-		attackFinished = false;
-
-		//don't move during attack
-		speedAmt = 0.0f;
-		SetSpeed(speedAmt);
-		agent.isStopped = true;
-
-
-		// Start shoot animation
-		AnimatorComponent.SetInteger("AnimState", 3);
-		AnimatorComponent.SetTrigger("Attack");
-
-
-		// Wait until delayShootTime to allow part of the animation to play
-		yield return new WaitForSeconds(delayShootTime);
-		//attack
-		NPCAttackComponent.Fire();
-		if(cancelAttackTaunt){
-			vocalFx.Stop();
+			HitEffect();
 		}
-		attackTime = Time.time + 2.0f;
-		// Wait for the rest of the animation to finish
-		yield return new WaitForSeconds(delayShootTime + Random.Range(shotDuration, shotDuration + 0.75f));
+		else
+		{
+			attackFinished = false;
 
-		attackFinished = true;
+			//don't move during attack
+			speedAmt = 0.0f;
+			SetSpeed(speedAmt);
+			agent.isStopped = true;
 
-		AnimatorComponent.SetInteger("AnimState", 0);
-		
+
+			// Start shoot animation
+			AnimatorComponent.SetInteger("AnimState", 3);
+			AnimatorComponent.SetTrigger("Attack");
+
+
+			// Wait until delayShootTime to allow part of the animation to play
+			yield return new WaitForSeconds(delayShootTime);
+			//attack
+			NPCAttackComponent.Fire();
+			if (cancelAttackTaunt)
+			{
+				vocalFx.Stop();
+			}
+			attackTime = Time.time + 2.0f;
+			// Wait for the rest of the animation to finish
+			yield return new WaitForSeconds(delayShootTime + Random.Range(shotDuration, shotDuration + 0.75f));
+
+			attackFinished = true;
+
+			AnimatorComponent.SetInteger("AnimState", 0);
+		}
 
 	}
-	
+	public void Delay1()
+    {
+		HitCount = 0;
+		AnimatorComponent.SetBool("Hitt", false);
+		isTile = false;
+	}
 	IEnumerator AttackTarget(){
-		if (!AttackMode)
+		if (HitCount >= 3 && !isTile)
 		{
-			yield break;
+			HitEffect();
 		}
-
-		while (true) {
-		
-			if(Time.timeSinceLevelLoad < 1f){//add small delay before checking target visibility
-				yield return new WaitForSeconds(1.0f);
-			}
-			
-			// no target - stop hunting
-			if(target == null || (TargetAIComponent && !TargetAIComponent.enabled) && !huntPlayer){
-				timeout = 0.0f;
-				heardPlayer = false;
-				heardTarget = false;
-				damaged = false;
-				TargetAIComponent = null;
+		else
+		{
+			if (!AttackMode)
+			{
 				yield break;
 			}
-			
-			//play a taunt if hunting target
-			if(lastTauntTime + tauntDelay < Time.time 
-			&& Random.value < tauntChance 
-			&& (alertTaunt || alertSnds.Length <= 0)){
-				if(tauntSnds.Length > 0){
-					vocalFx.volume = tauntVol;
-					vocalFx.pitch = Random.Range(0.94f, 1f);
-					vocalFx.spatialBlend = 1.0f;
-					vocalFx.clip = tauntSnds[Random.Range(0, tauntSnds.Length)];
-					vocalFx.PlayOneShot(vocalFx.clip);
-					lastTauntTime = Time.time;
+
+			while (true)
+			{
+
+				if (Time.timeSinceLevelLoad < 1f)
+				{//add small delay before checking target visibility
+					yield return new WaitForSeconds(1.0f);
 				}
-			}
-			
-			//play alert sound if target detected
-			if(!alertTaunt){
-				if(alertSnds.Length > 0){
-					vocalFx.volume = alertVol;
-					vocalFx.pitch = Random.Range(0.94f, 1f);
-					vocalFx.spatialBlend = 1.0f;
-					vocalFx.clip = alertSnds[Random.Range(0, alertSnds.Length)];
-					vocalFx.PlayOneShot(vocalFx.clip);
-					lastTauntTime = Time.time;
-					alertTaunt = true;
-				}
-			}
-			
-			float distance = Vector3.Distance(myTransform.position, target.position);
-			
-			if(!huntPlayer){
-				
-				//search for player if their attacks have been heard
-				if(heardPlayer && (target == playerTransform || target == FPSWalker.leanObj.transform)){
-					InitializeAnim();
-					speedAmt = runSpeed;
-					SearchTarget(lastVisibleTargetPosition);
-				}
-				//search for target if their attacks have been heard
-				if(heardTarget){
-					InitializeAnim();
-					speedAmt = runSpeed;
-					SearchTarget(lastVisibleTargetPosition);
-				}
-		
-				// Target is too far away - give up	
-				if(distance > attackRangeAmt){
-					speedAmt = walkSpeed;
-					target = null;
+
+				// no target - stop hunting
+				if (target == null || (TargetAIComponent && !TargetAIComponent.enabled) && !huntPlayer)
+				{
+					timeout = 0.0f;
+					heardPlayer = false;
+					heardTarget = false;
+					damaged = false;
+					TargetAIComponent = null;
 					yield break;
 				}
-				
-			}else{
-				InitializeAnim();
-				target = playerTransform;
-				speedAmt = runSpeed;
-				TravelToPoint(target.position);
-			}
 
-			if(pursueTarget){//should NPC attack player collider or leaning collider?
-				lastVisibleTargetPosition = FPSWalker.leanObj.transform.position;
-			}else{
-				lastVisibleTargetPosition = target.position + (target.up * targetEyeHeight);
-			}
+				//play a taunt if hunting target
+				if (lastTauntTime + tauntDelay < Time.time
+				&& Random.value < tauntChance
+				&& (alertTaunt || alertSnds.Length <= 0))
+				{
+					if (tauntSnds.Length > 0)
+					{
+						vocalFx.volume = tauntVol;
+						vocalFx.pitch = Random.Range(0.94f, 1f);
+						vocalFx.spatialBlend = 1.0f;
+						vocalFx.clip = tauntSnds[Random.Range(0, tauntSnds.Length)];
+						vocalFx.PlayOneShot(vocalFx.clip);
+						lastTauntTime = Time.time;
+					}
+				}
 
-			CanSeeTarget();
-			if(targetVisible){
-				timeout = Time.time + 6.0f;
-			
-				if(distance > shootRange){
-					if(!huntPlayer){
+				//play alert sound if target detected
+				if (!alertTaunt)
+				{
+					if (alertSnds.Length > 0)
+					{
+						vocalFx.volume = alertVol;
+						vocalFx.pitch = Random.Range(0.94f, 1f);
+						vocalFx.spatialBlend = 1.0f;
+						vocalFx.clip = alertSnds[Random.Range(0, alertSnds.Length)];
+						vocalFx.PlayOneShot(vocalFx.clip);
+						lastTauntTime = Time.time;
+						alertTaunt = true;
+					}
+				}
+
+				float distance = Vector3.Distance(myTransform.position, target.position);
+
+				if (!huntPlayer)
+				{
+
+					//search for player if their attacks have been heard
+					if (heardPlayer && (target == playerTransform || target == FPSWalker.leanObj.transform))
+					{
+						InitializeAnim();
+						speedAmt = runSpeed;
 						SearchTarget(lastVisibleTargetPosition);
 					}
-				}else{//close to target, rotate NPC to face it
-					if(!turning){
-						StopCoroutine("RotateTowards");
-						StartCoroutine(RotateTowards(lastVisibleTargetPosition, 20.0f, 2.0f));
+					//search for target if their attacks have been heard
+					if (heardTarget)
+					{
+						InitializeAnim();
+						speedAmt = runSpeed;
+						SearchTarget(lastVisibleTargetPosition);
 					}
-					speedAmt = 0.0f;
-					SetSpeed(speedAmt);
-					agent.speed = speedAmt;
+
+					// Target is too far away - give up	
+					if (distance > attackRangeAmt)
+					{
+						speedAmt = walkSpeed;
+						target = null;
+						yield break;
+					}
+
+				}
+				else
+				{
+					InitializeAnim();
+					target = playerTransform;
+					speedAmt = runSpeed;
+					TravelToPoint(target.position);
 				}
 
-				InitializeAnim();
-				speedAmt = runSpeed;
+				if (pursueTarget)
+				{//should NPC attack player collider or leaning collider?
+					lastVisibleTargetPosition = FPSWalker.leanObj.transform.position;
+				}
+				else
+				{
+					lastVisibleTargetPosition = target.position + (target.up * targetEyeHeight);
+				}
 
-				Vector3 forward = myTransform.TransformDirection(Vector3.forward);
-				Vector3 targetDirection = lastVisibleTargetPosition - (myTransform.position + (myTransform.up * eyeHeight));
-				targetDirection.y = 0;
-				
-				float angle = Vector3.Angle(targetDirection, forward);
-				
-				// Start shooting if close and player is in sight
-				if(distance < shootRange && angle < shootAngle){
-					if(attackFinished){
-						yield return StartCoroutine(Shoot());
+				CanSeeTarget();
+				if (targetVisible)
+				{
+					timeout = Time.time + 6.0f;
+
+					if (distance > shootRange)
+					{
+						if (!huntPlayer)
+						{
+							SearchTarget(lastVisibleTargetPosition);
+						}
 					}
-					else{
+					else
+					{//close to target, rotate NPC to face it
+						if (!turning)
+						{
+							StopCoroutine("RotateTowards");
+							StartCoroutine(RotateTowards(lastVisibleTargetPosition, 20.0f, 2.0f));
+						}
 						speedAmt = 0.0f;
 						SetSpeed(speedAmt);
-						agent.isStopped = true;
+						agent.speed = speedAmt;
 					}
-				}
-				
-			}else{
-				if(!huntPlayer){
-					if(attackFinished || huntPlayer){
-						if(timeout > Time.time){
-							InitializeAnim();
-							speedAmt = runSpeed;
-							SetSpeed(speedAmt);
-							SearchTarget(lastVisibleTargetPosition);
-						}else{//if timeout has elapsed and target is not visible, resume initial behavior
-							heardPlayer = false;
-							heardTarget = false;
-							alertTaunt = false;
+
+					InitializeAnim();
+					speedAmt = runSpeed;
+
+					Vector3 forward = myTransform.TransformDirection(Vector3.forward);
+					Vector3 targetDirection = lastVisibleTargetPosition - (myTransform.position + (myTransform.up * eyeHeight));
+					targetDirection.y = 0;
+
+					float angle = Vector3.Angle(targetDirection, forward);
+
+					// Start shooting if close and player is in sight
+					if (distance < shootRange && angle < shootAngle)
+					{
+						if (attackFinished)
+						{
+							yield return StartCoroutine(Shoot());
+						}
+						else
+						{
 							speedAmt = 0.0f;
 							SetSpeed(speedAmt);
 							agent.isStopped = true;
-							target = null;
-							yield break;
+						}
+					}
+
+				}
+				else
+				{
+					if (!huntPlayer)
+					{
+						if (attackFinished || huntPlayer)
+						{
+							if (timeout > Time.time)
+							{
+								InitializeAnim();
+								speedAmt = runSpeed;
+								SetSpeed(speedAmt);
+								SearchTarget(lastVisibleTargetPosition);
+							}
+							else
+							{//if timeout has elapsed and target is not visible, resume initial behavior
+								heardPlayer = false;
+								heardTarget = false;
+								alertTaunt = false;
+								speedAmt = 0.0f;
+								SetSpeed(speedAmt);
+								agent.isStopped = true;
+								target = null;
+								yield break;
+							}
 						}
 					}
 				}
-			}
-			
-			if(animInit){
-				//only wait one frame till next pass so animations will be initialized now, instead of in 0.3 second normal AI calculation delay
-				yield return null;
-			}else{
-				yield return new WaitForSeconds(0.3f);//wait 0.3 seconds (not every frame) untill next AI calculation (for efficiency)
-			}
 
+				if (animInit)
+				{
+					//only wait one frame till next pass so animations will be initialized now, instead of in 0.3 second normal AI calculation delay
+					yield return null;
+				}
+				else
+				{
+					yield return new WaitForSeconds(0.3f);//wait 0.3 seconds (not every frame) untill next AI calculation (for efficiency)
+				}
+
+			}
 		}
 	}
 
 	//look for target at a location
 	void SearchTarget( Vector3 position  ){
-		if(attackFinished){
-			if(target == playerTransform || target == FPSWalker.leanObj.transform || (TargetAIComponent && TargetAIComponent.enabled)){
-				if(!huntPlayer){
-					speedAmt = runSpeed;
-					TravelToPoint(target.position);
+		if (HitCount >= 3 && !isTile)
+		{
+			HitEffect();
+		}
+		else
+		{
+			if (attackFinished)
+			{
+				if (target == playerTransform || target == FPSWalker.leanObj.transform || (TargetAIComponent && TargetAIComponent.enabled))
+				{
+					if (!huntPlayer)
+					{
+						speedAmt = runSpeed;
+						TravelToPoint(target.position);
+					}
 				}
-			}else{
-				timeout = 0.0f;
-				damaged = false;
+				else
+				{
+					timeout = 0.0f;
+					damaged = false;
+				}
 			}
 		}
 	}
 
 	//rotate to face target
-	public IEnumerator RotateTowards( Vector3 position, float rotationSpeed, float turnTimer, bool attacking = true ){
-		float turnTime;
-		turnTime = Time.time;
+	public IEnumerator RotateTowards(Vector3 position, float rotationSpeed, float turnTimer, bool attacking = true)
+	{
+		if (HitCount >= 3 && !isTile)
+		{
+			HitEffect();
+		}
+		else
+		{
+			float turnTime;
+			turnTime = Time.time;
 
-		SetSpeed(0.0f);
-		agent.isStopped = true;
+			SetSpeed(0.0f);
+			agent.isStopped = true;
 
-		while(turnTime + turnTimer > Time.time && !cancelRotate){
-			turning = true;
+			while (turnTime + turnTimer > Time.time && !cancelRotate)
+			{
+				turning = true;
 
-			if(pursueTarget){
-				position = FPSWalker.leanObj.transform.position;
-			}else{
-				if((target && attacking && (target == playerTransform || (TargetAIComponent && TargetAIComponent.enabled)))){
-					lastVisibleTargetPosition = target.position + (target.up * targetEyeHeight);
-				}else{
-					lastVisibleTargetPosition = position;
+				if (pursueTarget)
+				{
+					position = FPSWalker.leanObj.transform.position;
+				}
+				else
+				{
+					if ((target && attacking && (target == playerTransform || (TargetAIComponent && TargetAIComponent.enabled))))
+					{
+						lastVisibleTargetPosition = target.position + (target.up * targetEyeHeight);
+					}
+					else
+					{
+						lastVisibleTargetPosition = position;
+					}
+				}
+
+				Vector3 direction = lastVisibleTargetPosition - myTransform.position;
+				direction.y = 0;
+				if (direction.x != 0 && direction.z != 0)
+				{
+					// Rotate towards the target
+					myTransform.rotation = Quaternion.Slerp(myTransform.rotation, Quaternion.LookRotation(direction), rotationSpeed * Time.deltaTime);
+					myTransform.eulerAngles = new Vector3(0, myTransform.eulerAngles.y, 0);
+					yield return null;
+				}
+				else
+				{
+					break;//stop rotating 
 				}
 			}
-			
-			Vector3 direction = lastVisibleTargetPosition - myTransform.position;
-			direction.y = 0;
-			if(direction.x != 0 && direction.z != 0){
-				// Rotate towards the target
-				myTransform.rotation = Quaternion.Slerp (myTransform.rotation, Quaternion.LookRotation(direction), rotationSpeed * Time.deltaTime);
-				myTransform.eulerAngles = new Vector3(0, myTransform.eulerAngles.y, 0);
-				yield return null;
-			}else{
-				break;//stop rotating 
-			}
+			cancelRotate = false;
+			turning = false;
 		}
-		cancelRotate = false;
-		turning = false;
 	}
-	
+
 	//Allow tweaking of model yaw/facing direction from the inspector for NPC alignment with attack direction 
-	private IEnumerator UpdateModelYaw(){
-		while(true){
-			
-			if(stepInterval > 0.0f){
-				yawAmt = Mathf.MoveTowards(yawAmt, movingYaw, Time.deltaTime * 180.0f);
-			}else{
-				yawAmt = Mathf.MoveTowards(yawAmt, idleYaw, Time.deltaTime * 180.0f);
+	private IEnumerator UpdateModelYaw()
+	{
+		if (HitCount >= 3 && !isTile)
+		{
+			HitEffect();
+		}
+		else
+		{
+			while (true)
+			{
+
+				if (stepInterval > 0.0f)
+				{
+					yawAmt = Mathf.MoveTowards(yawAmt, movingYaw, Time.deltaTime * 180.0f);
+				}
+				else
+				{
+					yawAmt = Mathf.MoveTowards(yawAmt, idleYaw, Time.deltaTime * 180.0f);
+				}
+
+				objectWithAnims.transform.localRotation = Quaternion.Euler(0.0f, yawAmt, 0.0f);
+
+				yield return null;
 			}
-
-			objectWithAnims.transform.localRotation = Quaternion.Euler(0.0f, yawAmt, 0.0f);
-
-			yield return null;
 		}
 	}
 
@@ -1241,66 +1415,98 @@ public class AI : MonoBehaviour {
 	
 	//Interact with NPC when pressing use key over them 
 	public void CommandNPC () {
-		if(factionNum == 1 && followOnUse && commandedTime + 0.5f < Time.time){
-			orderedMove = false;
-			cancelRotate = false;
-			commandedTime = Time.time;
-			if(attackFinished && !turning){
-				StopCoroutine("RotateTowards");
-				StartCoroutine(RotateTowards(playerTransform.position, 10.0f, 2.0f, false));
-			}
-			if(!followPlayer){
-				if((followFx1 || followFx2) && ((jokeFx && jokePlaying + jokeFx.length < Time.time) || !jokeFx)){
-					if(Random.value > 0.5f){
-						vocalFx.clip = followFx1;
-					}else{
-						vocalFx.clip = followFx2;
-					}
-					vocalFx.pitch = Random.Range(0.94f, 1f);
-					vocalFx.spatialBlend = 1.0f;
-					vocalFx.PlayOneShot(vocalFx.clip);
-				}
-				followPlayer = true;
-			}else{
-				if((stayFx1 || stayFx2) && ((jokeFx && jokePlaying + jokeFx.length < Time.time) || !jokeFx)){
-					if(Random.value > 0.5f){
-						vocalFx.clip = stayFx1;
-					}else{
-						vocalFx.clip = stayFx2;
-					}
-					vocalFx.pitch = Random.Range(0.94f, 1f);
-					vocalFx.spatialBlend = 1.0f;
-					vocalFx.PlayOneShot(vocalFx.clip);
-				}
-				startPosition = myTransform.position;
-				followPlayer = false;
-			}
+		if (HitCount >= 3 && !isTile)
+		{
+			HitEffect();
 		}
-		if(jokeFx && factionNum == 1 && followOnUse){
-			if(jokeCount == 0){
-				talkedTime = Time.time;
-			}
-			if(talkedTime + 0.5f > Time.time){
-				talkedTime = Time.time;
-				jokeCount++;
-				if(jokeCount > jokeActivate){
-					if(!jokeFx2){
-						vocalFx.clip = jokeFx;
-					}else{
-						if(Random.value > 0.5f){
-							vocalFx.clip = jokeFx;
-						}else{
-							vocalFx.clip = jokeFx2;
+		else
+		{
+			if (factionNum == 1 && followOnUse && commandedTime + 0.5f < Time.time)
+			{
+				orderedMove = false;
+				cancelRotate = false;
+				commandedTime = Time.time;
+				if (attackFinished && !turning)
+				{
+					StopCoroutine("RotateTowards");
+					StartCoroutine(RotateTowards(playerTransform.position, 10.0f, 2.0f, false));
+				}
+				if (!followPlayer)
+				{
+					if ((followFx1 || followFx2) && ((jokeFx && jokePlaying + jokeFx.length < Time.time) || !jokeFx))
+					{
+						if (Random.value > 0.5f)
+						{
+							vocalFx.clip = followFx1;
 						}
+						else
+						{
+							vocalFx.clip = followFx2;
+						}
+						vocalFx.pitch = Random.Range(0.94f, 1f);
+						vocalFx.spatialBlend = 1.0f;
+						vocalFx.PlayOneShot(vocalFx.clip);
 					}
-					vocalFx.pitch = Random.Range(0.94f, 1f);
-					vocalFx.spatialBlend = 1.0f;
-					vocalFx.PlayOneShot(vocalFx.clip);
-					jokePlaying = Time.time;
+					followPlayer = true;
+				}
+				else
+				{
+					if ((stayFx1 || stayFx2) && ((jokeFx && jokePlaying + jokeFx.length < Time.time) || !jokeFx))
+					{
+						if (Random.value > 0.5f)
+						{
+							vocalFx.clip = stayFx1;
+						}
+						else
+						{
+							vocalFx.clip = stayFx2;
+						}
+						vocalFx.pitch = Random.Range(0.94f, 1f);
+						vocalFx.spatialBlend = 1.0f;
+						vocalFx.PlayOneShot(vocalFx.clip);
+					}
+					startPosition = myTransform.position;
+					followPlayer = false;
+				}
+			}
+			if (jokeFx && factionNum == 1 && followOnUse)
+			{
+				if (jokeCount == 0)
+				{
+					talkedTime = Time.time;
+				}
+				if (talkedTime + 0.5f > Time.time)
+				{
+					talkedTime = Time.time;
+					jokeCount++;
+					if (jokeCount > jokeActivate)
+					{
+						if (!jokeFx2)
+						{
+							vocalFx.clip = jokeFx;
+						}
+						else
+						{
+							if (Random.value > 0.5f)
+							{
+								vocalFx.clip = jokeFx;
+							}
+							else
+							{
+								vocalFx.clip = jokeFx2;
+							}
+						}
+						vocalFx.pitch = Random.Range(0.94f, 1f);
+						vocalFx.spatialBlend = 1.0f;
+						vocalFx.PlayOneShot(vocalFx.clip);
+						jokePlaying = Time.time;
+						jokeCount = 0;
+					}
+				}
+				else
+				{
 					jokeCount = 0;
 				}
-			}else{
-				jokeCount = 0;
 			}
 		}
 	}
