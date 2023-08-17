@@ -43,6 +43,8 @@ public class GameManager : MonoBehaviour
     bool isLevelComplete;
     private void Start()
     {
+
+        SoundsManager.instance.PlayGameplayMusic();
         isLevelComplete = false;
         ZombieJump_Bool = false;
         instance = this;
@@ -62,11 +64,11 @@ public class GameManager : MonoBehaviour
             Call_Zombies(Levels[PlayerPrefs.GetInt("WaveNo")]);
              Assign_Paths();
     }
-
+    
     private void Update()
     {
         Wave.text = "Zombies Left :" + ZombieDeathCount;
-        if (ZombieDeathCount == 0 && NextWave_Enter && !isLevelComplete)
+        if (ZombieDeathCount == 0 && NextWave_Enter && !isLevelComplete  )
         {
             PlayerPrefs.SetInt("WaveUnlock", PlayerPrefs.GetInt("WaveUnlock")+1);
             PlayerPrefs.SetInt("WaveNo", PlayerPrefs.GetInt("WaveNo") + 1);
