@@ -327,7 +327,7 @@ public class CFEditorStyles
 
 		if (tex == null)
 			{
-			Debug.LogError("Can't load texture : " + iconName);
+		//	Debug.LogError("Can't load texture : " + iconName);
 			return EditorGUIUtility.whiteTexture;	
 			}
 

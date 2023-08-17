@@ -40,8 +40,10 @@ public class GameManager : MonoBehaviour
     public GameObject LevelComplete;
     public GameObject LevelFailed;
     public GameObject LevelPasued;
+    bool isLevelComplete;
     private void Start()
     {
+        isLevelComplete = false;
         ZombieJump_Bool = false;
         instance = this;
         NextWave_Enter = false;
@@ -64,11 +66,12 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         Wave.text = "Way " + PlayerPrefs.GetInt("WaveNo") + "  Remaining Zombies " + ZombieDeathCount;
-        if (ZombieDeathCount == 0 && NextWave_Enter)
+        if (ZombieDeathCount == 0 && NextWave_Enter && !isLevelComplete)
         {
             PlayerPrefs.SetInt("WaveUnlock", PlayerPrefs.GetInt("WaveUnlock")+1);
             PlayerPrefs.SetInt("WaveNo", PlayerPrefs.GetInt("WaveNo") + 1);
             LevelComplete.SetActive(true);
+            isLevelComplete = true;
         }
     }
 
