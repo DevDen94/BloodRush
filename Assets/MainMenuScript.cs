@@ -10,6 +10,8 @@ public class MainMenuScript : MonoBehaviour
     public AudioClip BtnClickSound;
     public GameObject[] LockedImages;
     public Button[] LevelBtns;
+    public Slider[] MusicSlider;
+
 
     void DisableAll()
     {
@@ -32,6 +34,12 @@ public class MainMenuScript : MonoBehaviour
     }
     void Start()
     {
+
+        if (!SoundsManager.instance.IsPlayMainMenuSound)
+        {
+            SoundsManager.instance.PlayGameplayMusic();
+        }
+
         if (!PlayerPrefs.HasKey("Zero"))
         {
             PlayerPrefs.SetInt("Zero", 1);
@@ -43,7 +51,8 @@ public class MainMenuScript : MonoBehaviour
 
     public void ButtonClick()
     {
-        src.PlayOneShot(BtnClickSound);
+        //src.PlayOneShot(BtnClickSound);
+        SoundsManager.instance.playBtnClick();
     }
     // Update is called once per frame
     void Update()
@@ -51,6 +60,14 @@ public class MainMenuScript : MonoBehaviour
         
     }
 
+
+
+    public void SaveSettings()
+    {
+        
+        PlayerPrefs.SetFloat("MusicVoulme", MusicSlider[0].value);
+        PlayerPrefs.SetFloat("SFXVoulme", MusicSlider[1].value);
+    }
 
     public void WayLevel(int way = 0)
     {
