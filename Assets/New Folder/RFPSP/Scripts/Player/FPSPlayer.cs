@@ -1333,8 +1333,8 @@ public class FPSPlayer : MonoBehaviour {
 		FPSWalkerComponent.inputX = 0;
 		FPSWalkerComponent.inputY = 0;
 		FPSWalkerComponent.cancelSprint = true;
-			
 
+		GameManager.instance.LevelFailed.SetActive(true);
 		//call FadeAndLoadLevel function with fadein argument set to false 
 		//in levelLoadFadeObj to restart level and fade screen out from black on level load
 		levelLoadFadeRef.StopAllCoroutines();
@@ -1342,7 +1342,7 @@ public class FPSPlayer : MonoBehaviour {
 		
 	}
 	
-	public void RestartMap () {
+	/*public void RestartMap () {
 		Time.timeScale = 1.0f;//set timescale to 1.0f so fadeout wont take longer if bullet time is active
 
 		//call FadeAndLoadLevel function with fadein argument set to false 
@@ -1357,6 +1357,6 @@ public class FPSPlayer : MonoBehaviour {
 		FPSWalkerComponent.inputY = 0;
 		FPSWalkerComponent.cancelSprint = true;
 		WeaponBehaviorComponent.shooting = false;
-	}
+	}*/
 
 }

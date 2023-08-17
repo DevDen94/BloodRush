@@ -208,7 +208,7 @@ public class MainMenu : MonoBehaviour {
 		}
 		
 		if (GUI.Button(new Rect(buttonH, buttonV + buttonHeightAmt + buttonSpacing, buttonWidthAmt, buttonHeightAmt), "Restart Map", mainButtonSyle)){		
-			FPSPlayerComponent.RestartMap();
+			//FPSPlayerComponent.RestartMap();
 			PlayButtonFx(buttonClickFx, buttonFxVol);
 			this.enabled = false;
 		}
@@ -216,7 +216,7 @@ public class MainMenu : MonoBehaviour {
 		if (GUI.Button(new Rect(buttonH, buttonV + ((buttonHeightAmt + buttonSpacing) * 2), buttonWidthAmt, buttonHeightAmt), "Story Mode", mapButtonStyle)){
 			if(!npcGoupsNull){	
 				PlayerPrefs.SetInt("Game Type", 0);
-				FPSPlayerComponent.RestartMap();
+			//	FPSPlayerComponent.RestartMap();
 				PlayButtonFx(buttonClickFx, buttonFxVol);
 				this.enabled = false;
 			}else{
@@ -227,7 +227,7 @@ public class MainMenu : MonoBehaviour {
 		if (GUI.Button(new Rect(buttonH, buttonV + ((buttonHeightAmt + buttonSpacing) * 3), buttonWidthAmt, buttonHeightAmt), "Faction War", mapButtonStyle)){		
 			if(!npcGoupsNull){	
 				PlayerPrefs.SetInt("Game Type", 1);
-				FPSPlayerComponent.RestartMap();
+			//	FPSPlayerComponent.RestartMap();
 				PlayButtonFx(buttonClickFx, buttonFxVol);
 				this.enabled = false;
 			}else{
@@ -238,7 +238,7 @@ public class MainMenu : MonoBehaviour {
 		if (GUI.Button(new Rect(buttonH, buttonV + ((buttonHeightAmt + buttonSpacing) * 4), buttonWidthAmt, buttonHeightAmt), "Wave Survival", mapButtonStyle)){		
 			if(!npcGoupsNull){	
 				PlayerPrefs.SetInt("Game Type", 2);
-				FPSPlayerComponent.RestartMap();
+				//FPSPlayerComponent.RestartMap();
 				PlayButtonFx(buttonClickFx, buttonFxVol);
 				this.enabled = false;
 			}else{

@@ -65,7 +65,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        Wave.text = "Way " + PlayerPrefs.GetInt("WaveNo") + "  Remaining Zombies " + ZombieDeathCount;
+        Wave.text = "Zombies Left :" + ZombieDeathCount;
         if (ZombieDeathCount == 0 && NextWave_Enter && !isLevelComplete)
         {
             PlayerPrefs.SetInt("WaveUnlock", PlayerPrefs.GetInt("WaveUnlock")+1);
