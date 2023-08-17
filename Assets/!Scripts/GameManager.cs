@@ -36,7 +36,10 @@ public class GameManager : MonoBehaviour
     public CheckWindow Path4_EndPoint;
     public CheckWindow Path5_EndPoint;
 
-
+    [Header(" UI Elements")]
+    public GameObject LevelComplete;
+    public GameObject LevelFailed;
+    public GameObject LevelPasued;
     private void Start()
     {
         ZombieJump_Bool = false;
@@ -63,16 +66,34 @@ public class GameManager : MonoBehaviour
         Wave.text = "Way " + PlayerPrefs.GetInt("WaveNo") + "  Remaining Zombies " + ZombieDeathCount;
         if (ZombieDeathCount == 0 && NextWave_Enter)
         {
+            PlayerPrefs.SetInt("WaveUnlock", PlayerPrefs.GetInt("WaveUnlock")+1);
             PlayerPrefs.SetInt("WaveNo", PlayerPrefs.GetInt("WaveNo") + 1);
-            SceneManager.LoadScene("GamePlay");
-           
-            /*ZombieDeathCount = Instainated_Count[PlayerPrefs.GetInt("WaveNo")];
-            Invoke("Instaniate_Zombies", 15f);
-            NextWave_Enter = false;*/
+            LevelComplete.SetActive(true);
         }
     }
 
-
+    public void Next_Btn()
+    {
+        SceneManager.LoadScene("GamePlay");
+    }
+    public void Restart_Btn()
+    {
+        SceneManager.LoadScene("GamePlay");
+    }
+    public void Home()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
+    public void Pause_BTn()
+    {
+        LevelPasued.SetActive(true);
+        Time.timeScale = 0;
+    }
+    public void Resume()
+    {
+        LevelPasued.SetActive(false);
+        Time.timeScale = 1;
+    }
     void LoadWeapons_Data(int value)
     {
         if (value == 1)
