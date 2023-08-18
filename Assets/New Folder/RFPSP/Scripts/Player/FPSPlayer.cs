@@ -42,7 +42,7 @@ public class FPSPlayer : MonoBehaviour {
 	[Tooltip("Reference to the UI Canvas object.")]
 	public  GameObject canvasObj;
 	[Tooltip("Object reference to the GUITexture object in the project library that renders pain effects on screen.")]
-	public GameObject painFadeObj;
+	public GameObject[] painFadeObj;
 	private PainFade painFadeComponent;
 	private Image painFadeImage;
 	public GameObject levelLoadFadeObj;
@@ -305,7 +305,7 @@ public class FPSPlayer : MonoBehaviour {
 	private MainMenu MainMenuComponent;
 
 	private Transform myTransform;
-
+	int abc = 0;
 	void Start (){	
 
 		if(removePrefabRoot){
@@ -326,12 +326,13 @@ public class FPSPlayer : MonoBehaviour {
 		weaponObj = CameraControlComponent.weaponObj;
 		WeaponEffectsComponent = weaponObj.GetComponent<WeaponEffects>();
 		PlayerWeaponsComponent = weaponObj.GetComponent<PlayerWeapons>();
-		painFadeObj.SetActive(true);
-		painFadeComponent = painFadeObj.GetComponent<PainFade>();
+
+		int ran = Random.Range(0, painFadeObj.Length);
+		painFadeComponent = painFadeObj[ran].GetComponent<PainFade>();
+		abc = ran;
 		painFadeComponent.painImageComponent = painFadeComponent.GetComponent<Image>();
 		PainColor = painFadeComponent.painImageComponent.color;
-		painFadeObj.SetActive(false);
-		
+
 		MainMenuComponent = mainCamTransform.parent.transform.GetComponent<MainMenu>();
 //		MainMenuComponent.enabled = false;
 		menuDisplayed = false;
@@ -599,8 +600,12 @@ public class FPSPlayer : MonoBehaviour {
 			&& hitPoints > 0.0f){
 				//use a negative heal amount to prevent unneeded damage effects of ApplyDamage function
 				HealPlayer(starveDmgAmt, true);//
-				//fade screen red when taking starvation damage
-				painFadeObj.SetActive(true);
+				int ran = Random.Range(0, painFadeObj.Length);
+				painFadeComponent = painFadeObj[ran].GetComponent<PainFade>();
+				abc = ran;         //fade screen red when taking starvation damage
+
+				painFadeObj[abc].SetActive(true);
+
 				painFadeComponent.StartCoroutine(painFadeComponent.FadeIn(PainColor, 0.75f));//Call FadeIn function in painFadeObj to fade screen red when damage taken
 				//Call Die function if player's hitpoints have been depleted
 				if (hitPoints < 1.0f){
@@ -633,7 +638,11 @@ public class FPSPlayer : MonoBehaviour {
 				//use a negative heal amount to prevent unneeded damage effects of ApplyDamage function
 				HealPlayer(thirstDmgAmt, true);
 				//fade screen red when taking starvation damage
-				painFadeObj.SetActive(true);
+				int ran = Random.Range(0, painFadeObj.Length);
+				painFadeComponent = painFadeObj[ran].GetComponent<PainFade>();
+				abc = ran;
+				painFadeObj[abc].SetActive(true);
+		
 				painFadeComponent.StartCoroutine(painFadeComponent.FadeIn(PainColor, 0.75f));//Call FadeIn function in painFadeObj to fade screen red when damage taken
 				//Call Die function if player's hitpoints have been depleted
 				if (hitPoints < 1.0f){
@@ -1236,7 +1245,11 @@ public class FPSPlayer : MonoBehaviour {
 		if(!blockState){
 			painFadeColor = PainColor;
 			painFadeColor.a = PainColor.a + (Random.value * 0.1f);//fade pain overlay based on damage amount
-			painFadeObj.SetActive(true);
+			int ran = Random.Range(0, painFadeObj.Length);
+			painFadeComponent = painFadeObj[ran].GetComponent<PainFade>();
+			abc = ran;
+			painFadeObj[abc].SetActive(true);
+
 			painFadeComponent.StartCoroutine(painFadeComponent.FadeIn(painFadeColor, 0.75f));//Call FadeIn function in painFadeObj to fade screen red when damage taken
 		}
 			
