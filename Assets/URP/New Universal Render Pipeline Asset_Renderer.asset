@@ -57,3 +57,20 @@ MonoBehaviour:
   m_ClusteredRendering: 0
   m_TileSize: 32
   m_IntermediateTextureMode: 1
+--- !u!114 &1346591700753974667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70e5811d9aeb3e04fb48321dce46f24d, type: 3}
+  m_Name: HighlightsManagerURP
+  m_EditorClassIdentifier: 
+  m_Active: 1
+  DepthLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  renderingEvent: 0

@@ -125,7 +125,7 @@ public class GameManager : MonoBehaviour
     void Call_Zombies(Level_Data level)
     {
         // Call Normal Zombies
-        for (int i = 0; i <= level.NormalZombies_Count; i++)
+        for (int i = 1; i <= level.NormalZombies_Count; i++)
         {
             int rand = Random.Range(0, NormalZombies.Length);
             GameObject T = NormalZombies[rand];
@@ -141,7 +141,7 @@ public class GameManager : MonoBehaviour
         // Call Doctor Zombies
         if (level.DoctorZombie_Count != 0)
         {
-            for (int i = 0; i <= level.DoctorZombie_Count; i++)
+            for (int i = 1; i <= level.DoctorZombie_Count; i++)
             {
                 GameObject temp = Instantiate(DoctorZombie, SpawnPoints[i].transform.position, SpawnPoints[i].transform.rotation);
                 temp.transform.SetParent(ZombieContainer.transform);
@@ -155,7 +155,7 @@ public class GameManager : MonoBehaviour
         // Call Miltary Zombies
         if (level.Miltory_Count != 0)
         {
-            for (int i = 0; i <= level.Miltory_Count; i++)
+            for (int i = 1; i <= level.Miltory_Count; i++)
             {
                 GameObject temp = Instantiate(Miltory_Zombie, SpawnPoints[i].transform.position, SpawnPoints[i].transform.rotation);
                 temp.transform.SetParent(ZombieContainer.transform);
@@ -169,7 +169,7 @@ public class GameManager : MonoBehaviour
         // Call Muscular Zombies
         if (level.Muscular_Count != 0)
         {
-            for (int i = 0; i <= level.Muscular_Count; i++)
+            for (int i = 1; i <= level.Muscular_Count; i++)
             {
                 GameObject temp = Instantiate(MuscularZombie, SpawnPoints[i].transform.position, SpawnPoints[i].transform.rotation);
                 temp.transform.SetParent(ZombieContainer.transform);
@@ -183,7 +183,7 @@ public class GameManager : MonoBehaviour
         // Call PoliceMen Zombies
         if (level.PoliceMen_Zombies != 0)
         {
-            for (int i = 0; i <= level.PoliceMen_Zombies; i++)
+            for (int i = 1; i <= level.PoliceMen_Zombies; i++)
             {
                 GameObject temp = Instantiate(PoliceMenZombie, SpawnPoints[i].transform.position, SpawnPoints[i].transform.rotation);
                 temp.transform.SetParent(ZombieContainer.transform);
@@ -197,7 +197,7 @@ public class GameManager : MonoBehaviour
         // Call FAT Zombies
         if (level.FatZombie_Count != 0)
         {
-            for (int i = 0; i <= level.FatZombie_Count; i++)
+            for (int i = 1; i <= level.FatZombie_Count; i++)
             {
                 GameObject temp = Instantiate(Fat_Zombie, SpawnPoints[i].transform.position, SpawnPoints[i].transform.rotation);
                 temp.transform.SetParent(ZombieContainer.transform);
