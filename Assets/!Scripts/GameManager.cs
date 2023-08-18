@@ -43,8 +43,8 @@ public class GameManager : MonoBehaviour
     bool isLevelComplete;
     private void Start()
     {
-
-       // SoundsManager.instance.PlayGameplayMusic();
+     
+        // SoundsManager.instance.PlayGameplayMusic();
         isLevelComplete = false;
         ZombieJump_Bool = false;
         instance = this;
