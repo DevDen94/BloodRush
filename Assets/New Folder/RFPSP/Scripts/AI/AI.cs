@@ -577,6 +577,7 @@ public class AI : MonoBehaviour {
 		
 		AnimatorComponent.SetInteger("AnimState", 0);
 		waypointGroup = curWayPoint.GetComponent<CheckWindow>().New_WayPointGroup;
+		followPlayer = true;
 		Patrollling = false;
 		curWayPoint = waypointGroup.wayPoints[curWayPoint.GetComponent<CheckWindow>().Index_C];
 		AttackMode = true;

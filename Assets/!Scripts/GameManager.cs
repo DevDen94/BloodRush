@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour
     public Slider Reloading_Slider;
     private void Start()
     {
-        
+        PlayerPrefs.SetInt("WaveNo", 4);
         // SoundsManager.instance.PlayGameplayMusic();
         isLevelComplete = false;
         ZombieJump_Bool = false;
@@ -59,11 +59,12 @@ public class GameManager : MonoBehaviour
         ZombieDeathCount = Instainated_Count[PlayerPrefs.GetInt("WaveNo")];
         LoadWeapons_Data(PlayerPrefs.GetInt("WaveNo"));
         Invoke("Instaniate_Zombies",1f);
-        Invoke("Delay", 4f);
+        Invoke("Delay", 2f);
     }
     void Delay()
     {
         Objective_Panel.SetActive(true);
+        BrokenEnable = true;
         Time.timeScale = 0f;
    
     }
