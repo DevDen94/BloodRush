@@ -590,14 +590,18 @@ public class AI : MonoBehaviour {
 			{
 				AnimatorComponent.SetInteger("AnimState", 3);
 				AnimatorComponent.SetTrigger("Attack");
-				
-				
+				Debug.LogError("ATTTACK_CALL");
+                if (curWayPoint.GetComponent<CheckWindow>().Windowslider.value <=0)
+                {
+					Jump = true;
+				}
 			}
 			else
 			{
 				if (!enter)
 				{
-                    if (curWayPoint.GetComponent<CheckWindow>().IS_door)
+					Debug.LogError("Jump_CALL");
+					if (curWayPoint.GetComponent<CheckWindow>().IS_door)
                     {
 						agent.SetDestination(curWayPoint.GetComponent<CheckWindow>().JumpP.transform.position);
 						AnimatorComponent.SetInteger("AnimState", 1);

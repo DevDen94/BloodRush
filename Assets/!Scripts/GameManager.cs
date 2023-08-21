@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
     bool isLevelComplete;
     private void Start()
     {
-     
+        
         // SoundsManager.instance.PlayGameplayMusic();
         isLevelComplete = false;
         ZombieJump_Bool = false;
@@ -62,7 +62,7 @@ public class GameManager : MonoBehaviour
     {
             ZombieContainer.SetActive(true);
             Call_Zombies(Levels[PlayerPrefs.GetInt("WaveNo")]);
-             Assign_Paths();
+            Assign_Paths();
     }
     
     private void Update()

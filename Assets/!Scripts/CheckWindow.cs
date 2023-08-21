@@ -20,6 +20,7 @@ public class CheckWindow : MonoBehaviour
         panel2 = false;
         panel3 = false;
         jum = false;
+        Is_2nd = false;
     }
     public bool sliderEnable = false;
 
@@ -30,8 +31,8 @@ public class CheckWindow : MonoBehaviour
     {
         StartCoroutine(DecrementSlider());
     }
-        
-    
+
+    public bool Is_2nd;
 
     private IEnumerator DecrementSlider()
     {
@@ -89,12 +90,42 @@ public class CheckWindow : MonoBehaviour
             {  
                 for (int i = 0; i < Zombie.Length; i++)
                 {
+                if (Zombie[i] == null)
+                {
+                    return;
+                }
+                else
+                {
                     Zombie[i].GetComponent<AI>().Jump = true;
                 }
-
+                  
+                }
+               Is_2nd = true;
                 jum = true;
 
             }
         
+    }
+    public void CheckSlider()
+    {
+        jum = false;
+        if (Windowslider.value <= 0 && jum == false)
+        {
+            Debug.LogError("CheckSlider");
+            for (int i = 0; i < Zombie.Length; i++)
+            {
+                if (Zombie[i] == null)
+                {
+                    print("Abc");
+                }
+                else
+                {
+                    Zombie[i].GetComponent<AI>().Jump = true;
+                }
+            }
+
+            jum = true;
+
+        }
     }
 }
