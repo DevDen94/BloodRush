@@ -646,6 +646,7 @@ GameObject:
   m_Component:
   - component: {fileID: 720092397690158093}
   - component: {fileID: 8199095849715431484}
+  - component: {fileID: 9168568017120629446}
   m_Layer: 13
   m_Name: Zombie_Invincible.015
   m_TagString: Untagged
@@ -789,6 +790,24 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.21354389, y: 0.088614464, z: 1.1605766}
     m_Extent: {x: 3.0787373, y: 4.3778343, z: 2.6734731}
   m_DirtyAABB: 0
+--- !u!114 &9168568017120629446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1565360380919138984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 0.07289309, b: 0, a: 1}
+  outlineWidth: 1.11
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &1631851481657270560
 GameObject:
   m_ObjectHideFlags: 0
@@ -2087,7 +2106,7 @@ MonoBehaviour:
   runStepTime: 0.65
   shootRange: 2
   attackRange: 20
-  listenRange: 0.1
+  listenRange: 100
   shotDuration: 0
   shootAnimSpeed: 1
   attackRangeAmt: 30
@@ -2116,6 +2135,8 @@ MonoBehaviour:
   anim: {fileID: 0}
   PathIndex: 3
   AttackMode: 0
+  HitCount: 0
+  isTile: 0
   Patrollling: 0
   Jump: 0
 --- !u!114 &6263679218962662533

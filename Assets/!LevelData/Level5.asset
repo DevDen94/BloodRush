@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Level5
   m_EditorClassIdentifier: 
   NormalZombies_Count: 0
-  DoctorZombie_Count: 10
+  DoctorZombie_Count: 0
   FatZombie_Count: 5
   Miltory_Count: 10
-  Muscular_Count: 0
+  Muscular_Count: 10
   Fireman_Zombies: 0
   PoliceMen_Zombies: 0

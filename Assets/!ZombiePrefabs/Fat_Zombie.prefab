@@ -2504,8 +2504,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8114617487106647115}
+  - component: {fileID: 940462375923432973}
   - component: {fileID: 5253693263155590826}
+  - component: {fileID: 4199640071657564389}
   m_Layer: 13
   m_Name: Object_4.001
   m_TagString: Untagged
@@ -2513,21 +2514,26 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8114617487106647115
-Transform:
+--- !u!224 &940462375923432973
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3465982479785838136}
   m_LocalRotation: {x: -0.50000006, y: 0.49999994, z: 0.49999997, w: 0.50000006}
-  m_LocalPosition: {x: 0.001993587, y: -0.0000014209747, z: 0.000000071525214}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 10.62287, y: 10.622874, z: 10.622872}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8037089081274738867}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0.001993587, y: -0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!137 &5253693263155590826
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 0
@@ -2659,6 +2665,24 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.8617892, y: 2.4846613, z: -0.8028375}
     m_Extent: {x: 8.795429, y: 6.358144, z: 4.3228416}
   m_DirtyAABB: 0
+--- !u!114 &4199640071657564389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3465982479785838136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 0.8584906, g: 0.2948024, b: 0.2948024, a: 1}
+  outlineWidth: 0.59
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &3504529145913246726
 GameObject:
   m_ObjectHideFlags: 0
@@ -4906,7 +4930,7 @@ Transform:
   - {fileID: 2997397610643401961}
   - {fileID: 4014528736919318432}
   - {fileID: 1385328288463255597}
-  - {fileID: 8114617487106647115}
+  - {fileID: 940462375923432973}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5017,7 +5041,7 @@ MonoBehaviour:
   walkStepTime: 0.65
   runStepTime: 0.65
   shootRange: 2
-  attackRange: 30
+  attackRange: 100
   listenRange: 0.1
   shotDuration: 0
   shootAnimSpeed: 1
@@ -5047,6 +5071,8 @@ MonoBehaviour:
   anim: {fileID: 0}
   PathIndex: 1
   AttackMode: 1
+  HitCount: 0
+  isTile: 0
   Patrollling: 0
   Jump: 0
 --- !u!114 &4136931446234346188

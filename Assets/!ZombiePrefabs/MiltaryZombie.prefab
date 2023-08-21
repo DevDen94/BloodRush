@@ -2129,8 +2129,8 @@ MonoBehaviour:
   walkStepTime: 0.65
   runStepTime: 0.65
   shootRange: 2
-  attackRange: 30
-  listenRange: 0.1
+  attackRange: 100
+  listenRange: 10
   shotDuration: 0
   shootAnimSpeed: 1
   attackRangeAmt: 30
@@ -2159,6 +2159,8 @@ MonoBehaviour:
   anim: {fileID: 0}
   PathIndex: 4
   AttackMode: 0
+  HitCount: 0
+  isTile: 0
   Patrollling: 0
   Jump: 0
 --- !u!114 &2974623342268401216
@@ -4803,6 +4805,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3571910263331262225}
   - component: {fileID: 7615750881197834811}
+  - component: {fileID: 7433060558459690696}
   m_Layer: 13
   m_Name: 2-_09___Defaultad.001
   m_TagString: Untagged
@@ -4946,6 +4949,24 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.49390364, y: -0.112431765, z: 1.7416945}
     m_Extent: {x: 4.45552, y: 7.104925, z: 4.448845}
   m_DirtyAABB: 0
+--- !u!114 &7433060558459690696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6558179056236850020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 0.754717, g: 0.15236738, b: 0.15236738, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &6562525594367201641
 GameObject:
   m_ObjectHideFlags: 0
