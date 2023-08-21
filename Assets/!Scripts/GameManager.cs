@@ -41,6 +41,8 @@ public class GameManager : MonoBehaviour
     public GameObject LevelFailed;
     public GameObject LevelPasued;
     bool isLevelComplete;
+    public GameObject Objective_Panel;
+    public Slider Reloading_Slider;
     private void Start()
     {
         
@@ -57,14 +59,26 @@ public class GameManager : MonoBehaviour
         ZombieDeathCount = Instainated_Count[PlayerPrefs.GetInt("WaveNo")];
         LoadWeapons_Data(PlayerPrefs.GetInt("WaveNo"));
         Invoke("Instaniate_Zombies",1f);
+        Invoke("Delay", 4f);
+    }
+    void Delay()
+    {
+        Objective_Panel.SetActive(true);
+        Time.timeScale = 0f;
+   
     }
     void Instaniate_Zombies()
     {
             ZombieContainer.SetActive(true);
             Call_Zombies(Levels[PlayerPrefs.GetInt("WaveNo")]);
             Assign_Paths();
+        
     }
-    
+    public void ContinueGame()
+    {
+        Objective_Panel.SetActive(false);
+        Time.timeScale = 1f;
+    }
     private void Update()
     {
         Wave.text = "Zombies Left :" + ZombieDeathCount;

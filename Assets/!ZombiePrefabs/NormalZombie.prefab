@@ -137,6 +137,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2257161363700554708}
   - component: {fileID: 3098460911753253100}
+  - component: {fileID: 4735453540620784313}
   m_Layer: 13
   m_Name: Object_7.001
   m_TagString: Untagged
@@ -283,6 +284,24 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.14675331, y: 10.197212, z: 8.600727}
     m_Extent: {x: 39.08345, y: 56.10122, z: 28.11042}
   m_DirtyAABB: 0
+--- !u!114 &4735453540620784313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 396138675639505468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 0.8301887, g: 0.33990744, b: 0.33990744, a: 1}
+  outlineWidth: 0.96
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &409232227643492971
 GameObject:
   m_ObjectHideFlags: 0
@@ -936,6 +955,8 @@ MonoBehaviour:
   anim: {fileID: 0}
   PathIndex: 2
   AttackMode: 0
+  HitCount: 0
+  isTile: 0
   Patrollling: 0
   Jump: 0
 --- !u!114 &5541230609178761639

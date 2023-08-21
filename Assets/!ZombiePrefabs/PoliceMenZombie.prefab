@@ -1483,6 +1483,8 @@ MonoBehaviour:
   anim: {fileID: 0}
   PathIndex: 1
   AttackMode: 0
+  HitCount: 0
+  isTile: 0
   Patrollling: 0
   Jump: 0
 --- !u!114 &1219402145101636663
@@ -1853,6 +1855,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8063685182767289829}
   - component: {fileID: 3846384766673056767}
+  - component: {fileID: 8415660865783818971}
   m_Layer: 13
   m_Name: c_zom_der_zombie_cin_1_fb.001
   m_TagString: Untagged
@@ -1966,6 +1969,24 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.6230012, y: -0.91348124, z: 1.3283162}
     m_Extent: {x: 4.3476677, y: 6.8223023, z: 3.6113753}
   m_DirtyAABB: 0
+--- !u!114 &8415660865783818971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3057093304253054351}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 0.9056604, g: 0.37080812, b: 0.37080812, a: 1}
+  outlineWidth: 1.03
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &3221035763173958592
 GameObject:
   m_ObjectHideFlags: 0

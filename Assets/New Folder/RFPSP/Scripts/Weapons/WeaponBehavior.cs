@@ -709,7 +709,8 @@ public class WeaponBehavior : MonoBehaviour {
 	public float pointRange1Cam = 0.2f;
 	
 	void Start (){
-		
+		timer = 0f;
+		isFilling = false;
 		myTransform = transform;//cache transform for efficiency
 		mainCamTransform = Camera.main.transform;
 		
@@ -2442,7 +2443,25 @@ public class WeaponBehavior : MonoBehaviour {
 			return false;
 		}
 	}
-	
+	private float timer;
+	private bool isFilling;
+	void FixedUpdate()
+    {
+		if (isFilling)
+		{
+			GameManager.instance.Reloading_Slider.gameObject.SetActive(true);
+			  timer += Time.deltaTime;
+			float fillPercentage = timer / reloadTime;
+		    GameManager.instance.Reloading_Slider.value = Mathf.Lerp(0f, GameManager.instance.Reloading_Slider.maxValue, fillPercentage);
+
+			if (timer >= reloadTime)
+			{
+				isFilling = false;
+				timer = 0f;
+				GameManager.instance.Reloading_Slider.gameObject.SetActive(false);
+			}
+		}
+	}
 	IEnumerator Reload(){
 		
 		if(meleeActive || FPSWalkerComponent.hideWeapon){
@@ -2494,6 +2513,7 @@ public class WeaponBehavior : MonoBehaviour {
 					//do not wait for reloadTime if this is not a magazine reload and this is the first bullet/shell to be loaded,
 					//otherwise, adding of ammo and finishing reload will wait for reloadTime while animation and sound plays
 					if((bulletsToReload != bulletsPerClip && bulletsReloaded > 0) || bulletsToReload == bulletsPerClip){
+						isFilling = true;
 						// Wait for reload time first, then proceed
 						yield return new WaitForSeconds(reloadTime);
 					}
