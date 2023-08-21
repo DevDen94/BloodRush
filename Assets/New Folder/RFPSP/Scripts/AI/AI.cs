@@ -591,7 +591,7 @@ public class AI : MonoBehaviour {
 			{
 				AnimatorComponent.SetInteger("AnimState", 3);
 				AnimatorComponent.SetTrigger("Attack");
-				Debug.LogError("ATTTACK_CALL");
+				
                 if (curWayPoint.GetComponent<CheckWindow>().Windowslider.value <=0)
                 {
 					Jump = true;
@@ -601,7 +601,7 @@ public class AI : MonoBehaviour {
 			{
 				if (!enter)
 				{
-					Debug.LogError("Jump_CALL");
+				
 					if (curWayPoint.GetComponent<CheckWindow>().IS_door)
                     {
 						agent.SetDestination(curWayPoint.GetComponent<CheckWindow>().JumpP.transform.position);
