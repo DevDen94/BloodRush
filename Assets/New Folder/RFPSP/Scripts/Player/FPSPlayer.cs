@@ -394,16 +394,17 @@ public class FPSPlayer : MonoBehaviour {
 		//set alpha of hand pickup crosshair
 		pickupReticleColor.a = 0.95f;
 		initialReticleColor = crosshairUiImage.color;
+		Debug.Log("RED");
 		//set alpha of aiming reticule and make it 100% transparent if crosshair is disabled
-		if(crosshairEnabled){
+		if (crosshairEnabled){
 			reticleColor.a = initialReticleColor.a;
-			hitmarkerUiImage.color = hitmarkerColor;
+			//hitmarkerUiImage.color = hitmarkerColor;
 		}else{
 			//make alpha of aiming reticle zero/transparent
 			reticleColor.a = 0.0f;
 			//set alpha of aiming reticle at start to prevent it from showing, but allow item pickup hand reticle 
-			crosshairUiImage.color = reticleColor;
-			hitmarkerUiImage.color = reticleColor;
+			//crosshairUiImage.color = reticleColor;
+			//hitmarkerUiImage.color = reticleColor;
 		}
 		
 		//set reference for main color element of heath GUIText
@@ -490,7 +491,7 @@ public class FPSPlayer : MonoBehaviour {
 		hitmarkerUiRect.anchorMax = camCrosshairPos;
 		hitmarkerUiRect.anchorMin = camCrosshairPos;
 		hitmarkerColor.a = 0.7f;
-		hitmarkerUiImage.color = hitmarkerColor;	
+		//hitmarkerUiImage.color = hitmarkerColor;	
 		
 	}
 	
@@ -765,16 +766,20 @@ public class FPSPlayer : MonoBehaviour {
 						reticleColor.a = initialReticleColor.a;
 					}
 				}
-				crosshairUiImage.color = reticleColor;
-			}else{
+				//crosshairUiImage.color = reticleColor;
+				//Debug.Log("RED");
+			}
+			else{
 				//make alpha of aiming reticle zero/transparent
 				reticleColor.a = 0.0f;
 				//set alpha of aiming reticle at start to prevent it from showing, but allow item pickup hand reticle 
-				crosshairUiImage.color = reticleColor;
+				//crosshairUiImage.color = reticleColor;
+				Debug.Log("RED");
 			}
 		}else{
 			reticleColor.a = 0.0f;
-			crosshairUiImage.color = reticleColor;
+			//	crosshairUiImage.color = reticleColor;
+			Debug.Log("RED");
 		}
 				
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1022,19 +1027,26 @@ public class FPSPlayer : MonoBehaviour {
 	public void UpdateReticle( bool reticleType ){
 		if(!reticleType){
 			crosshairUiImage.sprite = pickupTex;
-			crosshairUiImage.color = pickupReticleColor;
+			//crosshairUiImage.color = pickupReticleColor;
+			
+			//Debug.Log("RED");
 			crosshairTextureState = true;
 		}else{
 			crosshairUiImage.sprite = aimingReticle;
-			crosshairUiImage.color = reticleColor;
+			//crosshairUiImage.color = reticleColor;
+			//Debug.Log("RED");
+			
 			crosshairTextureState = false;	
 		}
 	}
 	
 	void UpdateHitmarker(){
 		if(hitTime + 0.3f > Time.time){
-			if(!hitMarkerState){
-				if(WeaponBehaviorComponent.meleeSwingDelay == 0 && !WeaponBehaviorComponent.meleeActive){
+			
+			if (!hitMarkerState){
+				//crosshairUiImage.color = Color.red;
+				
+				if (WeaponBehaviorComponent.meleeSwingDelay == 0 && !WeaponBehaviorComponent.meleeActive){
 					hitmarkerUiImage.enabled = true;
 					hitmarkfx.clip = hitMarker;
 					hitmarkfx.PlayOneShot(hitmarkfx.clip, 1.0f);
@@ -1048,7 +1060,13 @@ public class FPSPlayer : MonoBehaviour {
 			hitmarkerUiImage.enabled = false;
 		}
 	}
-	
+	public void ImageUI()
+    {
+		
+	}
+
+
+
 	public void UpdateHitTime(){
 		hitTime = Time.time;//used for hitmarker
 		hitMarkerState = false;	

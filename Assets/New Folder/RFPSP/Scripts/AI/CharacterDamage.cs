@@ -56,7 +56,17 @@ public class CharacterDamage : MonoBehaviour {
 	private bool explosionCheck;
 	private LayerMask raymask = 1 << 13;
 
-	void OnEnable (){
+	public GameObject TextDemage;
+	public GameObject BloodEffect,BloodEffectBack;
+
+    private void Start()
+    {
+		TextDemage.SetActive(false);
+		BloodEffect.SetActive(false);
+    }
+
+
+    void OnEnable (){
 		myTransform = transform;
 		RemoveBodyComponent = GetComponent<RemoveBody>();
 		Mathf.Clamp01(sloMoDeathChance);
@@ -126,6 +136,11 @@ public class CharacterDamage : MonoBehaviour {
 	//damage NPC
 	public void ApplyDamage ( float damage, Vector3 attackDir, Vector3 attackerPos, Transform attacker, bool isPlayer, bool isExplosion, Rigidbody hitBody = null, float bodyForce = 0.0f ){
 		Debug.LogError(damage);
+		TextDemage.SetActive(true);
+		BloodEffect.SetActive(true);
+		BloodEffectBack.SetActive(true);
+		TextDemage.GetComponent<TextMesh>().text = damage.ToString();
+		
 		if (hitPoints <= 0.0f){
 			return;
 		}

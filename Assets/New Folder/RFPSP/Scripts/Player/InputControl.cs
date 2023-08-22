@@ -6,7 +6,11 @@ using System.Collections;
 public class InputControl : MonoBehaviour {
 
 	private FPSPlayer FPSPlayerComponent;
-	
+
+
+	public ControlFreak2.TouchButton TouchButton;
+
+
 	//button states that are accessed by the other scripts
 	[HideInInspector]
 	public bool fireHold;
@@ -161,33 +165,65 @@ public class InputControl : MonoBehaviour {
 	
 	void Update () {
 
-		if(FPSPlayerComponent && !FPSPlayerComponent.restarting){
-		
+		if (FPSPlayerComponent && !FPSPlayerComponent.restarting) {
+
 			//player movement buttons
 			leftHold = ControlFreak2.CF2Input.GetButton("Left");
 			rightHold = ControlFreak2.CF2Input.GetButton("Right");
 			forwardHold = ControlFreak2.CF2Input.GetButton("Forward");
 			backHold = ControlFreak2.CF2Input.GetButton("Back");
-			
+
 			//cancel player movement if opposite buttons are held at the same time
-			if(leftHold && !rightHold){
+			if (leftHold && !rightHold) {
 				moveXButton = -1.0f;
-			}else if(rightHold && !leftHold){
-				moveXButton = 1.0f;	
-			}else{
-				moveXButton = 0.0f;	
+				Debug.Log("1");
 			}
-			
-			if(forwardHold && !backHold){
+			else if (rightHold && !leftHold) {
+				moveXButton = 1.0f;
+				Debug.Log("2");
+			}
+			else {
+				moveXButton = 0.0f;
+				//	Debug.Log("3");
+			}
+
+			if (forwardHold && !backHold) {
 				moveYButton = 1.0f;
-			}else if(backHold && !forwardHold){
-				moveYButton = -1.0f;	
-			}else{
-				moveYButton = 0.0f;	
+				Debug.Log("4");
 			}
-			
+			else if (backHold && !forwardHold) {
+				moveYButton = -1.0f;
+				Debug.Log("5");
+			}
+			else {
+				moveYButton = 0.0f;
+				//	Debug.Log("6");
+			}
+
+
+			if (forwardHold)
+			{
+				Debug.Log("5");
+			}
+
 			//scaled radial deadzone for joysticks for smooth player movement ramp from deadzone
 			moveInput = new Vector2(ControlFreak2.CF2Input.GetAxis("Joystick Move X"), ControlFreak2.CF2Input.GetAxis("Joystick Move Y"));
+
+			//Debug.Log(ControlFreak2.CF2Input.GetAxis("Joystick Move X"));
+
+			if (ControlFreak2.CF2Input.GetAxis("Joystick Move X") != 0 && TouchButton.toggle == true)
+			{
+				TouchButton.toggle = false;
+				StartCoroutine(TurnOffToggle());
+			}
+
+			IEnumerator TurnOffToggle()
+            {
+				yield return new WaitForSeconds(0.5f);
+				TouchButton.toggle = true;
+			}
+
+
 			if(moveInput.magnitude < deadzone){
 				moveInput = Vector2.zero;
 			}else{
