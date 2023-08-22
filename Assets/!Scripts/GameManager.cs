@@ -42,11 +42,17 @@ public class GameManager : MonoBehaviour
     public GameObject LevelPasued;
     bool isLevelComplete;
     public GameObject Objective_Panel;
+    public GameObject Weapons_Panel;
     public Slider Reloading_Slider;
+
+    public GameObject[] Weapon_StartImages;
+    public GameObject WeaponStartHeader;
+    public GameObject[] WeaponWheelImages;
+    
     private void Start()
     {
-        PlayerPrefs.SetInt("WaveNo", 4);
-        // SoundsManager.instance.PlayGameplayMusic();
+        PlayerPrefs.SetInt("WaveNo", 2);
+
         isLevelComplete = false;
         ZombieJump_Bool = false;
         instance = this;
@@ -59,7 +65,7 @@ public class GameManager : MonoBehaviour
         ZombieDeathCount = Instainated_Count[PlayerPrefs.GetInt("WaveNo")];
         LoadWeapons_Data(PlayerPrefs.GetInt("WaveNo"));
         Invoke("Instaniate_Zombies",1f);
-        Invoke("Delay", 2f);
+        Invoke("Delay", 1.5f);
     }
     void Delay()
     {
@@ -78,6 +84,7 @@ public class GameManager : MonoBehaviour
     public void ContinueGame()
     {
         Objective_Panel.SetActive(false);
+        Weapons_Panel.SetActive(true);
         Time.timeScale = 1f;
     }
     private void Update()
@@ -119,11 +126,12 @@ public class GameManager : MonoBehaviour
         if (value == 1)
         {
             Weapons[2].haveWeapon = true;
+            
         }
         if (value == 2)
         {
             Weapons[2].haveWeapon = true;
-            Weapons[3].haveWeapon = true;
+            Weapons[3].haveWeapon = true; 
         }
         if (value == 3)
         {
@@ -135,8 +143,35 @@ public class GameManager : MonoBehaviour
             Weapons[6].haveWeapon = true;
             Weapons[7].haveWeapon = true;
         }
+        for (int i = 0; i < Weapons.Length; ++i)
+        {
+            if (Weapons[i].haveWeapon == true)
+            {
+                GameObject a = Instantiate(Weapon_StartImages[i]);
+                a.transform.SetParent(WeaponStartHeader.transform);
+                WeaponWheelImages[i].SetActive(true);
+            }
+        }
     }
-
+    public GameObject WeaponWheel;
+    public PlayerWeapons p;
+    public void SelectWeapn(int i)
+    {
+        string weapon = "Select Weapon " + i;
+        print(weapon);
+        p.StartCoroutine(p.SelectWeapon(i));
+       
+    }
+    public void Open_WeaponWheel()
+    {
+        Time.timeScale = 0.3f;
+        WeaponWheel.SetActive(true);
+    }
+    public void Close_WeaponWheel()
+    {
+        Time.timeScale = 1;
+        WeaponWheel.SetActive(false);
+    }
     void Call_Zombies(Level_Data level)
     {
         // Call Normal Zombies
