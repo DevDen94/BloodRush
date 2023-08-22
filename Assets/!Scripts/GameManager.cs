@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
     public GameObject Fat_Zombie;
     public GameObject FireManZombie;
 
+    public bool AttackModeOn;
     [Header("Zombies_PathArray")]
     public CheckWindow Path1_EndPoint;
     public CheckWindow Path2_EndPoint;
@@ -96,6 +97,21 @@ public class GameManager : MonoBehaviour
             PlayerPrefs.SetInt("WaveNo", PlayerPrefs.GetInt("WaveNo") + 1);
             LevelComplete.SetActive(true);
             isLevelComplete = true;
+        }
+        if (AttackModeOn)
+        {
+            for (int i = 0; i < AllZombies.Length; ++i)
+            {
+                if (AllZombies[i] == null)
+                {
+                    print("Zombie dead");
+                }
+                else
+                {
+                    AllZombies[i].GetComponent<AI>().AttackMode = true;
+                }
+            }
+            AttackModeOn = false;
         }
     }
 

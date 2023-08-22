@@ -6668,6 +6668,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1659182475060632451}
     m_Modifications:
+    - target: {fileID: 2519328066014538300, guid: 5a5991370374e864881147bd175dfe88,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9c7ba83ef8a716343bf0e95d93833ff4, type: 3}
+    - target: {fileID: 2519328066014538301, guid: 5a5991370374e864881147bd175dfe88,
+        type: 3}
+      propertyPath: m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 9c7ba83ef8a716343bf0e95d93833ff4,
+        type: 3}
+    - target: {fileID: 2519328066014538301, guid: 5a5991370374e864881147bd175dfe88,
+        type: 3}
+      propertyPath: m_Color.rgba
+      value: 4283782487
+      objectReference: {fileID: 0}
     - target: {fileID: 2519328066629287761, guid: 5a5991370374e864881147bd175dfe88,
         type: 3}
       propertyPath: m_RootOrder

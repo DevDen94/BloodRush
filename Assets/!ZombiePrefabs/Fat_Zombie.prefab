@@ -4581,8 +4581,8 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.1709266
-  m_Center: {x: 0, y: 0.1709266, z: 0}
+  m_Radius: 1.6710279
+  m_Center: {x: 0.00000002151019, y: 1.1637946, z: 1.1313328}
 --- !u!54 &867826179370863252
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6920,6 +6920,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8037089081274738867}
     m_Modifications:
+    - target: {fileID: 2519328066014538300, guid: 5a5991370374e864881147bd175dfe88,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d93c1bc57fdf1ac4dad1bf04fac05464, type: 3}
+    - target: {fileID: 2519328066014538301, guid: 5a5991370374e864881147bd175dfe88,
+        type: 3}
+      propertyPath: m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: d93c1bc57fdf1ac4dad1bf04fac05464,
+        type: 3}
+    - target: {fileID: 2519328066014538301, guid: 5a5991370374e864881147bd175dfe88,
+        type: 3}
+      propertyPath: m_Color.rgba
+      value: 4284769391
+      objectReference: {fileID: 0}
     - target: {fileID: 2519328066629287761, guid: 5a5991370374e864881147bd175dfe88,
         type: 3}
       propertyPath: m_RootOrder

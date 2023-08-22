@@ -87,7 +87,8 @@ public class CheckWindow : MonoBehaviour
 
         
             if (Windowslider.value <= 0 && jum == false)
-            {  
+            {
+               
                 for (int i = 0; i < Zombie.Length; i++)
                 {
                 if (Zombie[i] == null)
@@ -100,10 +101,13 @@ public class CheckWindow : MonoBehaviour
                 }
                   
                 }
-               Is_2nd = true;
+                Is_2nd = true;
                 jum = true;
-
-            }
+              if (IS_door)
+              {
+                GameManager.instance.AttackModeOn = true;
+              }
+        }
         
     }
     public void CheckSlider()
