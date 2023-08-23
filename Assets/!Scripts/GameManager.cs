@@ -36,6 +36,7 @@ public class GameManager : MonoBehaviour
     public CheckWindow Path3_EndPoint;
     public CheckWindow Path4_EndPoint;
     public CheckWindow Path5_EndPoint;
+    public GameObject[] NavMesh_G;
 
     [Header(" UI Elements")]
     public GameObject LevelComplete;
@@ -49,10 +50,13 @@ public class GameManager : MonoBehaviour
     public GameObject[] Weapon_StartImages;
     public GameObject WeaponStartHeader;
     public GameObject[] WeaponWheelImages;
+
+    public AudioSource src;
+    public AudioClip Btnclick;
     
     private void Start()
     {
-        PlayerPrefs.SetInt("WaveNo", 2);
+     
 
         isLevelComplete = false;
         ZombieJump_Bool = false;
@@ -84,6 +88,7 @@ public class GameManager : MonoBehaviour
     }
     public void ContinueGame()
     {
+        src.PlayOneShot(Btnclick);
         Objective_Panel.SetActive(false);
         Weapons_Panel.SetActive(true);
         Time.timeScale = 1f;
@@ -109,31 +114,39 @@ public class GameManager : MonoBehaviour
                 else
                 {
                     AllZombies[i].GetComponent<AI>().AttackMode = true;
+
                 }
             }
             AttackModeOn = false;
+          /*  NavMesh_G[0].SetActive(true);
+            NavMesh_G[1].SetActive(true);*/
         }
     }
 
     public void Next_Btn()
     {
+        src.PlayOneShot(Btnclick);
         SceneManager.LoadScene("GamePlay");
     }
     public void Restart_Btn()
     {
+        src.PlayOneShot(Btnclick);
         SceneManager.LoadScene("GamePlay");
     }
     public void Home()
     {
+        src.PlayOneShot(Btnclick);
         SceneManager.LoadScene("MainMenu");
     }
     public void Pause_BTn()
     {
+        src.PlayOneShot(Btnclick);
         LevelPasued.SetActive(true);
         Time.timeScale = 0;
     }
     public void Resume()
     {
+        src.PlayOneShot(Btnclick);
         LevelPasued.SetActive(false);
         Time.timeScale = 1;
     }
@@ -173,6 +186,7 @@ public class GameManager : MonoBehaviour
     public PlayerWeapons p;
     public void SelectWeapn(int i)
     {
+        src.PlayOneShot(Btnclick);
         string weapon = "Select Weapon " + i;
         print(weapon);
         p.StartCoroutine(p.SelectWeapon(i));
@@ -180,7 +194,7 @@ public class GameManager : MonoBehaviour
     }
     public void Open_WeaponWheel()
     {
-        Time.timeScale = 0.3f;
+     
         WeaponWheel.SetActive(true);
     }
     public void Close_WeaponWheel()

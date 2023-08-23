@@ -246,7 +246,7 @@ public class AI : MonoBehaviour {
 	bool isCheck;
 	public bool AttackMode;
 	public int HitCount;
-
+	public bool Jumpp_ForAttack;
     private void Update()
     {
         if (GameManager.instance.BrokenEnable && !isCheck)
@@ -256,10 +256,14 @@ public class AI : MonoBehaviour {
 			firstWaypoint = 0;
 			isCheck = true;
         }
+        if (LookAt)
+        {
+			gameObject.transform.LookAt(curWayPoint.GetComponent<CheckWindow>().window.transform);
+		}
     }
     void Start()
 	{
-		isTile = false;
+	
 		AttackMode = false;
 		isCheck = false;
 		Patrollling = false;
@@ -457,21 +461,10 @@ public class AI : MonoBehaviour {
 			animInit = false;
 		}
 	}
-	public bool isTile;
-	public void HitEffect()
-    {
-		isTile = true;
-		//AnimatorComponent.SetInteger("AnimState", 5);
-		AnimatorComponent.SetBool("Hitt",true);
-		Invoke("Delay1", 2f);
-	}
+
+	
 	IEnumerator StandWatch(){
-		if (HitCount >= 3 && !isTile)
-		{
-			HitEffect();
-		}
-		else
-		{
+		
 
 			while (true)
 			{
@@ -569,7 +562,7 @@ public class AI : MonoBehaviour {
 				{
 					yield return new WaitForSeconds(0.3f);//wait 0.3 seconds (not every frame) untill next AI calculation (for efficiency)
 				}
-			}
+			
 		}
 	}bool enter = false;
 	void Reset_ZombieMovement()
@@ -599,6 +592,7 @@ public class AI : MonoBehaviour {
 			}
 			else
 			{
+				LookAt = false;
 				if (!enter)
 				{
 				
@@ -635,24 +629,20 @@ public class AI : MonoBehaviour {
 	}
 	public bool Patrollling;
 	public bool Jump;
-	
+	public bool LookAt;
 	IEnumerator Patrol(){
-		if (HitCount >= 3 && !isTile)
-		{
-			HitEffect();
-		}
-		else
-		{
+		
 			while (true)
 			{
 				if (curWayPoint.GetComponent<CheckWindow>() != null)
 				{
-					gameObject.transform.LookAt(curWayPoint.GetComponent<CheckWindow>().window.transform);
-					StartCoroutine(Jumpp());
+				LookAt = true;
+				StartCoroutine(Jumpp());
 					yield return new WaitForSeconds(1.7f);
 				}
 				else
 				{
+				LookAt = false;
 					if (huntPlayer)
 					{
 						StartCoroutine(SpawnNPC());
@@ -808,18 +798,12 @@ public class AI : MonoBehaviour {
 				}
 				yield return new WaitForSeconds(0.3f);
 			}
-		}
+		
 	}
 
 
 	void CanSeeTarget(){
-		if (HitCount >= 3 && !isTile)
-		{
-			HitEffect();
-		}
-		else
-		{
-			if (spawnTime + 1f > Time.time)
+		if (spawnTime + 1f > Time.time)
 			{//add small delay before checking target visibility
 				return;
 			}
@@ -995,18 +979,13 @@ public class AI : MonoBehaviour {
 				targetVisible = false;
 				return;
 			}
-		}
+		
 	}
 	
 
 
 	IEnumerator Shoot(){
-		if (HitCount >= 3 && !isTile)
-		{
-			HitEffect();
-		}
-		else
-		{
+		
 			attackFinished = false;
 
 			//don't move during attack
@@ -1035,22 +1014,17 @@ public class AI : MonoBehaviour {
 			attackFinished = true;
 
 			AnimatorComponent.SetInteger("AnimState", 0);
-		}
+		
 
 	}
 	public void Delay1()
     {
 		HitCount = 0;
 		AnimatorComponent.SetBool("Hitt", false);
-		isTile = false;
+		
 	}
 	IEnumerator AttackTarget(){
-		if (HitCount >= 3 && !isTile)
-		{
-			HitEffect();
-		}
-		else
-		{
+	
 			if (!AttackMode)
 			{
 				yield break;
@@ -1239,18 +1213,13 @@ public class AI : MonoBehaviour {
 					yield return new WaitForSeconds(0.3f);//wait 0.3 seconds (not every frame) untill next AI calculation (for efficiency)
 				}
 
-			}
+		
 		}
 	}
 
 	//look for target at a location
 	void SearchTarget( Vector3 position  ){
-		if (HitCount >= 3 && !isTile)
-		{
-			HitEffect();
-		}
-		else
-		{
+		
 			if (attackFinished)
 			{
 				if (target == playerTransform || target == FPSWalker.leanObj.transform || (TargetAIComponent && TargetAIComponent.enabled))
@@ -1267,18 +1236,13 @@ public class AI : MonoBehaviour {
 					damaged = false;
 				}
 			}
-		}
+		
 	}
 
 	//rotate to face target
 	public IEnumerator RotateTowards(Vector3 position, float rotationSpeed, float turnTimer, bool attacking = true)
 	{
-		if (HitCount >= 3 && !isTile)
-		{
-			HitEffect();
-		}
-		else
-		{
+		
 			float turnTime;
 			turnTime = Time.time;
 
@@ -1321,18 +1285,13 @@ public class AI : MonoBehaviour {
 			}
 			cancelRotate = false;
 			turning = false;
-		}
+		
 	}
 
 	//Allow tweaking of model yaw/facing direction from the inspector for NPC alignment with attack direction 
 	private IEnumerator UpdateModelYaw()
 	{
-		if (HitCount >= 3 && !isTile)
-		{
-			HitEffect();
-		}
-		else
-		{
+		
 			while (true)
 			{
 
@@ -1349,7 +1308,7 @@ public class AI : MonoBehaviour {
 
 				yield return null;
 			}
-		}
+		
 	}
 
 	//set navmesh destination and set NPC speed
@@ -1420,12 +1379,7 @@ public class AI : MonoBehaviour {
 	
 	//Interact with NPC when pressing use key over them 
 	public void CommandNPC () {
-		if (HitCount >= 3 && !isTile)
-		{
-			HitEffect();
-		}
-		else
-		{
+		
 			if (factionNum == 1 && followOnUse && commandedTime + 0.5f < Time.time)
 			{
 				orderedMove = false;
@@ -1513,7 +1467,7 @@ public class AI : MonoBehaviour {
 					jokeCount = 0;
 				}
 			}
-		}
+		
 	}
 	
 	//Move an NPC to a specific position 

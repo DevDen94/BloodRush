@@ -91,9 +91,9 @@ public class CheckWindow : MonoBehaviour
                
                 for (int i = 0; i < Zombie.Length; i++)
                 {
-                if (Zombie[i] == null)
+                  if (Zombie[i] == null)
                 {
-                    return;
+                    print("ABC");
                 }
                 else
                 {

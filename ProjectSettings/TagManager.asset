@@ -20,6 +20,7 @@ TagManager:
   - metal
   - Hand
   - Zombie
+  - Jump
   layers:
   - Default
   - TransparentFX

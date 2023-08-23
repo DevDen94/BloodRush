@@ -18,9 +18,7 @@ public class AnimationOff : MonoBehaviour
     }
     private void Update()
     {
-        Vector3 directionToPlayer = Player.transform.position - transform.position;
-
-        transform.rotation = Quaternion.LookRotation(directionToPlayer, Vector3.down);
+        transform.LookAt(transform.position + Player.transform.rotation * Vector3.forward, Player.transform.rotation * Vector3.up);
     }
 }
 
