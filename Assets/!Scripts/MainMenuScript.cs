@@ -74,4 +74,25 @@ public class MainMenuScript : MonoBehaviour
         PlayerPrefs.SetInt("WaveNo", way);
         LoaddingPanel.SetActive(true);
     }
+
+    public void RateUs()
+    {
+        Application.OpenURL("https://play.google.com/store/apps/details?id=" + Application.identifier);
+    }
+
+    public void MoreGames()
+    {
+        Application.OpenURL("https://play.google.com/store/apps/developer?id=Darwin+Games");
+    }
+
+    public void PP()
+    {
+        Application.OpenURL("https://darwingames1.blogspot.com/2023/06/privacy-policy.html");
+    }
+
+    public void exit()
+    {
+        Application.Quit();
+    }
+
 }
