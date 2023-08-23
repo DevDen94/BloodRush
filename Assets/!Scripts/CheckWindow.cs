@@ -13,6 +13,7 @@ public class CheckWindow : MonoBehaviour
     public GameObject JumpP;
     public bool IS_door;
     public int Index_C;
+    public GameObject NAV_Obstacle;
     // Start is called before the first frame update
     void Start()
     {
@@ -88,25 +89,29 @@ public class CheckWindow : MonoBehaviour
         
             if (Windowslider.value <= 0 && jum == false)
             {
-               
-                for (int i = 0; i < Zombie.Length; i++)
+            Is_2nd = true;
+            jum = true;
+              for (int i = 0; i < Zombie.Length; i++)
                 {
-                  if (Zombie[i] == null)
-                {
-                    print("ABC");
-                }
-                else
+                     if (Zombie[i] == null)
+                    {
+                      print("ABC");
+                   }
+                   else
                 {
                     Zombie[i].GetComponent<AI>().Jump = true;
                 }
                   
                 }
-                Is_2nd = true;
-                jum = true;
+               
                 if (IS_door)
                 {
                 GameManager.instance.AttackModeOn = true;
-                }
+            }
+            else
+            {
+                NAV_Obstacle.SetActive(false);
+            }
         }
         
     }

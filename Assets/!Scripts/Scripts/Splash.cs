@@ -16,7 +16,7 @@ public class Splash : MonoBehaviour
         Value = 0;
         StartCoroutine(waitforSceneSwitch());
         activeScene = SceneManager.GetActiveScene();
-        SoundsManager.instance.PlayMainMenuMusic();
+       // SoundsManager.instance.PlayMainMenuMusic();
     }
 
 

@@ -272,7 +272,7 @@ public class AI : MonoBehaviour {
 	public GameObject a;
 	void Three()
     {
-		AnimatorComponent.SetInteger("AnimState", 1);
+		//AnimatorComponent.SetInteger("AnimState", 1);
 		Jumpp_ForAttack = true;
     }
     void Start()

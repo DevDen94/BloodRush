@@ -35,10 +35,9 @@ public class MainMenuScript : MonoBehaviour
     void Start()
     {
 
-        if (!SoundsManager.instance.IsPlayMainMenuSound)
-        {
-            SoundsManager.instance.PlayGameplayMusic();
-        }
+        
+            SoundsManager.instance.PlayMainMenuMusic();
+        
 
         if (!PlayerPrefs.HasKey("Zero"))
         {

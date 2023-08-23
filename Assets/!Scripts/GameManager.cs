@@ -178,6 +178,7 @@ public class GameManager : MonoBehaviour
             {
                 GameObject a = Instantiate(Weapon_StartImages[i]);
                 a.transform.SetParent(WeaponStartHeader.transform);
+                a.transform.localScale = new Vector3(1, 1, 1);
                 WeaponWheelImages[i].SetActive(true);
             }
         }

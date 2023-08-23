@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SoundsManager : MonoBehaviour
 {
-    public AudioSource MainMenuSound, GamePlaySound, ButtonClickSound;
+    public AudioSource MainMenuSound, ButtonClickSound;
     public bool IsPlayMainMenuSound;
 
 
@@ -13,7 +13,7 @@ public class SoundsManager : MonoBehaviour
     private void Update()
     {
         MainMenuSound.volume = PlayerPrefs.GetFloat("MusicVoulme");
-        GamePlaySound.volume = PlayerPrefs.GetFloat("MusicVoulme");
+      //  GamePlaySound.volume = PlayerPrefs.GetFloat("MusicVoulme");
     }
 
 
@@ -38,14 +38,14 @@ public class SoundsManager : MonoBehaviour
     {
         IsPlayMainMenuSound = true;
         MainMenuSound.Play();
-        GamePlaySound.Stop();
+     
     }
 
     public void PlayGameplayMusic()
     {
         IsPlayMainMenuSound = false;
         MainMenuSound.Stop();
-        GamePlaySound.Play();
+      
     }
 
     public void playBtnClick()
