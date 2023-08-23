@@ -1970,6 +1970,7 @@ GameObject:
   - component: {fileID: 3912183078046111656}
   - component: {fileID: 7890811768112683931}
   - component: {fileID: 797207178257465257}
+  - component: {fileID: 3170821610029115579}
   m_Layer: 13
   m_Name: Normal
   m_TagString: Flesh
@@ -2137,9 +2138,12 @@ MonoBehaviour:
   PathIndex: 3
   AttackMode: 0
   HitCount: 0
-  isTile: 0
+  Jumpp_ForAttack: 0
+  isTrigger_GameObj: 0
+  a: {fileID: 0}
   Patrollling: 0
   Jump: 0
+  LookAt: 0
 --- !u!114 &6263679218962662533
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2328,6 +2332,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bodyStayTime: 15
   GunPickup: {fileID: 0}
+--- !u!65 &3170821610029115579
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3264045240748327398}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 2.9718356, z: 1}
+  m_Center: {x: 0, y: 1.5151794, z: 0}
 --- !u!1 &3294789127123552406
 GameObject:
   m_ObjectHideFlags: 0

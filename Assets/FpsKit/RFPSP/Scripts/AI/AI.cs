@@ -247,6 +247,7 @@ public class AI : MonoBehaviour {
 	public bool AttackMode;
 	public int HitCount;
 	public bool Jumpp_ForAttack;
+	public bool isTrigger_GameObj;
     private void Update()
     {
         if (GameManager.instance.BrokenEnable && !isCheck)
@@ -260,10 +261,24 @@ public class AI : MonoBehaviour {
         {
 			gameObject.transform.LookAt(curWayPoint.GetComponent<CheckWindow>().window.transform);
 		}
+        if (Jumpp_ForAttack)
+        {
+			
+			Invoke("Three", 1F);
+			
+		}
+		
+    }
+	public GameObject a;
+	void Three()
+    {
+		AnimatorComponent.SetInteger("AnimState", 1);
+		Jumpp_ForAttack = true;
     }
     void Start()
 	{
-	
+		isTrigger_GameObj = false;
+		Jumpp_ForAttack = true;
 		AttackMode = false;
 		isCheck = false;
 		Patrollling = false;
@@ -464,8 +479,12 @@ public class AI : MonoBehaviour {
 
 	
 	IEnumerator StandWatch(){
-		
 
+        if (!Jumpp_ForAttack)
+        {
+			yield break;
+        }
+        else {
 			while (true)
 			{
 
@@ -562,7 +581,7 @@ public class AI : MonoBehaviour {
 				{
 					yield return new WaitForSeconds(0.3f);//wait 0.3 seconds (not every frame) untill next AI calculation (for efficiency)
 				}
-			
+			}
 		}
 	}bool enter = false;
 	void Reset_ZombieMovement()
@@ -630,19 +649,25 @@ public class AI : MonoBehaviour {
 	public bool Patrollling;
 	public bool Jump;
 	public bool LookAt;
-	IEnumerator Patrol(){
-		
+	IEnumerator Patrol()
+	{
+		if (!Jumpp_ForAttack)
+		{
+			yield break;
+		}
+		else
+		{
 			while (true)
 			{
 				if (curWayPoint.GetComponent<CheckWindow>() != null)
 				{
-				LookAt = true;
-				StartCoroutine(Jumpp());
+					LookAt = true;
+					StartCoroutine(Jumpp());
 					yield return new WaitForSeconds(1.7f);
 				}
 				else
 				{
-				LookAt = false;
+					LookAt = false;
 					if (huntPlayer)
 					{
 						StartCoroutine(SpawnNPC());
@@ -798,12 +823,20 @@ public class AI : MonoBehaviour {
 				}
 				yield return new WaitForSeconds(0.3f);
 			}
-		
+
+		}
 	}
 
 
-	void CanSeeTarget(){
-		if (spawnTime + 1f > Time.time)
+	void CanSeeTarget()
+	{
+		if (!Jumpp_ForAttack)
+		{
+			return;
+		}
+		else
+		{
+			if (spawnTime + 1f > Time.time)
 			{//add small delay before checking target visibility
 				return;
 			}
@@ -979,7 +1012,8 @@ public class AI : MonoBehaviour {
 				targetVisible = false;
 				return;
 			}
-		
+
+		}
 	}
 	
 
@@ -1218,8 +1252,14 @@ public class AI : MonoBehaviour {
 	}
 
 	//look for target at a location
-	void SearchTarget( Vector3 position  ){
-		
+	void SearchTarget(Vector3 position)
+	{
+		if (!Jumpp_ForAttack)
+		{
+			return;
+		}
+		else
+		{
 			if (attackFinished)
 			{
 				if (target == playerTransform || target == FPSWalker.leanObj.transform || (TargetAIComponent && TargetAIComponent.enabled))
@@ -1236,7 +1276,8 @@ public class AI : MonoBehaviour {
 					damaged = false;
 				}
 			}
-		
+
+		}
 	}
 
 	//rotate to face target

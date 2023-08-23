@@ -103,10 +103,10 @@ public class CheckWindow : MonoBehaviour
                 }
                 Is_2nd = true;
                 jum = true;
-              if (IS_door)
-              {
+                if (IS_door)
+                {
                 GameManager.instance.AttackModeOn = true;
-              }
+                }
         }
         
     }

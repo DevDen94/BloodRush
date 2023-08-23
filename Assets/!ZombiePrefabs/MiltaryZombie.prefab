@@ -1993,6 +1993,7 @@ GameObject:
   - component: {fileID: 2974623342268401222}
   - component: {fileID: 2974623342268401221}
   - component: {fileID: 2974623342268401220}
+  - component: {fileID: 3641125810610147162}
   m_Layer: 13
   m_Name: MiltaryZombie
   m_TagString: Flesh
@@ -2161,9 +2162,12 @@ MonoBehaviour:
   PathIndex: 4
   AttackMode: 0
   HitCount: 0
-  isTile: 0
+  Jumpp_ForAttack: 0
+  isTrigger_GameObj: 0
+  a: {fileID: 0}
   Patrollling: 0
   Jump: 0
+  LookAt: 0
 --- !u!114 &2974623342268401216
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2352,6 +2356,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bodyStayTime: 15
   GunPickup: {fileID: 0}
+--- !u!65 &3641125810610147162
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2453384859415878897}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.999998, y: 4.557648, z: 0.999998}
+  m_Center: {x: 0, y: 1.7788244, z: 0}
 --- !u!1 &2520162137386587521
 GameObject:
   m_ObjectHideFlags: 0
