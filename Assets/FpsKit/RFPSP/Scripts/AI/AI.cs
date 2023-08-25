@@ -247,14 +247,16 @@ public class AI : MonoBehaviour {
 	public bool AttackMode;
 	public int HitCount;
 	public bool Jumpp_ForAttack;
-	//public bool isTrigger_GameObj;
+	public bool isTrigger_GameObj;
+	public bool JumpWindow;
+	public int counter;
     private void Update()
     {
         if (GameManager.instance.BrokenEnable && !isCheck)
         {
 			waypointGroup = GameManager.instance.BrokenPaths[PathIndex];
-			curWayPoint = waypointGroup.wayPoints[0];
-			firstWaypoint = 0;
+			curWayPoint = waypointGroup.wayPoints[1];
+			firstWaypoint = 1;
 			isCheck = true;
         }
         if (LookAt)
@@ -277,9 +279,10 @@ public class AI : MonoBehaviour {
     }
     void Start()
 	{
-		//isTrigger_GameObj = false;
+		JumpWindow = false;
+		isTrigger_GameObj = false;
 		Jumpp_ForAttack = true;
-		AttackMode = false;
+		//AttackMode = false;
 		isCheck = false;
 		Patrollling = false;
 		Jump = false;

@@ -536,6 +536,65 @@ SkinnedMeshRenderer:
     m_Center: {x: 2.20751, y: -7.006001, z: 1.6040881}
     m_Extent: {x: 0.9439664, y: 0.8520932, z: 1.1630323}
   m_DirtyAABB: 0
+--- !u!1 &1336476026047892598
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3728152063966406784}
+  - component: {fileID: 1517079262155572106}
+  - component: {fileID: 4019844993011045413}
+  m_Layer: 0
+  m_Name: F
+  m_TagString: Flesh
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3728152063966406784
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1336476026047892598}
+  m_LocalRotation: {x: 0.09028704, y: -0.09699314, z: 0.13514383, w: 0.981925}
+  m_LocalPosition: {x: -0.42056268, y: -2.2103312, z: -2.42281}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 745343051873652894}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: -12.189, y: -18.362, z: 181.453}
+--- !u!65 &1517079262155572106
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1336476026047892598}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.99999994, y: 2.078815, z: 1.3741757}
+  m_Center: {x: -0.0000009080833, y: 5.5092273, z: 0.18708666}
+--- !u!114 &4019844993011045413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1336476026047892598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e0bc60873fcbd1428cdb3f5579000eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Parent: {fileID: 1709672678493341603}
 --- !u!1 &1375533955817192092
 GameObject:
   m_ObjectHideFlags: 0
@@ -1163,6 +1222,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6397460744338784943}
+  - {fileID: 3728152063966406784}
   m_Father: {fileID: 9046606659767902154}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1970,7 +2030,6 @@ GameObject:
   - component: {fileID: 3912183078046111656}
   - component: {fileID: 7890811768112683931}
   - component: {fileID: 797207178257465257}
-  - component: {fileID: 3170821610029115579}
   m_Layer: 13
   m_Name: Normal
   m_TagString: Flesh
@@ -2068,7 +2127,7 @@ MonoBehaviour:
   walkOnPatrol: 1
   curWayPoint: {fileID: 0}
   waypointGroup: {fileID: 0}
-  firstWaypoint: 7
+  firstWaypoint: 2
   standWatch: 0
   followPlayer: 0
   followOnUse: 0
@@ -2140,6 +2199,8 @@ MonoBehaviour:
   HitCount: 0
   Jumpp_ForAttack: 0
   isTrigger_GameObj: 0
+  JumpWindow: 0
+  counter: 0
   a: {fileID: 0}
   Patrollling: 0
   Jump: 0
@@ -2332,19 +2393,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bodyStayTime: 15
   GunPickup: {fileID: 0}
---- !u!65 &3170821610029115579
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3264045240748327398}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 2.9718356, z: 1}
-  m_Center: {x: 0, y: 1.5151794, z: 0}
 --- !u!1 &3294789127123552406
 GameObject:
   m_ObjectHideFlags: 0

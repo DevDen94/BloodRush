@@ -6,20 +6,22 @@ public class Attack_On : MonoBehaviour
 {
     public GameObject LookAtt;
     public GameObject a;
-
+    BoxCollider box;
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Flesh")
         {
-          /*  if (other.gameObject.GetComponent<AI>().isTrigger_GameObj == false)
-            {*/
-                other.gameObject.GetComponent<AI>().Jumpp_ForAttack = false;
-                other.gameObject.GetComponent<AI>().AnimatorComponent.SetInteger("AnimState", 3);
-                other.gameObject.GetComponent<AI>().AnimatorComponent.SetTrigger("Jump");
-                other.gameObject.GetComponent<AI>().gameObject.transform.LookAt(LookAtt.transform);
-                other.gameObject.GetComponent<AI>().agent.SetDestination(a.transform.position);
-               // other.gameObject.GetComponent<AI>().isTrigger_GameObj = true;
-            //}
+            
+                other.gameObject.GetComponent<AI_Parent>().Parent.counter += 1;
+            
+            other.gameObject.GetComponent<AI_Parent>().Parent.Jumpp_ForAttack = false;
+                other.gameObject.GetComponent<AI_Parent>().Parent.AnimatorComponent.SetInteger("AnimState", 3);
+            other.gameObject.GetComponent<AI_Parent>().Parent.AnimatorComponent.SetTrigger("Jump");
+            other.gameObject.GetComponent<AI_Parent>().Parent.gameObject.transform.LookAt(LookAtt.transform);
+            other.gameObject.GetComponent<AI_Parent>().Parent.agent.SetDestination(a.transform.position);
+           
         }
     }
+
+
 }

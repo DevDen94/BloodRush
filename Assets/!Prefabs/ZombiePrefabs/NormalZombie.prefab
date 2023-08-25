@@ -789,7 +789,6 @@ GameObject:
   - component: {fileID: 5541230609178761637}
   - component: {fileID: 5541230609178761636}
   - component: {fileID: 1525639336}
-  - component: {fileID: 6014073322890919163}
   m_Layer: 13
   m_Name: NormalZombie
   m_TagString: Flesh
@@ -888,7 +887,7 @@ MonoBehaviour:
   walkOnPatrol: 1
   curWayPoint: {fileID: 0}
   waypointGroup: {fileID: 0}
-  firstWaypoint: 17
+  firstWaypoint: 2
   standWatch: 0
   followPlayer: 0
   followOnUse: 0
@@ -960,6 +959,8 @@ MonoBehaviour:
   HitCount: 0
   Jumpp_ForAttack: 0
   isTrigger_GameObj: 0
+  JumpWindow: 0
+  counter: 0
   a: {fileID: 0}
   Patrollling: 0
   Jump: 0
@@ -1152,19 +1153,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!65 &6014073322890919163
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1246823754379729251}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 7.7863665, y: 12.759644, z: 10.626305}
-  m_Center: {x: 3.393183, y: 5.8798223, z: 4.8131533}
 --- !u!1 &1277013496039313427
 GameObject:
   m_ObjectHideFlags: 0
@@ -3218,6 +3206,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5278275840497821454}
+  - {fileID: 599289553970945210}
   m_Father: {fileID: 3915406869412530203}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3525,6 +3514,65 @@ Transform:
   m_Father: {fileID: 7046595117410092221}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3491693321407734290
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 599289553970945210}
+  - component: {fileID: 7005815217154504480}
+  - component: {fileID: 8959855913022724597}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Flesh
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &599289553970945210
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3491693321407734290}
+  m_LocalRotation: {x: 0.12659186, y: -0.5147536, z: -0.8403617, w: 0.11311685}
+  m_LocalPosition: {x: -17.7, y: -14.7, z: 3.7}
+  m_LocalScale: {x: 0.9999883, y: 0.99998856, z: 0.99998784}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7262605141886933546}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &7005815217154504480
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3491693321407734290}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 25.853333, y: 21.999334, z: 5.6225424}
+  m_Center: {x: 0.14735435, y: -12.386266, z: 2.3112502}
+--- !u!114 &8959855913022724597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3491693321407734290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e0bc60873fcbd1428cdb3f5579000eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Parent: {fileID: 5541230609178761656}
 --- !u!1 &3519661925782183793
 GameObject:
   m_ObjectHideFlags: 0

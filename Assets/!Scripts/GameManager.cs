@@ -78,6 +78,7 @@ public class GameManager : MonoBehaviour
         Invoke("Delay", 1.5f);
         Bg_Music.volume = PlayerPrefs.GetFloat("Music");
         src.volume = PlayerPrefs.GetFloat("Sounds");
+        
         GoogleAdMobController.instance.RequestBannerAd();
     }
     void Delay()
@@ -354,7 +355,7 @@ public class GameManager : MonoBehaviour
     {
         int objectsPerArray = AllZombies.Length / 5;
         int remainder = AllZombies.Length % 5;
-        int currentIndex = 0;
+       int currentIndex = 0;
 
         for (int i = 0; i <5; i++)
         {
