@@ -30,6 +30,7 @@ public class HealthText : MonoBehaviour {
 				guiTextComponent.text = "Health : 0";
 				GameManager.instance.LevelFailed.SetActive(true);
 				Health.value = 0;
+				Time.timeScale = 0;
 			}
 			else{
 				guiTextComponent.text = "Health : "+ healthGui.ToString();

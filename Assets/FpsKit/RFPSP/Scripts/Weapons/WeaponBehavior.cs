@@ -709,6 +709,7 @@ public class WeaponBehavior : MonoBehaviour {
 	public float pointRange1Cam = 0.2f;
 	
 	void Start (){
+		fireVol= PlayerPrefs.GetFloat("Sounds");
 		timer = 0f;
 		isFilling = false;
 		myTransform = transform;//cache transform for efficiency
@@ -934,7 +935,7 @@ public class WeaponBehavior : MonoBehaviour {
 					readyTimeAmt = readyTime;
 					
 					//play weapon readying sound
-					otherfx.volume = 1.0f;
+					otherfx.volume = PlayerPrefs.GetFloat("Sounds");
 					otherfx.clip = readySnd;
 					otherfx.PlayOneShot(otherfx.clip, 1.0f / otherfx.volume);
 					
@@ -1270,7 +1271,7 @@ public class WeaponBehavior : MonoBehaviour {
 						   && ammo <= 0 
 						   && !meleeIfNoAmmo
 						   && AnimatorComponent.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.65f){
-							otherfx.volume = 1.0f;
+							otherfx.volume = PlayerPrefs.GetFloat("Sounds"); ;
 							otherfx.clip = noammoSnd;
 							otherfx.PlayOneShot(otherfx.clip, 1.0f / otherfx.volume);
 							shooting = false;
@@ -1308,7 +1309,7 @@ public class WeaponBehavior : MonoBehaviour {
 								}else{
 									muzzleFlashReduction = 2.0f;		
 								}
-								otherfx.volume = 1.0f;
+								otherfx.volume = PlayerPrefs.GetFloat("Sounds"); ;
 								otherfx.clip = noammoSnd;
 								otherfx.PlayOneShot(otherfx.clip, 1.0f / otherfx.volume);
 								
@@ -1336,7 +1337,7 @@ public class WeaponBehavior : MonoBehaviour {
 								}else{
 									muzzleFlashReduction = 2.0f;		
 								}
-								otherfx.volume = 1.0f;
+								otherfx.volume = PlayerPrefs.GetFloat("Sounds"); 
 								otherfx.clip = noammoSnd;
 								otherfx.PlayOneShot(otherfx.clip, 1.0f / otherfx.volume);	
 							}
@@ -1491,7 +1492,7 @@ public class WeaponBehavior : MonoBehaviour {
 							}
 							
 							if(pullSnd){
-								otherfx.volume = 1.0f;
+								otherfx.volume = PlayerPrefs.GetFloat("Sounds");
 								otherfx.clip = pullSnd;
 								otherfx.PlayOneShot(otherfx.clip, 1.0f / otherfx.volume);
 							}
@@ -1696,7 +1697,7 @@ public class WeaponBehavior : MonoBehaviour {
 				}
 				
 				if(InputComponent.flashlightPress || (useZoomSwitch && InputComponent.zoomPress)){
-					otherfx.volume = 1.0f;
+					otherfx.volume = PlayerPrefs.GetFloat("Sounds");
 					otherfx.clip = noammoSnd;
 					otherfx.PlayOneShot(otherfx.clip, 1.0f / otherfx.volume);
 					if(!lightOn){
@@ -1737,7 +1738,7 @@ public class WeaponBehavior : MonoBehaviour {
 		//don't fire this weapon underwater if fireableUnderwater var is false
 		if(FPSWalkerComponent.holdingBreath && !meleeActive && (!fireableUnderwater || FPSWalkerComponent.lowerGunForSwim)){ 
 			if(cantFireState){
-				otherfx.volume = 1.0f;
+				otherfx.volume = PlayerPrefs.GetFloat("Sounds");
 				otherfx.clip = noammoSnd;
 				otherfx.PlayOneShot(otherfx.clip, 1.0f / otherfx.volume);
 				cantFireState = false;//only play noammo sound once if this is an automatic weapon
@@ -2449,10 +2450,10 @@ public class WeaponBehavior : MonoBehaviour {
     {
 		if (isFilling)
 		{
-			GameManager.instance.Reloading_Slider.gameObject.SetActive(true);
+			  
 			  timer += Time.deltaTime;
-			float fillPercentage = timer / reloadTime;
-		    GameManager.instance.Reloading_Slider.value = Mathf.Lerp(0f, GameManager.instance.Reloading_Slider.maxValue, fillPercentage);
+			 float fillPercentage = timer / reloadTime;
+		     GameManager.instance.Reloading_Slider.value = Mathf.Lerp(0f, GameManager.instance.Reloading_Slider.maxValue, fillPercentage);
 
 			if (timer >= reloadTime)
 			{
@@ -2484,7 +2485,7 @@ public class WeaponBehavior : MonoBehaviour {
 					//if loading by magazine, start these reloading actions immediately and wait for reloadTime before adding ammo and completing reload
 					if(bulletsToReload == bulletsPerClip){
 						//play reload sound once at start of reload
-						otherfx.volume = 1.0f;
+						otherfx.volume = PlayerPrefs.GetFloat("Sounds");
 						otherfx.clip = reloadSnd;
 						otherfx.Play();//OneShot(otherfx.clip, 1.0f / otherfx.volume);//play magazine reload sound effect
 
@@ -2515,6 +2516,8 @@ public class WeaponBehavior : MonoBehaviour {
 					//otherwise, adding of ammo and finishing reload will wait for reloadTime while animation and sound plays
 					if((bulletsToReload != bulletsPerClip && bulletsReloaded > 0) || bulletsToReload == bulletsPerClip){
 						isFilling = true;
+						GameManager.instance.Reloading_Slider.gameObject.SetActive(true);
+						GameManager.instance.src.PlayOneShot(GameManager.instance.ReloadingClip);
 						// Wait for reload time first, then proceed
 						yield return new WaitForSeconds(reloadTime);
 					}
@@ -2592,7 +2595,7 @@ public class WeaponBehavior : MonoBehaviour {
 						}
 
 						//play reloading sound effect	
-						otherfx.volume = 1.0f;
+						otherfx.volume = PlayerPrefs.GetFloat("Sounds");
 						otherfx.pitch = Random.Range(0.95f * Time.timeScale, 1 * Time.timeScale);
 						otherfx.PlayOneShot(otherfx.clip, 1.0f / otherfx.volume);
 						

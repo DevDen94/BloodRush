@@ -314,7 +314,7 @@ public class AI : MonoBehaviour {
 		//initialize audiosource for footsteps
 		footstepsFx = myTransform.gameObject.AddComponent<AudioSource>();
 		footstepsFx.spatialBlend = 1.0f;
-		footstepsFx.volume = footStepVol;
+		footstepsFx.volume = PlayerPrefs.GetFloat("Sounds");
 		footstepsFx.pitch = 1.0f;
 		footstepsFx.dopplerLevel = 0.0f;
 		footstepsFx.bypassEffects = true;
@@ -326,7 +326,7 @@ public class AI : MonoBehaviour {
 		
 		vocalFx = myTransform.gameObject.AddComponent<AudioSource>();
 		vocalFx.spatialBlend = 1.0f;
-		vocalFx.volume = vocalVol;
+		vocalFx.volume = PlayerPrefs.GetFloat("Sounds");
 		vocalFx.pitch = 1.0f;
 		vocalFx.dopplerLevel = 0.0f;
 		vocalFx.bypassEffects = true;
@@ -591,9 +591,9 @@ public class AI : MonoBehaviour {
 		waypointGroup = curWayPoint.GetComponent<CheckWindow>().New_WayPointGroup;
 		followPlayer = true;
 		Patrollling = false;
-		curWayPoint = waypointGroup.wayPoints[curWayPoint.GetComponent<CheckWindow>().Index_C];
+		
 		AttackMode = true;
-		StartCoroutine(Patrol());
+		StartCoroutine(Patrol()); curWayPoint = waypointGroup.wayPoints[curWayPoint.GetComponent<CheckWindow>().Index_C];
 	}
 	IEnumerator Jumpp()
 	{
@@ -618,22 +618,26 @@ public class AI : MonoBehaviour {
 					if (curWayPoint.GetComponent<CheckWindow>().IS_door)
                     {
 						agent.SetDestination(curWayPoint.GetComponent<CheckWindow>().JumpP.transform.position);
+						
 						AnimatorComponent.SetInteger("AnimState", 1);
 						Invoke("Reset_ZombieMovement", 6f);
 					}
                     else
-                    {
+					{
+						agent.speed = 2f;
+						gameObject.transform.LookAt(curWayPoint.GetComponent<CheckWindow>().JumpP.transform);
 						agent.SetDestination(curWayPoint.GetComponent<CheckWindow>().JumpP.transform.position);
 						AnimatorComponent.SetInteger("AnimState", 3);
 						AnimatorComponent.SetTrigger("Jump");
-						Invoke("Reset_ZombieMovement", 3f);
+						Invoke("Reset_ZombieMovement", 2f);
 					}
+
 					enter = true;
-					
 
 				}
                 else
                 {
+					
 					yield break;
 				}
 			}
@@ -1090,8 +1094,8 @@ public class AI : MonoBehaviour {
 				{
 					if (tauntSnds.Length > 0)
 					{
-						vocalFx.volume = tauntVol;
-						vocalFx.pitch = Random.Range(0.94f, 1f);
+						vocalFx.volume = PlayerPrefs.GetFloat("Sounds");
+					vocalFx.pitch = Random.Range(0.94f, 1f);
 						vocalFx.spatialBlend = 1.0f;
 						vocalFx.clip = tauntSnds[Random.Range(0, tauntSnds.Length)];
 						vocalFx.PlayOneShot(vocalFx.clip);
@@ -1410,7 +1414,7 @@ public class AI : MonoBehaviour {
 		while(true){
 			if(footSteps.Length > 0 && stepInterval > 0.0f ){
 				footstepsFx.pitch = 1.0f;
-				footstepsFx.volume = footStepVol;
+				footstepsFx.volume = PlayerPrefs.GetFloat("Sounds");
 				footstepsFx.clip = footSteps[Random.Range(0, footSteps.Length)];
 				footstepsFx.PlayOneShot(footstepsFx.clip);
 			}

@@ -127,7 +127,11 @@ public class PlayerWeapons : MonoBehaviour {
 		aSource = playerObj.AddComponent<AudioSource>(); 
 		aSource.spatialBlend = 0.0f;
 		aSource.playOnAwake = false;
-		
+		aSource.volume= PlayerPrefs.GetFloat("Sounds");
+		for (int i = 0; i < aSources.Length; i++)
+        {
+			aSources[i].volume= PlayerPrefs.GetFloat("Sounds");
+		}
 		//set the weapon order number in the WeaponBehavior scripts
 		for(int i = 0; i < weaponOrder.Length; i++)	{
 			weaponOrder[i].GetComponent<WeaponBehavior>().weaponNumber = i;
@@ -557,7 +561,7 @@ public class PlayerWeapons : MonoBehaviour {
 			if(!offhandThrowActive && !displayingGrenade){
 				//play weapon switch sound if not the first call to this function after level load
 				aSource.clip = changesnd;
-				aSource.volume = 1f;
+				aSource.volume = PlayerPrefs.GetFloat("Sounds");
 				aSource.Play();
 			}
 		

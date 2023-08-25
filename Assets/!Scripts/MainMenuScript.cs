@@ -11,8 +11,8 @@ public class MainMenuScript : MonoBehaviour
     public GameObject[] LockedImages;
     public Button[] LevelBtns;
     public Slider[] MusicSlider;
-
-
+    public VersionNumber number;
+    public Text VersionNumber;
     void DisableAll()
     {
         foreach(GameObject a in LockedImages)
@@ -34,40 +34,50 @@ public class MainMenuScript : MonoBehaviour
     }
     void Start()
     {
-
-        
-            SoundsManager.instance.PlayMainMenuMusic();
+      
+        VersionNumber.text = number.Playstore_Version + " : " + number.Appstore_Version;
+        Screen.sleepTimeout = SleepTimeout.NeverSleep;
+      
         
 
         if (!PlayerPrefs.HasKey("Zero"))
         {
             PlayerPrefs.SetInt("Zero", 1);
             PlayerPrefs.SetInt("WaveUnlock", 0);
+            PlayerPrefs.SetFloat("Music", 0.5f);
+            PlayerPrefs.SetFloat("Sounds", 1f);
         }
         DisableAll();
         EnableButtons(PlayerPrefs.GetInt("WaveUnlock"));
+        MusicSlider[0].value = PlayerPrefs.GetFloat("Music");
+        MusicSlider[1].value= PlayerPrefs.GetFloat("Sounds");
+     
+        src.volume= PlayerPrefs.GetFloat("Music");
     }
 
     public void ButtonClick()
     {
-        //src.PlayOneShot(BtnClickSound);
-        SoundsManager.instance.playBtnClick();
+        src.PlayOneShot(BtnClickSound);
+       
     }
     // Update is called once per frame
-    void Update()
+  public void SaveSetting()
     {
-        
+        PlayerPrefs.SetFloat("Music", MusicSlider[0].value);
+        PlayerPrefs.SetFloat("Sounds", MusicSlider[1].value);
+        src.volume = PlayerPrefs.GetFloat("Music");
     }
 
 
-
-    public void SaveSettings()
+  
+    public void BTN_cLICK()
     {
-        
-        PlayerPrefs.SetFloat("MusicVoulme", MusicSlider[0].value);
-        PlayerPrefs.SetFloat("SFXVoulme", MusicSlider[1].value);
+        src.PlayOneShot(BtnClickSound);
     }
-
+    public void Exit()
+    {
+        Application.Quit();
+    }
     public void WayLevel(int way = 0)
     {
         PlayerPrefs.SetInt("WaveNo", way);

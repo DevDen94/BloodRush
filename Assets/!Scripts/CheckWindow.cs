@@ -14,6 +14,7 @@ public class CheckWindow : MonoBehaviour
     public bool IS_door;
     public int Index_C;
     public GameObject NAV_Obstacle;
+    public GameObject Jump_Trigger;
     // Start is called before the first frame update
     void Start()
     {
@@ -111,6 +112,7 @@ public class CheckWindow : MonoBehaviour
             else
             {
                 NAV_Obstacle.SetActive(false);
+               // Jump_Trigger.SetActive(true);
             }
         }
         

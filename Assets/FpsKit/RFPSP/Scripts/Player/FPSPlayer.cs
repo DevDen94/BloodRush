@@ -348,6 +348,8 @@ public class FPSPlayer : MonoBehaviour {
 		otherfx.spatialBlend = 0.0f;
 		hitmarkfx.spatialBlend = 0.0f;
 		
+		otherfx.volume= PlayerPrefs.GetFloat("Sounds");
+		hitmarkfx.volume= PlayerPrefs.GetFloat("Sounds"); ;
 		//Set time settings
 		Time.timeScale = 1.0f;
 		initialFixedTime =  Time.fixedDeltaTime;
@@ -547,14 +549,14 @@ public class FPSPlayer : MonoBehaviour {
 				if(bulletTimeActive){
 					if(!bullettimefxstate){
 						otherfx.clip = enterBulletTimeFx;
-						otherfx.PlayOneShot(otherfx.clip, 1.0f);//play enter bullet time sound effect
+						otherfx.PlayOneShot(otherfx.clip);//play enter bullet time sound effect
 						bullettimefxstate = true;
 					}
 					Time.timeScale = Mathf.MoveTowards(Time.timeScale, bulletTimeSpeed, Time.deltaTime * 3.0f);
 				}else{
 					if(bullettimefxstate){
 						otherfx.clip = exitBulletTimeFx;
-						otherfx.PlayOneShot(otherfx.clip, 1.0f);//play exit bullet time sound effect
+						otherfx.PlayOneShot(otherfx.clip);//play exit bullet time sound effect
 						FPSWalkerComponent.moveSpeedMult = 1.0f;
 						bullettimefxstate = false;
 					}
@@ -1049,7 +1051,7 @@ public class FPSPlayer : MonoBehaviour {
 				if (WeaponBehaviorComponent.meleeSwingDelay == 0 && !WeaponBehaviorComponent.meleeActive){
 					hitmarkerUiImage.enabled = true;
 					hitmarkfx.clip = hitMarker;
-					hitmarkfx.PlayOneShot(hitmarkfx.clip, 1.0f);
+					hitmarkfx.PlayOneShot(hitmarkfx.clip);
 					hitMarkerState = true;
 				}
 			}
@@ -1220,7 +1222,7 @@ public class FPSPlayer : MonoBehaviour {
 			
 				damage *= 1f - WeaponBehaviorComponent.blockDefenseAmt;
 				otherfx.clip = WeaponBehaviorComponent.blockSound;
-				otherfx.PlayOneShot(otherfx.clip, 1.0f);
+				otherfx.PlayOneShot(otherfx.clip);
 				
 				if(blockParticles){
 					if(!CameraControlComponent.thirdPersonActive){
@@ -1278,12 +1280,12 @@ public class FPSPlayer : MonoBehaviour {
 					// Play a big pain sound
 					if (hitPoints < 40.0f || damage > 30.0f) {
 						otherfx.clip = painBig;
-						otherfx.PlayOneShot(otherfx.clip, 1.0f);
+						otherfx.PlayOneShot(otherfx.clip);
 						gotHitTimer = Time.time + Random.Range(.5f, .75f);
 					} else {
 						//Play a small pain sound
 						otherfx.clip = painLittle;
-						otherfx.PlayOneShot(otherfx.clip, 1.0f);
+						otherfx.PlayOneShot(otherfx.clip);
 						gotHitTimer = Time.time + Random.Range(.5f, .75f);
 					}
 				}
@@ -1292,7 +1294,7 @@ public class FPSPlayer : MonoBehaviour {
 			if (Time.time > gotHitTimer && painDrown) {
 				//Play a small pain sound
 				otherfx.clip = painDrown;
-				otherfx.PlayOneShot(otherfx.clip, 1.0f);
+				otherfx.PlayOneShot(otherfx.clip);
 				gotHitTimer = Time.time + Random.Range(.5f, .75f);
 			}	
 		}
@@ -1352,19 +1354,19 @@ public class FPSPlayer : MonoBehaviour {
 		if(!FPSWalkerComponent.drowning){
 			//play normal player death sound effect if the player is on land 
 			otherfx.clip = die;
-			otherfx.PlayOneShot(otherfx.clip, 1.0f);
+			otherfx.PlayOneShot(otherfx.clip);
 
 		}else{
 			//play drowning sound effect if the player is underwater 	
 			otherfx.clip = dieDrown;
-			otherfx.PlayOneShot(otherfx.clip, 1.0f);
+			otherfx.PlayOneShot(otherfx.clip);
 		}
 		
 		//disable player control and sprinting on death
 		FPSWalkerComponent.inputX = 0;
 		FPSWalkerComponent.inputY = 0;
 		FPSWalkerComponent.cancelSprint = true;
-
+		Time.timeScale = 0;
 		GameManager.instance.LevelFailed.SetActive(true);
 		//call FadeAndLoadLevel function with fadein argument set to false 
 		//in levelLoadFadeObj to restart level and fade screen out from black on level load

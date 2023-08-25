@@ -46,18 +46,23 @@ public class GameManager : MonoBehaviour
     public GameObject Objective_Panel;
     public GameObject Weapons_Panel;
     public Slider Reloading_Slider;
+    public GameObject aimBtn;
 
     public GameObject[] Weapon_StartImages;
     public GameObject WeaponStartHeader;
     public GameObject[] WeaponWheelImages;
 
+    public AudioSource Bg_Music;
     public AudioSource src;
     public AudioClip Btnclick;
+    public AudioClip ReloadingClip;
+    public GameObject EmptyPanel;
     
     private void Start()
     {
-     
-
+      
+        EmptyPanel.SetActive(true);
+        Screen.sleepTimeout = SleepTimeout.NeverSleep;
         isLevelComplete = false;
         ZombieJump_Bool = false;
         instance = this;
@@ -71,12 +76,25 @@ public class GameManager : MonoBehaviour
         LoadWeapons_Data(PlayerPrefs.GetInt("WaveNo"));
         Invoke("Instaniate_Zombies",1f);
         Invoke("Delay", 1.5f);
+        Bg_Music.volume = PlayerPrefs.GetFloat("Music");
+        src.volume = PlayerPrefs.GetFloat("Sounds");
     }
     void Delay()
     {
-        Objective_Panel.SetActive(true);
+        if (PlayerPrefs.GetInt("WaveNo") == 0)
+        {
+            Objective_Panel.SetActive(true);
+        }
+        else
+        {
+            Objective_Panel.SetActive(false);
+            Weapons_Panel.SetActive(true);
+
+        }
+        
         BrokenEnable = true;
         Time.timeScale = 0f;
+        
    
     }
     void Instaniate_Zombies()
@@ -86,8 +104,16 @@ public class GameManager : MonoBehaviour
             Assign_Paths();
         
     }
+    public void Off_AvaliableWeaponPanel()
+    {
+        EmptyPanel.SetActive(false);
+        Weapons_Panel.SetActive(false);
+        src.PlayOneShot(Btnclick);
+        Time.timeScale = 1f;
+    }
     public void ContinueGame()
     {
+        EmptyPanel.SetActive(false);
         src.PlayOneShot(Btnclick);
         Objective_Panel.SetActive(false);
         Weapons_Panel.SetActive(true);
@@ -118,6 +144,7 @@ public class GameManager : MonoBehaviour
                 }
             }
             AttackModeOn = false;
+       
           /*  NavMesh_G[0].SetActive(true);
             NavMesh_G[1].SetActive(true);*/
         }
@@ -127,14 +154,17 @@ public class GameManager : MonoBehaviour
     {
         src.PlayOneShot(Btnclick);
         SceneManager.LoadScene("GamePlay");
+        //Time.timeScale = 1f;
     }
     public void Restart_Btn()
     {
+        //Time.timeScale = 1f;
         src.PlayOneShot(Btnclick);
         SceneManager.LoadScene("GamePlay");
     }
     public void Home()
     {
+        //Time.timeScale = 1f;
         src.PlayOneShot(Btnclick);
         SceneManager.LoadScene("MainMenu");
     }
@@ -152,22 +182,22 @@ public class GameManager : MonoBehaviour
     }
     void LoadWeapons_Data(int value)
     {
-        if (value == 1)
+        if (value == 1 || value==5)
         {
             Weapons[2].haveWeapon = true;
             
         }
-        if (value == 2)
+        if (value == 2 || value == 6)
         {
             Weapons[2].haveWeapon = true;
             Weapons[3].haveWeapon = true; 
         }
-        if (value == 3)
+        if (value == 3 || value == 7)
         {
             Weapons[4].haveWeapon = true;
             Weapons[5].haveWeapon = true;
         }
-        if (value == 4)
+        if (value == 4 || value == 8)
         {
             Weapons[6].haveWeapon = true;
             Weapons[7].haveWeapon = true;
@@ -191,11 +221,20 @@ public class GameManager : MonoBehaviour
         string weapon = "Select Weapon " + i;
         print(weapon);
         p.StartCoroutine(p.SelectWeapon(i));
+
+        if(i==3 || i == 4)
+        {
+            aimBtn.SetActive(false);
+        }
+        else
+        {
+            aimBtn.SetActive(true);
+        }
        
     }
     public void Open_WeaponWheel()
     {
-     
+        Reloading_Slider.gameObject.SetActive(false);
         WeaponWheel.SetActive(true);
     }
     public void Close_WeaponWheel()

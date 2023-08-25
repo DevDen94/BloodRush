@@ -73,7 +73,7 @@ public class NPCAttack : MonoBehaviour {
 		playerObj = Camera.main.transform.GetComponent<CameraControl>().playerObj;
 		FPSWalker = playerObj.GetComponent<FPSRigidBodyWalker>();
 		aSource = GetComponent<AudioSource>();
-
+		aSource.volume= PlayerPrefs.GetFloat("Sounds");
 		//bulletsLeft = bulletsPerClip;
 		shootStartTime = -fireRate * 2;
 	}
@@ -263,7 +263,7 @@ public class NPCAttack : MonoBehaviour {
 		aSource.clip = firesnd;
 		aSource.pitch = Random.Range(fireFxRandPitch, 1);
 		if(aSource.volume > 0){
-			aSource.PlayOneShot(aSource.clip, 0.8f / aSource.volume);
+			aSource.PlayOneShot(aSource.clip, PlayerPrefs.GetFloat("Sounds"));
 		}
 		
 		//track ammo and fired shots amount

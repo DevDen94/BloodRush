@@ -23,7 +23,7 @@ public class Splash : MonoBehaviour
     IEnumerator waitforSceneSwitch()
     {
         Time.timeScale = 1f;
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.1f);
         
         // Instantiate the child GameObject from the prefab
         GameObject instantiatedChild = Instantiate(childPrefab, childPrefab.transform.position, childPrefab.transform.rotation);
