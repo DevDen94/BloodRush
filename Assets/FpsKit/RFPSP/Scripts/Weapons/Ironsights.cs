@@ -504,7 +504,7 @@ public class Ironsights : MonoBehaviour {
 					//If not a melee weapon, play sound effect when raising sights
 					if(zoomSfxState && WeaponBehaviorComponent.meleeSwingDelay == 0 && !WeaponBehaviorComponent.unarmed){
 						aSource.clip = sightsUpSnd;
-						aSource.volume = 1.0f;
+						aSource.volume = PlayerPrefs.GetFloat("Sounds"); ;
 						aSource.pitch = 1.0f * Time.timeScale;
 						aSource.Play();
 						zoomSfxState = false;
@@ -581,7 +581,7 @@ public class Ironsights : MonoBehaviour {
 				//If not a melee weapon, play sound effect when lowering sights	
 				if(!zoomSfxState && WeaponBehaviorComponent.meleeSwingDelay == 0 && !WeaponBehaviorComponent.unarmed){
 					aSource.clip = sightsDownSnd;
-					aSource.volume = 1.0f;
+					aSource.volume = PlayerPrefs.GetFloat("Sounds");
 					aSource.pitch = 1.0f * Time.timeScale;
 					aSource.Play();
 					zoomSfxState = true;

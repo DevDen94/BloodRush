@@ -937,7 +937,7 @@ public class WeaponBehavior : MonoBehaviour {
 					//play weapon readying sound
 					otherfx.volume = PlayerPrefs.GetFloat("Sounds");
 					otherfx.clip = readySnd;
-					otherfx.PlayOneShot(otherfx.clip, 1.0f / otherfx.volume);
+					otherfx.PlayOneShot(otherfx.clip,  otherfx.volume);
 					
 					//play weapon readying animation after it has just been selected
 					if(!PlayerWeaponsComponent.offhandThrowActive){
@@ -1273,7 +1273,7 @@ public class WeaponBehavior : MonoBehaviour {
 						   && AnimatorComponent.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.65f){
 							otherfx.volume = PlayerPrefs.GetFloat("Sounds"); ;
 							otherfx.clip = noammoSnd;
-							otherfx.PlayOneShot(otherfx.clip, 1.0f / otherfx.volume);
+							otherfx.PlayOneShot(otherfx.clip, otherfx.volume);
 							shooting = false;
 							cantFireState = false;
 						}
@@ -1311,7 +1311,7 @@ public class WeaponBehavior : MonoBehaviour {
 								}
 								otherfx.volume = PlayerPrefs.GetFloat("Sounds"); ;
 								otherfx.clip = noammoSnd;
-								otherfx.PlayOneShot(otherfx.clip, 1.0f / otherfx.volume);
+								otherfx.PlayOneShot(otherfx.clip, otherfx.volume);
 								
 								if(burstAndAuto){//if all three fire modes are available, choose burst fire after semi auto
 									if(!burstFire){
@@ -1339,7 +1339,7 @@ public class WeaponBehavior : MonoBehaviour {
 								}
 								otherfx.volume = PlayerPrefs.GetFloat("Sounds"); 
 								otherfx.clip = noammoSnd;
-								otherfx.PlayOneShot(otherfx.clip, 1.0f / otherfx.volume);	
+								otherfx.PlayOneShot(otherfx.clip, otherfx.volume);	
 							}
 						}
 					}else{
@@ -1494,7 +1494,7 @@ public class WeaponBehavior : MonoBehaviour {
 							if(pullSnd){
 								otherfx.volume = PlayerPrefs.GetFloat("Sounds");
 								otherfx.clip = pullSnd;
-								otherfx.PlayOneShot(otherfx.clip, 1.0f / otherfx.volume);
+								otherfx.PlayOneShot(otherfx.clip, otherfx.volume);
 							}
 							pullTimer = Time.time;
 							pullAnimState = true;
@@ -1699,7 +1699,7 @@ public class WeaponBehavior : MonoBehaviour {
 				if(InputComponent.flashlightPress || (useZoomSwitch && InputComponent.zoomPress)){
 					otherfx.volume = PlayerPrefs.GetFloat("Sounds");
 					otherfx.clip = noammoSnd;
-					otherfx.PlayOneShot(otherfx.clip, 1.0f / otherfx.volume);
+					otherfx.PlayOneShot(otherfx.clip, otherfx.volume);
 					if(!lightOn){
 						if(lightConeMesh){lightConeMesh.enabled = true;}
 						if(spot){spot.enabled = true;}
@@ -1740,7 +1740,7 @@ public class WeaponBehavior : MonoBehaviour {
 			if(cantFireState){
 				otherfx.volume = PlayerPrefs.GetFloat("Sounds");
 				otherfx.clip = noammoSnd;
-				otherfx.PlayOneShot(otherfx.clip, 1.0f / otherfx.volume);
+				otherfx.PlayOneShot(otherfx.clip, otherfx.volume);
 				cantFireState = false;//only play noammo sound once if this is an automatic weapon
 				waterFireState = true;//make player have to press fire button again after surfacing to fire
 			}
@@ -1848,11 +1848,11 @@ public class WeaponBehavior : MonoBehaviour {
 		firefx.clip = fireSnd;
 		autoFireAsource2.clip = fireSnd;
 		if(curAutofireAsource){
-			autoFireAsource1.volume = fireVol;
+			autoFireAsource1.volume = PlayerPrefs.GetFloat("Sounds");
 			autoFireAsource1.PlayScheduled(playTime);
 			curAutofireAsource = false;
 		}else{
-			autoFireAsource2.volume = fireVol;
+			autoFireAsource2.volume = PlayerPrefs.GetFloat("Sounds");
 			autoFireAsource2.PlayScheduled(playTime);
 			curAutofireAsource = true;
 		}
@@ -2597,7 +2597,7 @@ public class WeaponBehavior : MonoBehaviour {
 						//play reloading sound effect	
 						otherfx.volume = PlayerPrefs.GetFloat("Sounds");
 						otherfx.pitch = Random.Range(0.95f * Time.timeScale, 1 * Time.timeScale);
-						otherfx.PlayOneShot(otherfx.clip, 1.0f / otherfx.volume);
+						otherfx.PlayOneShot(otherfx.clip, PlayerPrefs.GetFloat("Sounds"));
 						
 						reloadEndTime = Time.time;//track time that we finished reload to determine if this reload can be interrupted by fire button
 						

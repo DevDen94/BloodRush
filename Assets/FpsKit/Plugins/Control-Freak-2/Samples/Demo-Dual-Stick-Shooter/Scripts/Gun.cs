@@ -48,10 +48,14 @@ public class Gun : MonoBehaviour
 		
 		this.isFiring = false;
 		}
-	
-	
-	// -----------------------
-	public void SetTriggerState(bool fire)
+        private void Start()
+        {
+			this.audioSource.volume = PlayerPrefs.GetFloat("Sounds");
+
+		}
+
+        // -----------------------
+        public void SetTriggerState(bool fire)
 		{	
 		if (fire != this.isFiring)
 			{

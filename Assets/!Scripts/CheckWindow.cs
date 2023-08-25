@@ -90,8 +90,8 @@ public class CheckWindow : MonoBehaviour
         
             if (Windowslider.value <= 0 && jum == false)
             {
-            Is_2nd = true;
-            jum = true;
+                Is_2nd = true;
+                jum = true;
               for (int i = 0; i < Zombie.Length; i++)
                 {
                      if (Zombie[i] == null)
@@ -108,12 +108,14 @@ public class CheckWindow : MonoBehaviour
                 if (IS_door)
                 {
                 GameManager.instance.AttackModeOn = true;
-            }
-            else
-            {
                 NAV_Obstacle.SetActive(false);
+                }
+               else
+              {
+                NAV_Obstacle.SetActive(false);
+                Jump_Trigger.SetActive(true);
                // Jump_Trigger.SetActive(true);
-            }
+              }
         }
         
     }

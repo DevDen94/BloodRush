@@ -6222,12 +6222,12 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 30dc370b164eefc43b95744fc796dad0, type: 3}
+      objectReference: {fileID: 2100000, guid: 824b0392f582ca34fa9af6e31edb6662, type: 3}
     - target: {fileID: 2519328066014538301, guid: 5a5991370374e864881147bd175dfe88,
         type: 3}
       propertyPath: m_Font
       value: 
-      objectReference: {fileID: 12800000, guid: 30dc370b164eefc43b95744fc796dad0,
+      objectReference: {fileID: 12800000, guid: 824b0392f582ca34fa9af6e31edb6662,
         type: 3}
     - target: {fileID: 2519328066014538301, guid: 5a5991370374e864881147bd175dfe88,
         type: 3}

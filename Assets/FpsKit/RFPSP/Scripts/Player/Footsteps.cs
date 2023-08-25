@@ -120,6 +120,7 @@ public class Footsteps : MonoBehaviour {
 	private Vector3 terrainPos;
 	
 	void Start () {
+		volumeAmt = PlayerPrefs.GetFloat("Sounds");
 		playerObj = Camera.main.transform.GetComponent<CameraControl>().playerObj;
 		FPSWalkerComponent = playerObj.GetComponent<FPSRigidBodyWalker>();
 		FPSPlayerComponent = playerObj.GetComponent<FPSPlayer>();
@@ -144,12 +145,12 @@ public class Footsteps : MonoBehaviour {
 						if(waterSounds.Length > 0){
 							footStepClip = waterSounds[Random.Range(0, waterSounds.Length)];//select random water step effect from waterSounds array
 							if(!FPSWalkerComponent.holdingBreath){
-								volumeAmt = waterSoundVol;//set volume of audio clip to customized amount
+								volumeAmt = PlayerPrefs.GetFloat("Sounds");//set volume of audio clip to customized amount
 							}else{
-								volumeAmt = waterSoundVol/2;//set volume of audio clip to customized amount
+								volumeAmt = PlayerPrefs.GetFloat("Sounds") / 2;//set volume of audio clip to customized amount
 							}
 							aSource.clip = footStepClip;
-							aSource.volume = volumeAmt;
+							aSource.volume = PlayerPrefs.GetFloat("Sounds");
 							aSource.Play();
 						}
 					}else{
@@ -161,49 +162,49 @@ public class Footsteps : MonoBehaviour {
 								case "Wood":
 									if(woodSteps.Length > 0){
 										footStepClip = woodSteps[Random.Range(0, woodSteps.Length)];
-										volumeAmt = woodStepVol;
+										volumeAmt = PlayerPrefs.GetFloat("Sounds");
 									}
 									break;
 								case "Metal":
 									if(metalSteps.Length > 0){
 										footStepClip = metalSteps[Random.Range(0, metalSteps.Length)];
-										volumeAmt = metalStepVol;
+										volumeAmt = PlayerPrefs.GetFloat("Sounds");
 									}
 									break;
 								case "Dirt":
 									if(dirtSteps.Length > 0){
 										footStepClip = dirtSteps[Random.Range(0, dirtSteps.Length)];
-										volumeAmt = dirtStepVol;
+										volumeAmt = PlayerPrefs.GetFloat("Sounds");
 									}
 									break;
 								case "Stone":
 									if(stoneSteps.Length > 0){
 										footStepClip = stoneSteps[Random.Range(0, stoneSteps.Length)];
-										volumeAmt = stoneStepVol;
+										volumeAmt = PlayerPrefs.GetFloat("Sounds");
 									}
 									break;
 								case "Sand":
 									if(sandSteps.Length > 0){
 										footStepClip = sandSteps[Random.Range(0, sandSteps.Length)];
-										volumeAmt = sandStepVol;
+										volumeAmt = PlayerPrefs.GetFloat("Sounds");
 									}
 									break;
 								case "Gravel":
 									if(gravelSteps.Length > 0){
 										footStepClip = gravelSteps[Random.Range(0, gravelSteps.Length)];
-										volumeAmt = gravelStepVol;
+										volumeAmt = PlayerPrefs.GetFloat("Sounds");
 									}
 									break;
 								case "Grass":
 									if(grassSteps.Length > 0){
 										footStepClip = grassSteps[Random.Range(0, grassSteps.Length)];
-										volumeAmt = grassStepVol;
+										volumeAmt = PlayerPrefs.GetFloat("Sounds");
 									}
 									break;
 								default:
 									if(defaultSteps.Length > 0){
 										footStepClip = defaultSteps[Random.Range(0, defaultSteps.Length)];
-										volumeAmt = defaultStepVol;
+										volumeAmt = PlayerPrefs.GetFloat("Sounds");
 									}
 									break;	
 								}
@@ -215,40 +216,40 @@ public class Footsteps : MonoBehaviour {
 									|| terrainIndex == dirtTerrainIndex3){
 										if(dirtSteps.Length > 0){
 											footStepClip = dirtSteps[Random.Range(0, dirtSteps.Length)];
-											volumeAmt = dirtStepVol;
+											volumeAmt = PlayerPrefs.GetFloat("Sounds");
 										}
 									}else if(terrainIndex == stoneTerrainIndex1
 									|| terrainIndex == stoneTerrainIndex2
 									|| terrainIndex == stoneTerrainIndex3){
 										if(stoneSteps.Length > 0){
 											footStepClip = stoneSteps[Random.Range(0, stoneSteps.Length)];
-											volumeAmt = stoneStepVol;
+											volumeAmt = PlayerPrefs.GetFloat("Sounds");
 										}
 									}else if(terrainIndex == grassTerrainIndex1
 									|| terrainIndex == grassTerrainIndex2
 									|| terrainIndex == grassTerrainIndex3){
 										if(grassSteps.Length > 0){
 											footStepClip = grassSteps[Random.Range(0, grassSteps.Length)];
-											volumeAmt = grassStepVol;
+											volumeAmt = PlayerPrefs.GetFloat("Sounds");
 										}
 									}else if(terrainIndex ==  gravelTerrainIndex1
 									|| terrainIndex ==  gravelTerrainIndex2
 									|| terrainIndex ==  gravelTerrainIndex3){
 										if(gravelSteps.Length > 0){
 											footStepClip = gravelSteps[Random.Range(0, gravelSteps.Length)];
-											volumeAmt = gravelStepVol;
+											volumeAmt = PlayerPrefs.GetFloat("Sounds");
 										}
 									}else if(terrainIndex == sandTerrainIndex1
 									|| terrainIndex == sandTerrainIndex2
 									|| terrainIndex == sandTerrainIndex3){
 										if(sandSteps.Length > 0){
 											footStepClip = sandSteps[Random.Range(0, sandSteps.Length)];
-											volumeAmt = sandStepVol;
+											volumeAmt = PlayerPrefs.GetFloat("Sounds");
 										}
 									}else{
 										if(defaultSteps.Length > 0){
 											footStepClip = defaultSteps[Random.Range(0, defaultSteps.Length)];
-											volumeAmt = defaultStepVol;
+											volumeAmt = PlayerPrefs.GetFloat("Sounds");
 										}
 									}
 								}
@@ -256,7 +257,7 @@ public class Footsteps : MonoBehaviour {
 							if(footStepClip){
 								//play the sound effect
 								aSource.clip = footStepClip;
-								aSource.volume = volumeAmt;
+								aSource.volume = PlayerPrefs.GetFloat("Sounds");
 								aSource.Play();
 							}
 						}
@@ -264,9 +265,9 @@ public class Footsteps : MonoBehaviour {
 				}else{//play climbing footstep effects
 					if(climbSounds.Length > 0 && !FPSWalkerComponent.noClimbingSfx){
 						footStepClip = climbSounds[Random.Range(0, climbSounds.Length)];
-						volumeAmt = climbSoundVol;
+						volumeAmt = PlayerPrefs.GetFloat("Sounds");
 						aSource.clip = footStepClip;
-						aSource.volume = volumeAmt;
+						aSource.volume = PlayerPrefs.GetFloat("Sounds");
 						aSource.Play();
 					}
 				}
@@ -275,7 +276,7 @@ public class Footsteps : MonoBehaviour {
 					footStepClip = proneSteps[Random.Range(0, proneSteps.Length)];
 					volumeAmt = proneStepVol;
 					aSource.clip = footStepClip;
-					aSource.volume = volumeAmt;
+					aSource.volume = PlayerPrefs.GetFloat("Sounds");
 					aSource.Play();
 				}
 			}

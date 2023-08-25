@@ -50,6 +50,7 @@ public class BreakableObject : MonoBehaviour {
 				breakParticles.Emit(Mathf.RoundToInt(breakParticles.emission.rateOverTime.constant));//emit broken object particles
 			}
 			if(GetComponent<AudioSource>()){
+				GetComponent<AudioSource>().volume = PlayerPrefs.GetFloat("Sounds");
 				GetComponent<AudioSource>().pitch = Random.Range(0.95f * Time.timeScale, 1.0f * Time.timeScale);//add slight random value to breaking sound pitch for variety
 				GetComponent<AudioSource>().Play();//play break sound
 			}

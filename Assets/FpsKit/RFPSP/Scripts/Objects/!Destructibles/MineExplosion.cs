@@ -38,6 +38,7 @@ public class MineExplosion : MonoBehaviour {
 	public float randomSpawnChance = 1.0f;
 	
 	void Start (){
+		GetComponent<AudioSource>().volume = PlayerPrefs.GetFloat("Sounds");
 		WeaponEffectsComponent = Camera.main.GetComponent<CameraControl>().playerObj.GetComponent<FPSPlayer>().WeaponEffectsComponent;
 		myTransform = transform;
 		//WorldRecenterComponent = Camera.main.GetComponent<CameraControl>().playerObj.transform.GetComponent<WorldRecenter>();

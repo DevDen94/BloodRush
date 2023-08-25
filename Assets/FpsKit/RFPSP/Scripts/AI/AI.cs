@@ -247,7 +247,7 @@ public class AI : MonoBehaviour {
 	public bool AttackMode;
 	public int HitCount;
 	public bool Jumpp_ForAttack;
-	public bool isTrigger_GameObj;
+	//public bool isTrigger_GameObj;
     private void Update()
     {
         if (GameManager.instance.BrokenEnable && !isCheck)
@@ -261,10 +261,10 @@ public class AI : MonoBehaviour {
         {
 			gameObject.transform.LookAt(curWayPoint.GetComponent<CheckWindow>().window.transform);
 		}
-        if (Jumpp_ForAttack)
+        if (!Jumpp_ForAttack)
         {
 			
-			Invoke("Three", 1F);
+			Invoke("Three", 2f);
 			
 		}
 		
@@ -277,7 +277,7 @@ public class AI : MonoBehaviour {
     }
     void Start()
 	{
-		isTrigger_GameObj = false;
+		//isTrigger_GameObj = false;
 		Jumpp_ForAttack = true;
 		AttackMode = false;
 		isCheck = false;
@@ -677,7 +677,7 @@ public class AI : MonoBehaviour {
 						StartCoroutine(SpawnNPC());
 						yield break;
 					}
-
+			
 					if (curWayPoint && waypointGroup)
 					{//patrol if NPC has a current waypoint, otherwise stand watch
 						Vector3 waypointPosition = curWayPoint.position;
@@ -1108,7 +1108,7 @@ public class AI : MonoBehaviour {
 				{
 					if (alertSnds.Length > 0)
 					{
-						vocalFx.volume = alertVol;
+						vocalFx.volume = PlayerPrefs.GetFloat("Sounds");
 						vocalFx.pitch = Random.Range(0.94f, 1f);
 						vocalFx.spatialBlend = 1.0f;
 						vocalFx.clip = alertSnds[Random.Range(0, alertSnds.Length)];

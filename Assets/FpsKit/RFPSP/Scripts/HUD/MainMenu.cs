@@ -71,7 +71,7 @@ public class MainMenu : MonoBehaviour {
 		
 		aSource = gameObject.AddComponent<AudioSource>(); 
 		aSource.spatialBlend = 0.0f;
-		aSource.volume = 1.0f;
+		aSource.volume = PlayerPrefs.GetFloat("Sounds");
 		aSource.playOnAwake = false;
 		
 		hungerThirstActive = FPSPlayerComponent.usePlayerThirst;
@@ -326,7 +326,7 @@ public class MainMenu : MonoBehaviour {
 	
 	//play button click sound effects
 	private void PlayButtonFx(AudioClip clip, float vol){
-		aSource.volume = vol;
+		aSource.volume = PlayerPrefs.GetFloat("Sounds");
 		aSource.clip = clip;
 		aSource.Play();
 	}

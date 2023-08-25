@@ -60,7 +60,7 @@ public class GameManager : MonoBehaviour
     
     private void Start()
     {
-        GoogleAdMobController.instance.RequestBannerAd();
+     
         EmptyPanel.SetActive(true);
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
         isLevelComplete = false;
@@ -78,6 +78,7 @@ public class GameManager : MonoBehaviour
         Invoke("Delay", 1.5f);
         Bg_Music.volume = PlayerPrefs.GetFloat("Music");
         src.volume = PlayerPrefs.GetFloat("Sounds");
+        GoogleAdMobController.instance.RequestBannerAd();
     }
     void Delay()
     {
@@ -124,8 +125,11 @@ public class GameManager : MonoBehaviour
         Wave.text = "Zombies Left :" + ZombieDeathCount;
         if (ZombieDeathCount == 0 && NextWave_Enter && !isLevelComplete  )
         {
-            PlayerPrefs.SetInt("WaveUnlock", PlayerPrefs.GetInt("WaveUnlock")+1);
-            PlayerPrefs.SetInt("WaveNo", PlayerPrefs.GetInt("WaveNo") + 1);
+            if (PlayerPrefs.GetInt("WaveNo") < 7)
+            {
+             PlayerPrefs.SetInt("WaveUnlock", PlayerPrefs.GetInt("WaveUnlock") + 1);
+             PlayerPrefs.SetInt("WaveNo", PlayerPrefs.GetInt("WaveNo") + 1);
+            }
             LevelComplete.SetActive(true);
             GoogleAdMobController.instance.ShowInterstitialAd();
             GoogleAdMobController.instance.RequestBigBannerAd();
@@ -154,6 +158,7 @@ public class GameManager : MonoBehaviour
 
     public void Next_Btn()
     {
+       
         GoogleAdMobController.instance.RequestBannerAd();
 
         src.PlayOneShot(Btnclick);
@@ -179,7 +184,7 @@ public class GameManager : MonoBehaviour
     public void Pause_BTn()
     {
         GoogleAdMobController.instance.ShowInterstitialAd();
-        GoogleAdMobController.instance.RequestBigBannerAd();
+       
         src.PlayOneShot(Btnclick);
         LevelPasued.SetActive(true);
         Time.timeScale = 0;
