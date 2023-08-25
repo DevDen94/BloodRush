@@ -34,7 +34,15 @@ public class MainMenuScript : MonoBehaviour
     }
     void Start()
     {
-      
+        GoogleAdMobController.instance.RequestBannerAd();
+        if (GoogleAdMobController.instance.IsAppOpen)
+        {
+            GoogleAdMobController.instance.ShowAppOpenAd();
+            GoogleAdMobController.instance.IsAppOpen = false;
+        }
+
+
+
         VersionNumber.text = number.Playstore_Version + " : " + number.Appstore_Version;
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
       
@@ -54,6 +62,13 @@ public class MainMenuScript : MonoBehaviour
      
         src.volume= PlayerPrefs.GetFloat("Music");
     }
+
+
+    public void showInter()
+    {
+        GoogleAdMobController.instance.ShowInterstitialAd();
+    }
+
 
     public void ButtonClick()
     {
@@ -80,6 +95,7 @@ public class MainMenuScript : MonoBehaviour
     }
     public void WayLevel(int way = 0)
     {
+        GoogleAdMobController.instance.ShowInterstitialAd();
         PlayerPrefs.SetInt("WaveNo", way);
         LoaddingPanel.SetActive(true);
     }

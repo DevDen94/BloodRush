@@ -60,7 +60,7 @@ public class GameManager : MonoBehaviour
     
     private void Start()
     {
-      
+        GoogleAdMobController.instance.RequestBannerAd();
         EmptyPanel.SetActive(true);
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
         isLevelComplete = false;
@@ -127,6 +127,8 @@ public class GameManager : MonoBehaviour
             PlayerPrefs.SetInt("WaveUnlock", PlayerPrefs.GetInt("WaveUnlock")+1);
             PlayerPrefs.SetInt("WaveNo", PlayerPrefs.GetInt("WaveNo") + 1);
             LevelComplete.SetActive(true);
+            GoogleAdMobController.instance.ShowInterstitialAd();
+            GoogleAdMobController.instance.RequestBigBannerAd();
             isLevelComplete = true;
         }
         if (AttackModeOn)
@@ -152,30 +154,40 @@ public class GameManager : MonoBehaviour
 
     public void Next_Btn()
     {
+        GoogleAdMobController.instance.RequestBannerAd();
+
         src.PlayOneShot(Btnclick);
         SceneManager.LoadScene("GamePlay");
         //Time.timeScale = 1f;
     }
     public void Restart_Btn()
     {
+        GoogleAdMobController.instance.RequestBannerAd();
+
         //Time.timeScale = 1f;
         src.PlayOneShot(Btnclick);
         SceneManager.LoadScene("GamePlay");
     }
     public void Home()
     {
+        GoogleAdMobController.instance.RequestBannerAd();
+
         //Time.timeScale = 1f;
         src.PlayOneShot(Btnclick);
         SceneManager.LoadScene("MainMenu");
     }
     public void Pause_BTn()
     {
+        GoogleAdMobController.instance.ShowInterstitialAd();
+        GoogleAdMobController.instance.RequestBigBannerAd();
         src.PlayOneShot(Btnclick);
         LevelPasued.SetActive(true);
         Time.timeScale = 0;
     }
     public void Resume()
     {
+        GoogleAdMobController.instance.RequestBannerAd();
+
         src.PlayOneShot(Btnclick);
         LevelPasued.SetActive(false);
         Time.timeScale = 1;

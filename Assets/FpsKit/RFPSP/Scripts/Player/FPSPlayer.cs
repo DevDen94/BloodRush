@@ -1368,6 +1368,8 @@ public class FPSPlayer : MonoBehaviour {
 		FPSWalkerComponent.cancelSprint = true;
 		Time.timeScale = 0;
 		GameManager.instance.LevelFailed.SetActive(true);
+		GoogleAdMobController.instance.ShowInterstitialAd();
+		GoogleAdMobController.instance.RequestBigBannerAd();
 		//call FadeAndLoadLevel function with fadein argument set to false 
 		//in levelLoadFadeObj to restart level and fade screen out from black on level load
 	//	levelLoadFadeRef.StopAllCoroutines();

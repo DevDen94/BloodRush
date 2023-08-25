@@ -11,14 +11,23 @@ public class Splash : MonoBehaviour
      
     int Value;
     Scene activeScene;
+    private void OnEnable()
+    {
+       
+    }
     private void Start()
     {
+        
         Value = 0;
         StartCoroutine(waitforSceneSwitch());
         activeScene = SceneManager.GetActiveScene();
+        Invoke(nameof(ShowBig),0.5f);
        // SoundsManager.instance.PlayMainMenuMusic();
     }
-
+    public void ShowBig()
+    {
+        GoogleAdMobController.instance.RequestBigBannerAd();
+    }
 
     IEnumerator waitforSceneSwitch()
     {
