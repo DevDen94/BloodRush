@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "939742244432",
+    "project_id": "zombie-shooter-e6d1a",
+    "storage_bucket": "zombie-shooter-e6d1a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:939742244432:android:f7cdfea6e7e8f8802beb55",
+        "android_client_info": {
+          "package_name": "com.darwin.zombie.shooting"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "939742244432-0ibc038b2rv1tu4u7gs6bifee0h4a7bp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDDxYK6DgxrG8GqhTmDoKoI0dda56fp3tc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "939742244432-0ibc038b2rv1tu4u7gs6bifee0h4a7bp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

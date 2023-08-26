@@ -121,20 +121,30 @@ public class GameManager : MonoBehaviour
         Weapons_Panel.SetActive(true);
         Time.timeScale = 1f;
     }
+
+    public void LevelFailded()
+    {
+
+    }
+    public void LevelCompletee()
+    {
+        if (PlayerPrefs.GetInt("WaveNo") < 7)
+        {
+            PlayerPrefs.SetInt("WaveUnlock", PlayerPrefs.GetInt("WaveUnlock") + 1);
+            PlayerPrefs.SetInt("WaveNo", PlayerPrefs.GetInt("WaveNo") + 1);
+        }
+        LevelComplete.SetActive(true);
+        GoogleAdMobController.instance.ShowInterstitialAd();
+        GoogleAdMobController.instance.RequestBigBannerAd();
+        isLevelComplete = true;
+    }
     private void Update()
     {
         Wave.text = "Zombies Left :" + ZombieDeathCount;
         if (ZombieDeathCount == 0 && NextWave_Enter && !isLevelComplete  )
         {
-            if (PlayerPrefs.GetInt("WaveNo") < 7)
-            {
-             PlayerPrefs.SetInt("WaveUnlock", PlayerPrefs.GetInt("WaveUnlock") + 1);
-             PlayerPrefs.SetInt("WaveNo", PlayerPrefs.GetInt("WaveNo") + 1);
-            }
-            LevelComplete.SetActive(true);
-            GoogleAdMobController.instance.ShowInterstitialAd();
-            GoogleAdMobController.instance.RequestBigBannerAd();
-            isLevelComplete = true;
+            Invoke("LevelCompletee", 1.5f);
+           
         }
         if (AttackModeOn)
         {
