@@ -122,21 +122,23 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1f;
     }
 
-    public void LevelFailded()
-    {
 
-    }
     public void LevelCompletee()
     {
-        if (PlayerPrefs.GetInt("WaveNo") < 7)
+       
+        if (PlayerPrefs.GetInt("WaveNo") > 7)
+        {
+            return;
+        }
+        else
         {
             PlayerPrefs.SetInt("WaveUnlock", PlayerPrefs.GetInt("WaveUnlock") + 1);
             PlayerPrefs.SetInt("WaveNo", PlayerPrefs.GetInt("WaveNo") + 1);
         }
         LevelComplete.SetActive(true);
-        GoogleAdMobController.instance.ShowInterstitialAd();
-        GoogleAdMobController.instance.RequestBigBannerAd();
-        isLevelComplete = true;
+       // GoogleAdMobController.instance.ShowInterstitialAd();
+       // GoogleAdMobController.instance.RequestBigBannerAd();
+        
     }
     private void Update()
     {
@@ -144,7 +146,8 @@ public class GameManager : MonoBehaviour
         if (ZombieDeathCount == 0 && NextWave_Enter && !isLevelComplete  )
         {
             Invoke("LevelCompletee", 1.5f);
-           
+            isLevelComplete = true;
+
         }
         if (AttackModeOn)
         {
