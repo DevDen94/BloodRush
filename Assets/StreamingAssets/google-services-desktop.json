@@ -1,38 +1,35 @@
 {
   "project_info": {
-    "project_number": "939742244432",
-    "project_id": "zombie-shooter-e6d1a",
-    "storage_bucket": "zombie-shooter-e6d1a.appspot.com"
+    "project_number": "368088180683",
+    "project_id": "zombie-31fb0",
+    "storage_bucket": "zombie-31fb0.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:939742244432:android:f7cdfea6e7e8f8802beb55",
+        "mobilesdk_app_id": "1:368088180683:ios:dc48ad6171669bc0f6384e",
         "android_client_info": {
-          "package_name": "com.darwin.zombie.shooting"
+          "package_name": "com.stackergames.zombie.survival.shooting.games"
+        }
+      },
+      "api_key": [
+        {
+          "current_key": "AIzaSyCcGjvWPK42S1RzwSIm4g4Rogjk7hNbLzU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 0
+        },
+        "appinvite_service": {
+          "status": 1
         }
       },
       "oauth_client": [
         {
-          "client_id": "939742244432-0ibc038b2rv1tu4u7gs6bifee0h4a7bp.apps.googleusercontent.com",
-          "client_type": 3
+          "client_id": "368088180683-hadad5rhiverrusbem4adinmbjqjf0sa.apps.googleusercontent.com"
         }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyDDxYK6DgxrG8GqhTmDoKoI0dda56fp3tc"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "939742244432-0ibc038b2rv1tu4u7gs6bifee0h4a7bp.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
+      ]
     }
   ],
   "configuration_version": "1"
