@@ -1371,7 +1371,7 @@ MonoBehaviour:
   rewardedInterstitialId: null
   BigBannerId: ca-app-pub-5227706387493609/7152222047
   debug: 0
-  test: 0
+  test: 1
   IsAppOpen: 0
 --- !u!114 &1788405149
 MonoBehaviour:

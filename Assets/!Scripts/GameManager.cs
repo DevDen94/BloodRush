@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
     public CheckWindow Path3_EndPoint;
     public CheckWindow Path4_EndPoint;
     public CheckWindow Path5_EndPoint;
-    public GameObject[] NavMesh_G;
+    
 
     [Header(" UI Elements")]
     public GameObject LevelComplete;
@@ -60,7 +60,8 @@ public class GameManager : MonoBehaviour
     
     private void Start()
     {
-     
+       // PlayerPrefs.SetInt("WaveNo", 7);
+   
         EmptyPanel.SetActive(true);
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
         isLevelComplete = false;
@@ -125,20 +126,23 @@ public class GameManager : MonoBehaviour
 
     public void LevelCompletee()
     {
-       
-        if (PlayerPrefs.GetInt("WaveNo") > 7)
+        LevelComplete.SetActive(true);
+        if (PlayerPrefs.GetInt("WaveNo") >= 7)
         {
+             GoogleAdMobController.instance.ShowInterstitialAd();
+             GoogleAdMobController.instance.RequestBigBannerAd();
             return;
         }
         else
         {
             PlayerPrefs.SetInt("WaveUnlock", PlayerPrefs.GetInt("WaveUnlock") + 1);
             PlayerPrefs.SetInt("WaveNo", PlayerPrefs.GetInt("WaveNo") + 1);
+            GoogleAdMobController.instance.ShowInterstitialAd();
+            GoogleAdMobController.instance.RequestBigBannerAd();
         }
-        LevelComplete.SetActive(true);
-       // GoogleAdMobController.instance.ShowInterstitialAd();
-       // GoogleAdMobController.instance.RequestBigBannerAd();
-        
+
+
+
     }
     private void Update()
     {
@@ -165,8 +169,7 @@ public class GameManager : MonoBehaviour
             }
             AttackModeOn = false;
        
-          /*  NavMesh_G[0].SetActive(true);
-            NavMesh_G[1].SetActive(true);*/
+        
         }
     }
 

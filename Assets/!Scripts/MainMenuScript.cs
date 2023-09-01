@@ -34,33 +34,34 @@ public class MainMenuScript : MonoBehaviour
     }
     void Start()
     {
-        GoogleAdMobController.instance.RequestBannerAd();
+        /*GoogleAdMobController.instance.RequestBannerAd();
         if (GoogleAdMobController.instance.IsAppOpen)
         {
             GoogleAdMobController.instance.ShowAppOpenAd();
             GoogleAdMobController.instance.IsAppOpen = false;
         }
 
-
+*/
 
         VersionNumber.text = number.Playstore_Version + " : " + number.Appstore_Version;
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
 
-        PlayerPrefs.SetFloat("Sounds", 0.5f);
+   
 
         if (!PlayerPrefs.HasKey("Zero"))
         {
             PlayerPrefs.SetInt("Zero", 1);
             PlayerPrefs.SetInt("WaveUnlock", 0);
             PlayerPrefs.SetFloat("Music", 0.5f);
-            PlayerPrefs.SetFloat("Graphics", 0.5f);
+            PlayerPrefs.SetFloat("Sounds", 0.5f);
         }
         DisableAll();
         EnableButtons(PlayerPrefs.GetInt("WaveUnlock"));
         MusicSlider[0].value = PlayerPrefs.GetFloat("Music");
-        MusicSlider[1].value= PlayerPrefs.GetFloat("Graphics");
+        MusicSlider[1].value= PlayerPrefs.GetFloat("Sounds");
      
         src.volume= PlayerPrefs.GetFloat("Music");
+     
     }
 
 
@@ -79,7 +80,7 @@ public class MainMenuScript : MonoBehaviour
   public void SaveSetting()
     {
         PlayerPrefs.SetFloat("Music", MusicSlider[0].value);
-        PlayerPrefs.SetFloat("Graphics", MusicSlider[1].value);
+        PlayerPrefs.SetFloat("Sounds", MusicSlider[1].value);
         src.volume = PlayerPrefs.GetFloat("Music");
     }
 

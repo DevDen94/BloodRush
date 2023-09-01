@@ -22,7 +22,7 @@ public static class PlayAudioAtPos{
 		aSource.spatialBlend = blend;
 		aSource.minDistance = minDist;
 		aSource.maxDistance = maxDist;
-		aSource.volume = vol;
+		aSource.volume = PlayerPrefs.GetFloat("Sounds");
 		aSource.pitch = pitch;
 		aSource.Play(); // start the sound
 		TimerComponent.StartCoroutine(TimerComponent.DeactivateTimer());
