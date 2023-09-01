@@ -57,11 +57,14 @@ public class GameManager : MonoBehaviour
     public AudioClip Btnclick;
     public AudioClip ReloadingClip;
     public GameObject EmptyPanel;
-    
+    public GameObject[] SpawnPoints_P;
+    public Transform Player;
     private void Start()
     {
-       // PlayerPrefs.SetInt("WaveNo", 7);
-   
+        // PlayerPrefs.SetInt("WaveNo", 7);
+        int sp = Random.Range(0, SpawnPoints_P.Length);
+        Player.position = SpawnPoints_P[sp].transform.position;
+        Player.rotation = SpawnPoints_P[sp].transform.rotation;
         EmptyPanel.SetActive(true);
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
         isLevelComplete = false;
