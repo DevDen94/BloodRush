@@ -2460,6 +2460,7 @@ public class WeaponBehavior : MonoBehaviour {
 				isFilling = false;
 				timer = 0f;
 				GameManager.instance.Reloading_Slider.gameObject.SetActive(false);
+				GameManager.instance.Gernade_Image.SetActive(true);
 				WeaponAnimatorComponent.SetTrigger("Idle");
 			}
 		}
@@ -2516,6 +2517,7 @@ public class WeaponBehavior : MonoBehaviour {
 					//otherwise, adding of ammo and finishing reload will wait for reloadTime while animation and sound plays
 					if((bulletsToReload != bulletsPerClip && bulletsReloaded > 0) || bulletsToReload == bulletsPerClip){
 						isFilling = true;
+						GameManager.instance.Gernade_Image.SetActive(false);
 						GameManager.instance.Reloading_Slider.gameObject.SetActive(true);
 						GameManager.instance.src.PlayOneShot(GameManager.instance.ReloadingClip);
 						// Wait for reload time first, then proceed

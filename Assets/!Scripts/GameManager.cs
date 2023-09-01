@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public WaypointGroup OuterPath;
     public int[] Instainated_Count;
     public WeaponBehavior[] Weapons;
+    public WeaponBehavior Gernade;
     public Level_Data[] Levels;
     public GameObject[] SpawnPoints;
     public bool ZombieJump_Bool;
@@ -59,9 +60,14 @@ public class GameManager : MonoBehaviour
     public GameObject EmptyPanel;
     public GameObject[] SpawnPoints_P;
     public Transform Player;
+
+    public GameObject Gernade_Image;
+    private bool is_Gernade;
+    public Text Wave_NO;
     private void Start()
     {
-        // PlayerPrefs.SetInt("WaveNo", 7);
+        is_Gernade = false;
+     
         int sp = Random.Range(0, SpawnPoints_P.Length);
         Player.position = SpawnPoints_P[sp].transform.position;
         Player.rotation = SpawnPoints_P[sp].transform.rotation;
@@ -82,7 +88,7 @@ public class GameManager : MonoBehaviour
         Invoke("Delay", 1.5f);
         Bg_Music.volume = PlayerPrefs.GetFloat("Music");
         src.volume = PlayerPrefs.GetFloat("Sounds");
-        
+        Wave_NO.text = " WAVE NO : " + PlayerPrefs.GetInt("WaveNo");
         GoogleAdMobController.instance.RequestBannerAd();
     }
     void Delay()
@@ -107,6 +113,7 @@ public class GameManager : MonoBehaviour
     {
             ZombieContainer.SetActive(true);
             Call_Zombies(Levels[PlayerPrefs.GetInt("WaveNo")]);
+        Debug.LogError(Levels[PlayerPrefs.GetInt("WaveNo")]);
             Assign_Paths();
         
     }
@@ -123,17 +130,16 @@ public class GameManager : MonoBehaviour
         src.PlayOneShot(Btnclick);
         Objective_Panel.SetActive(false);
         Weapons_Panel.SetActive(true);
-        Time.timeScale = 1f;
+        
     }
-
+ 
 
     public void LevelCompletee()
     {
         LevelComplete.SetActive(true);
-        if (PlayerPrefs.GetInt("WaveNo") >= 7)
+        if (PlayerPrefs.GetInt("WaveNo") >= 19)
         {
-             GoogleAdMobController.instance.ShowInterstitialAd();
-             GoogleAdMobController.instance.RequestBigBannerAd();
+            SceneManager.LoadScene("MainMenu");
             return;
         }
         else
@@ -149,6 +155,12 @@ public class GameManager : MonoBehaviour
     }
     private void Update()
     {
+        if (Gernade.ammo == 0 && is_Gernade==false)
+        {
+            Gernade_Image.SetActive(false);
+            SelectWeapn(2);
+            is_Gernade = true;
+        }
         Wave.text = "Zombies Left :" + ZombieDeathCount;
         if (ZombieDeathCount == 0 && NextWave_Enter && !isLevelComplete  )
         {
@@ -180,7 +192,6 @@ public class GameManager : MonoBehaviour
     {
        
         GoogleAdMobController.instance.RequestBannerAd();
-
         src.PlayOneShot(Btnclick);
         SceneManager.LoadScene("GamePlay");
         //Time.timeScale = 1f;
@@ -219,25 +230,50 @@ public class GameManager : MonoBehaviour
     }
     void LoadWeapons_Data(int value)
     {
-        if (value == 1 || value==5)
+        if (value == 1 || value==10)
         {
             Weapons[2].haveWeapon = true;
             
         }
-        if (value == 2 || value == 6)
+        if (value == 2 || value == 11)
         {
             Weapons[2].haveWeapon = true;
             Weapons[3].haveWeapon = true; 
         }
-        if (value == 3 || value == 7)
+        if (value == 3 || value == 12)
         {
             Weapons[4].haveWeapon = true;
             Weapons[5].haveWeapon = true;
         }
-        if (value == 4 || value == 8)
+        if (value == 4 || value == 13)
         {
             Weapons[6].haveWeapon = true;
             Weapons[7].haveWeapon = true;
+        }
+        if (value == 5 || value == 14)
+        {
+            Weapons[2].haveWeapon = true;
+            Weapons[7].haveWeapon = true;
+        }
+        if (value == 6 || value == 15)
+        {
+            Weapons[4].haveWeapon = true;
+            Weapons[8].haveWeapon = true;
+        }
+        if (value == 7 || value == 16)
+        {
+            Weapons[2].haveWeapon = true;
+            Weapons[5].haveWeapon = true;
+        }
+        if (value == 8 || value == 17)
+        {
+            Weapons[2].haveWeapon = true;
+            Weapons[8].haveWeapon = true;
+        }
+        if (value == 9 || value == 18)
+        {
+            Weapons[4].haveWeapon = true;
+            Weapons[8].haveWeapon = true;
         }
         for (int i = 0; i < Weapons.Length; ++i)
         {
@@ -259,7 +295,7 @@ public class GameManager : MonoBehaviour
         print(weapon);
         p.StartCoroutine(p.SelectWeapon(i));
 
-        if(i==3 || i == 4)
+        if(i==3 || i == 4 || i==14)
         {
             aimBtn.SetActive(false);
         }
@@ -271,6 +307,7 @@ public class GameManager : MonoBehaviour
     }
     public void Open_WeaponWheel()
     {
+ 
         Reloading_Slider.gameObject.SetActive(false);
         WeaponWheel.SetActive(true);
     }
@@ -357,6 +394,21 @@ public class GameManager : MonoBehaviour
             for (int i = 1; i <= level.FatZombie_Count; i++)
             {
                 GameObject temp = Instantiate(Fat_Zombie, SpawnPoints[i].transform.position, SpawnPoints[i].transform.rotation);
+                temp.transform.SetParent(ZombieContainer.transform);
+                temp.GetComponent<AI>().waypointGroup = OuterPath;
+                instantiatedObjectsList.Add(temp);
+                System.Array.Resize(ref AllZombies, AllZombies.Length + 1);
+                AllZombies[AllZombies.Length - 1] = temp;
+
+            }
+        }
+
+        // Call Fireman Zombies
+        if (level.Fireman_Zombies != 0)
+        {
+            for (int i = 1; i <= level.Fireman_Zombies; i++)
+            {
+                GameObject temp = Instantiate(FireManZombie, SpawnPoints[i].transform.position, SpawnPoints[i].transform.rotation);
                 temp.transform.SetParent(ZombieContainer.transform);
                 temp.GetComponent<AI>().waypointGroup = OuterPath;
                 instantiatedObjectsList.Add(temp);
