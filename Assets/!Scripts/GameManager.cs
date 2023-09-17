@@ -89,7 +89,7 @@ public class GameManager : MonoBehaviour
         Bg_Music.volume = PlayerPrefs.GetFloat("Music");
         src.volume = PlayerPrefs.GetFloat("Sounds");
         Wave_NO.text = " WAVE NO : " + PlayerPrefs.GetInt("WaveNo");
-        GoogleAdMobController.instance.RequestBannerAd();
+        AdsManager.instance.ShowSmallBanner();
     }
     void Delay()
     {
@@ -146,8 +146,8 @@ public class GameManager : MonoBehaviour
         {
             PlayerPrefs.SetInt("WaveUnlock", PlayerPrefs.GetInt("WaveUnlock") + 1);
             PlayerPrefs.SetInt("WaveNo", PlayerPrefs.GetInt("WaveNo") + 1);
-            GoogleAdMobController.instance.ShowInterstitialAd();
-            GoogleAdMobController.instance.RequestBigBannerAd();
+            AdsManager.instance.ShowinterAd();
+           AdsManager.instance.ShowBigBanner();
         }
 
 
@@ -191,14 +191,14 @@ public class GameManager : MonoBehaviour
     public void Next_Btn()
     {
        
-        GoogleAdMobController.instance.RequestBannerAd();
+        AdsManager.instance.ShowSmallBanner();
         src.PlayOneShot(Btnclick);
         SceneManager.LoadScene("GamePlay");
         //Time.timeScale = 1f;
     }
     public void Restart_Btn()
     {
-        GoogleAdMobController.instance.RequestBannerAd();
+        AdsManager.instance.ShowSmallBanner();
 
         //Time.timeScale = 1f;
         src.PlayOneShot(Btnclick);
@@ -206,7 +206,7 @@ public class GameManager : MonoBehaviour
     }
     public void Home()
     {
-        GoogleAdMobController.instance.RequestBannerAd();
+        AdsManager.instance.ShowSmallBanner();
 
         //Time.timeScale = 1f;
         src.PlayOneShot(Btnclick);
@@ -214,15 +214,15 @@ public class GameManager : MonoBehaviour
     }
     public void Pause_BTn()
     {
-        GoogleAdMobController.instance.ShowInterstitialAd();
-       
+        AdsManager.instance.ShowinterAd();
+        AdsManager.instance.ShowBigBanner();
         src.PlayOneShot(Btnclick);
         LevelPasued.SetActive(true);
         Time.timeScale = 0;
     }
     public void Resume()
     {
-        GoogleAdMobController.instance.RequestBannerAd();
+        AdsManager.instance.ShowSmallBanner();
 
         src.PlayOneShot(Btnclick);
         LevelPasued.SetActive(false);

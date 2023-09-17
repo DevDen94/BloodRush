@@ -1378,7 +1378,8 @@ public class FPSPlayer : MonoBehaviour {
 	void Level_F() {
 		Time.timeScale = 0;
 		GameManager.instance.LevelFailed.SetActive(true);
-		GoogleAdMobController.instance.ShowInterstitialAd();
+		AdsManager.instance.ShowinterAd();
+		AdsManager.instance.ShowBigBanner();
 	}
 		/*public void RestartMap () {
 		Time.timeScale = 1.0f;//set timescale to 1.0f so fadeout wont take longer if bullet time is active

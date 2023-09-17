@@ -26,7 +26,7 @@ public class Splash : MonoBehaviour
     }
     public void ShowBig()
     {
-        GoogleAdMobController.instance.RequestBigBannerAd();
+        AdsManager.instance.ShowBigBanner();
     }
 
     IEnumerator waitforSceneSwitch()

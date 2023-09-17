@@ -34,24 +34,24 @@ public class MainMenuScript : MonoBehaviour
     }
     void Start()
     {
-        /*GoogleAdMobController.instance.RequestBannerAd();
-        if (GoogleAdMobController.instance.IsAppOpen)
+        AdsManager.instance.ShowSmallBanner();
+        if (AdsManager.instance.isAppOpen)
         {
-            GoogleAdMobController.instance.ShowAppOpenAd();
-            GoogleAdMobController.instance.IsAppOpen = false;
+            AdsManager.instance.ShowAppOpenAd();
+            AdsManager.instance.isAppOpen = false;
         }
 
-*/
+
 
         VersionNumber.text = number.Playstore_Version + " : " + number.Appstore_Version;
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
 
-   
+       
 
         if (!PlayerPrefs.HasKey("Zero"))
         {
             PlayerPrefs.SetInt("Zero", 1);
-            PlayerPrefs.SetInt("WaveUnlock", 0);
+            
             PlayerPrefs.SetFloat("Music", 0.5f);
             PlayerPrefs.SetFloat("Sounds", 0.5f);
         }
@@ -67,7 +67,7 @@ public class MainMenuScript : MonoBehaviour
 
     public void showInter()
     {
-        GoogleAdMobController.instance.ShowInterstitialAd();
+        AdsManager.instance.ShowinterAd();
     }
 
 
@@ -96,7 +96,7 @@ public class MainMenuScript : MonoBehaviour
     }
     public void WayLevel(int way = 0)
     {
-        GoogleAdMobController.instance.ShowInterstitialAd();
+        AdsManager.instance.ShowinterAd();
         PlayerPrefs.SetInt("WaveNo", way);
         LoaddingPanel.SetActive(true);
     }
