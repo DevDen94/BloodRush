@@ -8,11 +8,11 @@ public class WaveManager_ : MonoBehaviour
     public static WaveManager_ instance;
 
     public GameObject ObjectDisable;
-    public bool BrokenEnable;
+    
     public GameObject ZombieContainer;
     public WaypointGroup[] BrokenPaths;
     public WaypointGroup OuterPath;
-    public int[] Instainated_Count;
+  
     public WeaponBehavior[] Weapons;
     public WeaponBehavior Gernade;
     public Level_Data[] Levels;
@@ -20,7 +20,6 @@ public class WaveManager_ : MonoBehaviour
     public bool ZombieJump_Bool;
     public bool NextWave_Enter;
     public int ZombieDeathCount;
-    public Text Wave;
     [Header("Zombies")]
     public GameObject[] NormalZombies;
     public GameObject DoctorZombie;
@@ -32,15 +31,10 @@ public class WaveManager_ : MonoBehaviour
 
     public bool AttackModeOn;
     [Header("Zombies_PathArray")]
-    public CheckWindow Path1_EndPoint;
-    public CheckWindow Path2_EndPoint;
-    public CheckWindow Path3_EndPoint;
-    public CheckWindow Path4_EndPoint;
     public CheckWindow Path5_EndPoint;
     
 
     [Header(" UI Elements")]
-    public GameObject LevelComplete;
     public GameObject LevelFailed;
     public GameObject LevelPasued;
     bool isLevelComplete;
@@ -64,12 +58,14 @@ public class WaveManager_ : MonoBehaviour
     public GameObject AmmoObj;
     public GameObject Gernade_Image;
     private bool is_Gernade;
-    public Text Wave_NO;
+    private Level_Data Wave_;
+    public int Total_Kills;
+    public Text Kills;
     private void Start()
     {
         AmmoObj.SetActive(false);
         is_Gernade = false;
-     
+        Total_Kills = 0;
         int sp = Random.Range(0, SpawnPoints_P.Length);
         Player.position = SpawnPoints_P[sp].transform.position;
         Player.rotation = SpawnPoints_P[sp].transform.rotation;
@@ -84,40 +80,34 @@ public class WaveManager_ : MonoBehaviour
             PlayerPrefs.SetFloat("START", 1);
             PlayerPrefs.SetInt("Wave_No", 0);
         }
-        ZombieDeathCount = Instainated_Count[PlayerPrefs.GetInt("Wave_No")];
+
+        Wave_ = Levels[PlayerPrefs.GetInt("Wave_No")];
+        TotalCount();
         LoadWeapons_Data(PlayerPrefs.GetInt("Wave_No"));
         Invoke("Instaniate_Zombies",1f);
         Invoke("Delay", 1.5f);
         Bg_Music.volume = PlayerPrefs.GetFloat("Music");
         src.volume = PlayerPrefs.GetFloat("Sounds");
-        int wav = PlayerPrefs.GetInt("Wave_No") + 1;
-        Wave_NO.text = " WAVE NO : " +wav ;
+     
       //  AdsManager.instance.ShowSmallBanner();
+    }
+    void TotalCount()
+    {
+        ZombieDeathCount = Wave_.DoctorZombie_Count +
+        Wave_.Fireman_Zombies + Wave_.FatZombie_Count +
+        Wave_.Miltory_Count + Wave_.PoliceMen_Zombies + Wave_.Muscular_Count + Wave_.NormalZombies_Count;
     }
     void Delay()
     {
-        if (PlayerPrefs.GetInt("WaveNo") == 0)
-        {
-            Objective_Panel.SetActive(true);
-        }
-        else
-        {
-            Objective_Panel.SetActive(false);
-            Weapons_Panel.SetActive(true);
-
-        }
-        
-        BrokenEnable = true;
+        Objective_Panel.SetActive(true);
         Time.timeScale = 0f;
-        
-   
     }
     void Instaniate_Zombies()
     {
-            ZombieContainer.SetActive(true);
-            Call_Zombies(Levels[PlayerPrefs.GetInt("Wave_No")]);
-            Debug.LogError(Levels[PlayerPrefs.GetInt("Wave_No")]);
-            Assign_Paths();
+       ZombieContainer.SetActive(true);
+       Call_Zombies(Levels[PlayerPrefs.GetInt("Wave_No")]);
+       Debug.LogError(Levels[PlayerPrefs.GetInt("Wave_No")]);
+       Assign_Paths();
     }
     public void Off_AvaliableWeaponPanel()
     {
@@ -134,11 +124,10 @@ public class WaveManager_ : MonoBehaviour
         Weapons_Panel.SetActive(true);
         
     }
- 
 
     public void WaveComplete()
     {
-         PlayerPrefs.SetInt("Wave_No", PlayerPrefs.GetInt("Wave_No") + 1);
+        PlayerPrefs.SetInt("Wave_No", PlayerPrefs.GetInt("Wave_No") + 1);
         Instaniate_Zombies();
     }
     private void Update()
@@ -149,7 +138,7 @@ public class WaveManager_ : MonoBehaviour
             SelectWeapn(2);
             is_Gernade = true;
         }
-        Wave.text =  ZombieDeathCount.ToString();
+        Kills.text =  Total_Kills.ToString();
         if (ZombieDeathCount == 0 && NextWave_Enter && !isLevelComplete  )
         {
             Invoke("WaveComplete", 1.5f);
@@ -171,16 +160,12 @@ public class WaveManager_ : MonoBehaviour
                 }
             }
             AttackModeOn = false;
-       
-        
         }
     }
 
     public void Next_Btn()
-    {
-
+    {      
        // AdsManager.instance.ShowSmallBanner();
-
         src.PlayOneShot(Btnclick);
         SceneManager.LoadScene("GamePlay");
         //Time.timeScale = 1f;
@@ -196,7 +181,6 @@ public class WaveManager_ : MonoBehaviour
     public void Home()
     {
         //AdsManager.instance.ShowSmallBanner();
-
         //Time.timeScale = 1f;
         src.PlayOneShot(Btnclick);
         SceneManager.LoadScene("MainMenu");
@@ -455,45 +439,12 @@ public class WaveManager_ : MonoBehaviour
         for (int i = 0; i <5; i++)
         {
             int count = objectsPerArray + (i < remainder ? 1 : 0);
-
-            if (i == 0)
-                Path1_EndPoint.Zombie = new GameObject[count];
-            else if (i == 1)
-                Path2_EndPoint.Zombie = new GameObject[count];
-            else if(i == 2)
-               Path3_EndPoint.Zombie = new GameObject[count];
-            else if (i == 3)
-                Path4_EndPoint.Zombie = new GameObject[count];
-            else
-                Path5_EndPoint.Zombie = new GameObject[count];
+            Path5_EndPoint.Zombie = new GameObject[count];
 
             for (int j = 0; j < count; j++)
             {
-                if (i == 0)
-                {
-                    Path1_EndPoint.Zombie[j] = AllZombies[currentIndex];
-                    Path1_EndPoint.Zombie[j].GetComponent<AI>().PathIndex = 0;
-                }
-                else if (i == 1)
-                {
-                    Path2_EndPoint.Zombie[j] = AllZombies[currentIndex];
-                    Path2_EndPoint.Zombie[j].GetComponent<AI>().PathIndex = 1;
-                }
-                else if (i == 2)
-                {
-                    Path3_EndPoint.Zombie[j] = AllZombies[currentIndex];
-                    Path3_EndPoint.Zombie[j].GetComponent<AI>().PathIndex = 2;
-                }
-                else if (i == 3)
-                {
-                    Path4_EndPoint.Zombie[j] = AllZombies[currentIndex];
-                    Path4_EndPoint.Zombie[j].GetComponent<AI>().PathIndex = 3;
-                }
-                else
-                {
-                    Path5_EndPoint.Zombie[j] = AllZombies[currentIndex];
-                    Path5_EndPoint.Zombie[j].GetComponent<AI>().PathIndex = 4;
-                }
+                Path5_EndPoint.Zombie[j] = AllZombies[currentIndex];
+                Path5_EndPoint.Zombie[j].GetComponent<AI>().PathIndex = 4;
                 currentIndex++;
             }
         }

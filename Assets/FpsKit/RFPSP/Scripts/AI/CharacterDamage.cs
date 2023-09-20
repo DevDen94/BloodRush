@@ -213,11 +213,24 @@ public class CharacterDamage : MonoBehaviour {
 	void RagDollDie(Rigidbody hitBody, float bodyForce) {
 		if (dieSound){
 			PlayAudioAtPos.PlayClipAt(dieSound, transform.position, 1.0f);
-			GameManager.instance.ZombieDeathCount--;
-			if (GameManager.instance.ZombieDeathCount == 0)
-			{
-				GameManager.instance.NextWave_Enter = true;
-			}
+            if (PlayerPrefs.GetInt("Mode") == 1)
+            {
+				GameManager.instance.ZombieDeathCount--;
+				if (GameManager.instance.ZombieDeathCount == 0)
+				{
+					GameManager.instance.NextWave_Enter = true;
+				}
+            }
+            else
+            {
+				WaveManager_.instance.ZombieDeathCount--;
+				WaveManager_.instance.Total_Kills = WaveManager_.instance.Total_Kills + 1;
+                if (WaveManager_.instance.ZombieDeathCount == 0)
+                {
+					WaveManager_.instance.NextWave_Enter = true;
+                }
+            }
+			
 		}
 		
 		AIComponent.NPCRegistryComponent.UnregisterNPC(AIComponent);//unregister NPC from main NPC registry

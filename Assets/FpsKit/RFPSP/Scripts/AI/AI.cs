@@ -251,14 +251,17 @@ public class AI : MonoBehaviour {
 	public bool JumpWindow;
 	public int counter;
     private void Update()
-    {
-        if (GameManager.instance.BrokenEnable && !isCheck)
-        {
-			waypointGroup = GameManager.instance.BrokenPaths[PathIndex];
-			curWayPoint = waypointGroup.wayPoints[1];
-			firstWaypoint = 1;
-			isCheck = true;
-        }
+	{
+		if (PlayerPrefs.GetInt("Mode") == 1)
+		{
+			if (GameManager.instance.BrokenEnable && !isCheck)
+			{
+				waypointGroup = GameManager.instance.BrokenPaths[PathIndex];
+				curWayPoint = waypointGroup.wayPoints[1];
+				firstWaypoint = 1;
+				isCheck = true;
+			}
+		}
         if (LookAt)
         {
 			gameObject.transform.LookAt(curWayPoint.GetComponent<CheckWindow>().window.transform);

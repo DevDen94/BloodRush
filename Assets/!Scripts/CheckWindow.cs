@@ -107,7 +107,10 @@ public class CheckWindow : MonoBehaviour
                
                 if (IS_door)
                 {
-                GameManager.instance.AttackModeOn = true;
+                if (PlayerPrefs.GetInt("Mode") == 1)
+                {
+                    GameManager.instance.AttackModeOn = true;
+                }
                 NAV_Obstacle.SetActive(false);
                 }
                else

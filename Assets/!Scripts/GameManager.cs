@@ -116,7 +116,7 @@ public class GameManager : MonoBehaviour
     {
             ZombieContainer.SetActive(true);
             Call_Zombies(Levels[PlayerPrefs.GetInt("WaveNo")]);
-        Debug.LogError(Levels[PlayerPrefs.GetInt("WaveNo")]);
+         //  Debug.LogError(Levels[PlayerPrefs.GetInt("WaveNo")]);
             Assign_Paths();
         
     }
@@ -304,7 +304,7 @@ public class GameManager : MonoBehaviour
    public void FireGer()
     {
         wp.Fire();
-       // p.StartCoroutine(p.SelectWeapon(PlayerPrefs.GetInt("CurrentWeapon")));
+        p.StartCoroutine(p.SelectWeapon(PlayerPrefs.GetInt("CurrentWeapon")));
     }
     public void SelectWeapn(int i)
     {

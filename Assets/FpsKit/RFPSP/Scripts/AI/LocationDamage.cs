@@ -42,7 +42,14 @@ public class LocationDamage : MonoBehaviour {
     private void Start()
     {
         if (IsMeshCut) {
-			Objects = GameManager.instance.ObjectDisable;
+			if (PlayerPrefs.GetInt("Mode") == 1)
+			{
+				Objects = GameManager.instance.ObjectDisable;
+            }
+            else
+            {
+				Objects = WaveManager_.instance.ObjectDisable;
+			}
 		}
     }
     //damage NPC
