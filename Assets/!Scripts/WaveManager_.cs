@@ -61,6 +61,7 @@ public class WaveManager_ : MonoBehaviour
     private Level_Data Wave_;
     public int Total_Kills;
     public Text Kills;
+    public GameObject WaveImage;
     private void Start()
     {
         AmmoObj.SetActive(false);
@@ -75,15 +76,10 @@ public class WaveManager_ : MonoBehaviour
         ZombieJump_Bool = false;
         instance = this;
         NextWave_Enter = false;
-        if (!PlayerPrefs.HasKey("START"))
-        {
-            PlayerPrefs.SetFloat("START", 1);
-            PlayerPrefs.SetInt("Wave_No", 0);
-        }
+        PlayerPrefs.SetInt("Wave_No", 0);
+   
 
-        Wave_ = Levels[PlayerPrefs.GetInt("Wave_No")];
-        TotalCount();
-        LoadWeapons_Data(PlayerPrefs.GetInt("Wave_No"));
+       
         Invoke("Instaniate_Zombies",1f);
         Invoke("Delay", 1.5f);
         Bg_Music.volume = PlayerPrefs.GetFloat("Music");
@@ -102,12 +98,15 @@ public class WaveManager_ : MonoBehaviour
         Objective_Panel.SetActive(true);
         Time.timeScale = 0f;
     }
-    void Instaniate_Zombies()
+ public void Instaniate_Zombies()
     {
-       ZombieContainer.SetActive(true);
-       Call_Zombies(Levels[PlayerPrefs.GetInt("Wave_No")]);
-       Debug.LogError(Levels[PlayerPrefs.GetInt("Wave_No")]);
-       Assign_Paths();
+        Wave_ = Levels[PlayerPrefs.GetInt("Wave_No")];
+        TotalCount();
+        LoadWeapons_Data(PlayerPrefs.GetInt("Wave_No"));
+        ZombieContainer.SetActive(true);
+        Call_Zombies(Levels[PlayerPrefs.GetInt("Wave_No")]);
+        Debug.LogError(Levels[PlayerPrefs.GetInt("Wave_No")]);
+        Assign_Paths();
     }
     public void Off_AvaliableWeaponPanel()
     {
@@ -128,7 +127,7 @@ public class WaveManager_ : MonoBehaviour
     public void WaveComplete()
     {
         PlayerPrefs.SetInt("Wave_No", PlayerPrefs.GetInt("Wave_No") + 1);
-        Instaniate_Zombies();
+        WaveImage.SetActive(true);
     }
     private void Update()
     {
@@ -167,7 +166,7 @@ public class WaveManager_ : MonoBehaviour
     {      
        // AdsManager.instance.ShowSmallBanner();
         src.PlayOneShot(Btnclick);
-        SceneManager.LoadScene("GamePlay");
+        SceneManager.LoadScene("SurvivalMode");
         //Time.timeScale = 1f;
     }
     public void Restart_Btn()
@@ -176,7 +175,7 @@ public class WaveManager_ : MonoBehaviour
 
         //Time.timeScale = 1f;
         src.PlayOneShot(Btnclick);
-        SceneManager.LoadScene("GamePlay");
+        SceneManager.LoadScene("SurvivalMode");
     }
     public void Home()
     {

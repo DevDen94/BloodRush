@@ -1377,7 +1377,14 @@ public class FPSPlayer : MonoBehaviour {
 	}
 	void Level_F() {
 		Time.timeScale = 0;
-		GameManager.instance.LevelFailed.SetActive(true);
+		if (PlayerPrefs.GetInt("Mode") == 1)
+		{
+			GameManager.instance.LevelFailed.SetActive(true);
+        }
+        else
+        {
+			WaveManager_.instance.LevelFailed.SetActive(true);
+        }
 		//AdsManager.instance.ShowinterAd();
 		//AdsManager.instance.ShowBigBanner();
 	}
