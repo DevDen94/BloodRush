@@ -506,11 +506,14 @@ public class PlayerWeapons : MonoBehaviour {
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	public bool isBlade;
 	public IEnumerator SelectWeapon ( int index, bool isOffhandThrow = false, bool endOffhandThrow = false){
-		for(int i = 0; i < WeaponImages.Length; ++i)
-        {
-			WeaponImages[i].SetActive(false);
-        }
-		WeaponImages[index].SetActive(true);
+		if (PlayerPrefs.GetInt("Mode") == 1)
+		{
+			for (int i = 0; i < WeaponImages.Length; ++i)
+			{
+				WeaponImages[i].SetActive(false);
+			}
+			WeaponImages[index].SetActive(true);
+		}
 		CameraAnimatorComponent = Camera.main.GetComponent<Animator>();
 		WeaponObjAnimatorComponent = weaponOrder[currentWeapon].GetComponent<Animator>();
 		

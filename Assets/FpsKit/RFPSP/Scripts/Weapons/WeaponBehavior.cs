@@ -2451,18 +2451,36 @@ public class WeaponBehavior : MonoBehaviour {
 		if (isFilling)
 		{
 			  
-			  timer += Time.deltaTime;
-			 float fillPercentage = timer / reloadTime;
-		     GameManager.instance.Reloading_Slider.value = Mathf.Lerp(0f, GameManager.instance.Reloading_Slider.maxValue, fillPercentage);
-
-			if (timer >= reloadTime)
+		
+			if (PlayerPrefs.GetInt("Mode") == 1)
 			{
-				isFilling = false;
-				timer = 0f;
-				GameManager.instance.Reloading_Slider.gameObject.SetActive(false);
-				GameManager.instance.Gernade_Image.SetActive(true);
-				WeaponAnimatorComponent.SetTrigger("Idle");
+				timer += Time.deltaTime;
+				float fillPercentage = timer / reloadTime;
+				GameManager.instance.Reloading_Slider.value = Mathf.Lerp(0f, GameManager.instance.Reloading_Slider.maxValue, fillPercentage);
+				if (timer >= reloadTime)
+				{
+					isFilling = false;
+					timer = 0f;
+					GameManager.instance.Reloading_Slider.gameObject.SetActive(false);
+					GameManager.instance.Gernade_Image.SetActive(true);
+					WeaponAnimatorComponent.SetTrigger("Idle");
+				}
 			}
+            else
+            {
+				timer += Time.deltaTime;
+				float fillPercentage = timer / reloadTime;
+				WaveManager_.instance.Reloading_Slider.value = Mathf.Lerp(0f, WaveManager_.instance.Reloading_Slider.maxValue, fillPercentage);
+				if (timer >= reloadTime)
+				{
+					isFilling = false;
+					timer = 0f;
+					WaveManager_.instance.Reloading_Slider.gameObject.SetActive(false);
+					WaveManager_.instance.Gernade_Image.SetActive(true);
+					WeaponAnimatorComponent.SetTrigger("Idle");
+				}
+			}
+			
 		}
 	}
 	IEnumerator Reload(){
@@ -2517,9 +2535,18 @@ public class WeaponBehavior : MonoBehaviour {
 					//otherwise, adding of ammo and finishing reload will wait for reloadTime while animation and sound plays
 					if((bulletsToReload != bulletsPerClip && bulletsReloaded > 0) || bulletsToReload == bulletsPerClip){
 						isFilling = true;
-						GameManager.instance.Gernade_Image.SetActive(false);
-						GameManager.instance.Reloading_Slider.gameObject.SetActive(true);
-						GameManager.instance.src.PlayOneShot(GameManager.instance.ReloadingClip);
+						if (PlayerPrefs.GetInt("Mode") == 1)
+						{
+							GameManager.instance.Gernade_Image.SetActive(false);
+							GameManager.instance.Reloading_Slider.gameObject.SetActive(true);
+							GameManager.instance.src.PlayOneShot(GameManager.instance.ReloadingClip);
+                        }
+                        else
+                        {
+							WaveManager_.instance.Gernade_Image.SetActive(false);
+							WaveManager_.instance.Reloading_Slider.gameObject.SetActive(true);
+							WaveManager_.instance.src.PlayOneShot(WaveManager_.instance.ReloadingClip);
+						}
 						// Wait for reload time first, then proceed
 						yield return new WaitForSeconds(reloadTime);
 					}

@@ -227,7 +227,7 @@ public class CharacterDamage : MonoBehaviour {
 				WaveManager_.instance.Total_Kills = WaveManager_.instance.Total_Kills + 1;
                 if (WaveManager_.instance.ZombieDeathCount == 0)
                 {
-					WaveManager_.instance.NextWave_Enter = true;
+					WaveManager_.instance.isLevelComplete = true;
                 }
             }
 			

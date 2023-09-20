@@ -18,7 +18,6 @@ public class WaveManager_ : MonoBehaviour
     public Level_Data[] Levels;
     public GameObject[] SpawnPoints;
     public bool ZombieJump_Bool;
-    public bool NextWave_Enter;
     public int ZombieDeathCount;
     [Header("Zombies")]
     public GameObject[] NormalZombies;
@@ -37,7 +36,8 @@ public class WaveManager_ : MonoBehaviour
     [Header(" UI Elements")]
     public GameObject LevelFailed;
     public GameObject LevelPasued;
-    bool isLevelComplete;
+    [HideInInspector]
+    public bool isLevelComplete;
     public GameObject Objective_Panel;
     public GameObject Weapons_Panel;
     public Slider Reloading_Slider;
@@ -62,8 +62,19 @@ public class WaveManager_ : MonoBehaviour
     public int Total_Kills;
     public Text Kills;
     public GameObject WaveImage;
+
+
+    [HideInInspector] public bool Slot1;
+    [HideInInspector] public bool Slot2;
+    [HideInInspector] public bool Slot3;
+    [HideInInspector] public bool Slot4;
+    public GameObject Slot1_G;
+    public GameObject Slot2_G;
+    public GameObject Slot3_G;
+    public GameObject Slot4_G;
     private void Start()
     {
+        isLevelComplete = false;
         AmmoObj.SetActive(false);
         is_Gernade = false;
         Total_Kills = 0;
@@ -72,14 +83,8 @@ public class WaveManager_ : MonoBehaviour
         Player.rotation = SpawnPoints_P[sp].transform.rotation;
         EmptyPanel.SetActive(true);
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
-        isLevelComplete = false;
-        ZombieJump_Bool = false;
         instance = this;
-        NextWave_Enter = false;
         PlayerPrefs.SetInt("Wave_No", 0);
-   
-
-       
         Invoke("Instaniate_Zombies",1f);
         Invoke("Delay", 1.5f);
         Bg_Music.volume = PlayerPrefs.GetFloat("Music");
@@ -89,9 +94,11 @@ public class WaveManager_ : MonoBehaviour
     }
     void TotalCount()
     {
+        isLevelComplete = false;
         ZombieDeathCount = Wave_.DoctorZombie_Count +
         Wave_.Fireman_Zombies + Wave_.FatZombie_Count +
         Wave_.Miltory_Count + Wave_.PoliceMen_Zombies + Wave_.Muscular_Count + Wave_.NormalZombies_Count;
+        Debug.LogError(ZombieDeathCount);
     }
     void Delay()
     {
@@ -100,13 +107,14 @@ public class WaveManager_ : MonoBehaviour
     }
  public void Instaniate_Zombies()
     {
+
         Wave_ = Levels[PlayerPrefs.GetInt("Wave_No")];
         TotalCount();
         LoadWeapons_Data(PlayerPrefs.GetInt("Wave_No"));
         ZombieContainer.SetActive(true);
         Call_Zombies(Levels[PlayerPrefs.GetInt("Wave_No")]);
         Debug.LogError(Levels[PlayerPrefs.GetInt("Wave_No")]);
-        Assign_Paths();
+     
     }
     public void Off_AvaliableWeaponPanel()
     {
@@ -138,10 +146,10 @@ public class WaveManager_ : MonoBehaviour
             is_Gernade = true;
         }
         Kills.text =  Total_Kills.ToString();
-        if (ZombieDeathCount == 0 && NextWave_Enter && !isLevelComplete  )
+        if (ZombieDeathCount == 0 && isLevelComplete  )
         {
             Invoke("WaveComplete", 1.5f);
-            isLevelComplete = true;
+            isLevelComplete = false;
 
         }
         if (AttackModeOn)
@@ -202,51 +210,7 @@ public class WaveManager_ : MonoBehaviour
     }
     void LoadWeapons_Data(int value)
     {
-        if (value == 1 || value==10)
-        {
-            Weapons[2].haveWeapon = true;
-            
-        }
-        if (value == 2 || value == 11)
-        {
-            Weapons[2].haveWeapon = true;
-            Weapons[3].haveWeapon = true; 
-        }
-        if (value == 3 || value == 12)
-        {
-            Weapons[4].haveWeapon = true;
-            Weapons[5].haveWeapon = true;
-        }
-        if (value == 4 || value == 13)
-        {
-            Weapons[6].haveWeapon = true;
-            Weapons[7].haveWeapon = true;
-        }
-        if (value == 5 || value == 14)
-        {
-            Weapons[2].haveWeapon = true;
-            Weapons[7].haveWeapon = true;
-        }
-        if (value == 6 || value == 15)
-        {
-            Weapons[4].haveWeapon = true;
-            Weapons[8].haveWeapon = true;
-        }
-        if (value == 7 || value == 16)
-        {
-            Weapons[2].haveWeapon = true;
-            Weapons[5].haveWeapon = true;
-        }
-        if (value == 8 || value == 17)
-        {
-            Weapons[2].haveWeapon = true;
-            Weapons[8].haveWeapon = true;
-        }
-        if (value == 9 || value == 18)
-        {
-            Weapons[4].haveWeapon = true;
-            Weapons[8].haveWeapon = true;
-        }
+        Weapons[2].haveWeapon = true;
         for (int i = 0; i < Weapons.Length; ++i)
         {
             if (Weapons[i].haveWeapon == true)
@@ -254,9 +218,46 @@ public class WaveManager_ : MonoBehaviour
                 GameObject a = Instantiate(Weapon_StartImages[i]);
                 a.transform.SetParent(WeaponStartHeader.transform);
                 a.transform.localScale = new Vector3(1, 1, 1);
-                WeaponWheelImages[i].SetActive(true);
+                Slot_Weapon_Intialize(WeaponWheelImages[i]);
             }
         }
+    }
+    void Slot_Weapon_Intialize(GameObject slotImg)
+    {
+        if (Slot1 && Slot2 && Slot3 && Slot4)
+        {
+            Destroy(Slot4_G.transform.GetChild(0).gameObject);
+        }
+        GameObject temp = Instantiate(slotImg);
+        if (!Slot1)
+        {
+            temp.transform.SetParent(Slot1_G.transform);
+            temp.transform.localScale = new Vector3(1, 1, 1);
+            Slot1 = true;
+            return;
+        }
+        if (!Slot2)
+        {
+            temp.transform.SetParent(Slot2_G.transform);
+            temp.transform.localScale = new Vector3(1, 1, 1);
+            Slot2 = true;
+            return;
+        }
+        if (!Slot3)
+        {
+            temp.transform.SetParent(Slot3_G.transform);
+            temp.transform.localScale = new Vector3(1, 1, 1);
+            Slot3 = true;
+            return;
+        }
+        if (!Slot4)
+        {
+            temp.transform.SetParent(Slot4_G.transform);
+            temp.transform.localScale = new Vector3(1, 1, 1);
+            Slot4 = true;
+            return;
+        }
+     
     }
     public GameObject WeaponWheel;
     public PlayerWeapons p;
@@ -272,7 +273,7 @@ public class WaveManager_ : MonoBehaviour
    public void FireGer()
     {
         wp.Fire();
-       // p.StartCoroutine(p.SelectWeapon(PlayerPrefs.GetInt("CurrentWeapon")));
+        p.StartCoroutine(p.SelectWeapon(PlayerPrefs.GetInt("CurrentWeapon")));
     }
     public void SelectWeapn(int i)
     {
@@ -429,23 +430,5 @@ public class WaveManager_ : MonoBehaviour
 
     public List<GameObject> instantiatedObjectsList = new List<GameObject>();
     public  GameObject[] AllZombies;
-    public void Assign_Paths()
-    {
-        int objectsPerArray = AllZombies.Length / 5;
-        int remainder = AllZombies.Length % 5;
-       int currentIndex = 0;
-
-        for (int i = 0; i <5; i++)
-        {
-            int count = objectsPerArray + (i < remainder ? 1 : 0);
-            Path5_EndPoint.Zombie = new GameObject[count];
-
-            for (int j = 0; j < count; j++)
-            {
-                Path5_EndPoint.Zombie[j] = AllZombies[currentIndex];
-                Path5_EndPoint.Zombie[j].GetComponent<AI>().PathIndex = 4;
-                currentIndex++;
-            }
-        }
-    }
+    
 }
