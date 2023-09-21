@@ -7,6 +7,10 @@ using System.Collections.Generic;
 using System.Diagnostics;
 
 public class WeaponBehavior : MonoBehaviour {
+
+
+	public int AA=0;
+	public GameObject Wheel_Btn;
 	[HideInInspector]
 	public Animator PlayerModelAnim;
 	//animator components for third person weapon animations
@@ -62,7 +66,7 @@ public class WeaponBehavior : MonoBehaviour {
 	private Vector3 weaponMeshInitalPos;
 	[HideInInspector]
 	public Animator AnimatorComponent;
-	[HideInInspector]
+
 	public Animator WeaponAnimatorComponent;
 	[HideInInspector]
 	public Animator CameraAnimatorComponent;

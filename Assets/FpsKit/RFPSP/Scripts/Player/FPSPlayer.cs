@@ -1382,8 +1382,15 @@ public class FPSPlayer : MonoBehaviour {
 			GameManager.instance.LevelFailed.SetActive(true);
         }
         else
-        {
+		{
+			WaveManager_.instance.timer_Script.StopTimer();
 			WaveManager_.instance.LevelFailed.SetActive(true);
+			if(WaveManager_.instance.Total_Kills > PlayerPrefs.GetInt("BestKills"))
+            {
+				PlayerPrefs.SetInt("BestKills", WaveManager_.instance.Total_Kills);
+			}
+			WaveManager_.instance.timer_Script.Actualkills.text = WaveManager_.instance.Total_Kills.ToString();
+		
         }
 		//AdsManager.instance.ShowinterAd();
 		//AdsManager.instance.ShowBigBanner();

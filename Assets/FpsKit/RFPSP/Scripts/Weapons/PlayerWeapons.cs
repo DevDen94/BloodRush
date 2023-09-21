@@ -35,7 +35,7 @@ public class PlayerWeapons : MonoBehaviour {
 	public int backupWeapon = 1;
 	[HideInInspector]
 	public int grenadeWeapon;//index of grenade in grenade order array for offhand throw
-	[HideInInspector]
+
 	public int totalWeapons;
 
 	public int currentWeapon;//index of weaponOrder array that corresponds to current weapon 
@@ -431,7 +431,12 @@ public class PlayerWeapons : MonoBehaviour {
 		
 		//set haveWeapon value to false for this weapon to remove it from player's inventory
 		weaponOrder[weapon].GetComponent<WeaponBehavior>().haveWeapon = false;
-		
+		if (PlayerPrefs.GetInt("Mode") != 1)
+		{
+			weaponOrder[weapon].GetComponent<WeaponBehavior>().AA = 1;
+			weaponOrder[weapon].GetComponent<WeaponBehavior>().Wheel_Btn.transform.SetParent(WaveManager_.instance.SlotParent.transform);
+			weaponOrder[weapon].GetComponent<WeaponBehavior>().Wheel_Btn.SetActive(false);
+		}
 		aSources[1].Stop();//prevent reload sound from playing after dropping weapon
 		
 		//modify drop velocity based on player speed so the weapon doesn't fly far away 

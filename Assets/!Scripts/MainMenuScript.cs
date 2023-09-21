@@ -32,6 +32,10 @@ public class MainMenuScript : MonoBehaviour
             LevelBtns[i].interactable = true;
         }
     }
+    public void ModeSelect(int mode)
+    {
+        PlayerPrefs.SetInt("Mode", mode);
+    }
     void Start()
     {
      /*   AdsManager.instance.ShowSmallBanner();

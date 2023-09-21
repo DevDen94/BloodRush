@@ -7,7 +7,7 @@ public class GunSway : MonoBehaviour {
 	//set up external script references
 	private FPSRigidBodyWalker FPSWalkerComponent;
 	private Ironsights IronsightsComponent;
-	private WeaponBehavior WeaponBehaviorComponent;
+	public WeaponBehavior WeaponBehaviorComponent;
 	private FPSPlayer FPSPlayerComponent;
 	private InputControl InputComponent;
 	private CameraControl CameraControlComponent;

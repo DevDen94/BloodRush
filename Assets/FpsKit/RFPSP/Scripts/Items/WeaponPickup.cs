@@ -91,6 +91,8 @@ public class WeaponPickup : MonoBehaviour {
 					}else{//replace current weapon if dropCurrentWeapon is false
 						CurrentWeaponBehaviorComponent.haveWeapon = false;
 						CurrentWeaponBehaviorComponent.dropWillDupe = false;
+						CurrentWeaponBehaviorComponent.AA = 1;
+						WeaponBehaviorComponent.AA = 2;
 						//prevent dropping this weapon and creating duplicated ammo by picking up the weapon again from the non-destroyable pickup item
 						WeaponBehaviorComponent.dropWillDupe = true;
 					}
@@ -116,6 +118,7 @@ public class WeaponPickup : MonoBehaviour {
 					
 					if(removeOnUse && !WeaponBehaviorComponent.dropWillDupe){//drop the next weapon if dropCurrentWeapon is true and current weapon is not droppable
 						PlayerWeaponsComponent.DropWeapon(weaponToDrop);	
+					
 					}else{//replace the next weapon if dropCurrentWeapon is false and current weapon is not droppable
 						PlayerWeaponsComponent.weaponOrder[weaponToDrop].GetComponent<WeaponBehavior>().haveWeapon = false;
 						PlayerWeaponsComponent.weaponOrder[weaponToDrop].GetComponent<WeaponBehavior>().dropWillDupe = false;
@@ -128,6 +131,11 @@ public class WeaponPickup : MonoBehaviour {
 					
 			//update haveWeapon value of new weapon's WeaponBehavior.cs component
 			WeaponBehaviorComponent.haveWeapon = true;
+			if (PlayerPrefs.GetInt("Mode") != 1)
+			{
+				WeaponBehaviorComponent.AA = 2;
+				WaveManager_.instance.LoadWeapons_Data();
+			}
 			if(!removeOnUse){
 				WeaponBehaviorComponent.dropWillDupe = true;
 			}else{
