@@ -61,17 +61,20 @@ public class WaveManager_ : MonoBehaviour
     public GameObject WaveImage;
 
 
-    [HideInInspector] public bool Slot1;
-    [HideInInspector] public bool Slot2;
-    [HideInInspector] public bool Slot3;
-    [HideInInspector] public bool Slot4;
+     public bool Slot1;
+    public bool Slot2;
+     public bool Slot3;
+     public bool Slot4;
     public GameObject SlotParent;
+    public GameObject DropWeapon_BTN, Pick_WeaponBTN;
     public GameObject Slot1_G;
     public GameObject Slot2_G;
     public GameObject Slot3_G;
     public GameObject Slot4_G;
+    public GameObject Coming;
     private void Start()
     {
+        LoadWeapons_Data();
         isLevelComplete = false;
         AmmoObj.SetActive(false);
         is_Gernade = false;
@@ -97,7 +100,7 @@ public class WaveManager_ : MonoBehaviour
         ZombieDeathCount = Wave_.DoctorZombie_Count +
         Wave_.Fireman_Zombies + Wave_.FatZombie_Count +
         Wave_.Miltory_Count + Wave_.PoliceMen_Zombies + Wave_.Muscular_Count + Wave_.NormalZombies_Count;
-        Debug.LogError(ZombieDeathCount);
+      
     }
     void Delay()
     {
@@ -113,10 +116,9 @@ public class WaveManager_ : MonoBehaviour
 
         Wave_ = Levels[PlayerPrefs.GetInt("Wave_No")];
         TotalCount();
-        LoadWeapons_Data();
         ZombieContainer.SetActive(true);
         Call_Zombies(Levels[PlayerPrefs.GetInt("Wave_No")]);
-        Debug.LogError(Levels[PlayerPrefs.GetInt("Wave_No")]);
+       
      
     }
  
@@ -134,6 +136,7 @@ public class WaveManager_ : MonoBehaviour
     {
         PlayerPrefs.SetInt("Wave_No", PlayerPrefs.GetInt("Wave_No") + 1);
         WaveImage.SetActive(true);
+
     }
     private void Update()
     {
@@ -166,6 +169,8 @@ public class WaveManager_ : MonoBehaviour
             }
             AttackModeOn = false;
         }
+
+        if (p.totalWeapons > 2) { DropWeapon_BTN.SetActive(true); } else { DropWeapon_BTN.SetActive(false); };
     }
 
     public void Next_Btn()
@@ -209,19 +214,20 @@ public class WaveManager_ : MonoBehaviour
     public void Slot_bool_Check()
     {
         int i = Slot1_G.transform.childCount;
-        if (i < 2) Slot1 = false;
+        if (i == 2) Slot1 = true;
 
         int j = Slot2_G.transform.childCount;
-        if (j < 2) Slot2 = false;
+        if (j == 2) Slot2 = true;
 
-        int k = Slot3_G.transform.childCount;
-        if (k < 2) Slot3 = false;
+        int k = Slot3_G.transform. childCount;
+        if (k == 2) Slot3 = true;
 
         int l = Slot4_G.transform.childCount;
-        if (l < 2) Slot4 = false;
+        if (l == 2) Slot4 = true;
     }
  public  void LoadWeapons_Data()
     {
+        Slot_bool_Check();
         for (int i = 0; i < Weapons.Length; ++i)
         {
             if (Weapons[i].haveWeapon == true)
@@ -229,49 +235,52 @@ public class WaveManager_ : MonoBehaviour
                 Slot_Weapon_Intialize(WeaponWheelImages[i]);
             }
         }
+    
     }
-    void Slot_Weapon_Intialize(GameObject slotImg) // Spawn the selected weaponwheel image into the empty slot 
+   public void Slot_Weapon_Intialize(GameObject slotImg) // Spawn the selected weaponwheel image into the empty slot 
     {
-       
-        slotImg.SetActive(true);
+        Slot_bool_Check();
         if (!Slot1)
         {
+            slotImg.SetActive(true);
             slotImg.transform.SetParent(Slot1_G.transform);
             slotImg.transform.position = Slot1_G.transform.GetChild(0).gameObject.transform.position;
             slotImg.transform.rotation= Slot1_G.transform.GetChild(0).gameObject.transform.rotation;
             slotImg.transform.localScale = new Vector3(1, 1, 1);
             Slot1 = true;
-            Slot_bool_Check();
+            
             return;
         }
         if (!Slot2)
         {
+            slotImg.SetActive(true);
             slotImg.transform.SetParent(Slot2_G.transform);
             slotImg.transform.position = Slot2_G.transform.GetChild(0).gameObject.transform.position;
             slotImg.transform.rotation = Slot2_G.transform.GetChild(0).gameObject.transform.rotation;
             slotImg.transform.localScale = new Vector3(1, 1, 1);
             Slot2 = true;
-            Slot_bool_Check();
             return;
         }
         if (!Slot3)
         {
+            slotImg.SetActive(true);
             slotImg.transform.SetParent(Slot3_G.transform);
             slotImg.transform.position = Slot3_G.transform.GetChild(0).gameObject.transform.position;
             slotImg.transform.rotation = Slot3_G.transform.GetChild(0).gameObject.transform.rotation;
             slotImg.transform.localScale = new Vector3(1, 1, 1);
             Slot3 = true;
-            Slot_bool_Check();
+         
             return;
         }
         if (!Slot4)
         {
+            slotImg.SetActive(true);
             slotImg.transform.SetParent(Slot4_G.transform);
             slotImg.transform.position = Slot4_G.transform.GetChild(0).gameObject.transform.position;
             slotImg.transform.rotation = Slot4_G.transform.GetChild(0).gameObject.transform.rotation;
             slotImg.transform.localScale = new Vector3(1, 1, 1);
             Slot4 = true;
-            Slot_bool_Check();
+    
             return;
         }
        
@@ -456,4 +465,13 @@ public class WaveManager_ : MonoBehaviour
     public List<GameObject> instantiatedObjectsList = new List<GameObject>();
     public  GameObject[] AllZombies;
     
+    public void Gernade_Cycle()
+    {
+        Gernade.cycleSelect = false;
+        Invoke("sec", 1f);
+    }
+    void sec()
+    {
+        Gernade.cycleSelect = true;
+    }
 }

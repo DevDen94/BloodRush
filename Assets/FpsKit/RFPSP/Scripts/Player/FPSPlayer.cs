@@ -885,6 +885,7 @@ public class FPSPlayer : MonoBehaviour {
 									}else{
 										//display weapon swap reticle if player has max weapons and can swap held weapon for pickup under reticle
 										pickupTex = swapReticle;
+
 									}
 									
 								}else{
@@ -1385,10 +1386,7 @@ public class FPSPlayer : MonoBehaviour {
 		{
 			WaveManager_.instance.timer_Script.StopTimer();
 			WaveManager_.instance.LevelFailed.SetActive(true);
-			if(WaveManager_.instance.Total_Kills > PlayerPrefs.GetInt("BestKills"))
-            {
-				PlayerPrefs.SetInt("BestKills", WaveManager_.instance.Total_Kills);
-			}
+			
 			WaveManager_.instance.timer_Script.Actualkills.text = WaveManager_.instance.Total_Kills.ToString();
 		
         }

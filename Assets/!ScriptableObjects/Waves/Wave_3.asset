@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac054b7b644d0294e8a8a6695b42b7db, type: 3}
   m_Name: Wave_3
   m_EditorClassIdentifier: 
-  NormalZombies_Count: 0
+  NormalZombies_Count: 2
   DoctorZombie_Count: 0
   FatZombie_Count: 0
-  Miltory_Count: 3
+  Miltory_Count: 6
   Muscular_Count: 0
-  Fireman_Zombies: 0
+  Fireman_Zombies: 7
   PoliceMen_Zombies: 0

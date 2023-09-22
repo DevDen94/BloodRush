@@ -134,14 +134,18 @@ public class WeaponPickup : MonoBehaviour {
 			if (PlayerPrefs.GetInt("Mode") != 1)
 			{
 				WeaponBehaviorComponent.AA = 2;
-				WaveManager_.instance.LoadWeapons_Data();
+				WaveManager_.instance.Slot_Weapon_Intialize(WeaponBehaviorComponent.Wheel_Btn);
 			}
 			if(!removeOnUse){
 				WeaponBehaviorComponent.dropWillDupe = true;
 			}else{
 				WeaponBehaviorComponent.dropWillDupe = false;	
 			}
-			//select the weapon after picking it up
+            //select the weapon after picking it up
+            if (PlayerWeaponsComponent.totalWeapons == 1)
+            {
+				PlayerWeaponsComponent.StartCoroutine(PlayerWeaponsComponent.SelectWeapon(0));
+			}
 			PlayerWeaponsComponent.StartCoroutine(PlayerWeaponsComponent.SelectWeapon(WeaponBehaviorComponent.weaponNumber));
 			//update the total weapon amount in PlayerWeapons.cs
 			PlayerWeaponsComponent.UpdateTotalWeapons();

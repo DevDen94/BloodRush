@@ -325,6 +325,8 @@ public class PlayerWeapons : MonoBehaviour {
 										//but allow backupWeapon to be selected when cycling weapon selection manually
 										|| (ThisWeaponBehavior2.haveWeapon && ThisWeaponBehavior2.cycleSelect 
 										&& n != currentWeapon && n != backupWeapon && dropWeapon)){
+
+											
 											StartCoroutine(SelectWeapon(n));
 											break;
 										}
@@ -426,6 +428,8 @@ public class PlayerWeapons : MonoBehaviour {
 		if(!weaponOrder[weapon].GetComponent<WeaponBehavior>().haveWeapon){
 			return;
 		}
+
+		
 		
 		float dropVel;//var to allow velocity to be added to weapon if dropped while moving
 		
@@ -433,7 +437,8 @@ public class PlayerWeapons : MonoBehaviour {
 		weaponOrder[weapon].GetComponent<WeaponBehavior>().haveWeapon = false;
 		if (PlayerPrefs.GetInt("Mode") != 1)
 		{
-			weaponOrder[weapon].GetComponent<WeaponBehavior>().AA = 1;
+			WaveManager_.instance.Gernade_Cycle();
+			weaponOrder[weapon].GetComponent<WeaponBehavior>().Wheel_Btn.transform.parent.GetComponent<SlotParent>().SlotInactive();
 			weaponOrder[weapon].GetComponent<WeaponBehavior>().Wheel_Btn.transform.SetParent(WaveManager_.instance.SlotParent.transform);
 			weaponOrder[weapon].GetComponent<WeaponBehavior>().Wheel_Btn.SetActive(false);
 		}
@@ -482,17 +487,18 @@ public class PlayerWeapons : MonoBehaviour {
 			weaponObjDrop.GetComponent<Rigidbody>().AddRelativeTorque(Vector3.right * rotateAmt,ForceMode.Impulse);
 		}
 
+	
 		//if player dropped their last weapon, just select the null/holstered weapon 
-		if(!deadDropped){
+		if (!deadDropped){
 			if(totalWeapons == 0 && currentWeapon != 0 && currentWeapon != backupWeapon){
 				if(weaponOrder[backupWeapon].GetComponent<WeaponBehavior>().haveWeapon && FPSPlayerComponent.hitPoints > 1.0f){
-					StartCoroutine(SelectWeapon(backupWeapon));
+					StartCoroutine(SelectWeapon(1));
 				}else{
-					StartCoroutine(SelectWeapon(0));	
+					StartCoroutine(SelectWeapon(1));	
 				}
 			}
 		}else{
-			StartCoroutine(SelectWeapon(0));//don't select another weapon if player died
+			StartCoroutine(SelectWeapon(1));//don't select another weapon if player died
 		}
 		
 	}
@@ -504,21 +510,15 @@ public class PlayerWeapons : MonoBehaviour {
 				totalWeapons ++;//increment totalWeapons by one if player has this weapon	
 			}
 		}
+       
 	}
-
+	public WaveManager_ wp;
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//Select Weapons
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	public bool isBlade;
 	public IEnumerator SelectWeapon ( int index, bool isOffhandThrow = false, bool endOffhandThrow = false){
-		if (PlayerPrefs.GetInt("Mode") == 1)
-		{
-			for (int i = 0; i < WeaponImages.Length; ++i)
-			{
-				WeaponImages[i].SetActive(false);
-			}
-			WeaponImages[index].SetActive(true);
-		}
+	
 		CameraAnimatorComponent = Camera.main.GetComponent<Animator>();
 		WeaponObjAnimatorComponent = weaponOrder[currentWeapon].GetComponent<Animator>();
 		
@@ -529,7 +529,26 @@ public class PlayerWeapons : MonoBehaviour {
 		//but make an exception for the null/unarmed weapon for when the player presses the holster button
 		//also dont allow weapon switch if player is climbing, swimming, or holding object and their weapon is lowered
 		WeaponBehavior ThisWeaponBehavior = weaponOrder[index].GetComponent<WeaponBehavior>();
-		if((!ThisWeaponBehavior.haveWeapon && index != 0) 
+
+		if (PlayerPrefs.GetInt("Mode") == 1)
+		{
+			for (int i = 0; i < WeaponImages.Length; ++i)
+			{
+				WeaponImages[i].SetActive(false);
+			}
+			WeaponImages[index].SetActive(true);
+		}
+		else
+		{
+            if (index != 14)
+			{
+				wp.SlotImageParent(ThisWeaponBehavior.Wheel_Btn);
+				}
+
+		}
+
+
+		if ((!ThisWeaponBehavior.haveWeapon && index != 0) 
 		|| (!ThisWeaponBehavior.cycleSelect && !isOffhandThrow)
 		|| FPSWalkerComponent.hideWeapon
 		|| pullGrenadeState){

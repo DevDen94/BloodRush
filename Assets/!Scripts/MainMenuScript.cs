@@ -35,6 +35,10 @@ public class MainMenuScript : MonoBehaviour
     public void ModeSelect(int mode)
     {
         PlayerPrefs.SetInt("Mode", mode);
+        if (mode == 2)
+        {
+            LoaddingPanel.SetActive(true);
+        }
     }
     void Start()
     {

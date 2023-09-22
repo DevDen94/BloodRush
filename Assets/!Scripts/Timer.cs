@@ -54,28 +54,27 @@ public class Timer : MonoBehaviour
         isRunning = false;
         CompleteLevel();
     }
-
+    public bool BestTime;
     private void CompleteLevel()
     {
-        if (timer < BestTime_Saved)
-        {
-            BestTime_Saved = timer;
-            PlayerPrefs.SetFloat("BestTime", BestTime_Saved);
-            Debug.LogError("A");
-        }
+       if (WaveManager_.instance.Total_Kills > PlayerPrefs.GetInt("BestKills"))
+         {
+              PlayerPrefs.SetInt("BestKills", WaveManager_.instance.Total_Kills);
+              BestTime_Saved = timer;
+              PlayerPrefs.SetFloat("BestTime", BestTime_Saved);
+         }
         else
         {
             BestTime_Saved = PlayerPrefs.GetFloat("BestTime");
-            Debug.LogError("AB");
+         
         }
-        
-      
+
+
         ActualTime.text = FormatTime(timer);
         Best_Time.text = FormatTime(BestTime_Saved);
         bestkills.text = PlayerPrefs.GetInt("BestKills").ToString();
 
-        Debug.Log("Best Time: " + FormatTime(BestTime_Saved));
-        Debug.Log("Actual Time: " + FormatTime(timer));
+       
     }
 
     private string FormatTime(float time)

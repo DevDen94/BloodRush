@@ -7,6 +7,8 @@ public class fadeOff : MonoBehaviour
    public void WaveOn()
     {
         gameObject.SetActive(false);
-        WaveManager_.instance.Instaniate_Zombies();
+        WaveManager_.instance.Coming.SetActive(true);
+        WaveManager_.instance.Coming.GetComponent<CountDown>().Start();
     }
+
 }

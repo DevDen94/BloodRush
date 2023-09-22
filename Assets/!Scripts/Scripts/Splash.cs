@@ -52,7 +52,17 @@ public class Splash : MonoBehaviour
             if (activeScene.name == "Splash")
                 SceneManager.LoadScene("MainMenu");
             else if (activeScene.name == "MainMenu")
-                SceneManager.LoadScene("GamePlay");
+            {
+                if (PlayerPrefs.GetInt("Mode") == 1)
+                {
+                    SceneManager.LoadScene("GamePlay");
+                }
+                else
+                {
+                    SceneManager.LoadScene("SurvivalMode");
+                }
+                
+            }
         }
         else
         {

@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     public GameObject ZombieContainer;
     public WaypointGroup[] BrokenPaths;
     public WaypointGroup OuterPath;
-    public int[] Instainated_Count;
+   
     public WeaponBehavior[] Weapons;
     public WeaponBehavior Gernade;
     public Level_Data[] Levels;
@@ -65,6 +65,14 @@ public class GameManager : MonoBehaviour
     public GameObject Gernade_Image;
     private bool is_Gernade;
     public Text Wave_NO;
+    private Level_Data Wave_;
+    void TotalCount()
+    {
+        ZombieDeathCount = Wave_.DoctorZombie_Count +
+        Wave_.Fireman_Zombies + Wave_.FatZombie_Count +
+        Wave_.Miltory_Count + Wave_.PoliceMen_Zombies + Wave_.Muscular_Count + Wave_.NormalZombies_Count;
+
+    }
     private void Start()
     {
         AmmoObj.SetActive(false);
@@ -84,7 +92,8 @@ public class GameManager : MonoBehaviour
             PlayerPrefs.SetFloat("START", 1);
             PlayerPrefs.SetInt("WaveNo", 0);
         }
-        ZombieDeathCount = Instainated_Count[PlayerPrefs.GetInt("WaveNo")];
+        Wave_= Levels[PlayerPrefs.GetInt("WaveNo")];
+        TotalCount();
         LoadWeapons_Data(PlayerPrefs.GetInt("WaveNo"));
         Invoke("Instaniate_Zombies",1f);
         Invoke("Delay", 1.5f);
