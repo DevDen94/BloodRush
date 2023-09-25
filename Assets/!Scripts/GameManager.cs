@@ -75,6 +75,7 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
+       
         GoogleAdMobController.instance.ShowSmallBannerAd();
         AmmoObj.SetActive(false);
         is_Gernade = false;
@@ -102,7 +103,8 @@ public class GameManager : MonoBehaviour
         src.volume = PlayerPrefs.GetFloat("Sounds");
         int wav = PlayerPrefs.GetInt("WaveNo") + 1;
         Wave_NO.text = " WAVE NO : " +wav ;
-      //  AdsManager.instance.ShowSmallBanner();
+        Firebase.Analytics.FirebaseAnalytics.LogEvent("WaveMode", "Gameplay", Wave_.ToString());
+        //  AdsManager.instance.ShowSmallBanner();
     }
     void Delay()
     {
@@ -149,6 +151,7 @@ public class GameManager : MonoBehaviour
 
     public void LevelCompletee()
     {
+         Firebase.Analytics.FirebaseAnalytics.LogEvent("WaveMode", "Wave_Complete", Wave_.ToString());
         GoogleAdMobController.instance.ShowBigBannerAd();
         GoogleAdMobController.instance.ShowInterstitialAd();
         LevelComplete.SetActive(true);

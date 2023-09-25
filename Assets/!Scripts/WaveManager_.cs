@@ -90,7 +90,7 @@ public class WaveManager_ : MonoBehaviour
         Invoke("Delay", 1.5f);
         Bg_Music.volume = PlayerPrefs.GetFloat("Music");
         src.volume = PlayerPrefs.GetFloat("Sounds");
-       
+        GoogleAdMobController.instance.ShowSmallBannerAd();
         //  AdsManager.instance.ShowSmallBanner();
     }
     
@@ -115,6 +115,7 @@ public class WaveManager_ : MonoBehaviour
     {
 
         Wave_ = Levels[PlayerPrefs.GetInt("Wave_No")];
+        Firebase.Analytics.FirebaseAnalytics.LogEvent("SurvivalMode", "GamePlayStart", Wave_.ToString());
         TotalCount();
         ZombieContainer.SetActive(true);
         Call_Zombies(Levels[PlayerPrefs.GetInt("Wave_No")]);
@@ -134,9 +135,10 @@ public class WaveManager_ : MonoBehaviour
 
     public void WaveComplete()
     {
+        Firebase.Analytics.FirebaseAnalytics.LogEvent("SurvivalMode", "Wave_Complete", Wave_.ToString());
         PlayerPrefs.SetInt("Wave_No", PlayerPrefs.GetInt("Wave_No") + 1);
         WaveImage.SetActive(true);
-
+        GoogleAdMobController.instance.ShowInterstitialAd();
     }
     private void Update()
     {
@@ -174,7 +176,8 @@ public class WaveManager_ : MonoBehaviour
     }
 
     public void Next_Btn()
-    {      
+    {
+        GoogleAdMobController.instance.ShowSmallBannerAd();
        // AdsManager.instance.ShowSmallBanner();
         src.PlayOneShot(Btnclick);
         SceneManager.LoadScene("SurvivalMode");
@@ -182,14 +185,15 @@ public class WaveManager_ : MonoBehaviour
     }
     public void Restart_Btn()
     {
-       // AdsManager.instance.ShowSmallBanner();
-
+        // AdsManager.instance.ShowSmallBanner();
+        GoogleAdMobController.instance.ShowSmallBannerAd();
         //Time.timeScale = 1f;
         src.PlayOneShot(Btnclick);
         SceneManager.LoadScene("SurvivalMode");
     }
     public void Home()
     {
+        GoogleAdMobController.instance.ShowSmallBannerAd();
         //AdsManager.instance.ShowSmallBanner();
         //Time.timeScale = 1f;
         src.PlayOneShot(Btnclick);
@@ -197,16 +201,18 @@ public class WaveManager_ : MonoBehaviour
     }
     public void Pause_BTn()
     {
-      //  AdsManager.instance.ShowinterAd();
-       // AdsManager.instance.ShowBigBanner();
+        GoogleAdMobController.instance.ShowBigBannerAd();
+        GoogleAdMobController.instance.ShowInterstitialAd();
+        //  AdsManager.instance.ShowinterAd();
+        // AdsManager.instance.ShowBigBanner();
         src.PlayOneShot(Btnclick);
         LevelPasued.SetActive(true);
         Time.timeScale = 0;
     }
     public void Resume()
     {
-       // AdsManager.instance.ShowSmallBanner();
-
+        // AdsManager.instance.ShowSmallBanner();
+        GoogleAdMobController.instance.ShowSmallBannerAd();
         src.PlayOneShot(Btnclick);
         LevelPasued.SetActive(false);
         Time.timeScale = 1;
@@ -326,6 +332,8 @@ public class WaveManager_ : MonoBehaviour
             //ThrowGernade();
             return;
         }
+
+
         if (i==3 || i == 4 || i==14)
         {
             aimBtn.SetActive(false);
@@ -334,6 +342,7 @@ public class WaveManager_ : MonoBehaviour
         {
             aimBtn.SetActive(true);
         }
+
 
         if (i == 1)
         {

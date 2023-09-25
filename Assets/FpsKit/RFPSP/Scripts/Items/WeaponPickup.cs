@@ -135,6 +135,7 @@ public class WeaponPickup : MonoBehaviour {
 			{
 				WeaponBehaviorComponent.AA = 2;
 				WaveManager_.instance.Slot_Weapon_Intialize(WeaponBehaviorComponent.Wheel_Btn);
+				WaveManager_.instance.AmmoObj.SetActive(true);
 			}
 			if(!removeOnUse){
 				WeaponBehaviorComponent.dropWillDupe = true;

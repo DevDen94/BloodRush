@@ -8,8 +8,8 @@ using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using System.Collections;
-
-public class GoogleAdMobController : MonoBehaviour
+using UnityEngine.Advertisements;
+public class GoogleAdMobController : MonoBehaviour, IUnityAdsInitializationListener, IUnityAdsLoadListener, IUnityAdsShowListener
 {
     public static GoogleAdMobController instance;
     private AppOpenAd _appOpenAd;
@@ -34,7 +34,14 @@ public class GoogleAdMobController : MonoBehaviour
     public bool debug;
 
     public bool test;
-   
+
+    [Space]
+
+    public string UnityAdsID;
+    public string BANNER_PLACEMENT;
+    public string InterstatialPlacement;
+    public string REWARDED_VIDEO_PLACEMENT;
+
     public bool IsBannerLoading { get; private set; }
     public bool IsInterstitialLoading { get; private set; }
     public bool IsRewardedAdLoading { get; private set; }
@@ -44,6 +51,8 @@ public class GoogleAdMobController : MonoBehaviour
     public bool IsAppOpen;
     
 
+
+
     #region UNITY MONOBEHAVIOR METHODS
 
     private void Awake()
@@ -52,6 +61,24 @@ public class GoogleAdMobController : MonoBehaviour
         IsAppOpen = true;
         if (instance == null)
             instance = this;
+
+
+
+
+
+
+
+#if UNITY_ANDROID
+
+        BANNER_PLACEMENT = "Banner_Android";
+        InterstatialPlacement = "Interstitial_Android";
+        REWARDED_VIDEO_PLACEMENT = "Rewarded_Android";
+
+#elif UNITY_IOS
+        BANNER_PLACEMENT = "Banner_iOS";
+        InterstatialPlacemen = "Interstitial_iOS";
+        REWARDED_VIDEO_PLACEMENT = "Rewarded_iOS";
+#endif
     }
 
     public void Start()
@@ -90,6 +117,12 @@ public class GoogleAdMobController : MonoBehaviour
         RequestSmallBannerAd();
         RequestBigBannerAd();
 
+
+        if (!Advertisement.isInitialized && Advertisement.isSupported)
+        {
+            Advertisement.Initialize(UnityAdsID, test, this);
+            InitilizeUnityAds();
+        }
     }
 
     private void HandleInitCompleteAction(InitializationStatus initstatus)
@@ -335,7 +368,13 @@ public class GoogleAdMobController : MonoBehaviour
 
                 if (!IsInterstitialLoading)
                     RequestAndLoadInterstitialAd();
+
+                
+                  Advertisement.Show(InterstatialPlacement, this);
+                
             }
+            Invoke(nameof(LoadInterAd), 0.5f);
+            Invoke(nameof(InitilizeUnityAds), 0.5f);
         }
     }
 
@@ -645,7 +684,9 @@ public class GoogleAdMobController : MonoBehaviour
     #endregion
 
     #region Interstitial Callbacks
-
+    public void OnUnityAdsShowStart(string _adUnitId) { }
+    public void OnUnityAdsShowClick(string _adUnitId) { }
+    public void OnUnityAdsShowComplete(string _adUnitId, UnityAdsShowCompletionState showCompletionState) { }
     private void OnInterstitialLoaded()
     {
        if (debug)
@@ -783,4 +824,54 @@ public class GoogleAdMobController : MonoBehaviour
     }
 
     #endregion
+
+    //-------------Unity---------
+
+    public void InitilizeUnityAds()
+    {
+        Advertisement.Load(InterstatialPlacement, this);
+    }
+
+    public void LoadInterAd()
+    {
+        RequestAndLoadInterstitialAd();
+    }
+
+
+    public void OnInitializationComplete()
+    {
+        Debug.Log("Unity Ads initialization complete.");
+    }
+
+    public void OnInitializationFailed(UnityAdsInitializationError error, string message)
+    {
+        Debug.Log($"Unity Ads Initialization Failed: {error.ToString()} - {message}");
+    }
+
+
+
+    public void OnUnityAdsAdLoaded(string adUnitId)
+    {
+        // Optionally execute code if the Ad Unit successfully loads content.
+    }
+
+    public void OnUnityAdsFailedToLoad(string _adUnitId, UnityAdsLoadError error, string message)
+    {
+        Debug.Log($"Error loading Ad Unit: {_adUnitId} - {error.ToString()} - {message}");
+        // Optionally execute code if the Ad Unit fails to load, such as attempting to try again.
+    }
+
+    public void OnUnityAdsShowFailure(string _adUnitId, UnityAdsShowError error, string message)
+    {
+        Debug.Log($"Error showing Ad Unit {_adUnitId}: {error.ToString()} - {message}");
+        // Optionally execute code if the Ad Unit fails to show, such as loading another ad.
+    }
+
+
+
+
+
+
+
+
 }

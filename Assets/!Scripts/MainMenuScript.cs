@@ -35,6 +35,9 @@ public class MainMenuScript : MonoBehaviour
     public void ModeSelect(int mode)
     {
         PlayerPrefs.SetInt("Mode", mode);
+
+        Firebase.Analytics.FirebaseAnalytics.LogEvent("Mode_Selection", "mode_Number", mode.ToString());
+
         if (mode == 2)
         {
             LoaddingPanel.SetActive(true);
