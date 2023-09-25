@@ -17,16 +17,17 @@ public class Splash : MonoBehaviour
     }
     private void Start()
     {
-        
+       
         Value = 0;
         StartCoroutine(waitforSceneSwitch());
         activeScene = SceneManager.GetActiveScene();
-        Invoke(nameof(ShowBig),0.5f);
-       // SoundsManager.instance.PlayMainMenuMusic();
+        Invoke(nameof(ShowBig),1f);
+        
+        // SoundsManager.instance.PlayMainMenuMusic();
     }
     public void ShowBig()
     {
-     //   AdsManager.instance.ShowBigBanner();
+     GoogleAdMobController.instance.ShowBigBannerAd();
     }
 
     IEnumerator waitforSceneSwitch()

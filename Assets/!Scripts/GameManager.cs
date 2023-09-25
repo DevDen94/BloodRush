@@ -75,6 +75,7 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
+        GoogleAdMobController.instance.ShowSmallBannerAd();
         AmmoObj.SetActive(false);
         is_Gernade = false;
      
@@ -148,6 +149,8 @@ public class GameManager : MonoBehaviour
 
     public void LevelCompletee()
     {
+        GoogleAdMobController.instance.ShowBigBannerAd();
+        GoogleAdMobController.instance.ShowInterstitialAd();
         LevelComplete.SetActive(true);
         if (PlayerPrefs.GetInt("WaveNo") >= 19)
         {
@@ -203,8 +206,8 @@ public class GameManager : MonoBehaviour
     public void Next_Btn()
     {
 
-       // AdsManager.instance.ShowSmallBanner();
-
+        // AdsManager.instance.ShowSmallBanner();
+        
         src.PlayOneShot(Btnclick);
         SceneManager.LoadScene("GamePlay");
         //Time.timeScale = 1f;
@@ -227,16 +230,19 @@ public class GameManager : MonoBehaviour
     }
     public void Pause_BTn()
     {
-      //  AdsManager.instance.ShowinterAd();
-       // AdsManager.instance.ShowBigBanner();
+        GoogleAdMobController.instance.ShowInterstitialAd();
+        GoogleAdMobController.instance.ShowBigBannerAd();
+       
+        //  AdsManager.instance.ShowinterAd();
+        // AdsManager.instance.ShowBigBanner();
         src.PlayOneShot(Btnclick);
         LevelPasued.SetActive(true);
         Time.timeScale = 0;
     }
     public void Resume()
     {
-       // AdsManager.instance.ShowSmallBanner();
-
+        // AdsManager.instance.ShowSmallBanner();
+        GoogleAdMobController.instance.ShowSmallBannerAd();
         src.PlayOneShot(Btnclick);
         LevelPasued.SetActive(false);
         Time.timeScale = 1;

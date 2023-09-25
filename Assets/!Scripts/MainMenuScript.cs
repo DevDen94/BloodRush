@@ -42,14 +42,14 @@ public class MainMenuScript : MonoBehaviour
     }
     void Start()
     {
-     /*   AdsManager.instance.ShowSmallBanner();
-        if (AdsManager.instance.isAppOpen)
-        {
-            AdsManager.instance.ShowAppOpenAd();
-            AdsManager.instance.isAppOpen = false;
-        }*/
+        /*   AdsManager.instance.ShowSmallBanner();
+           if (AdsManager.instance.isAppOpen)
+           {
+               AdsManager.instance.ShowAppOpenAd();
+               AdsManager.instance.isAppOpen = false;
+           }*/
 
-
+        GoogleAdMobController.instance.ShowSmallBannerAd();
 
         VersionNumber.text = number.Playstore_Version + " : " + number.Appstore_Version;
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
@@ -69,13 +69,21 @@ public class MainMenuScript : MonoBehaviour
         MusicSlider[1].value= PlayerPrefs.GetFloat("Sounds");
      
         src.volume= PlayerPrefs.GetFloat("Music");
+
+
+        if (GoogleAdMobController.instance.IsAppOpen)
+        {
+            GoogleAdMobController.instance.ShowAppOpenAd();
+            GoogleAdMobController.instance.IsAppOpen = false;
+        }
      
     }
 
 
     public void showInter()
     {
-       // AdsManager.instance.ShowinterAd();
+        // AdsManager.instance.ShowinterAd();
+        GoogleAdMobController.instance.ShowInterstitialAd();
     }
 
 
