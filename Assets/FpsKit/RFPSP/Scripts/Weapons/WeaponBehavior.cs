@@ -2466,8 +2466,12 @@ public class WeaponBehavior : MonoBehaviour {
 					isFilling = false;
 					timer = 0f;
 					GameManager.instance.Reloading_Slider.gameObject.SetActive(false);
-					GameManager.instance.Gernade_Image.SetActive(true);
 					WeaponAnimatorComponent.SetTrigger("Idle");
+					if (GameManager.instance.Gernade.ammo != 0)
+					{
+						GameManager.instance.Gernade_Image.SetActive(true);
+					}
+				
 				}
 			}
             else
@@ -2480,9 +2484,13 @@ public class WeaponBehavior : MonoBehaviour {
 					isFilling = false;
 					timer = 0f;
 					WaveManager_.instance.Reloading_Slider.gameObject.SetActive(false);
-					WaveManager_.instance.Gernade_Image.SetActive(true);
 					WeaponAnimatorComponent.SetTrigger("Idle");
+					if (WaveManager_.instance.Gernade.ammo != 0)
+					{
+						WaveManager_.instance.Gernade_Image.SetActive(true);
+					}
 				}
+				
 			}
 			
 		}

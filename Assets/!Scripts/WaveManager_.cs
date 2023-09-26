@@ -54,7 +54,7 @@ public class WaveManager_ : MonoBehaviour
 
     public GameObject AmmoObj;
     public GameObject Gernade_Image;
-    private bool is_Gernade;
+    public bool is_Gernade;
     private Level_Data Wave_;
     public int Total_Kills;
     public Text Kills;
@@ -62,7 +62,7 @@ public class WaveManager_ : MonoBehaviour
 
 
      public bool Slot1;
-    public bool Slot2;
+     public bool Slot2;
      public bool Slot3;
      public bool Slot4;
     public GameObject SlotParent;
@@ -111,17 +111,15 @@ public class WaveManager_ : MonoBehaviour
     {
         timer_Script.StopTimer();
     }
- public void Instaniate_Zombies()
-    {
+     public void Instaniate_Zombies()
+      {
 
         Wave_ = Levels[PlayerPrefs.GetInt("Wave_No")];
         Firebase.Analytics.FirebaseAnalytics.LogEvent("SurvivalMode", "GamePlayStart", Wave_.ToString());
         TotalCount();
         ZombieContainer.SetActive(true);
         Call_Zombies(Levels[PlayerPrefs.GetInt("Wave_No")]);
-       
-     
-    }
+      }
  
     public void ContinueGame()
     {
@@ -138,7 +136,7 @@ public class WaveManager_ : MonoBehaviour
         Firebase.Analytics.FirebaseAnalytics.LogEvent("SurvivalMode", "Wave_Complete", Wave_.ToString());
         PlayerPrefs.SetInt("Wave_No", PlayerPrefs.GetInt("Wave_No") + 1);
         WaveImage.SetActive(true);
-        GoogleAdMobController.instance.ShowInterstitialAd();
+      
     }
     private void Update()
     {
@@ -201,8 +199,7 @@ public class WaveManager_ : MonoBehaviour
     }
     public void Pause_BTn()
     {
-        GoogleAdMobController.instance.ShowBigBannerAd();
-        GoogleAdMobController.instance.ShowInterstitialAd();
+       
         //  AdsManager.instance.ShowinterAd();
         // AdsManager.instance.ShowBigBanner();
         src.PlayOneShot(Btnclick);
