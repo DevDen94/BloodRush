@@ -1357,7 +1357,7 @@ Animator:
   m_GameObject: {fileID: 1992842177101806963}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: b57b20e66b9382f47b5dae6957015ea6, type: 3}
-  m_Controller: {fileID: 9100000, guid: 21efb84ed016b7b4f8e58848c55637b5, type: 2}
+  m_Controller: {fileID: 9100000, guid: 2af07607bbecb0a4780a2b95df040fcf, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1990,7 +1990,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   outlineMode: 0
   outlineColor: {r: 0.9056604, g: 0.37080812, b: 0.37080812, a: 1}
-  outlineWidth: 0.1
+  outlineWidth: 0.8
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []

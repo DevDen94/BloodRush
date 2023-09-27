@@ -76,7 +76,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
        
-        GoogleAdMobController.instance.ShowSmallBannerAd();
+        
         AmmoObj.SetActive(false);
         is_Gernade = false;
      
@@ -104,7 +104,7 @@ public class GameManager : MonoBehaviour
         int wav = PlayerPrefs.GetInt("WaveNo") + 1;
         Wave_NO.text = " WAVE NO : " +wav ;
         Firebase.Analytics.FirebaseAnalytics.LogEvent("WaveMode", "Gameplay", Wave_.ToString());
-        //  AdsManager.instance.ShowSmallBanner();
+        GoogleAdMobController.instance.ShowSmallBannerAd();
     }
     void Delay()
     {
