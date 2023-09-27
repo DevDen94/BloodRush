@@ -66,7 +66,7 @@ public class WaveManager_ : MonoBehaviour
      public bool Slot3;
      public bool Slot4;
     public GameObject SlotParent;
-    public GameObject DropWeapon_BTN, Pick_WeaponBTN;
+    public GameObject Pick_WeaponBTN;
     public GameObject Slot1_G;
     public GameObject Slot2_G;
     public GameObject Slot3_G;
@@ -170,7 +170,7 @@ public class WaveManager_ : MonoBehaviour
             AttackModeOn = false;
         }
 
-        if (p.totalWeapons > 2) { DropWeapon_BTN.SetActive(true); } else { DropWeapon_BTN.SetActive(false); };
+       // if (p.totalWeapons > 2) { DropWeapon_BTN.SetActive(true); } else { DropWeapon_BTN.SetActive(false); };
     }
 
     public void Next_Btn()

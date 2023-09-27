@@ -55,7 +55,7 @@ public class MainMenuScript : MonoBehaviour
         GoogleAdMobController.instance.ShowSmallBannerAd();
 
         VersionNumber.text = number.Playstore_Version + " : " + number.Appstore_Version;
-        Screen.sleepTimeout = SleepTimeout.NeverSleep;
+        //Screen.sleepTimeout = SleepTimeout.NeverSleep;
 
        
 
