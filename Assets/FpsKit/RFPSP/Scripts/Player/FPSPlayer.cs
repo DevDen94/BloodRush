@@ -1381,14 +1381,14 @@ public class FPSPlayer : MonoBehaviour {
 		if (PlayerPrefs.GetInt("Mode") == 1)
 		{
 			GameManager.instance.LevelFailed.SetActive(true);
-			Firebase.Analytics.FirebaseAnalytics.LogEvent("WaveMode", "Wave_Failed", PlayerPrefs.GetInt("WaveNo"));
+			Firebase.Analytics.FirebaseAnalytics.LogEvent("WaveMode_WaveFailed", "Wave_Failed", PlayerPrefs.GetInt("WaveNo"));
 			GoogleAdMobController.instance.ShowBigBannerAd();
 		}
         else
 		{
 			WaveManager_.instance.timer_Script.StopTimer();
 			WaveManager_.instance.LevelFailed.SetActive(true);
-			Firebase.Analytics.FirebaseAnalytics.LogEvent("SurvivalMode", "GameOver_At", PlayerPrefs.GetInt("Wave_No"));
+			Firebase.Analytics.FirebaseAnalytics.LogEvent("SurvivalMode_GameOver", "GameOver_At", PlayerPrefs.GetInt("Wave_No"));
 			WaveManager_.instance.timer_Script.Actualkills.text = WaveManager_.instance.Total_Kills.ToString();
 		
         }

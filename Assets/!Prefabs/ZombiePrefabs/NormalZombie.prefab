@@ -789,6 +789,7 @@ GameObject:
   - component: {fileID: 5541230609178761637}
   - component: {fileID: 5541230609178761636}
   - component: {fileID: 1525639336}
+  - component: {fileID: 1466459433980295971}
   m_Layer: 13
   m_Name: NormalZombie
   m_TagString: Flesh
@@ -1153,6 +1154,19 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &1466459433980295971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1246823754379729251}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e0549fbba82b42faa625fb48ffcf824, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radarMarkerImage: {fileID: 0}
 --- !u!1 &1277013496039313427
 GameObject:
   m_ObjectHideFlags: 0

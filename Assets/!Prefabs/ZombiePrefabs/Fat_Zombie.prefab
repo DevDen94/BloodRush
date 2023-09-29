@@ -5013,6 +5013,7 @@ GameObject:
   - component: {fileID: 4136931446234346186}
   - component: {fileID: 4136931446234346187}
   - component: {fileID: 4136931446234346184}
+  - component: {fileID: -2201804358886530773}
   m_Layer: 13
   m_Name: Fat_Zombie
   m_TagString: Flesh
@@ -5380,6 +5381,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bodyStayTime: 15
   GunPickup: {fileID: 0}
+--- !u!114 &-2201804358886530773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7260551656637297161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e0549fbba82b42faa625fb48ffcf824, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radarMarkerImage: {fileID: 0}
 --- !u!1 &7291917801245254225
 GameObject:
   m_ObjectHideFlags: 0

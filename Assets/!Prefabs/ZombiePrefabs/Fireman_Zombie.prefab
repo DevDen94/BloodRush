@@ -1124,6 +1124,7 @@ GameObject:
   - component: {fileID: 8243040907464501960}
   - component: {fileID: 7009821335528256611}
   - component: {fileID: 2950954394047734686}
+  - component: {fileID: -5721454041960698975}
   m_Layer: 13
   m_Name: Fireman_Zombie
   m_TagString: Flesh
@@ -1488,6 +1489,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bodyStayTime: 15
   GunPickup: {fileID: 0}
+--- !u!114 &-5721454041960698975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2236789407410563027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e0549fbba82b42faa625fb48ffcf824, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radarMarkerImage: {fileID: 0}
 --- !u!1 &2305819395744542371
 GameObject:
   m_ObjectHideFlags: 0

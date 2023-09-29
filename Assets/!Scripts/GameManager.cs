@@ -75,9 +75,7 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
-       
-        
-        AmmoObj.SetActive(false);
+     
         is_Gernade = false;
      
         int sp = Random.Range(0, SpawnPoints_P.Length);
@@ -103,7 +101,7 @@ public class GameManager : MonoBehaviour
         src.volume = PlayerPrefs.GetFloat("Sounds");
         int wav = PlayerPrefs.GetInt("WaveNo") + 1;
         Wave_NO.text = " WAVE NO : " +wav ;
-        Firebase.Analytics.FirebaseAnalytics.LogEvent("WaveMode", "Gameplay", Wave_.ToString());
+        Firebase.Analytics.FirebaseAnalytics.LogEvent("WaveMode_GamePlay_Start", "StartFunction", Wave_.ToString());
         GoogleAdMobController.instance.ShowSmallBannerAd();
     }
     void Delay()
@@ -151,7 +149,7 @@ public class GameManager : MonoBehaviour
 
     public void LevelCompletee()
     {
-         Firebase.Analytics.FirebaseAnalytics.LogEvent("WaveMode", "Wave_Complete", Wave_.ToString());
+        Firebase.Analytics.FirebaseAnalytics.LogEvent("WaveMode_LevelComplete", "WaveComplete", Wave_.ToString());
         GoogleAdMobController.instance.ShowBigBannerAd();
         GoogleAdMobController.instance.ShowInterstitialAd();
         LevelComplete.SetActive(true);
@@ -210,15 +208,15 @@ public class GameManager : MonoBehaviour
     {
 
         // AdsManager.instance.ShowSmallBanner();
-        
+        Firebase.Analytics.FirebaseAnalytics.LogEvent("WaveMode_NextBtn_Click", "WaveMode", Wave_.ToString());
         src.PlayOneShot(Btnclick);
         SceneManager.LoadScene("GamePlay");
         //Time.timeScale = 1f;
     }
     public void Restart_Btn()
     {
-       // AdsManager.instance.ShowSmallBanner();
-
+        // AdsManager.instance.ShowSmallBanner();
+        Firebase.Analytics.FirebaseAnalytics.LogEvent("WaveMode_RestartBtn_Click", "WaveMode", Wave_.ToString());
         //Time.timeScale = 1f;
         src.PlayOneShot(Btnclick);
         SceneManager.LoadScene("GamePlay");
@@ -226,7 +224,7 @@ public class GameManager : MonoBehaviour
     public void Home()
     {
         //AdsManager.instance.ShowSmallBanner();
-
+        Firebase.Analytics.FirebaseAnalytics.LogEvent("WaveMode_HomeBtn_Click", "WaveMode", Wave_.ToString());
         //Time.timeScale = 1f;
         src.PlayOneShot(Btnclick);
         SceneManager.LoadScene("MainMenu");
@@ -235,7 +233,7 @@ public class GameManager : MonoBehaviour
     {
         GoogleAdMobController.instance.ShowInterstitialAd();
         GoogleAdMobController.instance.ShowBigBannerAd();
-       
+        Firebase.Analytics.FirebaseAnalytics.LogEvent("WaveMode_PasueBtn_Click", "WaveMode", Wave_.ToString());
         //  AdsManager.instance.ShowinterAd();
         // AdsManager.instance.ShowBigBanner();
         src.PlayOneShot(Btnclick);

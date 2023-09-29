@@ -91,7 +91,7 @@ public class WaveManager_ : MonoBehaviour
         Bg_Music.volume = PlayerPrefs.GetFloat("Music");
         src.volume = PlayerPrefs.GetFloat("Sounds");
         GoogleAdMobController.instance.ShowSmallBannerAd();
-        //  AdsManager.instance.ShowSmallBanner();
+       
     }
     
     void TotalCount()
@@ -115,7 +115,7 @@ public class WaveManager_ : MonoBehaviour
       {
 
         Wave_ = Levels[PlayerPrefs.GetInt("Wave_No")];
-        Firebase.Analytics.FirebaseAnalytics.LogEvent("SurvivalMode", "GamePlayStart", Wave_.ToString());
+        Firebase.Analytics.FirebaseAnalytics.LogEvent("SurvivalMode_StartFunction", "SurvivalMode", Wave_.ToString());
         TotalCount();
         ZombieContainer.SetActive(true);
         Call_Zombies(Levels[PlayerPrefs.GetInt("Wave_No")]);
@@ -133,7 +133,7 @@ public class WaveManager_ : MonoBehaviour
 
     public void WaveComplete()
     {
-        Firebase.Analytics.FirebaseAnalytics.LogEvent("SurvivalMode", "Wave_Complete", Wave_.ToString());
+        Firebase.Analytics.FirebaseAnalytics.LogEvent("SurvivalMode_WaveComplete", "SurvivalMode", Wave_.ToString());
         PlayerPrefs.SetInt("Wave_No", PlayerPrefs.GetInt("Wave_No") + 1);
         WaveImage.SetActive(true);
       
@@ -176,7 +176,7 @@ public class WaveManager_ : MonoBehaviour
     public void Next_Btn()
     {
         GoogleAdMobController.instance.ShowSmallBannerAd();
-       // AdsManager.instance.ShowSmallBanner();
+        Firebase.Analytics.FirebaseAnalytics.LogEvent("SurvivalMode_NextBtn", "SurvivalMode", Wave_.ToString());
         src.PlayOneShot(Btnclick);
         SceneManager.LoadScene("SurvivalMode");
         //Time.timeScale = 1f;
@@ -185,23 +185,21 @@ public class WaveManager_ : MonoBehaviour
     {
         // AdsManager.instance.ShowSmallBanner();
         GoogleAdMobController.instance.ShowSmallBannerAd();
-        //Time.timeScale = 1f;
+        Firebase.Analytics.FirebaseAnalytics.LogEvent("SurvivalMode_RestartBtn", "SurvivalMode", Wave_.ToString());
         src.PlayOneShot(Btnclick);
         SceneManager.LoadScene("SurvivalMode");
     }
     public void Home()
     {
         GoogleAdMobController.instance.ShowSmallBannerAd();
-        //AdsManager.instance.ShowSmallBanner();
+        Firebase.Analytics.FirebaseAnalytics.LogEvent("SurvivalMode_HomeBtn", "SurvivalMode", Wave_.ToString());
         //Time.timeScale = 1f;
         src.PlayOneShot(Btnclick);
         SceneManager.LoadScene("MainMenu");
     }
     public void Pause_BTn()
     {
-       
-        //  AdsManager.instance.ShowinterAd();
-        // AdsManager.instance.ShowBigBanner();
+        Firebase.Analytics.FirebaseAnalytics.LogEvent("SurvivalMode_PasueBtn", "SurvivalMode", Wave_.ToString());
         src.PlayOneShot(Btnclick);
         LevelPasued.SetActive(true);
         Time.timeScale = 0;
