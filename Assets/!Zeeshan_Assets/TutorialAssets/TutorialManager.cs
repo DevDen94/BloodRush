@@ -1,0 +1,270 @@
+using ControlFreak2.Demos.SwipeSlasher;
+using NaughtyAttributes;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class TutorialManager : MonoBehaviour
+{
+    public static TutorialManager s_Instance;
+
+    #region Tutorial Things
+    [Foldout("Tutorial Icons")]
+    public GameObject dragToWalk;
+    [Foldout("Tutorial Icons")]
+    public GameObject swipeToMove;
+    [Foldout("Tutorial Icons")]
+    public GameObject pressToSprint;
+    [Foldout("Tutorial Icons")]
+    public GameObject pressToJump;
+    [Foldout("Tutorial Icons")]
+    public GameObject pressToShoot;
+    [Foldout("Tutorial Icons")]
+    public GameObject pressToAim;
+    [Foldout("Tutorial Icons")]
+    public GameObject pressToReload;
+    [Foldout("Tutorial Icons")]
+    public GameObject pressToGernade;
+    [Foldout("Tutorial Icons")]
+    public GameObject pressToChangeWeapon;
+    [Foldout("Tutorial Icons")]
+    public GameObject pressToPickupWeapon;
+    [Foldout("Tutorial Icons")]
+    public GameObject mapHighlighter;
+    [Foldout("Tutorial Icons")]
+    public GameObject healthAndOther;
+    #endregion
+
+    #region Game UI Buttons
+    [Foldout("Game UI Buttons")]
+    public GameObject _joystick;
+    [Foldout("Game UI Buttons")]
+    public GameObject jumpButton;
+    [Foldout("Game UI Buttons")]
+    public GameObject sprintButton;
+    [Foldout("Game UI Buttons")]
+    public GameObject[] fireButtons;
+    [Foldout("Game UI Buttons")]
+    public GameObject reloadButton;
+    [Foldout("Game UI Buttons")]
+    public GameObject aimButton;
+    [Foldout("Game UI Buttons")]
+    public GameObject changingWeaponsButton;
+    [Foldout("Game UI Buttons")]
+    public GameObject gernadeButton;
+    [Foldout("Game UI Buttons")]
+    public GameObject[] healthAndOthers;
+    #endregion
+
+    private void Awake()
+    {
+        if(s_Instance == null)
+        {
+            s_Instance = this;
+        }
+    }
+
+    void Start()
+    {
+        dragToWalk.SetActive(true);
+    }
+
+    public void TutorialBehaviour(string eventName)
+    {
+        switch (eventName)
+        {
+            case "End Walk Tut":
+                EndingWalkTut();
+                return;
+
+            case "End Move Tut":
+                EndingMoveTut();
+                return;
+
+            case "End Run Tut":
+                EndingRunTut();
+                return;
+
+            case "End Jump Tut":
+                EndingJumpTut();
+                return;
+
+            case "End Shoot Tut":
+                EndingShootTut();
+                return;
+
+            case "End Aim Tut":
+                EndingAimTut();
+                return;
+
+            case "End Reload Tut":
+                EndingReloadTut();
+                return;
+
+            case "End Gernade Tut":
+                EndingGrenadeTut();
+                return;
+
+            case "End Changing Weapons Tut":
+                EndingChangeWeaponsTut();
+                return;
+
+            case "End Pickup Weapons Tut":
+                EndingPickupWeaponsTut();
+                return;
+
+            case "End Minimap Tut":
+                EndingMapTut(); ;
+                return;
+
+            case "End Health Tut":
+                EndingHealthTut();
+                return;
+        }
+    }
+
+    void EndingWalkTut()
+    {
+        dragToWalk.SetActive(false);
+
+        _joystick.SetActive(true);
+    }
+
+    void EndingMoveTut()
+    {
+        swipeToMove.SetActive(false);
+
+        Time.timeScale = 1;
+    }
+
+    void EndingRunTut()
+    {
+        pressToSprint.SetActive(false);
+
+        sprintButton.SetActive(true);
+
+        Time.timeScale = 1.0f;
+    }
+    
+    void EndingJumpTut()
+    {
+        pressToJump.SetActive(false);
+
+        jumpButton.SetActive(true);
+
+        Time.timeScale = 1.0f;
+
+        StartCoroutine(SwipeTut());
+    }
+
+    void EndingShootTut()
+    {
+        pressToShoot.SetActive(false);
+
+        foreach (GameObject firebtns in fireButtons)
+        {
+            firebtns.SetActive(true);
+        }
+
+        Time.timeScale = 1f;
+    }
+
+    void EndingAimTut()
+    {
+        pressToAim.SetActive(false);
+
+        Time.timeScale = 1f;
+
+        aimButton.SetActive(true);
+
+        StartCoroutine(ShootTut());
+    }
+
+    void EndingReloadTut()
+    {
+        pressToReload.SetActive(false);
+
+        Time.timeScale = 1f;
+
+        StartCoroutine(MapTut());
+
+        IEnumerator MapTut()
+        {
+            yield return new WaitForSeconds(4f);
+
+            Time.timeScale = 0f;
+
+            mapHighlighter.SetActive(true);
+        }
+    }
+
+    void EndingMapTut()
+    {
+        mapHighlighter.SetActive(false);
+
+        healthAndOther.SetActive(true);
+    }
+
+    void EndingHealthTut()
+    {
+        healthAndOther.SetActive(false);
+
+        Time.timeScale = 1;
+
+        TutorialLevelManager.s_Instance._endingPanel.SetActive(true);
+    }
+
+    void EndingGrenadeTut()
+    {
+
+    }
+
+    void EndingChangeWeaponsTut()
+    {
+        pressToChangeWeapon.SetActive(false);
+
+        Time.timeScale = 1f;
+
+        changingWeaponsButton.SetActive(true);
+
+        StartCoroutine(AimTut());
+    }
+
+    void EndingPickupWeaponsTut()
+    {
+
+    }
+
+    #region Coroutines
+    
+    
+    IEnumerator SwipeTut()
+    {
+        yield return new WaitForSeconds(5f);
+
+        swipeToMove.SetActive(true);
+
+        Time.timeScale = 0f;
+    }
+
+    IEnumerator ShootTut()
+    {
+        yield return new WaitForSeconds(5f);
+
+        pressToShoot.SetActive(true);
+
+        Time.timeScale = 0f;
+    }
+
+
+    IEnumerator AimTut()
+    {
+        yield return new WaitForSeconds(5f);
+
+        pressToAim.SetActive(true);
+
+        Time.timeScale = 0f;
+    }
+
+    #endregion
+}

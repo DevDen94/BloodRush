@@ -297,7 +297,10 @@ public class AI : MonoBehaviour {
 		
 		Mathf.Clamp01(randomSpawnChance);
 
-		agent = GetComponent<NavMeshAgent>();
+		if(GetComponent<NavMeshAgent>() != null)
+        {
+            agent = GetComponent<NavMeshAgent>();
+        }
 
 		if(Random.value > randomSpawnChance){
 			Destroy(myTransform.gameObject);
@@ -367,7 +370,12 @@ public class AI : MonoBehaviour {
 
 		if(!spawned){//if spawned, SpawnNPC function will be called from NPCSpawner.cs. Otherwise, spawn now.	
 			StopAllCoroutines();	
-			StartCoroutine(SpawnNPC());
+
+			if(agent != null)
+					{
+
+                StartCoroutine(SpawnNPC());
+            }
 		}
 		
 	}

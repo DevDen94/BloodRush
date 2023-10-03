@@ -13,6 +13,9 @@ public class MainMenuScript : MonoBehaviour
     public Slider[] MusicSlider;
     public VersionNumber number;
     public Text VersionNumber;
+
+    public GameObject _levelsPanel;
+
     void DisableAll()
     {
         foreach(GameObject a in LockedImages)
@@ -38,9 +41,20 @@ public class MainMenuScript : MonoBehaviour
 
         Firebase.Analytics.FirebaseAnalytics.LogEvent("Mode_Selection", "mode_Number", mode.ToString());
 
-        if (mode == 2)
+        if(PlayerPrefs.GetInt("Tut") == 0)
         {
             LoaddingPanel.SetActive(true);
+        }
+        else
+        {
+            if (mode == 1)
+            {
+                _levelsPanel.SetActive(true);
+            }
+            else if (mode == 2)
+            {
+                LoaddingPanel.SetActive(true);
+            }
         }
     }
     void Start()
@@ -118,6 +132,11 @@ public class MainMenuScript : MonoBehaviour
         //AdsManager.instance.ShowinterAd();
         PlayerPrefs.SetInt("WaveNo", way);
         LoaddingPanel.SetActive(true);
+    }
+
+    public void ModeSelection()
+    {
+
     }
 
     public void RateUs()

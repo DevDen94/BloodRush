@@ -21,6 +21,7 @@ TagManager:
   - Hand
   - Zombie
   - Jump
+  - WalkEnd
   layers:
   - Default
   - TransparentFX
