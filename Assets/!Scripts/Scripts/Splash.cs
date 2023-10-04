@@ -18,7 +18,7 @@ public class Splash : MonoBehaviour
     private void Start()
     {
 
-        PlayerPrefs.SetInt("Tut", 1);
+        //PlayerPrefs.SetInt("Tut", 1);
 
         Value = 0;
         StartCoroutine(waitforSceneSwitch());
@@ -53,7 +53,9 @@ public class Splash : MonoBehaviour
         {
             StopCoroutine(waitforSceneSwitch());
             if (activeScene.name == "Splash")
+            {
                 SceneManager.LoadScene("MainMenu");
+            }
             else if (activeScene.name == "MainMenu")
             {
                 if(PlayerPrefs.GetInt("Tut") == 0)
@@ -71,6 +73,10 @@ public class Splash : MonoBehaviour
                         SceneManager.LoadScene("SurvivalMode");
                     }
                 }
+            }
+            else if(activeScene.name == "Tutorial")
+            {
+                SceneManager.LoadScene("MainMenu");
             }
         }
         else

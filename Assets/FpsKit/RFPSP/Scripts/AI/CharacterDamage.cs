@@ -2,6 +2,7 @@
 //Applies damage to NPCs 
 using UnityEngine;
 using System.Collections;
+using System;
 
 public class CharacterDamage : MonoBehaviour {
 	public UnityEngine.Events.UnityEvent onDie; // for save addon by PixelCrushers
@@ -57,7 +58,8 @@ public class CharacterDamage : MonoBehaviour {
 	private LayerMask raymask = 1 << 13;
 
 	public GameObject TextDemage;
-	
+
+    public static event Action zombieDied;
 
     private void Start()
     {
@@ -196,7 +198,7 @@ public class CharacterDamage : MonoBehaviour {
 			onDie.Invoke(); // for save addon by PixelCrushers
 			AIComponent.vocalFx.Stop();
 				
-			if(sloMoDeathChance >= Random.value && isPlayer){
+			if(sloMoDeathChance >= UnityEngine.Random.value && isPlayer){
 				AIComponent.PlayerWeaponsComponent.FPSPlayerComponent.StartCoroutine(AIComponent.PlayerWeaponsComponent.FPSPlayerComponent.ActivateBulletTime(sloMoDeathTime));
 			}
 			if(bodies.Length < 2){//if NPC is only using one capsule collider for collision, instantiate ragdoll, instead of activating existing body part rigidbodies
@@ -252,8 +254,12 @@ public class CharacterDamage : MonoBehaviour {
 		}
 		AIComponent.NPCAttackComponent.enabled = false;
 		AIComponent.StopAllCoroutines();
-		AIComponent.agent.enabled = false;
+		if(AIComponent.agent != null)
+		{
+            AIComponent.agent.enabled = false;
+		}
 		AIComponent.enabled = false;
+		zombieDied?.Invoke();
 		StartCoroutine(ApplyForce(hitBody, bodyForce));
 		//initialize the RemoveBody.cs script attached to the NPC ragdoll
 		if(RemoveBodyComponent){
@@ -274,7 +280,7 @@ public class CharacterDamage : MonoBehaviour {
 		}else{
 			//apply explosive damage force to the ragdoll rigidbodies
 			foreach(Rigidbody rb in bodies) {
-				rb.AddForce((myTransform.position - (attackerPos2 + (Vector3.up * -2.5f))).normalized * Random.Range(2.5f, 4.5f), ForceMode.Impulse);
+				rb.AddForce((myTransform.position - (attackerPos2 + (Vector3.up * -2.5f))).normalized * UnityEngine.Random.Range(2.5f, 4.5f), ForceMode.Impulse);
 			}
 		}
 	}
@@ -338,7 +344,7 @@ public class CharacterDamage : MonoBehaviour {
 					if(explosionCheck){
 						//if(body.transform.name == "Chest"){//only apply damage force to the chest of the ragdoll if damage is from non-player source 
 							//calculate direction to apply damage force to ragdoll
-							body.AddForce((myTransform.position - (attackerPos2 + (Vector3.up * -2.5f))).normalized * Random.Range(4.5f, 7.5f), ForceMode.Impulse);
+							body.AddForce((myTransform.position - (attackerPos2 + (Vector3.up * -2.5f))).normalized * UnityEngine.Random.Range(4.5f, 7.5f), ForceMode.Impulse);
 						//}
 					}else{
 						if(body.transform.name == "Chest"){//only apply damage force to the chest of the ragdoll if damage is from non-player source 

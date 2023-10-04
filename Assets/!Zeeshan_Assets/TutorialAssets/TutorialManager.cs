@@ -39,6 +39,8 @@ public class TutorialManager : MonoBehaviour
     [Foldout("Game UI Buttons")]
     public GameObject _joystick;
     [Foldout("Game UI Buttons")]
+    public GameObject _lookAroundArea;
+    [Foldout("Game UI Buttons")]
     public GameObject jumpButton;
     [Foldout("Game UI Buttons")]
     public GameObject sprintButton;
@@ -120,6 +122,10 @@ public class TutorialManager : MonoBehaviour
             case "End Health Tut":
                 EndingHealthTut();
                 return;
+
+            case "EndTheTutorial":
+                EndingTheTutorial();
+                return;
         }
     }
 
@@ -135,6 +141,8 @@ public class TutorialManager : MonoBehaviour
         swipeToMove.SetActive(false);
 
         Time.timeScale = 1;
+
+        _lookAroundArea.SetActive(true);
     }
 
     void EndingRunTut()
@@ -186,6 +194,8 @@ public class TutorialManager : MonoBehaviour
 
         Time.timeScale = 1f;
 
+        reloadButton.SetActive(true);
+
         StartCoroutine(MapTut());
 
         IEnumerator MapTut()
@@ -209,7 +219,10 @@ public class TutorialManager : MonoBehaviour
     {
         healthAndOther.SetActive(false);
 
-        Time.timeScale = 1;
+        foreach(GameObject hlthAothers in healthAndOthers)
+        {
+            hlthAothers.SetActive(true);
+        }
 
         TutorialLevelManager.s_Instance._endingPanel.SetActive(true);
     }
@@ -235,9 +248,18 @@ public class TutorialManager : MonoBehaviour
 
     }
 
+    void EndingTheTutorial()
+    {
+        Time.timeScale = 1f;
+
+        PlayerPrefs.SetInt("Tut", 1);
+
+        TutorialLevelManager.s_Instance._loadingPanel.SetActive(true);
+    }
+
     #region Coroutines
-    
-    
+
+
     IEnumerator SwipeTut()
     {
         yield return new WaitForSeconds(5f);
