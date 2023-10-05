@@ -7,6 +7,7 @@ public class MainMenuScript : MonoBehaviour
 {
     public GameObject LoaddingPanel;
     public AudioSource src;
+    public AudioSource _buttonClickSrc;
     public AudioClip BtnClickSound;
     public GameObject[] LockedImages;
     public Button[] LevelBtns;
@@ -60,6 +61,8 @@ public class MainMenuScript : MonoBehaviour
     }
     void Start()
     {
+        //PlayerPrefs.SetInt("Tut", 1);
+
         /*   AdsManager.instance.ShowSmallBanner();
            if (AdsManager.instance.isAppOpen)
            {
@@ -83,18 +86,19 @@ public class MainMenuScript : MonoBehaviour
         }
         DisableAll();
         EnableButtons(PlayerPrefs.GetInt("WaveUnlock"));
+
         MusicSlider[0].value = PlayerPrefs.GetFloat("Music");
         MusicSlider[1].value= PlayerPrefs.GetFloat("Sounds");
      
         src.volume= PlayerPrefs.GetFloat("Music");
-
+        _buttonClickSrc.volume = PlayerPrefs.GetFloat("Sounds");
 
         if (GoogleAdMobController.instance.IsAppOpen)
         {
             GoogleAdMobController.instance.ShowAppOpenAd();
             GoogleAdMobController.instance.IsAppOpen = false;
         }
-     
+
     }
 
 
@@ -107,8 +111,9 @@ public class MainMenuScript : MonoBehaviour
 
     public void ButtonClick()
     {
-        src.PlayOneShot(BtnClickSound);
-       
+        //src.PlayOneShot(BtnClickSound);
+
+        _buttonClickSrc.Play();
     }
     // Update is called once per frame
   public void SaveSetting()
@@ -116,13 +121,27 @@ public class MainMenuScript : MonoBehaviour
         PlayerPrefs.SetFloat("Music", MusicSlider[0].value);
         PlayerPrefs.SetFloat("Sounds", MusicSlider[1].value);
         src.volume = PlayerPrefs.GetFloat("Music");
+        _buttonClickSrc.volume = PlayerPrefs.GetFloat("Sounds");
     }
 
-
+    public void SoundBehaviour()
+    {
+        src.volume = MusicSlider[0].value;
+        _buttonClickSrc.volume = MusicSlider[1].value;
+    }
   
+    public void SettingsBack()
+    {
+        src.volume = PlayerPrefs.GetFloat("Music");
+        _buttonClickSrc.volume = PlayerPrefs.GetFloat("Sounds");
+
+        MusicSlider[0].value = PlayerPrefs.GetFloat("Music");
+        MusicSlider[1].value = PlayerPrefs.GetFloat("Sounds");
+    }
+
     public void BTN_cLICK()
     {
-        src.PlayOneShot(BtnClickSound);
+        _buttonClickSrc.Play();
     }
     public void Exit()
     {
