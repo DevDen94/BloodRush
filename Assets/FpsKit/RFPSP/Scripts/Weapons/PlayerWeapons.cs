@@ -532,7 +532,7 @@ public class PlayerWeapons : MonoBehaviour {
 
 		if(PlayerPrefs.GetInt("Tut") != 0)
 		{
-            if (PlayerPrefs.GetInt("Mode") == 1)
+            /*if (PlayerPrefs.GetInt("Mode") == 1)
             {
                 for (int i = 0; i < WeaponImages.Length; ++i)
                 {
@@ -547,7 +547,7 @@ public class PlayerWeapons : MonoBehaviour {
                     wp.SlotImageParent(ThisWeaponBehavior.Wheel_Btn);
                 }
 
-            }
+            }*/
         }
 		
 

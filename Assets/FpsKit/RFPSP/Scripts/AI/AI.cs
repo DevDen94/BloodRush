@@ -252,10 +252,11 @@ public class AI : MonoBehaviour {
 	public int counter;
     private void Update()
 	{
-		if(PlayerPrefs.GetInt("Tut") != 0)
-        {
-            if (PlayerPrefs.GetInt("Mode") == 1)
+		//if (PlayerPrefs.GetInt("Tut") != 0)
+		//{
+			if (PlayerPrefs.GetInt("Mode") == 1)
             {
+				Debug.Log("mode 1");
                 if (GameManager.instance.BrokenEnable && !isCheck)
                 {
                     waypointGroup = GameManager.instance.BrokenPaths[PathIndex];
@@ -264,8 +265,8 @@ public class AI : MonoBehaviour {
                     isCheck = true;
                 }
             }
-        }
-        if (LookAt)
+		//}
+		if (LookAt)
         {
 			gameObject.transform.LookAt(curWayPoint.GetComponent<CheckWindow>().window.transform);
 		}
@@ -300,10 +301,10 @@ public class AI : MonoBehaviour {
 		
 		Mathf.Clamp01(randomSpawnChance);
 
-		if(GetComponent<NavMeshAgent>() != null)
-        {
+		//if(GetComponent<NavMeshAgent>() != null)
+  //      {
             agent = GetComponent<NavMeshAgent>();
-        }
+        //}
 
 		if(Random.value > randomSpawnChance){
 			Destroy(myTransform.gameObject);
@@ -374,11 +375,11 @@ public class AI : MonoBehaviour {
 		if(!spawned){//if spawned, SpawnNPC function will be called from NPCSpawner.cs. Otherwise, spawn now.	
 			StopAllCoroutines();	
 
-			if(agent != null)
-					{
+			//if(agent != null)
+			//{
 
                 StartCoroutine(SpawnNPC());
-            }
+            //}
 		}
 		
 	}

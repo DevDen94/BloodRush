@@ -217,8 +217,10 @@ public class CharacterDamage : MonoBehaviour {
 			PlayAudioAtPos.PlayClipAt(dieSound, transform.position, 1.0f);
 			if(PlayerPrefs.GetInt("Tut") != 0) 
 			{
+				Debug.Log("Not Tutorial");
                 if (PlayerPrefs.GetInt("Mode") == 1)
                 {
+                    Debug.Log("Survival Mode");
                     GameManager.instance.ZombieDeathCount--;
                     if (GameManager.instance.ZombieDeathCount == 0)
                     {
@@ -227,6 +229,8 @@ public class CharacterDamage : MonoBehaviour {
                 }
                 else
                 {
+                    Debug.Log("Wave Mode");
+
                     WaveManager_.instance.ZombieDeathCount--;
                     WaveManager_.instance.Total_Kills = WaveManager_.instance.Total_Kills + 1;
                     if (WaveManager_.instance.ZombieDeathCount == 0)
@@ -235,10 +239,6 @@ public class CharacterDamage : MonoBehaviour {
                     }
                 }
             }
-			else
-			{
-
-			}
 		}
 		
 		AIComponent.NPCRegistryComponent.UnregisterNPC(AIComponent);//unregister NPC from main NPC registry
@@ -259,7 +259,10 @@ public class CharacterDamage : MonoBehaviour {
             AIComponent.agent.enabled = false;
 		}
 		AIComponent.enabled = false;
-		zombieDied?.Invoke();
+		if(PlayerPrefs.GetInt("Tut") == 0)
+        {
+            zombieDied?.Invoke();
+        }
 		StartCoroutine(ApplyForce(hitBody, bodyForce));
 		//initialize the RemoveBody.cs script attached to the NPC ragdoll
 		if(RemoveBodyComponent){
