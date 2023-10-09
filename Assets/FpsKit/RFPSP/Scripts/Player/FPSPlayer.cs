@@ -4,6 +4,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using ControlFreak2;
 
 public class FPSPlayer : MonoBehaviour {
 	[HideInInspector]
@@ -303,6 +304,8 @@ public class FPSPlayer : MonoBehaviour {
 	[HideInInspector]
 	public bool paused;
 	private MainMenu MainMenuComponent;
+
+	public GameObject _pickupButton;
 
 	private Transform myTransform;
 	int abc = 0;
@@ -1030,10 +1033,11 @@ public class FPSPlayer : MonoBehaviour {
 	public void UpdateReticle( bool reticleType ){
 		if(!reticleType){
 			crosshairUiImage.sprite = pickupTex;
-			//crosshairUiImage.color = pickupReticleColor;
-			
-			//Debug.Log("RED");
-			crosshairTextureState = true;
+			Debug.Log("CHC");
+            //crosshairUiImage.color = pickupReticleColor;
+
+            //Debug.Log("RED");
+            crosshairTextureState = true;
 		}else{
 			crosshairUiImage.sprite = aimingReticle;
 			//crosshairUiImage.color = reticleColor;

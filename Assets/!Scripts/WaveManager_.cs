@@ -72,6 +72,11 @@ public class WaveManager_ : MonoBehaviour
     public GameObject Slot3_G;
     public GameObject Slot4_G;
     public GameObject Coming;
+
+    [Header("Give Aways After Completing Wave")]
+    public GameObject[] _giveAwayElements;
+    public HealthText _healthBar;
+    public AmmoText _ammo;
     private void Start()
     {
         LoadWeapons_Data();
@@ -90,8 +95,8 @@ public class WaveManager_ : MonoBehaviour
         Invoke("Delay", 1.5f);
         Bg_Music.volume = PlayerPrefs.GetFloat("Music");
         src.volume = PlayerPrefs.GetFloat("Sounds");
-        GoogleAdMobController.instance.ShowSmallBannerAd();
-       
+        //GoogleAdMobController.instance.ShowSmallBannerAd();
+
     }
     
     void TotalCount()
@@ -136,8 +141,34 @@ public class WaveManager_ : MonoBehaviour
         Firebase.Analytics.FirebaseAnalytics.LogEvent("SurvivalMode_WaveComplete", "SurvivalMode", Wave_.ToString());
         PlayerPrefs.SetInt("Wave_No", PlayerPrefs.GetInt("Wave_No") + 1);
         WaveImage.SetActive(true);
-      
+
+        GiveAwavy();
     }
+
+    void GiveAwavy ()
+    {
+        if (_healthBar.Health.value < 60)
+        {
+            SpawnGiveawayElement(0);
+        }
+        else
+        {
+            SpawnGiveawayElement(1);
+        }
+    }
+
+    void SpawnGiveawayElement(int i)
+    {
+        // Calculate a random position within the specified radius from the player
+        Vector3 randomPosition = Player.position + Random.insideUnitSphere * 10f;
+
+        // Ensure the object is at the same Y coordinate as the player or adjust as needed
+        randomPosition.y = Player.position.y;
+
+        // Instantiate the GameObject at the calculated position
+        Instantiate(_giveAwayElements[i], randomPosition, Quaternion.identity);
+    }
+
     private void Update()
     {
         if (Gernade.ammo == 0 && is_Gernade==false)

@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac054b7b644d0294e8a8a6695b42b7db, type: 3}
   m_Name: Level2_15
   m_EditorClassIdentifier: 
-  NormalZombies_Count: 3
+  NormalZombies_Count: 2
   DoctorZombie_Count: 0
-  FatZombie_Count: 5
+  FatZombie_Count: 2
   Miltory_Count: 0
   Muscular_Count: 0
   Fireman_Zombies: 0
