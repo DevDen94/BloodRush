@@ -30,6 +30,7 @@ public class WeaponEffects : MonoBehaviour {
 	public GameObject stoneImpact;
 	[Tooltip("Particle effect to use for explosions.")]
 	public GameObject explosion;
+	public Animator pointLight;
 	private GameObject explosionObj;
 	[Tooltip("Particle effect to use for water splashes.")]
 	public GameObject waterSplash;
@@ -456,6 +457,7 @@ public class WeaponEffects : MonoBehaviour {
 			if(child.GetComponent<ParticleSystem>()){
 				partSys = child.GetComponent<ParticleSystem>();
 				partSys.Emit(Mathf.RoundToInt(partSys.emission.rateOverTime.constant));//emit the particle(s)
+				pointLight.Play("GrenadeAnim");
 			}
 		}
 	}

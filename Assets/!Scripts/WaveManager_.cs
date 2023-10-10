@@ -95,7 +95,7 @@ public class WaveManager_ : MonoBehaviour
         Invoke("Delay", 1.5f);
         Bg_Music.volume = PlayerPrefs.GetFloat("Music");
         src.volume = PlayerPrefs.GetFloat("Sounds");
-        //GoogleAdMobController.instance.ShowSmallBannerAd();
+        GoogleAdMobController.instance.ShowSmallBannerAd();
 
     }
     
@@ -147,7 +147,7 @@ public class WaveManager_ : MonoBehaviour
 
     void GiveAwavy ()
     {
-        if (_healthBar.Health.value < 60)
+        if (_healthBar.Health.value < 70)
         {
             SpawnGiveawayElement(0);
         }
@@ -159,14 +159,42 @@ public class WaveManager_ : MonoBehaviour
 
     void SpawnGiveawayElement(int i)
     {
-        // Calculate a random position within the specified radius from the player
-        Vector3 randomPosition = Player.position + Random.insideUnitSphere * 10f;
+        //// Calculate a random position within the specified radius from the player
+        //Vector3 randomPosition = Player.position + Random.insideUnitSphere * 5f;
 
-        // Ensure the object is at the same Y coordinate as the player or adjust as needed
-        randomPosition.y = Player.position.y;
+        //// Ensure the object is at the same Y coordinate as the player or adjust as needed
+        //randomPosition.y = Player.position.y;
 
-        // Instantiate the GameObject at the calculated position
-        Instantiate(_giveAwayElements[i], randomPosition, Quaternion.identity);
+        //// Instantiate the GameObject at the calculated position
+        //Instantiate(_giveAwayElements[i], randomPosition, Quaternion.identity);
+
+        //// Calculate a random angle within the specified range
+        //float randomAngle = Random.Range(-20, 20);
+
+        //// Convert the angle to radians
+        //float randomAngleRad = randomAngle * Mathf.Deg2Rad;
+
+        //// Calculate the direction vector in front of the player
+        //Vector3 spawnDirection = new Vector3(Mathf.Sin(randomAngleRad), 0, Mathf.Cos(randomAngleRad));
+
+        //// Calculate the spawn position in front of the player
+        //Vector3 randomPosition = Player.position + spawnDirection * Random.Range(0, 7f);
+
+        //// Ensure the object is at the same Y coordinate as the player or adjust as needed
+        //randomPosition.y = Player.position.y;
+        //randomPosition.z -= 7f;
+        //// Instantiate the GameObject at the calculated position
+        //Instantiate(_giveAwayElements[i], randomPosition, Quaternion.identity);
+
+        Quaternion giveawayRot = Player.localRotation;
+        Vector3 giveawayPos = Player.localPosition;
+
+        giveawayPos.z -= 7f;
+
+        GameObject instatiatedGiveaway = Instantiate(_giveAwayElements[i]);
+
+        instatiatedGiveaway.transform.rotation = giveawayRot;
+        instatiatedGiveaway.transform.position = giveawayPos;
     }
 
     private void Update()

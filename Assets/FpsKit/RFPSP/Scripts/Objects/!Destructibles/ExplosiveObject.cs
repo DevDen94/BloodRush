@@ -29,7 +29,9 @@ public class ExplosiveObject : MonoBehaviour {
 	private AudioSource aSource;
 	private Collider hitCollider;
 	private Rigidbody hitRigidbody;
-	
+
+	//public Light pointLight;
+
 	void Start (){
 		WeaponEffectsComponent = Camera.main.GetComponent<CameraControl>().playerObj.GetComponent<FPSPlayer>().WeaponEffectsComponent;
 		myTransform = transform;
@@ -86,6 +88,7 @@ public class ExplosiveObject : MonoBehaviour {
 		WeaponEffectsComponent.ExplosionEffect(myTransform.position);
 		
 		myTransform.GetComponent<MeshRenderer>().enabled = false;
+
 		aSource.pitch = Random.Range(0.75f * Time.timeScale, 1.0f * Time.timeScale);//add slight random value to sound pitch for variety
 		aSource.Play();
 		audioPlayed = true;
@@ -158,4 +161,5 @@ public class ExplosiveObject : MonoBehaviour {
 		}
 	}
 	
+	//IEnumerator()
 }

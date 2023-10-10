@@ -155,6 +155,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   objectPoolIndex: 16
+  pointLight: {fileID: 0}
 --- !u!82 &8225956
 AudioSource:
   m_ObjectHideFlags: 0
