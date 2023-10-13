@@ -211,17 +211,17 @@ public class InputControl : MonoBehaviour {
 
 			//Debug.Log(ControlFreak2.CF2Input.GetAxis("Joystick Move X"));
 
-			if (ControlFreak2.CF2Input.GetAxis("Joystick Move X") != 0 && TouchButton.toggle == true)
-			{
-				TouchButton.toggle = false;
-				StartCoroutine(TurnOffToggle());
-			}
+			//if (ControlFreak2.CF2Input.GetAxis("Joystick Move X") != 0 && TouchButton.toggle == true)
+			//{
+			//	TouchButton.toggle = false;
+			//	StartCoroutine(TurnOffToggle());
+			//}
 
-			IEnumerator TurnOffToggle()
-            {
-				yield return new WaitForSeconds(0.5f);
-				TouchButton.toggle = true;
-			}
+			//IEnumerator TurnOffToggle()
+   //         {
+			//	yield return new WaitForSeconds(0.5f);
+			//	TouchButton.toggle = true;
+			//}
 
 
 			if(moveInput.magnitude < deadzone){

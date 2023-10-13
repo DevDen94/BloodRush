@@ -66,6 +66,11 @@ public class GameManager : MonoBehaviour
     private bool is_Gernade;
     public Text Wave_NO;
     private Level_Data Wave_;
+
+    public GameObject TorchLight;
+    public GameObject TorchOn;
+    public GameObject TorchOff;
+
     void TotalCount()
     {
         ZombieDeathCount = Wave_.DoctorZombie_Count +
@@ -528,5 +533,13 @@ public class GameManager : MonoBehaviour
                 currentIndex++;
             }
         }
+    }
+
+    public void TorchActivity()
+    {
+        TorchLight.SetActive(!TorchLight.activeInHierarchy);
+
+        TorchOn.SetActive(TorchLight.activeInHierarchy);
+        TorchOff.SetActive(!TorchLight.activeInHierarchy);
     }
 }

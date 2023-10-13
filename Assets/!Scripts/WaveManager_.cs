@@ -77,6 +77,12 @@ public class WaveManager_ : MonoBehaviour
     public GameObject[] _giveAwayElements;
     public HealthText _healthBar;
     public AmmoText _ammo;
+    public Transform _referenceObjectForSpawnning;
+
+    public GameObject TorchLight;
+    public GameObject TorchOn;
+    public GameObject TorchOff;
+
     private void Start()
     {
         LoadWeapons_Data();
@@ -186,10 +192,11 @@ public class WaveManager_ : MonoBehaviour
         //// Instantiate the GameObject at the calculated position
         //Instantiate(_giveAwayElements[i], randomPosition, Quaternion.identity);
 
-        Quaternion giveawayRot = Player.localRotation;
-        Vector3 giveawayPos = Player.localPosition;
+        Quaternion giveawayRot = _referenceObjectForSpawnning.localRotation;
+        Vector3 giveawayPos = _referenceObjectForSpawnning.localPosition;
 
-        giveawayPos.z -= 7f;
+        giveawayPos.z -= 5.5f;
+        giveawayRot.x = 0f;
 
         GameObject instatiatedGiveaway = Instantiate(_giveAwayElements[i]);
 
@@ -536,5 +543,13 @@ public class WaveManager_ : MonoBehaviour
     void sec()
     {
         Gernade.cycleSelect = true;
+    }
+
+    public void TorchActivity()
+    {
+        TorchLight.SetActive(!TorchLight.activeInHierarchy);
+
+        TorchOn.SetActive(TorchLight.activeInHierarchy);
+        TorchOff.SetActive(!TorchLight.activeInHierarchy);
     }
 }
