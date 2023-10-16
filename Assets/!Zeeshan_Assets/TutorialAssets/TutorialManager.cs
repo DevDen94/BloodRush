@@ -254,6 +254,10 @@ public class TutorialManager : MonoBehaviour
 
         PlayerPrefs.SetInt("Tut", 1);
 
+        PlayerPrefs.SetInt("Mode", 1);
+
+        MainMenuScript.instance.WayLevel(0);
+
         TutorialLevelManager.s_Instance._loadingPanel.SetActive(true);
     }
 

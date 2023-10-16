@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 public class MainMenuScript : MonoBehaviour
 {
+    public static MainMenuScript instance;
+
     public GameObject LoaddingPanel;
     public AudioSource src;
     public AudioSource _buttonClickSrc;
@@ -16,6 +18,14 @@ public class MainMenuScript : MonoBehaviour
     public Text VersionNumber;
 
     public GameObject _levelsPanel;
+
+    private void Awake()
+    {
+        if(instance == null)
+        {
+            instance = this;
+        }
+    }
 
     void DisableAll()
     {
@@ -71,6 +81,8 @@ public class MainMenuScript : MonoBehaviour
            }*/
 
         GoogleAdMobController.instance.ShowSmallBannerAd();
+
+        Time.timeScale = 1f;
 
         VersionNumber.text = number.Playstore_Version + " : " + number.Appstore_Version;
         //Screen.sleepTimeout = SleepTimeout.NeverSleep;
@@ -151,7 +163,10 @@ public class MainMenuScript : MonoBehaviour
     {
         //AdsManager.instance.ShowinterAd();
         PlayerPrefs.SetInt("WaveNo", way);
-        LoaddingPanel.SetActive(true);
+        if(SceneManager.GetActiveScene().name != "Tutorial")
+        {
+            LoaddingPanel.SetActive(true);
+        }
     }
 
     public void ModeSelection()

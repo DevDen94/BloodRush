@@ -76,7 +76,7 @@ public class Splash : MonoBehaviour
             }
             else if(activeScene.name == "Tutorial")
             {
-                SceneManager.LoadScene("MainMenu");
+                SceneManager.LoadScene("GamePlay");
             }
         }
         else
