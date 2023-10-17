@@ -530,25 +530,25 @@ public class PlayerWeapons : MonoBehaviour {
 		//also dont allow weapon switch if player is climbing, swimming, or holding object and their weapon is lowered
 		WeaponBehavior ThisWeaponBehavior = weaponOrder[index].GetComponent<WeaponBehavior>();
 
-		if(PlayerPrefs.GetInt("Tut") != 0)
-		{
-            /*if (PlayerPrefs.GetInt("Mode") == 1)
-            {
-                for (int i = 0; i < WeaponImages.Length; ++i)
-                {
-                    WeaponImages[i].SetActive(false);
-                }
-                WeaponImages[index].SetActive(true);
-            }
-            else
-            {
-                if (index != 14)
-                {
-                    wp.SlotImageParent(ThisWeaponBehavior.Wheel_Btn);
-                }
+		//if(PlayerPrefs.GetInt("Tut") != 0)
+		//{
+			if (PlayerPrefs.GetInt("Mode") == 1)
+			{
+				for (int i = 0; i < WeaponImages.Length; ++i)
+				{
+					WeaponImages[i].SetActive(false);
+				}
+				WeaponImages[index].SetActive(true);
+			}
+			else
+			{
+				if (index != 14)
+				{
+					wp.SlotImageParent(ThisWeaponBehavior.Wheel_Btn);
+				}
 
-            }*/
-        }
+			}
+		//}
 		
 
 

@@ -97,16 +97,12 @@ public class GameManager : MonoBehaviour
             PlayerPrefs.SetFloat("START", 1);
             PlayerPrefs.SetInt("WaveNo", 0);
         }
-        Wave_= Levels[PlayerPrefs.GetInt("WaveNo")];
-        TotalCount();
-        LoadWeapons_Data(PlayerPrefs.GetInt("WaveNo"));
-        Invoke("Instaniate_Zombies",1f);
-        Invoke("Delay", 1.5f);
+        
         Bg_Music.volume = PlayerPrefs.GetFloat("Music");
         src.volume = PlayerPrefs.GetFloat("Sounds");
         int wav = PlayerPrefs.GetInt("WaveNo") + 1;
         Wave_NO.text = " WAVE NO : " +wav ;
-        Firebase.Analytics.FirebaseAnalytics.LogEvent("WaveMode_GamePlay_Start", "StartFunction", Wave_.ToString());
+        
         GoogleAdMobController.instance.ShowSmallBannerAd();
     }
     void Delay()
@@ -124,9 +120,18 @@ public class GameManager : MonoBehaviour
         
         BrokenEnable = true;
         Time.timeScale = 0f;
-        
-   
     }
+
+    public void CutSceneDelay()
+    {
+        Wave_ = Levels[PlayerPrefs.GetInt("WaveNo")];
+        TotalCount();
+        LoadWeapons_Data(PlayerPrefs.GetInt("WaveNo"));
+        Invoke("Instaniate_Zombies", 1f);
+        Invoke("Delay", 1.5f);
+        Firebase.Analytics.FirebaseAnalytics.LogEvent("WaveMode_GamePlay_Start", "StartFunction", Wave_.ToString());
+    }
+
     void Instaniate_Zombies()
     {
             ZombieContainer.SetActive(true);

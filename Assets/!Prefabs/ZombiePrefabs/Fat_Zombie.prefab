@@ -1988,7 +1988,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 5614927484693983967, guid: 9090489170c3e6245996b0bf51627bb1, type: 3}
+  - {fileID: 2100000, guid: 5c1069e39c6981b4c8a0725c81ad3b8c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5354,7 +5354,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 7260551656637297161}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 3.64
+  m_Radius: 6
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50

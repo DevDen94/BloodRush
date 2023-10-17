@@ -4,6 +4,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class NPCRegistry : MonoBehaviour {
 	private FPSRigidBodyWalker FPSWalker;
@@ -18,10 +19,21 @@ public class NPCRegistry : MonoBehaviour {
 	private RaycastHit hit;
 
 	void Start () {
-		playerObj = Camera.main.transform.GetComponent<CameraControl>().playerObj;
-		FPSWalker = playerObj.GetComponent<FPSRigidBodyWalker>();
-		playerTransform = playerObj.transform;
-	}
+		if(SceneManager.GetActiveScene().name == "SurvivalMode")
+        {
+            playerObj = Camera.main.transform.GetComponent<CameraControl>().playerObj;
+            FPSWalker = playerObj.GetComponent<FPSRigidBodyWalker>();
+            playerTransform = playerObj.transform;
+        }
+    }
+
+	public void StartWalaKam()
+	{
+        playerObj = Camera.main.transform.GetComponent<CameraControl>().playerObj;
+        FPSWalker = playerObj.GetComponent<FPSRigidBodyWalker>();
+        playerTransform = playerObj.transform;
+    }
+
 
 	//Remove an NPC from the NPC registry
 	public void UnregisterNPC(AI NpcAI){

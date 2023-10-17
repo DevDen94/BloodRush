@@ -13,9 +13,4 @@ public class Level_Data : ScriptableObject
     public int Fireman_Zombies;
     public int PoliceMen_Zombies;
 
-
-    
-    //   public int WeaponsUnlock;
-    
-
 }

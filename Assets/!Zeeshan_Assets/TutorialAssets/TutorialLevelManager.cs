@@ -7,13 +7,13 @@ public class TutorialLevelManager : MonoBehaviour
 {
     public static TutorialLevelManager s_Instance;
 
+    public AudioSource[] m_allAudios;
+
     public Transform _player;
     public GameObject _weaponsToPickup;
     public GameObject _endingPanel;
     public GameObject _loadingPanel;
     public GameObject _zombie;
-
-   
 
     private void Awake()
     {
@@ -27,6 +27,12 @@ public class TutorialLevelManager : MonoBehaviour
 
     void Start()
     {
+        m_allAudios = FindObjectsOfType<AudioSource>();
+
+        foreach (AudioSource audios in m_allAudios)
+        {
+            audios.volume = PlayerPrefs.GetFloat("Music");
+        }
 
         CharacterDamage.zombieDied += ZombieDied;
     }

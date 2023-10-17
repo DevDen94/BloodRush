@@ -430,19 +430,25 @@ public class WaveManager_ : MonoBehaviour
     }
     void Call_Zombies(Level_Data level)  // Instaniate Zombies
     {
+        StartCoroutine(Call_Zombies_Coroutine(level));
+
+    } 
+
+    IEnumerator Call_Zombies_Coroutine(Level_Data level)
+    {
         // Call Normal Zombies
         for (int i = 1; i <= level.NormalZombies_Count; i++)
         {
             int rand = Random.Range(0, NormalZombies.Length);
             GameObject T = NormalZombies[rand];
             GameObject temp = Instantiate(T, SpawnPoints[i].transform.position, SpawnPoints[i].transform.rotation);
-         
+
             temp.transform.SetParent(ZombieContainer.transform);
             instantiatedObjectsList.Add(temp);
             System.Array.Resize(ref AllZombies, AllZombies.Length + 1);
             AllZombies[AllZombies.Length - 1] = temp;
 
-
+            yield return new WaitForSeconds(0.2f);
         }
         // Call Doctor Zombies
         if (level.DoctorZombie_Count != 0)
@@ -451,11 +457,12 @@ public class WaveManager_ : MonoBehaviour
             {
                 GameObject temp = Instantiate(DoctorZombie, SpawnPoints[i].transform.position, SpawnPoints[i].transform.rotation);
                 temp.transform.SetParent(ZombieContainer.transform);
-              
+
                 instantiatedObjectsList.Add(temp);
                 System.Array.Resize(ref AllZombies, AllZombies.Length + 1);
                 AllZombies[AllZombies.Length - 1] = temp;
 
+                yield return new WaitForSeconds(0.2f);
             }
         }
         // Call Miltary Zombies
@@ -470,6 +477,7 @@ public class WaveManager_ : MonoBehaviour
                 System.Array.Resize(ref AllZombies, AllZombies.Length + 1);
                 AllZombies[AllZombies.Length - 1] = temp;
 
+                yield return new WaitForSeconds(0.2f);
             }
         }
         // Call Muscular Zombies
@@ -484,6 +492,7 @@ public class WaveManager_ : MonoBehaviour
                 System.Array.Resize(ref AllZombies, AllZombies.Length + 1);
                 AllZombies[AllZombies.Length - 1] = temp;
 
+                yield return new WaitForSeconds(0.2f);
             }
         }
         // Call PoliceMen Zombies
@@ -493,11 +502,12 @@ public class WaveManager_ : MonoBehaviour
             {
                 GameObject temp = Instantiate(PoliceMenZombie, SpawnPoints[i].transform.position, SpawnPoints[i].transform.rotation);
                 temp.transform.SetParent(ZombieContainer.transform);
-       ;
+                ;
                 instantiatedObjectsList.Add(temp);
                 System.Array.Resize(ref AllZombies, AllZombies.Length + 1);
                 AllZombies[AllZombies.Length - 1] = temp;
 
+                yield return new WaitForSeconds(0.2f);
             }
         }
         // Call FAT Zombies
@@ -507,11 +517,12 @@ public class WaveManager_ : MonoBehaviour
             {
                 GameObject temp = Instantiate(Fat_Zombie, SpawnPoints[i].transform.position, SpawnPoints[i].transform.rotation);
                 temp.transform.SetParent(ZombieContainer.transform);
-  
+
                 instantiatedObjectsList.Add(temp);
                 System.Array.Resize(ref AllZombies, AllZombies.Length + 1);
                 AllZombies[AllZombies.Length - 1] = temp;
 
+                yield return new WaitForSeconds(0.2f);
             }
         }
 
@@ -527,10 +538,10 @@ public class WaveManager_ : MonoBehaviour
                 System.Array.Resize(ref AllZombies, AllZombies.Length + 1);
                 AllZombies[AllZombies.Length - 1] = temp;
 
+                yield return new WaitForSeconds(0.2f);
             }
         }
-
-    } 
+    }
 
     public List<GameObject> instantiatedObjectsList = new List<GameObject>();
     public  GameObject[] AllZombies;
