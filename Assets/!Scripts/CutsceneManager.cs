@@ -28,6 +28,11 @@ public class CutsceneManager : MonoBehaviour
 
     private void Start()
     {
+        if(PlayerPrefs.GetInt("WaveNo") != 0)
+        {
+            gameObject.SetActive(false);
+            return;
+        }
         foreach (GameObject item in afterEnableingCutsceneThings)
         {
             item.SetActive(false);

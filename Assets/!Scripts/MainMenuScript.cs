@@ -19,6 +19,11 @@ public class MainMenuScript : MonoBehaviour
 
     public GameObject _levelsPanel;
 
+    public GameObject[] _levelPanels;
+    public GameObject _levelRightBtn;
+    public GameObject _levelLeftBtn;
+    int _currentLevelPanelsIndex;
+
     private void Awake()
     {
         if(instance == null)
@@ -48,7 +53,6 @@ public class MainMenuScript : MonoBehaviour
     }
     public void ModeSelect(int mode)
     {
-        
 
         Firebase.Analytics.FirebaseAnalytics.LogEvent("Mode_Selection", "mode_Number", mode.ToString());
 
@@ -82,6 +86,8 @@ public class MainMenuScript : MonoBehaviour
 
         GoogleAdMobController.instance.ShowSmallBannerAd();
 
+        _levelPanels[_currentLevelPanelsIndex].SetActive(true);
+
         Time.timeScale = 1f;
 
         VersionNumber.text = number.Playstore_Version + " : " + number.Appstore_Version;
@@ -97,6 +103,7 @@ public class MainMenuScript : MonoBehaviour
             PlayerPrefs.SetFloat("Sounds", 0.5f);
         }
         DisableAll();
+        Debug.Log("wave unlock " + PlayerPrefs.GetInt("WaveUnlock")); 
         EnableButtons(PlayerPrefs.GetInt("WaveUnlock"));
 
         MusicSlider[0].value = PlayerPrefs.GetFloat("Music");
@@ -194,4 +201,33 @@ public class MainMenuScript : MonoBehaviour
         Application.Quit();
     }
 
+    public void LevelsRight()
+    {
+        _levelPanels[_currentLevelPanelsIndex].SetActive(false);
+        _currentLevelPanelsIndex++;
+        _levelLeftBtn.SetActive(true);
+
+        if(_currentLevelPanelsIndex >= _levelPanels.Length - 1)
+        {
+            _levelRightBtn.SetActive(false);
+            _currentLevelPanelsIndex = _levelPanels.Length - 1;
+        }
+
+        _levelPanels[_currentLevelPanelsIndex].SetActive(true);
+    }
+
+    public void LevelsLeft()
+    {
+        _levelPanels[_currentLevelPanelsIndex].SetActive(false);
+        _currentLevelPanelsIndex--;
+        _levelRightBtn.SetActive(true);
+
+        if (_currentLevelPanelsIndex <= 0)
+        {
+            _levelLeftBtn.SetActive(false);
+            _currentLevelPanelsIndex = 0;
+        }
+
+        _levelPanels[_currentLevelPanelsIndex].SetActive(true);
+    }
 }

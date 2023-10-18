@@ -33,7 +33,6 @@ public class DynamicTorchBrightness : MonoBehaviour
         }
         else
         {
-            Debug.Log("dddd");
             _torchLight.intensity = _maxIntensity;
         }
     }

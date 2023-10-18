@@ -71,6 +71,10 @@ public class GameManager : MonoBehaviour
     public GameObject TorchOn;
     public GameObject TorchOff;
 
+    //public LaserBeamManager[] LaserBeams;
+    //public GameObject LaserOn;
+    //public GameObject LaserOff;
+
     void TotalCount()
     {
         ZombieDeathCount = Wave_.DoctorZombie_Count +
@@ -98,11 +102,21 @@ public class GameManager : MonoBehaviour
             PlayerPrefs.SetInt("WaveNo", 0);
         }
         
+        if(PlayerPrefs.GetInt("WaveNo") != 0)
+        {
+            CutSceneDelay();
+        }
+
         Bg_Music.volume = PlayerPrefs.GetFloat("Music");
         src.volume = PlayerPrefs.GetFloat("Sounds");
         int wav = PlayerPrefs.GetInt("WaveNo") + 1;
         Wave_NO.text = " WAVE NO : " +wav ;
-        
+
+        //foreach(var beam in LaserBeams)
+        //{
+        //    beam.gameObject.SetActive(false);
+        //}
+
         GoogleAdMobController.instance.ShowSmallBannerAd();
     }
     void Delay()
@@ -209,9 +223,20 @@ public class GameManager : MonoBehaviour
                 }
             }
             AttackModeOn = false;
-       
-        
         }
+
+        //if(ControlFreak2.CF2Input.GetKey(KeyCode.LeftShift))
+        //{
+        //    Debug.Log("LaserCancel");
+
+        //    foreach (var beam in LaserBeams)
+        //    {
+        //        beam.gameObject.SetActive(false);
+        //    }
+
+        //    LaserOn.SetActive(false);
+        //    LaserOff.SetActive(true);
+        //}
     }
 
     public void Next_Btn()
@@ -547,4 +572,15 @@ public class GameManager : MonoBehaviour
         TorchOn.SetActive(TorchLight.activeInHierarchy);
         TorchOff.SetActive(!TorchLight.activeInHierarchy);
     }
+
+    //public void LaserBeamActivity()
+    //{
+    //    foreach (var beam in LaserBeams)
+    //    {
+    //        beam.gameObject.SetActive(!beam.gameObject.activeInHierarchy);
+    //    }
+
+    //    LaserOn.SetActive(!LaserOn.activeInHierarchy);
+    //    LaserOff.SetActive(!LaserOn.activeInHierarchy);
+    //}
 }

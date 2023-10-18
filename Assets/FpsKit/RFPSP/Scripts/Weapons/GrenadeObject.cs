@@ -11,19 +11,19 @@ public class GrenadeObject : MonoBehaviour {
 	private ExplosiveObject ExplosiveObjectComponent;
 	private WeaponBehavior WeaponBehaviorComponent;
 
-	AudioSource explosionSound;
+	public AudioSource explosionSound;
 
 	void Start(){
 		ExplosiveObjectComponent = GetComponent<ExplosiveObject>();
 
-		explosionSound = GetComponent<AudioSource>();
-	}
+        explosionSound.volume = PlayerPrefs.GetFloat("Music");
+    }
 
 	void OnEnable()
 	{
 		startTime = Time.time;
 
-		explosionSound.volume = PlayerPrefs.GetFloat("Music");
+		
 	}
 
 

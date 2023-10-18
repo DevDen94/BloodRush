@@ -21,9 +21,14 @@ public class NPCRegistry : MonoBehaviour {
 	void Start () {
 		if(SceneManager.GetActiveScene().name == "SurvivalMode")
         {
-            playerObj = Camera.main.transform.GetComponent<CameraControl>().playerObj;
-            FPSWalker = playerObj.GetComponent<FPSRigidBodyWalker>();
-            playerTransform = playerObj.transform;
+			StartWalaKam();
+        }
+		else 
+		{
+            if (PlayerPrefs.GetInt("WaveNo") != 0)
+			{
+                StartWalaKam();
+            }
         }
     }
 

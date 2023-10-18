@@ -131,6 +131,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fuseTimeAmt: 0
+  explosionSound: {fileID: 8225956}
 --- !u!114 &11430612
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -155,7 +156,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   objectPoolIndex: 16
-  pointLight: {fileID: 0}
 --- !u!82 &8225956
 AudioSource:
   m_ObjectHideFlags: 0

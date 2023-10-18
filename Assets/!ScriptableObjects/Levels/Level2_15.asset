@@ -15,7 +15,7 @@ MonoBehaviour:
   NormalZombies_Count: 2
   DoctorZombie_Count: 0
   FatZombie_Count: 2
-  Miltory_Count: 0
-  Muscular_Count: 0
-  Fireman_Zombies: 0
+  Miltory_Count: 1
+  Muscular_Count: 2
+  Fireman_Zombies: 1
   PoliceMen_Zombies: 0

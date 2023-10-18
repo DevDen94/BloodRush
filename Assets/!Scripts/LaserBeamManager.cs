@@ -5,12 +5,8 @@ using UnityEngine;
 public class LaserBeamManager : MonoBehaviour
 {
     public LineRenderer _laserBeam;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public CameraControl _cameraForRaycasting;
+    public GameObject _reloadingSign;
 
     // Update is called once per frame
     void Update()
@@ -21,11 +17,23 @@ public class LaserBeamManager : MonoBehaviour
 
             RaycastHit hit;
 
-            if (Physics.Raycast(transform.position, transform.forward, out hit))
+            if (Physics.Raycast(_cameraForRaycasting.transform.position, _cameraForRaycasting.transform.forward, out hit))
             {
                 Vector3 hitPoint = hit.point;
 
-                _laserBeam.SetPosition(1, hitPoint);
+                if (!_reloadingSign.activeInHierarchy)
+                {
+                    _laserBeam.SetPosition(1, hitPoint);
+                }
+                else
+                {
+                    if(Physics.Raycast(transform.position, transform.forward, out hit))
+                    {
+                        Vector3 hitPointR = hit.point;
+
+                        _laserBeam.SetPosition(1, hitPointR);
+                    }
+                }
             }
         }
     }
