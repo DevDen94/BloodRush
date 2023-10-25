@@ -15,6 +15,10 @@ public class TutorialLevelManager : MonoBehaviour
     public GameObject _loadingPanel;
     public GameObject _zombie;
 
+    public GameObject Reloading_Slider;
+    public AudioSource src;
+    public AudioClip ReloadingClip;
+
     private void Awake()
     {
         if (s_Instance == null)

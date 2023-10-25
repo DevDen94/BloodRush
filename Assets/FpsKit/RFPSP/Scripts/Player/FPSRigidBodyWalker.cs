@@ -986,8 +986,11 @@ public class FPSRigidBodyWalker : MonoBehaviour {
 				   || WeaponBehaviorComponent.meleeActive
 				   //cancel sprint if player runs out of breath
 				   || (limitedSprint && staminaForSprintAmt <= 0.0f)){
-					cancelSprint = true;
-					sprintActive = false;
+
+					/* Uncomment these lines if you want to cancel the sprint automatically when click on fire, jump, aim or reload button
+					//cancelSprint = true;
+					//sprintActive = false;
+					*/
 				}
 				
 				//cancel sprint and start reload if sprintReload is false

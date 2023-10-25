@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using UnityEngine.SceneManagement;
 
 public class WeaponBehavior : MonoBehaviour {
 
@@ -2478,18 +2479,32 @@ public class WeaponBehavior : MonoBehaviour {
             {
 				timer += Time.deltaTime;
 				float fillPercentage = timer / reloadTime;
-				WaveManager_.instance.Reloading_Slider.value = Mathf.Lerp(0f, WaveManager_.instance.Reloading_Slider.maxValue, fillPercentage);
-				if (timer >= reloadTime)
+				if(SceneManager.GetActiveScene().name != "Tutorial")
 				{
-					isFilling = false;
-					timer = 0f;
-					WaveManager_.instance.Reloading_Slider.gameObject.SetActive(false);
-					WeaponAnimatorComponent.SetTrigger("Idle");
-					if (WaveManager_.instance.Gernade.ammo != 0)
-					{
-						WaveManager_.instance.Gernade_Image.SetActive(true);
-					}
-				}
+                    WaveManager_.instance.Reloading_Slider.value = Mathf.Lerp(0f, WaveManager_.instance.Reloading_Slider.maxValue, fillPercentage);
+                    if (timer >= reloadTime)
+                    {
+                        isFilling = false;
+                        timer = 0f;
+                        WaveManager_.instance.Reloading_Slider.gameObject.SetActive(false);
+                        WeaponAnimatorComponent.SetTrigger("Idle");
+                        if (WaveManager_.instance.Gernade.ammo != 0)
+                        {
+                            WaveManager_.instance.Gernade_Image.SetActive(true);
+                        }
+                    }
+                }
+				else
+				{
+					Slider reloadSlider = TutorialLevelManager.s_Instance.Reloading_Slider.GetComponent<Slider>();
+                    reloadSlider.value = Mathf.Lerp(0f, reloadSlider.maxValue, fillPercentage);
+                    if (timer >= reloadTime)
+                    {
+                        isFilling = false;
+                        timer = 0f;
+                        WeaponAnimatorComponent.SetTrigger("Idle");
+                    }
+                }
 				
 			}
 			
@@ -2555,9 +2570,17 @@ public class WeaponBehavior : MonoBehaviour {
                         }
                         else
                         {
-							WaveManager_.instance.Gernade_Image.SetActive(false);
-							WaveManager_.instance.Reloading_Slider.gameObject.SetActive(true);
-							WaveManager_.instance.src.PlayOneShot(WaveManager_.instance.ReloadingClip);
+							if(SceneManager.GetActiveScene().name != "Tutorial")
+							{
+                                WaveManager_.instance.Gernade_Image.SetActive(false);
+                                WaveManager_.instance.Reloading_Slider.gameObject.SetActive(true);
+                                WaveManager_.instance.src.PlayOneShot(WaveManager_.instance.ReloadingClip);
+                            }
+							else
+							{
+								TutorialLevelManager.s_Instance.Reloading_Slider.SetActive(true);
+                                TutorialLevelManager.s_Instance.src.PlayOneShot(TutorialLevelManager.s_Instance.ReloadingClip);
+                            }
 						}
 						// Wait for reload time first, then proceed
 						yield return new WaitForSeconds(reloadTime);

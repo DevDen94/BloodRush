@@ -71,6 +71,8 @@ public class GameManager : MonoBehaviour
     public GameObject TorchOn;
     public GameObject TorchOff;
 
+    public FPSRigidBodyWalker _FPSRigidBodyWalker;
+
     //public LaserBeamManager[] LaserBeams;
     //public GameObject LaserOn;
     //public GameObject LaserOff;
