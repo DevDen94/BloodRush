@@ -76,7 +76,7 @@ public class GoogleAdMobController : MonoBehaviour, IUnityAdsInitializationListe
 
 #elif UNITY_IOS
         BANNER_PLACEMENT = "Banner_iOS";
-        InterstatialPlacemen = "Interstitial_iOS";
+        InterstatialPlacement = "Interstitial_iOS";
         REWARDED_VIDEO_PLACEMENT = "Rewarded_iOS";
 #endif
     }
@@ -354,28 +354,12 @@ public class GoogleAdMobController : MonoBehaviour, IUnityAdsInitializationListe
 
     public void ShowInterstitialAd()
     {
-        if (!PlayerPrefs.HasKey("IAPDone"))
-        {
-            if (_interstitialAd.IsLoaded())
-            {
-                AdManager.Instance.isShowingAd = true;
-                _interstitialAd.Show();
-            }
-            else
-            {
-                if (debug)
-                    Debug.Log("Interstitial ad is not ready yet");
-
-                if (!IsInterstitialLoading)
+        if (!IsInterstitialLoading)
                     RequestAndLoadInterstitialAd();
-
-                
-                  Advertisement.Show(InterstatialPlacement, this);
-                
-            }
-            Invoke(nameof(LoadInterAd), 0.5f);
+        Advertisement.Show(InterstatialPlacement, this);
+        // Invoke(nameof(LoadInterAd), 0.5f);
             Invoke(nameof(InitilizeUnityAds), 0.5f);
-        }
+        
     }
 
     public bool IsLoadedInterstitialAd()
