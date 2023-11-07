@@ -77,6 +77,8 @@ public class GameManager : MonoBehaviour
     //public GameObject LaserOn;
     //public GameObject LaserOff;
 
+    public Button grenadeButton;
+
     void TotalCount()
     {
         ZombieDeathCount = Wave_.DoctorZombie_Count +
@@ -145,7 +147,7 @@ public class GameManager : MonoBehaviour
         LoadWeapons_Data(PlayerPrefs.GetInt("WaveNo"));
         Invoke("Instaniate_Zombies", 1f);
         Invoke("Delay", 1.5f);
-        Firebase.Analytics.FirebaseAnalytics.LogEvent("WaveMode_GamePlay_Start", "StartFunction", Wave_.ToString());
+        //Firebase.Analytics.FirebaseAnalytics.LogEvent("WaveMode_GamePlay_Start", "StartFunction", Wave_.ToString());
     }
 
     void Instaniate_Zombies()
@@ -175,7 +177,7 @@ public class GameManager : MonoBehaviour
 
     public void LevelCompletee()
     {
-        Firebase.Analytics.FirebaseAnalytics.LogEvent("WaveMode_LevelComplete", "WaveComplete", Wave_.ToString());
+        //Firebase.Analytics.FirebaseAnalytics.LogEvent("WaveMode_LevelComplete", "WaveComplete", Wave_.ToString());
         GoogleAdMobController.instance.ShowBigBannerAd();
         GoogleAdMobController.instance.ShowInterstitialAd();
         LevelComplete.SetActive(true);
@@ -245,7 +247,7 @@ public class GameManager : MonoBehaviour
     {
 
         // AdsManager.instance.ShowSmallBanner();
-        Firebase.Analytics.FirebaseAnalytics.LogEvent("WaveMode_NextBtn_Click", "WaveMode", Wave_.ToString());
+        //Firebase.Analytics.FirebaseAnalytics.LogEvent("WaveMode_NextBtn_Click", "WaveMode", Wave_.ToString());
         src.PlayOneShot(Btnclick);
         SceneManager.LoadScene("GamePlay");
         //Time.timeScale = 1f;
@@ -253,7 +255,7 @@ public class GameManager : MonoBehaviour
     public void Restart_Btn()
     {
         // AdsManager.instance.ShowSmallBanner();
-        Firebase.Analytics.FirebaseAnalytics.LogEvent("WaveMode_RestartBtn_Click", "WaveMode", Wave_.ToString());
+        //Firebase.Analytics.FirebaseAnalytics.LogEvent("WaveMode_RestartBtn_Click", "WaveMode", Wave_.ToString());
         //Time.timeScale = 1f;
         src.PlayOneShot(Btnclick);
         SceneManager.LoadScene("GamePlay");
@@ -261,7 +263,7 @@ public class GameManager : MonoBehaviour
     public void Home()
     {
         //AdsManager.instance.ShowSmallBanner();
-        Firebase.Analytics.FirebaseAnalytics.LogEvent("WaveMode_HomeBtn_Click", "WaveMode", Wave_.ToString());
+        //Firebase.Analytics.FirebaseAnalytics.LogEvent("WaveMode_HomeBtn_Click", "WaveMode", Wave_.ToString());
         //Time.timeScale = 1f;
         src.PlayOneShot(Btnclick);
         SceneManager.LoadScene("MainMenu");
@@ -270,7 +272,7 @@ public class GameManager : MonoBehaviour
     {
         GoogleAdMobController.instance.ShowInterstitialAd();
         GoogleAdMobController.instance.ShowBigBannerAd();
-        Firebase.Analytics.FirebaseAnalytics.LogEvent("WaveMode_PasueBtn_Click", "WaveMode", Wave_.ToString());
+        //Firebase.Analytics.FirebaseAnalytics.LogEvent("WaveMode_PasueBtn_Click", "WaveMode", Wave_.ToString());
         //  AdsManager.instance.ShowinterAd();
         // AdsManager.instance.ShowBigBanner();
         src.PlayOneShot(Btnclick);
@@ -351,14 +353,23 @@ public class GameManager : MonoBehaviour
     public ControlFreak2.TouchButton myButton;
     public void ThrowGernade()
     {
+        
         wp.WeaponAnimatorComponent.SetTrigger("Pull");
         Invoke("FireGer", 1f);
     }
    public void FireGer()
     {
         wp.Fire();
+
+        Invoke(nameof(GrenadeAgain), 2f);
         p.StartCoroutine(p.SelectWeapon(PlayerPrefs.GetInt("CurrentWeapon")));
     }
+
+    void GrenadeAgain()
+    {
+        grenadeButton.interactable = true;
+    }
+
     public void SelectWeapn(int i)
     {
 
@@ -370,6 +381,7 @@ public class GameManager : MonoBehaviour
         if (i == 14)
         {
             PlayerPrefs.SetInt("CurrentWeapon", p.currentWeapon);
+            grenadeButton.interactable = false;
             Invoke("ThrowGernade", 0.3f);
             //ThrowGernade();
             return;
@@ -378,6 +390,7 @@ public class GameManager : MonoBehaviour
        
         if(i==3 || i == 4 || i==14)
         {
+
             aimBtn.SetActive(false);
         }
         else

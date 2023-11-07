@@ -54,7 +54,7 @@ public class MainMenuScript : MonoBehaviour
     public void ModeSelect(int mode)
     {
 
-        Firebase.Analytics.FirebaseAnalytics.LogEvent("Mode_Selection", "mode_Number", mode.ToString());
+        //Firebase.Analytics.FirebaseAnalytics.LogEvent("Mode_Selection", "mode_Number", mode.ToString());
 
         if(PlayerPrefs.GetInt("Tut") == 0)
         {
@@ -75,7 +75,7 @@ public class MainMenuScript : MonoBehaviour
     }
     void Start()
     {
-        //PlayerPrefs.SetInt("Tut", 1);
+        PlayerPrefs.SetInt("Tut", 1);
 
         /*   AdsManager.instance.ShowSmallBanner();
            if (AdsManager.instance.isAppOpen)

@@ -83,6 +83,8 @@ public class WaveManager_ : MonoBehaviour
     public GameObject TorchOn;
     public GameObject TorchOff;
 
+    public Button grenadeButton;
+
     private void Start()
     {
         LoadWeapons_Data();
@@ -126,7 +128,7 @@ public class WaveManager_ : MonoBehaviour
       {
 
         Wave_ = Levels[PlayerPrefs.GetInt("Wave_No")];
-        Firebase.Analytics.FirebaseAnalytics.LogEvent("SurvivalMode_StartFunction", "SurvivalMode", Wave_.ToString());
+        //Firebase.Analytics.FirebaseAnalytics.LogEvent("SurvivalMode_StartFunction", "SurvivalMode", Wave_.ToString());
         TotalCount();
         ZombieContainer.SetActive(true);
         Call_Zombies(Levels[PlayerPrefs.GetInt("Wave_No")]);
@@ -144,7 +146,7 @@ public class WaveManager_ : MonoBehaviour
 
     public void WaveComplete()
     {
-        Firebase.Analytics.FirebaseAnalytics.LogEvent("SurvivalMode_WaveComplete", "SurvivalMode", Wave_.ToString());
+        //Firebase.Analytics.FirebaseAnalytics.LogEvent("SurvivalMode_WaveComplete", "SurvivalMode", Wave_.ToString());
         PlayerPrefs.SetInt("Wave_No", PlayerPrefs.GetInt("Wave_No") + 1);
         WaveImage.SetActive(true);
 
@@ -242,7 +244,7 @@ public class WaveManager_ : MonoBehaviour
     public void Next_Btn()
     {
         GoogleAdMobController.instance.ShowSmallBannerAd();
-        Firebase.Analytics.FirebaseAnalytics.LogEvent("SurvivalMode_NextBtn", "SurvivalMode", Wave_.ToString());
+        //Firebase.Analytics.FirebaseAnalytics.LogEvent("SurvivalMode_NextBtn", "SurvivalMode", Wave_.ToString());
         src.PlayOneShot(Btnclick);
         SceneManager.LoadScene("SurvivalMode");
         //Time.timeScale = 1f;
@@ -251,21 +253,21 @@ public class WaveManager_ : MonoBehaviour
     {
         // AdsManager.instance.ShowSmallBanner();
         GoogleAdMobController.instance.ShowSmallBannerAd();
-        Firebase.Analytics.FirebaseAnalytics.LogEvent("SurvivalMode_RestartBtn", "SurvivalMode", Wave_.ToString());
+        //Firebase.Analytics.FirebaseAnalytics.LogEvent("SurvivalMode_RestartBtn", "SurvivalMode", Wave_.ToString());
         src.PlayOneShot(Btnclick);
         SceneManager.LoadScene("SurvivalMode");
     }
     public void Home()
     {
         GoogleAdMobController.instance.ShowSmallBannerAd();
-        Firebase.Analytics.FirebaseAnalytics.LogEvent("SurvivalMode_HomeBtn", "SurvivalMode", Wave_.ToString());
+        //Firebase.Analytics.FirebaseAnalytics.LogEvent("SurvivalMode_HomeBtn", "SurvivalMode", Wave_.ToString());
         //Time.timeScale = 1f;
         src.PlayOneShot(Btnclick);
         SceneManager.LoadScene("MainMenu");
     }
     public void Pause_BTn()
     {
-        Firebase.Analytics.FirebaseAnalytics.LogEvent("SurvivalMode_PasueBtn", "SurvivalMode", Wave_.ToString());
+        //Firebase.Analytics.FirebaseAnalytics.LogEvent("SurvivalMode_PasueBtn", "SurvivalMode", Wave_.ToString());
         src.PlayOneShot(Btnclick);
         LevelPasued.SetActive(true);
         Time.timeScale = 0;
@@ -312,7 +314,7 @@ public class WaveManager_ : MonoBehaviour
             slotImg.SetActive(true);
             slotImg.transform.SetParent(Slot1_G.transform);
             slotImg.transform.position = Slot1_G.transform.GetChild(0).gameObject.transform.position;
-            slotImg.transform.rotation= Slot1_G.transform.GetChild(0).gameObject.transform.rotation;
+            //slotImg.transform.rotation= Slot1_G.transform.GetChild(0).gameObject.transform.rotation;
             slotImg.transform.localScale = new Vector3(1, 1, 1);
             Slot1 = true;
             
@@ -323,7 +325,7 @@ public class WaveManager_ : MonoBehaviour
             slotImg.SetActive(true);
             slotImg.transform.SetParent(Slot2_G.transform);
             slotImg.transform.position = Slot2_G.transform.GetChild(0).gameObject.transform.position;
-            slotImg.transform.rotation = Slot2_G.transform.GetChild(0).gameObject.transform.rotation;
+            //slotImg.transform.rotation = Slot2_G.transform.GetChild(0).gameObject.transform.rotation;
             slotImg.transform.localScale = new Vector3(1, 1, 1);
             Slot2 = true;
             return;
@@ -333,7 +335,7 @@ public class WaveManager_ : MonoBehaviour
             slotImg.SetActive(true);
             slotImg.transform.SetParent(Slot3_G.transform);
             slotImg.transform.position = Slot3_G.transform.GetChild(0).gameObject.transform.position;
-            slotImg.transform.rotation = Slot3_G.transform.GetChild(0).gameObject.transform.rotation;
+            //slotImg.transform.rotation = Slot3_G.transform.GetChild(0).gameObject.transform.rotation;
             slotImg.transform.localScale = new Vector3(1, 1, 1);
             Slot3 = true;
          
@@ -344,7 +346,7 @@ public class WaveManager_ : MonoBehaviour
             slotImg.SetActive(true);
             slotImg.transform.SetParent(Slot4_G.transform);
             slotImg.transform.position = Slot4_G.transform.GetChild(0).gameObject.transform.position;
-            slotImg.transform.rotation = Slot4_G.transform.GetChild(0).gameObject.transform.rotation;
+            //slotImg.transform.rotation = Slot4_G.transform.GetChild(0).gameObject.transform.rotation;
             slotImg.transform.localScale = new Vector3(1, 1, 1);
             Slot4 = true;
     
@@ -361,6 +363,7 @@ public class WaveManager_ : MonoBehaviour
     public ControlFreak2.TouchButton myButton;
     public void ThrowGernade()
     {
+        grenadeButton.interactable = true;
         wp.WeaponAnimatorComponent.SetTrigger("Pull");
         Invoke("FireGer", 1f);
     }
@@ -368,6 +371,8 @@ public class WaveManager_ : MonoBehaviour
     {
         wp.Fire();
         p.StartCoroutine(p.SelectWeapon(PlayerPrefs.GetInt("CurrentWeapon")));
+
+        SelectWeapn(1);
     }
     public void SlotImageParent(GameObject g)
     {
@@ -389,6 +394,7 @@ public class WaveManager_ : MonoBehaviour
         if (i == 14)
         {
             PlayerPrefs.SetInt("CurrentWeapon", p.currentWeapon);
+            grenadeButton.interactable = false;
             Invoke("ThrowGernade", 0.3f);
             //ThrowGernade();
             return;
