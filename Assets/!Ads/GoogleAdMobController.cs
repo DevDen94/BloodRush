@@ -357,7 +357,7 @@ public class GoogleAdMobController : MonoBehaviour, IUnityAdsInitializationListe
         if (!IsInterstitialLoading)
                     RequestAndLoadInterstitialAd();
         Advertisement.Show(InterstatialPlacement, this);
-        // Invoke(nameof(LoadInterAd), 0.5f);
+        Invoke(nameof(LoadInterAd), 0.5f);
             Invoke(nameof(InitilizeUnityAds), 0.5f);
         
     }

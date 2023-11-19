@@ -75,7 +75,7 @@ public class MainMenuScript : MonoBehaviour
     }
     void Start()
     {
-        PlayerPrefs.SetInt("Tut", 1);
+        //PlayerPrefs.SetInt("Tut", 1);
 
         /*   AdsManager.instance.ShowSmallBanner();
            if (AdsManager.instance.isAppOpen)
@@ -112,11 +112,11 @@ public class MainMenuScript : MonoBehaviour
         src.volume= PlayerPrefs.GetFloat("Music");
         _buttonClickSrc.volume = PlayerPrefs.GetFloat("Sounds");
 
-        if (GoogleAdMobController.instance.IsAppOpen)
-        {
-            GoogleAdMobController.instance.ShowAppOpenAd();
-            GoogleAdMobController.instance.IsAppOpen = false;
-        }
+        //if (GoogleAdMobController.instance.IsAppOpen)
+        //{
+        //    GoogleAdMobController.instance.ShowAppOpenAd();
+        //    GoogleAdMobController.instance.IsAppOpen = false;
+        //}
 
     }
 

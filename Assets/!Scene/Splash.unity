@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.2257134, b: 0.30692226, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -806,16 +806,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3d58f420833d1840b4a5b4af8c3c4b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  appId: null
-  bannerId: null
-  interstitialId: null
-  rewardedId: null
-  appOpenId: null
-  rewardedInterstitialId: null
-  BigBannerId: null
+  appId: ca-app-pub-5227706387493609~6365506566
+  bannerId: ca-app-pub-5227706387493609/5310075617
+  interstitialId: ca-app-pub-5227706387493609/8899583831
+  rewardedId: ca-app-pub-5227706387493609/2558370917
+  appOpenId: ca-app-pub-5227706387493609/5647568688
+  rewardedInterstitialId: ca-app-pub-5227706387493609/2558370917
+  BigBannerId: ca-app-pub-5227706387493609/2683912271
   debug: 0
   test: 0
-  UnityAdsID: 5402890
+  UnityAdsID: 5402891
   BANNER_PLACEMENT: 
   InterstatialPlacement: 
   REWARDED_VIDEO_PLACEMENT: 
