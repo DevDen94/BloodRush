@@ -134,6 +134,8 @@ public class TutorialManager : MonoBehaviour
         dragToWalk.SetActive(false);
 
         _joystick.SetActive(true);
+
+        TutorialLevelManager.s_Instance.WeaponWheelDeactivator();
     }
 
     void EndingMoveTut()
@@ -143,6 +145,8 @@ public class TutorialManager : MonoBehaviour
         Time.timeScale = 1;
 
         _lookAroundArea.SetActive(true);
+
+        TutorialLevelManager.s_Instance.WeaponWheelDeactivator();
     }
 
     void EndingRunTut()
@@ -152,8 +156,10 @@ public class TutorialManager : MonoBehaviour
         sprintButton.SetActive(true);
 
         Time.timeScale = 1.0f;
+
+        TutorialLevelManager.s_Instance.WeaponWheelDeactivator();
     }
-    
+
     void EndingJumpTut()
     {
         pressToJump.SetActive(false);
@@ -163,6 +169,8 @@ public class TutorialManager : MonoBehaviour
         Time.timeScale = 1.0f;
 
         StartCoroutine(SwipeTut());
+
+        TutorialLevelManager.s_Instance.WeaponWheelDeactivator();
     }
 
     void EndingShootTut()
@@ -175,6 +183,8 @@ public class TutorialManager : MonoBehaviour
         }
 
         Time.timeScale = 1f;
+
+        TutorialLevelManager.s_Instance.WeaponWheelDeactivator();
     }
 
     void EndingAimTut()
@@ -184,6 +194,8 @@ public class TutorialManager : MonoBehaviour
         Time.timeScale = 1f;
 
         aimButton.SetActive(true);
+
+        TutorialLevelManager.s_Instance.WeaponWheelDeactivator();
 
         StartCoroutine(ShootTut());
     }
@@ -202,10 +214,12 @@ public class TutorialManager : MonoBehaviour
         {
             yield return new WaitForSeconds(4f);
 
-            Time.timeScale = 0f;
+            //Time.timeScale = 0f;
 
             mapHighlighter.SetActive(true);
         }
+
+        TutorialLevelManager.s_Instance.WeaponWheelDeactivator();
     }
 
     void EndingMapTut()
@@ -213,6 +227,8 @@ public class TutorialManager : MonoBehaviour
         mapHighlighter.SetActive(false);
 
         healthAndOther.SetActive(true);
+
+        TutorialLevelManager.s_Instance.WeaponWheelDeactivator();
     }
 
     void EndingHealthTut()
@@ -225,6 +241,8 @@ public class TutorialManager : MonoBehaviour
         }
 
         TutorialLevelManager.s_Instance._endingPanel.SetActive(true);
+
+        TutorialLevelManager.s_Instance.WeaponWheelDeactivator();
     }
 
     void EndingGrenadeTut()
@@ -241,6 +259,8 @@ public class TutorialManager : MonoBehaviour
         changingWeaponsButton.SetActive(true);
 
         StartCoroutine(AimTut());
+
+        TutorialLevelManager.s_Instance.WeaponWheelDeactivator();
     }
 
     void EndingPickupWeaponsTut()
@@ -254,9 +274,11 @@ public class TutorialManager : MonoBehaviour
 
         PlayerPrefs.SetInt("Tut", 1);
 
-        PlayerPrefs.SetInt("Mode", 1);
-
-        MainMenuScript.instance.WayLevel(0);
+        if(PlayerPrefs.GetInt("ModeForTut") == 1)
+        {
+            
+            MainMenuScript.instance.WayLevel(0);
+        }
 
         TutorialLevelManager.s_Instance._loadingPanel.SetActive(true);
     }
@@ -288,6 +310,8 @@ public class TutorialManager : MonoBehaviour
         yield return new WaitForSeconds(5f);
 
         pressToAim.SetActive(true);
+
+        TutorialLevelManager.s_Instance.WeaponWheelDeactivator();
 
         Time.timeScale = 0f;
     }

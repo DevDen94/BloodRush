@@ -21,7 +21,7 @@ public class TutorialPlayerCheck : MonoBehaviour
             {
                 TutorialManager.s_Instance.pressToJump.SetActive(true);
 
-                TutorialManager.s_Instance.sprintButton.GetComponent<ControlFreak2.TouchButton>().toggle = false;
+                //TutorialManager.s_Instance.sprintButton.GetComponent<ControlFreak2.TouchButton>().toggle = false;
             }
             else if(_name == "StartGunChangeTut")
             {

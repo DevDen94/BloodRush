@@ -83,6 +83,7 @@ public class WaveManager_ : MonoBehaviour
     public GameObject TorchOn;
     public GameObject TorchOff;
 
+    //bool previouslyActived;
     public Button grenadeButton;
 
     private void Start()
@@ -363,17 +364,25 @@ public class WaveManager_ : MonoBehaviour
     public ControlFreak2.TouchButton myButton;
     public void ThrowGernade()
     {
-        grenadeButton.interactable = true;
+        
         wp.WeaponAnimatorComponent.SetTrigger("Pull");
         Invoke("FireGer", 1f);
     }
    public void FireGer()
     {
         wp.Fire();
+
+        Invoke(nameof(GrenadeAgain), 2f);
         p.StartCoroutine(p.SelectWeapon(PlayerPrefs.GetInt("CurrentWeapon")));
 
         SelectWeapn(1);
     }
+
+    void GrenadeAgain()
+    {
+        grenadeButton.interactable = true;
+    }
+
     public void SlotImageParent(GameObject g)
     {
         Slot1_G.GetComponent<Image>().enabled = false;
@@ -569,4 +578,17 @@ public class WaveManager_ : MonoBehaviour
         TorchOn.SetActive(TorchLight.activeInHierarchy);
         TorchOff.SetActive(!TorchLight.activeInHierarchy);
     }
+
+    //public void TorchControlWithZoom()
+    //{
+    //    if(TorchLight.activeInHierarchy)
+    //    {
+    //        previouslyActived = TorchLight.activeInHierarchy;
+    //        TorchLight.SetActive(false);
+    //    }
+    //    if(previouslyActived)
+    //    {
+    //        TorchLight.SetActive(true);
+    //    }
+    //}
 }

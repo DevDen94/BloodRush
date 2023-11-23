@@ -2,6 +2,7 @@
 //Camera positioning and angle management for smooth camera kicks and animations.
 using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class CameraControl : MonoBehaviour {
 	//other objects accessed by this script

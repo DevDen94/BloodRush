@@ -77,6 +77,8 @@ public class GameManager : MonoBehaviour
     //public GameObject LaserOn;
     //public GameObject LaserOff;
 
+    //bool previouslyActived;
+
     public Button grenadeButton;
 
     void TotalCount()
@@ -597,5 +599,18 @@ public class GameManager : MonoBehaviour
 
     //    LaserOn.SetActive(!LaserOn.activeInHierarchy);
     //    LaserOff.SetActive(!LaserOn.activeInHierarchy);
+    //}
+
+    //public void TorchControlWithZoom()
+    //{
+    //    if (TorchLight.activeInHierarchy)
+    //    {
+    //        previouslyActived = TorchLight.activeInHierarchy;
+    //        TorchLight.SetActive(false);
+    //    }
+    //    if (previouslyActived)
+    //    {
+    //        TorchLight.SetActive(true);
+    //    }
     //}
 }

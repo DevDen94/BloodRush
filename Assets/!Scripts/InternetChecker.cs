@@ -33,7 +33,7 @@ public class InternetChecker : MonoBehaviour
         }
         else
         {
-            Debug.Log("----working---");
+            //Debug.Log("----working---");
             //Time.timeScale = 1f;
             CanvasInternetError.SetActive(false);
         }

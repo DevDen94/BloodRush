@@ -59,6 +59,7 @@ public class MainMenuScript : MonoBehaviour
         if(PlayerPrefs.GetInt("Tut") == 0)
         {
             LoaddingPanel.SetActive(true);
+            PlayerPrefs.SetInt("ModeForTut", mode);
         }
         else
         {
@@ -75,7 +76,7 @@ public class MainMenuScript : MonoBehaviour
     }
     void Start()
     {
-        PlayerPrefs.SetInt("Tut", 1);
+        //PlayerPrefs.SetInt("Tut", 1);
 
         /*   AdsManager.instance.ShowSmallBanner();
            if (AdsManager.instance.isAppOpen)
