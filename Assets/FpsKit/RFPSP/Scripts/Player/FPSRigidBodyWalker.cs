@@ -279,7 +279,7 @@ public class FPSRigidBodyWalker : MonoBehaviour {
 	//sprinting
 	[HideInInspector]
 	public bool canRun = true;//true when player is allowed to sprint
-	[HideInInspector]
+	//[HideInInspector]
 	public bool sprintActive;//true when sprint button is ready
 	private bool sprintBtnState;
 	private float sprintStartTime;

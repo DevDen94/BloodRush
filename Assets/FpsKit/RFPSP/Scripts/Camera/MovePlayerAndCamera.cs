@@ -39,6 +39,7 @@ public class MovePlayerAndCamera : MonoBehaviour {
 	private Ironsights IronsightsComponent;
 	private bool playerModelToggleState;
 
+
 	void Start () {
 		//set up component references
 		if(CinemaCameraObj){
@@ -331,6 +332,7 @@ public class MovePlayerAndCamera : MonoBehaviour {
 		IronsightsComponent.nextFov = IronsightsComponent.defaultFov;
 		
 		FPSWalkerComponent.cancelSprint = true;
+		Debug.Log("SprintActive is false");
 		FPSWalkerComponent.sprintActive = false;
 		FPSWalkerComponent.jumping = false;
 		FPSWalkerComponent.landState = false;

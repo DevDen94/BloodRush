@@ -14,7 +14,7 @@ public class TutorialLevelManager : MonoBehaviour
     public GameObject _endingPanel;
     public GameObject _loadingPanel;
     public GameObject _zombie;
-
+    public GameObject _weaponWheel;
     public GameObject Reloading_Slider;
     public AudioSource src;
     public AudioClip ReloadingClip;
@@ -46,5 +46,11 @@ public class TutorialLevelManager : MonoBehaviour
         Time.timeScale = 0f;
 
         TutorialManager.s_Instance.pressToReload.SetActive(true);
+    }
+
+    public void WeaponWheelDeactivator()
+    {
+        Debug.Log("Weapon Wheel deactivated");
+        _weaponWheel.SetActive(false);
     }
 }

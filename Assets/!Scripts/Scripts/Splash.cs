@@ -76,7 +76,15 @@ public class Splash : MonoBehaviour
             }
             else if(activeScene.name == "Tutorial")
             {
-                SceneManager.LoadScene("GamePlay");
+                PlayerPrefs.SetInt("Mode", PlayerPrefs.GetInt("ModeForTut"));
+                if (PlayerPrefs.GetInt("ModeForTut") == 1)
+                {
+                    SceneManager.LoadScene("GamePlay");
+                }
+                else if (PlayerPrefs.GetInt("ModeForTut") == 2)
+                {
+                    SceneManager.LoadScene("SurvivalMode");
+                }
             }
         }
         else
