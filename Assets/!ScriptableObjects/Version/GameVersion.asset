@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37d8e58b2168cf247a52fd42b24715c6, type: 3}
   m_Name: GameVersion
   m_EditorClassIdentifier: 
-  Playstore_Version: 0.7
+  Playstore_Version: 1.0
   Appstore_Version: 1.0.5

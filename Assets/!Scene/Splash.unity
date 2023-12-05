@@ -725,6 +725,7 @@ MonoBehaviour:
   childPrefab: {fileID: 2688942258887290520, guid: 674fc702bdb9c5a45a2e5cc458b6c57e,
     type: 3}
   parentObject: {fileID: 1036294690}
+  data: {fileID: 11400000, guid: 8964e3cb8172dfd4dba3c32601dc210f, type: 2}
 --- !u!114 &1058272892
 MonoBehaviour:
   m_ObjectHideFlags: 0

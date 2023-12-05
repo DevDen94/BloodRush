@@ -8,23 +8,28 @@ public class Splash : MonoBehaviour
 
     public GameObject childPrefab; // Reference to the prefab of the child GameObject
     public Transform parentObject; // Reference to the parent GameObject's Transform component
-     
+    public Data data;
     int Value;
     Scene activeScene;
     private void OnEnable()
     {
        
-    }
+    }    
     private void Start()
     {
 
         //PlayerPrefs.SetInt("Tut", 1);
-
-        Value = 0;
-        StartCoroutine(waitforSceneSwitch());
-        activeScene = SceneManager.GetActiveScene();
-        Invoke(nameof(ShowBig),1f);
-        
+        if (data.data == Application.identifier)
+        {
+            Value = 0;
+            StartCoroutine(waitforSceneSwitch());
+            activeScene = SceneManager.GetActiveScene();
+            Invoke(nameof(ShowBig), 1f);
+        }
+        else
+        {
+            Application.Quit();
+        }
         // SoundsManager.instance.PlayMainMenuMusic();
     }
     public void ShowBig()

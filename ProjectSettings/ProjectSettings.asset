@@ -134,7 +134,7 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  bundleVersion: 0.7
+  bundleVersion: 1.0
   preloadedAssets: []
   metroInputSource: 0
   wsaTransparentSwapchain: 0
@@ -156,7 +156,7 @@ PlayerSettings:
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
     Android: com.darwin.zombie.shooting
-    Standalone: unity.DefaultCompany.RFPSP123
+    Standalone: com.GameShock.Zombie-Hunter
     Tizen: com.Company.ProductName
     iPhone: com.stackergames.zombie.survival.shooting.games
     tvOS: com.Company.ProductName
@@ -165,8 +165,8 @@ PlayerSettings:
     iPhone: 7
     tvOS: 0
   overrideDefaultApplicationIdentifier: 1
-  AndroidBundleVersionCode: 7
-  AndroidMinSdkVersion: 34
+  AndroidBundleVersionCode: 10
+  AndroidMinSdkVersion: 22
   AndroidTargetSdkVersion: 34
   AndroidPreferredInstallLocation: 1
   aotOptions: 
