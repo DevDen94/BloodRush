@@ -70,6 +70,7 @@ public class GameManager : MonoBehaviour
     public GameObject TorchLight;
     public GameObject TorchOn;
     public GameObject TorchOff;
+    public GameObject _skipLevelButton;
 
     public FPSRigidBodyWalker _FPSRigidBodyWalker;
 
@@ -107,7 +108,9 @@ public class GameManager : MonoBehaviour
             PlayerPrefs.SetFloat("START", 1);
             PlayerPrefs.SetInt("WaveNo", 0);
         }
-        
+
+        Debug.Log("wave pref in gameply : " + PlayerPrefs.GetInt("WaveNo"));
+
         if(PlayerPrefs.GetInt("WaveNo") != 0)
         {
             CutSceneDelay();
@@ -144,6 +147,7 @@ public class GameManager : MonoBehaviour
 
     public void CutSceneDelay()
     {
+        Debug.Log("Zombiess Coming");
         Wave_ = Levels[PlayerPrefs.GetInt("WaveNo")];
         TotalCount();
         LoadWeapons_Data(PlayerPrefs.GetInt("WaveNo"));
@@ -181,7 +185,13 @@ public class GameManager : MonoBehaviour
     {
         //Firebase.Analytics.FirebaseAnalytics.LogEvent("WaveMode_LevelComplete", "WaveComplete", Wave_.ToString());
         GoogleAdMobController.instance.ShowBigBannerAd();
-        GoogleAdMobController.instance.ShowInterstitialAd();
+
+        if(PlayerPrefs.GetInt("CompAd") % 2 == 0)
+        {
+            GoogleAdMobController.instance.ShowInterstitialAd();
+        }
+
+        PlayerPrefs.SetInt("CompAd", PlayerPrefs.GetInt("CompAd") + 1);
         LevelComplete.SetActive(true);
         if (PlayerPrefs.GetInt("WaveNo") >= 19)
         {
@@ -272,7 +282,7 @@ public class GameManager : MonoBehaviour
     }
     public void Pause_BTn()
     {
-        GoogleAdMobController.instance.ShowInterstitialAd();
+        //GoogleAdMobController.instance.ShowInterstitialAd();
         GoogleAdMobController.instance.ShowBigBannerAd();
         //Firebase.Analytics.FirebaseAnalytics.LogEvent("WaveMode_PasueBtn_Click", "WaveMode", Wave_.ToString());
         //  AdsManager.instance.ShowinterAd();
@@ -298,13 +308,14 @@ public class GameManager : MonoBehaviour
         }
         if (value == 2 || value == 11)
         {
-            Weapons[2].haveWeapon = true;
-            Weapons[3].haveWeapon = true; 
+            Debug.Log("Level 2");
+            Weapons[2].haveWeapon = true; //2
+            Weapons[9].haveWeapon = true; //3
         }
         if (value == 3 || value == 12)
         {
-            Weapons[4].haveWeapon = true;
-            Weapons[5].haveWeapon = true;
+            Weapons[4].haveWeapon = true; //4
+            Weapons[5].haveWeapon = true; //5
         }
         if (value == 4 || value == 13)
         {
@@ -335,6 +346,11 @@ public class GameManager : MonoBehaviour
         {
             Weapons[4].haveWeapon = true;
             Weapons[8].haveWeapon = true;
+        }
+        if(value == 19)
+        {
+            Weapons[2].haveWeapon = true;
+            Weapons[4].haveWeapon = true;
         }
         for (int i = 0; i < Weapons.Length; ++i)
         {
@@ -588,6 +604,26 @@ public class GameManager : MonoBehaviour
 
         TorchOn.SetActive(TorchLight.activeInHierarchy);
         TorchOff.SetActive(!TorchLight.activeInHierarchy);
+    }
+
+    public void SkipLevelRewardAd()
+    {
+        _skipLevelButton.SetActive(false);
+        if(Application.internetReachability != NetworkReachability.NotReachable)
+        {
+            PlayerPrefs.SetInt("SkipLevel", 1);
+        }
+        GoogleAdMobController.instance.ShowRewardedAd();
+    }
+
+    public void SkippingLevel()
+    {
+        Debug.Log("Skipping Level");
+
+        PlayerPrefs.SetInt("WaveUnlock", PlayerPrefs.GetInt("WaveUnlock") + 1);
+        PlayerPrefs.SetInt("WaveNo", PlayerPrefs.GetInt("WaveNo") + 1);
+
+        SceneManager.LoadScene("GamePlay");
     }
 
     //public void LaserBeamActivity()

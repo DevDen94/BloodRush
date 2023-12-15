@@ -873,7 +873,7 @@ MonoBehaviour:
   objectWithAnims: {fileID: 1875268989540811737}
   randomSpawnChance: 1
   runSpeed: 1
-  walkSpeed: 0.5
+  walkSpeed: 0.7
   walkAnimSpeed: 1
   runAnimSpeed: 2
   idleYaw: 0

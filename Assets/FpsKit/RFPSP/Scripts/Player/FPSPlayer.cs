@@ -1034,7 +1034,7 @@ public class FPSPlayer : MonoBehaviour {
 	public void UpdateReticle( bool reticleType ){
 		if(!reticleType){
 			crosshairUiImage.sprite = pickupTex;
-			Debug.Log("CHC");
+			//Debug.Log("CHC");
             //crosshairUiImage.color = pickupReticleColor;
 
             //Debug.Log("RED");
@@ -1392,16 +1392,39 @@ public class FPSPlayer : MonoBehaviour {
         else
 		{
 			WaveManager_.instance.timer_Script.StopTimer();
+
+			//WaveManager_.instance._revivePlayerPanel.SetActive(true);
+
+			//WaveManager_.instance._revivingCR = StartCoroutine(ReviveCR());
+
 			WaveManager_.instance.LevelFailed.SetActive(true);
 			//Firebase.Analytics.FirebaseAnalytics.LogEvent("SurvivalMode_GameOver", "GameOver_At", PlayerPrefs.GetInt("Wave_No"));
 			WaveManager_.instance.timer_Script.Actualkills.text = WaveManager_.instance.Total_Kills.ToString();
 		
         }
-		GoogleAdMobController.instance.ShowInterstitialAd();
+
+		if(PlayerPrefs.GetInt("FailAd") % 2 == 0)
+        {
+            GoogleAdMobController.instance.ShowInterstitialAd();
+        }
+
+		PlayerPrefs.SetInt("FailAd", PlayerPrefs.GetInt("FailAd") + 1);
 	
 		//AdsManager.instance.ShowinterAd();
 		//AdsManager.instance.ShowBigBanner();
 	}
+
+	IEnumerator ReviveCR()
+	{
+		for(int i = 0; i >= 0; i--)
+		{
+            yield return new WaitForSeconds(1f);
+
+            WaveManager_.instance._revivePlayerCounterText.text = i.ToString();
+        }
+
+        WaveManager_.instance.LevelFailed.SetActive(true);
+    }
 		/*public void RestartMap () {
 		Time.timeScale = 1.0f;//set timescale to 1.0f so fadeout wont take longer if bullet time is active
 

@@ -60,7 +60,6 @@ public class CutsceneManager : MonoBehaviour
                 gameObject.SetActive(false);
             }
             _startCamera.SetPositionAndRotation(Vector3.Lerp(_startCamera.position, _waypoints[_currentWaypoint].position, _lerpingSpeed), Quaternion.Slerp(_startCamera.rotation, _waypoints[_currentWaypoint].rotation, _lerpingSpeed));
-            Debug.Log("doing");
         }
     }
 

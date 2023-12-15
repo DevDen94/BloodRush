@@ -50,7 +50,6 @@ public class TutorialLevelManager : MonoBehaviour
 
     public void WeaponWheelDeactivator()
     {
-        Debug.Log("Weapon Wheel deactivated");
         _weaponWheel.SetActive(false);
     }
 }

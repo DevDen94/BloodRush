@@ -749,7 +749,43 @@ public class GoogleAdMobController : MonoBehaviour, IUnityAdsInitializationListe
     {
 
         Debug.Log("OnRewardAdClosed");
-        
+
+        if(PlayerPrefs.GetInt("SkipLevel") == 1)
+        {
+            PlayerPrefs.SetInt("SkipLevel", 0);
+            GameManager.instance.SkippingLevel();
+        }
+            
+        if(PlayerPrefs.GetInt("UnlockAllLevels") > 2)
+        {
+            PlayerPrefs.SetInt("UnlockAllLevels", 5);
+            MainMenuScript.instance.UnlockingAllLevels();
+        }
+
+        if(PlayerPrefs.GetInt("HealthReward") == 1)
+        {
+            PlayerPrefs.SetInt("HealthReward", 0);
+
+            WaveManager_.instance._giveawayCounterForAd = 0;
+
+            WaveManager_.instance.GiveawayGiving();
+        }
+
+        if (PlayerPrefs.GetInt("AmmoReward") == 1)
+        {
+            PlayerPrefs.SetInt("AmmoReward", 0);
+
+            WaveManager_.instance.GiveawayGiving();
+
+            WaveManager_.instance._giveawayCounterForAd = 0;
+        }
+
+        if(PlayerPrefs.GetInt("UnlockNextLevel") == 1)
+        {
+            PlayerPrefs.SetInt("UnlockNextLevel", 0);
+
+            MainMenuScript.instance.UnlockingNextLevel();
+        }
 
         if (debug)
             Debug.Log("OnRewardAdClosed");

@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Splash : MonoBehaviour
 {
@@ -11,18 +13,20 @@ public class Splash : MonoBehaviour
     public Data data;
     int Value;
     Scene activeScene;
+
     private void OnEnable()
     {
        
     }    
     private void Start()
     {
+        PlayerPrefs.SetInt("Tut", 1);
 
-        //PlayerPrefs.SetInt("Tut", 1);
         if (data.data == Application.identifier)
         {
             Value = 0;
             StartCoroutine(waitforSceneSwitch());
+
             activeScene = SceneManager.GetActiveScene();
             Invoke(nameof(ShowBig), 1f);
         }
@@ -59,7 +63,7 @@ public class Splash : MonoBehaviour
             StopCoroutine(waitforSceneSwitch());
             if (activeScene.name == "Splash")
             {
-                SceneManager.LoadScene("MainMenu");
+                SceneManager.LoadSceneAsync("MainMenu");
             }
             else if (activeScene.name == "MainMenu")
             {
@@ -71,11 +75,11 @@ public class Splash : MonoBehaviour
                 {
                     if (PlayerPrefs.GetInt("Mode") == 1)
                     {
-                        SceneManager.LoadScene("GamePlay");
+                        SceneManager.LoadSceneAsync("GamePlay");
                     }
                     else
                     {
-                        SceneManager.LoadScene("SurvivalMode");
+                        SceneManager.LoadSceneAsync("SurvivalMode");
                     }
                 }
             }
@@ -84,11 +88,11 @@ public class Splash : MonoBehaviour
                 PlayerPrefs.SetInt("Mode", PlayerPrefs.GetInt("ModeForTut"));
                 if (PlayerPrefs.GetInt("ModeForTut") == 1)
                 {
-                    SceneManager.LoadScene("GamePlay");
+                    SceneManager.LoadSceneAsync("GamePlay");
                 }
                 else if (PlayerPrefs.GetInt("ModeForTut") == 2)
                 {
-                    SceneManager.LoadScene("SurvivalMode");
+                    SceneManager.LoadSceneAsync("SurvivalMode");
                 }
             }
         }

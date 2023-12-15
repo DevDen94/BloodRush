@@ -27,6 +27,12 @@ public class WaveManager_ : MonoBehaviour
     public GameObject Fat_Zombie;
     public GameObject FireManZombie;
 
+    [Header("Slo-mo Zombies")]
+    public Transform _slomoZombieParent;
+    public GameObject[] _allSlomoZombies;
+    [Tooltip("The amount of zombies you want to instantiate in slomo Bonus")] public int _slomoZombieCount;
+    public bool _isSlomo = false;
+
     public bool AttackModeOn;
     [Header("Zombies_PathArray")]
     public CheckWindow Path5_EndPoint;
@@ -40,6 +46,10 @@ public class WaveManager_ : MonoBehaviour
     public GameObject Objective_Panel;
     public Slider Reloading_Slider;
     public GameObject aimBtn;
+    public GameObject _revivePlayerPanel;
+    public Text _revivePlayerCounterText;
+
+    public Coroutine _revivingCR;
 
     public GameObject[] Weapon_StartImages;
     public GameObject[] WeaponWheelImages;
@@ -86,6 +96,9 @@ public class WaveManager_ : MonoBehaviour
     //bool previouslyActived;
     public Button grenadeButton;
 
+    public GameObject _giveawayClaimAdButton;
+    [HideInInspector] public int _giveawayCounterForAd;
+
     private void Start()
     {
         LoadWeapons_Data();
@@ -104,6 +117,11 @@ public class WaveManager_ : MonoBehaviour
         Invoke("Delay", 1.5f);
         Bg_Music.volume = PlayerPrefs.GetFloat("Music");
         src.volume = PlayerPrefs.GetFloat("Sounds");
+
+        //To make the Giveaway Rewarded ad reset everytime when restart the game
+        PlayerPrefs.SetInt("Health", 0);
+        PlayerPrefs.SetInt("Ammo", 0);
+
         GoogleAdMobController.instance.ShowSmallBannerAd();
 
     }
@@ -162,6 +180,8 @@ public class WaveManager_ : MonoBehaviour
         }
         else
         {
+            int rand = Random.Range(1, 2);
+
             SpawnGiveawayElement(1);
         }
     }
@@ -198,13 +218,12 @@ public class WaveManager_ : MonoBehaviour
         Quaternion giveawayRot = _referenceObjectForSpawnning.localRotation;
         Vector3 giveawayPos = _referenceObjectForSpawnning.localPosition;
 
-        giveawayPos.z -= 5.5f;
+        giveawayPos.z = _referenceObjectForSpawnning.localPosition.z - 5.5f;
         giveawayRot.x = 0f;
 
         GameObject instatiatedGiveaway = Instantiate(_giveAwayElements[i]);
 
-        instatiatedGiveaway.transform.rotation = giveawayRot;
-        instatiatedGiveaway.transform.position = giveawayPos;
+        instatiatedGiveaway.transform.SetPositionAndRotation(giveawayPos, giveawayRot);
     }
 
     private void Update()
@@ -315,7 +334,7 @@ public class WaveManager_ : MonoBehaviour
             slotImg.SetActive(true);
             slotImg.transform.SetParent(Slot1_G.transform);
             slotImg.transform.position = Slot1_G.transform.GetChild(0).gameObject.transform.position;
-            //slotImg.transform.rotation= Slot1_G.transform.GetChild(0).gameObject.transform.rotation;
+            slotImg.transform.rotation = Slot1_G.transform.GetChild(0).gameObject.transform.rotation;
             slotImg.transform.localScale = new Vector3(1, 1, 1);
             Slot1 = true;
             
@@ -326,7 +345,7 @@ public class WaveManager_ : MonoBehaviour
             slotImg.SetActive(true);
             slotImg.transform.SetParent(Slot2_G.transform);
             slotImg.transform.position = Slot2_G.transform.GetChild(0).gameObject.transform.position;
-            //slotImg.transform.rotation = Slot2_G.transform.GetChild(0).gameObject.transform.rotation;
+            slotImg.transform.rotation = Slot2_G.transform.GetChild(0).gameObject.transform.rotation;
             slotImg.transform.localScale = new Vector3(1, 1, 1);
             Slot2 = true;
             return;
@@ -336,7 +355,7 @@ public class WaveManager_ : MonoBehaviour
             slotImg.SetActive(true);
             slotImg.transform.SetParent(Slot3_G.transform);
             slotImg.transform.position = Slot3_G.transform.GetChild(0).gameObject.transform.position;
-            //slotImg.transform.rotation = Slot3_G.transform.GetChild(0).gameObject.transform.rotation;
+            slotImg.transform.rotation = Slot3_G.transform.GetChild(0).gameObject.transform.rotation;
             slotImg.transform.localScale = new Vector3(1, 1, 1);
             Slot3 = true;
          
@@ -347,7 +366,7 @@ public class WaveManager_ : MonoBehaviour
             slotImg.SetActive(true);
             slotImg.transform.SetParent(Slot4_G.transform);
             slotImg.transform.position = Slot4_G.transform.GetChild(0).gameObject.transform.position;
-            //slotImg.transform.rotation = Slot4_G.transform.GetChild(0).gameObject.transform.rotation;
+            slotImg.transform.rotation = Slot4_G.transform.GetChild(0).gameObject.transform.rotation;
             slotImg.transform.localScale = new Vector3(1, 1, 1);
             Slot4 = true;
     
@@ -579,16 +598,63 @@ public class WaveManager_ : MonoBehaviour
         TorchOff.SetActive(!TorchLight.activeInHierarchy);
     }
 
-    //public void TorchControlWithZoom()
-    //{
-    //    if(TorchLight.activeInHierarchy)
-    //    {
-    //        previouslyActived = TorchLight.activeInHierarchy;
-    //        TorchLight.SetActive(false);
-    //    }
-    //    if(previouslyActived)
-    //    {
-    //        TorchLight.SetActive(true);
-    //    }
-    //}
+    //Rewarded Ads Area
+
+    public void RevivePlayer()
+    {
+        if(_revivingCR != null)
+        {
+            StopCoroutine(_revivingCR);
+        }
+
+        GoogleAdMobController.instance.ShowRewardedAd();
+    }
+
+    public void RevivingPlayer()
+    {
+        Time.timeScale = 1f;
+        timer_Script.StartTimerAfterRevive();
+        Player.GetComponent<FPSPlayer>().hitPoints = 100;
+        _revivePlayerPanel.SetActive(false);
+    }
+
+    public void GiveawayRewardedAd()
+    {
+        if(Application.internetReachability != NetworkReachability.NotReachable)
+        {
+            if (_giveawayCounterForAd == 1)
+            {
+                PlayerPrefs.SetInt("HealthReward", 1);
+            }
+            if(_giveawayCounterForAd == 2)
+            {
+                PlayerPrefs.SetInt("AmmoReward", 1);
+            }
+        }
+
+        GoogleAdMobController.instance.ShowRewardedAd();
+    }
+
+    public void GiveawayGiving()
+    {
+        _giveawayClaimAdButton.SetActive(false);
+
+        if (_giveawayCounterForAd == 1)
+        {
+            FPSPlayer fPSP = FindObjectOfType<FPSPlayer>();
+
+            fPSP.hitPoints = 100.0f;
+
+            _healthBar.healthGui = 100.0f;
+            _healthBar.Health.value = _healthBar.healthGui;
+        }
+        if (_giveawayCounterForAd == 2)
+        {
+            WeaponBehavior wp = FindObjectOfType<WeaponBehavior>();
+
+            wp.ammo = wp.maxAmmo;
+
+            WaveManager_.instance._ammo.ammoGui2 = wp.ammo;
+        }
+    }
 }

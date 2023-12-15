@@ -24,6 +24,9 @@ public class MainMenuScript : MonoBehaviour
     public GameObject _levelLeftBtn;
     int _currentLevelPanelsIndex;
 
+    public GameObject _unlockAllLevelButton;
+    public Text _UnlockAllLevelCounterText;
+
     private void Awake()
     {
         if(instance == null)
@@ -66,6 +69,10 @@ public class MainMenuScript : MonoBehaviour
             PlayerPrefs.SetInt("Mode", mode);
             if (mode == 1)
             {
+                if(PlayerPrefs.GetInt("WaveUnlock") < LevelBtns.Length - 2)
+                {
+                    CheckingAdButton();
+                }
                 _levelsPanel.SetActive(true);
             }
             else if (mode == 2)
@@ -86,6 +93,18 @@ public class MainMenuScript : MonoBehaviour
            }*/
 
         GoogleAdMobController.instance.ShowSmallBannerAd();
+
+        if(PlayerPrefs.GetInt("WaveUnlock") < LevelBtns.Length - 2)
+        {
+            CheckingAdButton();
+        }
+
+        _UnlockAllLevelCounterText.text = PlayerPrefs.GetInt("UnlockAllLevels") + "/3";
+
+        if(PlayerPrefs.GetInt("UnlockAllLevels") >= 2)
+        {
+            _unlockAllLevelButton.SetActive(false);
+        }
 
         _levelPanels[_currentLevelPanelsIndex].SetActive(true);
 
@@ -121,6 +140,15 @@ public class MainMenuScript : MonoBehaviour
 
     }
 
+    public void ShowInterPlay()
+    {
+        if(PlayerPrefs.GetInt("PlayAd") % 2 == 0)
+        {
+            GoogleAdMobController.instance.ShowInterstitialAd();
+        }
+
+        PlayerPrefs.SetInt("PlayAd", PlayerPrefs.GetInt("PlayAd") + 1);
+    }
 
     public void showInter()
     {
@@ -169,8 +197,10 @@ public class MainMenuScript : MonoBehaviour
     }
     public void WayLevel(int way = 0)
     {
+        Debug.Log("wave pref is : " + way);
         //AdsManager.instance.ShowinterAd();
         PlayerPrefs.SetInt("WaveNo", way);
+
         if(SceneManager.GetActiveScene().name != "Tutorial")
         {
             LoaddingPanel.SetActive(true);
@@ -230,5 +260,71 @@ public class MainMenuScript : MonoBehaviour
         }
 
         _levelPanels[_currentLevelPanelsIndex].SetActive(true);
+    }
+
+    public void CheckingAdButton()
+    {
+        foreach (Button b in LevelBtns)
+        {
+            b.transform.GetChild(2).gameObject.SetActive(false);
+        }
+
+        int adButtonToshow = PlayerPrefs.GetInt("WaveUnlock") + 1;
+        LevelBtns[adButtonToshow].transform.GetChild(2).gameObject.SetActive(true);
+
+        EnableButtons(adButtonToshow - 1);
+    }
+
+    public void UnlockAllLevelsRewardAd()
+    {
+        if (Application.internetReachability != NetworkReachability.NotReachable)
+        {
+            PlayerPrefs.SetInt("UnlockAllLevels", PlayerPrefs.GetInt("UnlockAllLevels") + 1);
+            if (PlayerPrefs.GetInt("UnlockAllLevels") > 2)
+            {
+                _unlockAllLevelButton.SetActive(false);
+            }
+            _UnlockAllLevelCounterText.text = PlayerPrefs.GetInt("UnlockAllLevels") + "/3";
+        }
+
+        GoogleAdMobController.instance.ShowRewardedAd();
+    }
+
+    public void UnlockingAllLevels()
+    {
+        PlayerPrefs.SetInt("WaveUnlock", LevelBtns.Length - 1);
+
+        foreach (Button b in LevelBtns)
+        {
+            b.transform.GetChild(2).gameObject.SetActive(false);
+        }
+
+        PlayerPrefs.SetFloat("START", 1);
+
+        EnableButtons(PlayerPrefs.GetInt("WaveUnlock"));
+    }
+
+    public void UnlockNextLevelRewardedAd()
+    {
+        if(Application.internetReachability != NetworkReachability.NotReachable)
+        {
+            PlayerPrefs.SetInt("UnlockNextLevel", 1);
+        }
+
+        GoogleAdMobController.instance.ShowRewardedAd();
+    }
+
+    public void UnlockingNextLevel()
+    {
+        PlayerPrefs.SetInt("WaveUnlock", PlayerPrefs.GetInt("WaveUnlock") + 1);
+
+        foreach(Button b in LevelBtns)
+        {
+            b.transform.GetChild(2).gameObject.SetActive(false);
+        }
+
+        int adButtonToshow = PlayerPrefs.GetInt("WaveUnlock") + 1;
+        LevelBtns[adButtonToshow].transform.GetChild(2).gameObject.SetActive(true);
+        EnableButtons(adButtonToshow - 1);
     }
 }

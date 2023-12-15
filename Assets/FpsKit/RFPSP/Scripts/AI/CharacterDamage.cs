@@ -231,11 +231,14 @@ public class CharacterDamage : MonoBehaviour {
                 {
                     Debug.Log("Wave Mode");
 
-                    WaveManager_.instance.ZombieDeathCount--;
                     WaveManager_.instance.Total_Kills = WaveManager_.instance.Total_Kills + 1;
-                    if (WaveManager_.instance.ZombieDeathCount == 0)
+                    if (!WaveManager_.instance._isSlomo)
                     {
-                        WaveManager_.instance.isLevelComplete = true;
+                        WaveManager_.instance.ZombieDeathCount--;
+                        if (WaveManager_.instance.ZombieDeathCount == 0)
+                        {
+                            WaveManager_.instance.isLevelComplete = true;
+                        }
                     }
                 }
             }

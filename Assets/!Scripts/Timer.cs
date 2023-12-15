@@ -54,6 +54,12 @@ public class Timer : MonoBehaviour
         isRunning = false;
         CompleteLevel();
     }
+
+    public void StartTimerAfterRevive()
+    {
+        isRunning = true;
+    }
+
     public bool BestTime;
     private void CompleteLevel()
     {
