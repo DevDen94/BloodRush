@@ -762,6 +762,12 @@ public class GoogleAdMobController : MonoBehaviour, IUnityAdsInitializationListe
             MainMenuScript.instance.UnlockingAllLevels();
         }
 
+        if(PlayerPrefs.GetInt("SurvivalModeAd") > 2)
+        {
+            PlayerPrefs.SetInt("SurvivalModeAd", 1);
+            MainMenuScript.instance.UnlockingSurvivalModeWithAds();
+        }
+
         if(PlayerPrefs.GetInt("HealthReward") == 1)
         {
             PlayerPrefs.SetInt("HealthReward", 0);

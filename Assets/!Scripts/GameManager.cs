@@ -308,13 +308,12 @@ public class GameManager : MonoBehaviour
         }
         if (value == 2 || value == 11)
         {
-            Debug.Log("Level 2");
-            Weapons[2].haveWeapon = true; //2
-            Weapons[9].haveWeapon = true; //3
+            Weapons[6].haveWeapon = true; //2
+            Weapons[3].haveWeapon = true; //3
         }
         if (value == 3 || value == 12)
         {
-            Weapons[4].haveWeapon = true; //4
+            Weapons[6].haveWeapon = true; //4
             Weapons[5].haveWeapon = true; //5
         }
         if (value == 4 || value == 13)

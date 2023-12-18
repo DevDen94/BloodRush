@@ -25,7 +25,11 @@ public class MainMenuScript : MonoBehaviour
     int _currentLevelPanelsIndex;
 
     public GameObject _unlockAllLevelButton;
-    public Text _UnlockAllLevelCounterText;
+    [HideInInspector] public Text _UnlockAllLevelCounterText;
+
+    public Button _survivalModeButton;
+    public Button _adButtonForSurvivalMode;
+    public Text _survivalModeUnlockAdsCounterText;
 
     private void Awake()
     {
@@ -48,6 +52,12 @@ public class MainMenuScript : MonoBehaviour
     }
     void EnableButtons(int a)
     {
+        if(a > 3)
+        {
+            _adButtonForSurvivalMode.gameObject.SetActive(false);
+            _survivalModeButton.interactable = true;
+        }
+
         for(int i = 0; i <= a; i++)
         {
             LockedImages[i].SetActive(false);
@@ -85,12 +95,6 @@ public class MainMenuScript : MonoBehaviour
     {
         //PlayerPrefs.SetInt("Tut", 1);
 
-        /*   AdsManager.instance.ShowSmallBanner();
-           if (AdsManager.instance.isAppOpen)
-           {
-               AdsManager.instance.ShowAppOpenAd();
-               AdsManager.instance.isAppOpen = false;
-           }*/
 
         GoogleAdMobController.instance.ShowSmallBannerAd();
 
@@ -262,6 +266,8 @@ public class MainMenuScript : MonoBehaviour
         _levelPanels[_currentLevelPanelsIndex].SetActive(true);
     }
 
+    #region Rewarded Ads Integration
+
     public void CheckingAdButton()
     {
         foreach (Button b in LevelBtns)
@@ -327,4 +333,27 @@ public class MainMenuScript : MonoBehaviour
         LevelBtns[adButtonToshow].transform.GetChild(2).gameObject.SetActive(true);
         EnableButtons(adButtonToshow - 1);
     }
+
+    public void UnlockSurvivalMode()
+    {
+        if(Application.internetReachability != NetworkReachability.NotReachable)
+        {
+            PlayerPrefs.SetInt("SurvivalModeAd", PlayerPrefs.GetInt("SurvivalModeAd") + 1);
+            if(PlayerPrefs.GetInt("SurvivalModeAd") > 2)
+            {
+                _adButtonForSurvivalMode.gameObject.SetActive(false);
+            }
+            _survivalModeUnlockAdsCounterText.text = PlayerPrefs.GetInt("SurvivalModeAd") + "/3";
+        }
+
+        GoogleAdMobController.instance.ShowRewardedAd();
+    }
+
+    public void UnlockingSurvivalModeWithAds()
+    {
+        _adButtonForSurvivalMode.gameObject.SetActive(false);
+        _survivalModeButton.interactable = true;
+    }
+
+    #endregion 
 }
