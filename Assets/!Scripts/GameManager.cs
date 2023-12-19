@@ -299,22 +299,23 @@ public class GameManager : MonoBehaviour
         LevelPasued.SetActive(false);
         Time.timeScale = 1;
     }
+
     void LoadWeapons_Data(int value)
     {
         if (value == 1 || value==10)
         {
-            Weapons[2].haveWeapon = true;
+            Weapons[11].haveWeapon = true; //2
             
         }
         if (value == 2 || value == 11)
         {
-            Weapons[6].haveWeapon = true; //2
-            Weapons[3].haveWeapon = true; //3
+            Weapons[13].haveWeapon = true; //2
+            Weapons[10].haveWeapon = true; //3
         }
         if (value == 3 || value == 12)
         {
-            Weapons[6].haveWeapon = true; //4
-            Weapons[5].haveWeapon = true; //5
+            Weapons[12].haveWeapon = true; //4
+            Weapons[9].haveWeapon = true; //5
         }
         if (value == 4 || value == 13)
         {
