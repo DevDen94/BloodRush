@@ -1387,7 +1387,7 @@ public class FPSPlayer : MonoBehaviour {
 		{
 			GameManager.instance.LevelFailed.SetActive(true);
 			//Firebase.Analytics.FirebaseAnalytics.LogEvent("WaveMode_WaveFailed", "Wave_Failed", PlayerPrefs.GetInt("WaveNo"));
-			GoogleAdMobController.instance.ShowBigBannerAd();
+			//GoogleAdMobController.instance.ShowBigBannerAd();
 		}
         else
 		{
@@ -1405,7 +1405,8 @@ public class FPSPlayer : MonoBehaviour {
 
 		if(PlayerPrefs.GetInt("FailAd") % 2 == 0)
         {
-            GoogleAdMobController.instance.ShowInterstitialAd();
+			//GoogleAdMobController.instance.ShowInterstitialAd();
+			GoogleMobileAdsController.Instance.ShowInterstitialAd();
         }
 
 		PlayerPrefs.SetInt("FailAd", PlayerPrefs.GetInt("FailAd") + 1);

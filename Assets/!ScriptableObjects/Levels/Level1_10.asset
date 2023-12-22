@@ -19,3 +19,8 @@ MonoBehaviour:
   Muscular_Count: 0
   Fireman_Zombies: 0
   PoliceMen_Zombies: 0
+  _dialogueText: 'Welcome survivor!
+
+    With the Available Weapons you have to Kill
+    "4" zombies and survive the apocalypse and defend your house.'
+  _dialogueSoundClip: {fileID: 8300000, guid: bafd3695c622af3448a827bb62039f21, type: 3}

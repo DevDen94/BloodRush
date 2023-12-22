@@ -68,7 +68,7 @@ public class TutorialManager : MonoBehaviour
 
     void Start()
     {
-        dragToWalk.SetActive(true);
+        //dragToWalk.SetActive(true);
     }
 
     public void TutorialBehaviour(string eventName)

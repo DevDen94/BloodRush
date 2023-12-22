@@ -82,6 +82,11 @@ public class GameManager : MonoBehaviour
 
     public Button grenadeButton;
 
+    public Text _DB_Text;
+    public GameObject _dialogueBoxPanel;
+    public AudioSource _dialogueSound;
+
+
     void TotalCount()
     {
         ZombieDeathCount = Wave_.DoctorZombie_Count +
@@ -126,7 +131,8 @@ public class GameManager : MonoBehaviour
         //    beam.gameObject.SetActive(false);
         //}
 
-        GoogleAdMobController.instance.ShowSmallBannerAd();
+        //GoogleAdMobController.instance.ShowSmallBannerAd();
+        GoogleMobileAdsController.Instance.ShowSmallBannerAd();
     }
     void Delay()
     {
@@ -147,8 +153,11 @@ public class GameManager : MonoBehaviour
 
     public void CutSceneDelay()
     {
-        Debug.Log("Zombiess Coming");
         Wave_ = Levels[PlayerPrefs.GetInt("WaveNo")];
+
+        _DB_Text.text = Wave_._dialogueText;
+        _dialogueSound.clip = Wave_._dialogueSoundClip;
+
         TotalCount();
         LoadWeapons_Data(PlayerPrefs.GetInt("WaveNo"));
         Invoke("Instaniate_Zombies", 1f);
@@ -164,12 +173,23 @@ public class GameManager : MonoBehaviour
             Assign_Paths();
         
     }
+
+    public void Off_Dialogue_Box()
+    {
+        EmptyPanel.SetActive(false);
+        Weapons_Panel.SetActive(false);
+        _dialogueBoxPanel.SetActive(false);
+        src.PlayOneShot(Btnclick);
+        Time.timeScale = 1f;
+    }
+
     public void Off_AvaliableWeaponPanel()
     {
         EmptyPanel.SetActive(false);
         Weapons_Panel.SetActive(false);
+        _dialogueBoxPanel.SetActive(true);
         src.PlayOneShot(Btnclick);
-        Time.timeScale = 1f;
+        Time.timeScale = 0f;
     }
     public void ContinueGame()
     {
@@ -184,11 +204,12 @@ public class GameManager : MonoBehaviour
     public void LevelCompletee()
     {
         //Firebase.Analytics.FirebaseAnalytics.LogEvent("WaveMode_LevelComplete", "WaveComplete", Wave_.ToString());
-        GoogleAdMobController.instance.ShowBigBannerAd();
+        //GoogleAdMobController.instance.ShowBigBannerAd();
 
         if(PlayerPrefs.GetInt("CompAd") % 2 == 0)
         {
-            GoogleAdMobController.instance.ShowInterstitialAd();
+            //GoogleAdMobController.instance.ShowInterstitialAd();
+            GoogleMobileAdsController.Instance.ShowInterstitialAd();
         }
 
         PlayerPrefs.SetInt("CompAd", PlayerPrefs.GetInt("CompAd") + 1);
@@ -283,7 +304,7 @@ public class GameManager : MonoBehaviour
     public void Pause_BTn()
     {
         //GoogleAdMobController.instance.ShowInterstitialAd();
-        GoogleAdMobController.instance.ShowBigBannerAd();
+        //GoogleAdMobController.instance.ShowBigBannerAd();
         //Firebase.Analytics.FirebaseAnalytics.LogEvent("WaveMode_PasueBtn_Click", "WaveMode", Wave_.ToString());
         //  AdsManager.instance.ShowinterAd();
         // AdsManager.instance.ShowBigBanner();
@@ -294,7 +315,7 @@ public class GameManager : MonoBehaviour
     public void Resume()
     {
         // AdsManager.instance.ShowSmallBanner();
-        GoogleAdMobController.instance.ShowSmallBannerAd();
+        //GoogleAdMobController.instance.ShowSmallBannerAd();
         src.PlayOneShot(Btnclick);
         LevelPasued.SetActive(false);
         Time.timeScale = 1;
@@ -304,7 +325,7 @@ public class GameManager : MonoBehaviour
     {
         if (value == 1 || value==10)
         {
-            Weapons[11].haveWeapon = true; //2
+            Weapons[10].haveWeapon = true; //2
             
         }
         if (value == 2 || value == 11)
@@ -613,7 +634,9 @@ public class GameManager : MonoBehaviour
         {
             PlayerPrefs.SetInt("SkipLevel", 1);
         }
-        GoogleAdMobController.instance.ShowRewardedAd();
+        //GoogleAdMobController.instance.ShowRewardedAd();
+        GoogleMobileAdsController.Instance.ShowRewardedAd();
+        GoogleMobileAdsController.Instance.isRewarded = true;
     }
 
     public void SkippingLevel()

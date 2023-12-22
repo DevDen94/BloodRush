@@ -19,3 +19,6 @@ MonoBehaviour:
   Muscular_Count: 0
   Fireman_Zombies: 0
   PoliceMen_Zombies: 12
+  _dialogueText: You Have to kill the "27" Zombies with Available Guns to survive
+    the Zombie Apocalypse
+  _dialogueSoundClip: {fileID: 8300000, guid: bfd6bfec1afc8434d922c131fe09df53, type: 3}

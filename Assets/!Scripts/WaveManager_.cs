@@ -96,6 +96,9 @@ public class WaveManager_ : MonoBehaviour
     //bool previouslyActived;
     public Button grenadeButton;
 
+    public GameObject _dialogueBoxPanel;
+    public Text _DB_Text;
+
     public GameObject _giveawayClaimAdButton;
     [HideInInspector] public int _giveawayCounterForAd;
 
@@ -122,7 +125,8 @@ public class WaveManager_ : MonoBehaviour
         PlayerPrefs.SetInt("Health", 0);
         PlayerPrefs.SetInt("Ammo", 0);
 
-        GoogleAdMobController.instance.ShowSmallBannerAd();
+        //GoogleAdMobController.instance.ShowSmallBannerAd();
+        GoogleMobileAdsController.Instance.ShowSmallBannerAd();
 
     }
     
@@ -155,19 +159,31 @@ public class WaveManager_ : MonoBehaviour
  
     public void ContinueGame()
     {
-        EmptyPanel.SetActive(false);
         src.PlayOneShot(Btnclick);
         Objective_Panel.SetActive(false);
+        _DB_Text.text = Wave_._dialogueText;
+        _dialogueBoxPanel.SetActive(true);
+        //timer_Script.StartTimer();
+        //Time.timeScale = 1f;
+        
+    }
+
+    public void Off_DialogueBox()
+    {
+        EmptyPanel.SetActive(false);
+        src.PlayOneShot(Btnclick);
+        _dialogueBoxPanel.SetActive(false);
         timer_Script.StartTimer();
         Time.timeScale = 1f;
-        
     }
 
     public void WaveComplete()
     {
         //Firebase.Analytics.FirebaseAnalytics.LogEvent("SurvivalMode_WaveComplete", "SurvivalMode", Wave_.ToString());
         PlayerPrefs.SetInt("Wave_No", PlayerPrefs.GetInt("Wave_No") + 1);
-        WaveImage.SetActive(true);
+        Wave_ = Levels[PlayerPrefs.GetInt("Wave_No")];
+        _DB_Text.text = Wave_._dialogueText;
+        _dialogueBoxPanel.SetActive(true);
 
         GiveAwavy();
     }
@@ -263,7 +279,7 @@ public class WaveManager_ : MonoBehaviour
 
     public void Next_Btn()
     {
-        GoogleAdMobController.instance.ShowSmallBannerAd();
+        //GoogleAdMobController.instance.ShowSmallBannerAd();
         //Firebase.Analytics.FirebaseAnalytics.LogEvent("SurvivalMode_NextBtn", "SurvivalMode", Wave_.ToString());
         src.PlayOneShot(Btnclick);
         SceneManager.LoadScene("SurvivalMode");
@@ -272,14 +288,14 @@ public class WaveManager_ : MonoBehaviour
     public void Restart_Btn()
     {
         // AdsManager.instance.ShowSmallBanner();
-        GoogleAdMobController.instance.ShowSmallBannerAd();
+        //GoogleAdMobController.instance.ShowSmallBannerAd();
         //Firebase.Analytics.FirebaseAnalytics.LogEvent("SurvivalMode_RestartBtn", "SurvivalMode", Wave_.ToString());
         src.PlayOneShot(Btnclick);
         SceneManager.LoadScene("SurvivalMode");
     }
     public void Home()
     {
-        GoogleAdMobController.instance.ShowSmallBannerAd();
+        //GoogleAdMobController.instance.ShowSmallBannerAd();
         //Firebase.Analytics.FirebaseAnalytics.LogEvent("SurvivalMode_HomeBtn", "SurvivalMode", Wave_.ToString());
         //Time.timeScale = 1f;
         src.PlayOneShot(Btnclick);
@@ -295,7 +311,7 @@ public class WaveManager_ : MonoBehaviour
     public void Resume()
     {
         // AdsManager.instance.ShowSmallBanner();
-        GoogleAdMobController.instance.ShowSmallBannerAd();
+        //GoogleAdMobController.instance.ShowSmallBannerAd();
         src.PlayOneShot(Btnclick);
         LevelPasued.SetActive(false);
         Time.timeScale = 1;
@@ -607,7 +623,7 @@ public class WaveManager_ : MonoBehaviour
             StopCoroutine(_revivingCR);
         }
 
-        GoogleAdMobController.instance.ShowRewardedAd();
+        //GoogleAdMobController.instance.ShowRewardedAd();
     }
 
     public void RevivingPlayer()
@@ -632,7 +648,9 @@ public class WaveManager_ : MonoBehaviour
             }
         }
 
-        GoogleAdMobController.instance.ShowRewardedAd();
+        //GoogleAdMobController.instance.ShowRewardedAd();
+        GoogleMobileAdsController.Instance.ShowRewardedAd();
+        GoogleMobileAdsController.Instance.isRewarded = true;
     }
 
     public void GiveawayGiving()

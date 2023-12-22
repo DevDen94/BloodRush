@@ -19,3 +19,10 @@ MonoBehaviour:
   Muscular_Count: 0
   Fireman_Zombies: 0
   PoliceMen_Zombies: 0
+  _dialogueText: 'Hello Survivor !
+
+    The Zombies Are Coming In Waves.
+
+    Be
+    careful !!!'
+  _dialogueSoundClip: {fileID: 8300000, guid: 87c7862b0bb53e24e8e77fbaafc4686b, type: 3}

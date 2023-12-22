@@ -19,3 +19,7 @@ MonoBehaviour:
   Muscular_Count: 0
   Fireman_Zombies: 4
   PoliceMen_Zombies: 6
+  _dialogueText: 'Next Wave is Coming!
+
+    Be Careful !!!'
+  _dialogueSoundClip: {fileID: 8300000, guid: 9589d927f04e5a344b6cec8bfb856262, type: 3}

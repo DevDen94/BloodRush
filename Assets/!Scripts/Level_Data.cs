@@ -13,4 +13,8 @@ public class Level_Data : ScriptableObject
     public int Fireman_Zombies;
     public int PoliceMen_Zombies;
 
+    [TextArea(3, 10)]
+    public string _dialogueText;
+
+    public AudioClip _dialogueSoundClip;
 }

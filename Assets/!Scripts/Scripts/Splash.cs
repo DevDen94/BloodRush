@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -14,10 +13,10 @@ public class Splash : MonoBehaviour
     int Value;
     Scene activeScene;
 
-    private void OnEnable()
-    {
-       
-    }    
+    AsyncOperation asyncOperation;
+    public float Wait;
+    public Image FillBar;
+
     private void Start()
     {
         PlayerPrefs.SetInt("Tut", 1);
@@ -26,6 +25,8 @@ public class Splash : MonoBehaviour
         {
             Value = 0;
             StartCoroutine(waitforSceneSwitch());
+
+            //StartCoroutine(LoadingScene());
 
             activeScene = SceneManager.GetActiveScene();
             Invoke(nameof(ShowBig), 1f);
@@ -36,10 +37,13 @@ public class Splash : MonoBehaviour
         }
         // SoundsManager.instance.PlayMainMenuMusic();
     }
+
     public void ShowBig()
     {
-     GoogleAdMobController.instance.ShowBigBannerAd();
+        //GoogleAdMobController.instance.ShowBigBannerAd();
+        GoogleMobileAdsController.Instance.ShowBiGBannerAd();
     }
+
 
     IEnumerator waitforSceneSwitch()
     {
@@ -53,6 +57,9 @@ public class Splash : MonoBehaviour
         instantiatedChild.transform.parent = parentObject;
         instantiatedChild.transform.localScale = new Vector3(1f, 1f, 1f);
         Value =Value + 1;
+
+        FillBar.fillAmount = Value / 50f;
+
         CheckTime();
     }
 
@@ -67,7 +74,7 @@ public class Splash : MonoBehaviour
             }
             else if (activeScene.name == "MainMenu")
             {
-                if(PlayerPrefs.GetInt("Tut") == 0)
+                if (PlayerPrefs.GetInt("Tut") == 0)
                 {
                     SceneManager.LoadSceneAsync("Tutorial");
                 }
@@ -83,7 +90,7 @@ public class Splash : MonoBehaviour
                     }
                 }
             }
-            else if(activeScene.name == "Tutorial")
+            else if (activeScene.name == "Tutorial")
             {
                 PlayerPrefs.SetInt("Mode", PlayerPrefs.GetInt("ModeForTut"));
                 if (PlayerPrefs.GetInt("ModeForTut") == 1)
@@ -102,4 +109,52 @@ public class Splash : MonoBehaviour
         }
     }
 
+    IEnumerator LoadingScene()
+    {
+        yield return new WaitForSeconds(Wait);
+
+        if (activeScene.name == "Splash")
+        {
+            asyncOperation = SceneManager.LoadSceneAsync("MainMenu");
+        }
+        else if (activeScene.name == "MainMenu")
+        {
+            if (PlayerPrefs.GetInt("Tut") == 0)
+            {
+                asyncOperation = SceneManager.LoadSceneAsync("Tutorial");
+            }
+            else
+            {
+                if (PlayerPrefs.GetInt("Mode") == 1)
+                {
+                    asyncOperation = SceneManager.LoadSceneAsync("GamePlay");
+                }
+                else
+                {
+                    asyncOperation = SceneManager.LoadSceneAsync("SurvivalMode");
+                }
+            }
+        }
+        else if (activeScene.name == "Tutorial")
+        {
+            PlayerPrefs.SetInt("Mode", PlayerPrefs.GetInt("ModeForTut"));
+            if (PlayerPrefs.GetInt("ModeForTut") == 1)
+            {
+                asyncOperation = SceneManager.LoadSceneAsync("GamePlay");
+            }
+            else if (PlayerPrefs.GetInt("ModeForTut") == 2)
+            {
+                asyncOperation = SceneManager.LoadSceneAsync("SurvivalMode");
+            }
+        }
+
+        while (!asyncOperation.isDone)
+        {
+
+            float progress = Mathf.Clamp01(asyncOperation.progress / 0.9f);
+            FillBar.fillAmount = progress;
+            yield return null;
+        }
+
+    }
 }

@@ -87,16 +87,16 @@ public class MainMenuScript : MonoBehaviour
             }
             else if (mode == 2)
             {
+                GoogleMobileAdsController.Instance.ShowInterstitialAd();
                 LoaddingPanel.SetActive(true);
             }
         }
     }
     void Start()
     {
-        //PlayerPrefs.SetInt("Tut", 1);
+        GoogleMobileAdsController.Instance.ShowSmallBannerAd();
 
-
-        GoogleAdMobController.instance.ShowSmallBannerAd();
+        //GoogleAdMobController.instance.ShowSmallBannerAd();
 
         if(PlayerPrefs.GetInt("WaveUnlock") < LevelBtns.Length - 2)
         {
@@ -148,7 +148,7 @@ public class MainMenuScript : MonoBehaviour
     {
         if(PlayerPrefs.GetInt("PlayAd") % 2 == 0)
         {
-            GoogleAdMobController.instance.ShowInterstitialAd();
+            //GoogleAdMobController.instance.ShowInterstitialAd();
         }
 
         PlayerPrefs.SetInt("PlayAd", PlayerPrefs.GetInt("PlayAd") + 1);
@@ -157,7 +157,7 @@ public class MainMenuScript : MonoBehaviour
     public void showInter()
     {
         // AdsManager.instance.ShowinterAd();
-        GoogleAdMobController.instance.ShowInterstitialAd();
+        //GoogleAdMobController.instance.ShowInterstitialAd();
     }
 
 
@@ -203,6 +203,9 @@ public class MainMenuScript : MonoBehaviour
     {
         Debug.Log("wave pref is : " + way);
         //AdsManager.instance.ShowinterAd();
+
+        GoogleMobileAdsController.Instance.ShowInterstitialAd();
+
         PlayerPrefs.SetInt("WaveNo", way);
 
         if(SceneManager.GetActiveScene().name != "Tutorial")
@@ -293,7 +296,9 @@ public class MainMenuScript : MonoBehaviour
             _UnlockAllLevelCounterText.text = PlayerPrefs.GetInt("UnlockAllLevels") + "/3";
         }
 
-        GoogleAdMobController.instance.ShowRewardedAd();
+        //GoogleAdMobController.instance.ShowRewardedAd();
+        GoogleMobileAdsController.Instance.ShowRewardedAd();
+        GoogleMobileAdsController.Instance.isRewarded = true;
     }
 
     public void UnlockingAllLevels()
@@ -317,7 +322,9 @@ public class MainMenuScript : MonoBehaviour
             PlayerPrefs.SetInt("UnlockNextLevel", 1);
         }
 
-        GoogleAdMobController.instance.ShowRewardedAd();
+        //GoogleAdMobController.instance.ShowRewardedAd();
+        GoogleMobileAdsController.Instance.ShowRewardedAd();
+        GoogleMobileAdsController.Instance.isRewarded = true;
     }
 
     public void UnlockingNextLevel()
@@ -346,12 +353,15 @@ public class MainMenuScript : MonoBehaviour
             _survivalModeUnlockAdsCounterText.text = PlayerPrefs.GetInt("SurvivalModeAd") + "/3";
         }
 
-        GoogleAdMobController.instance.ShowRewardedAd();
+        //GoogleAdMobController.instance.ShowRewardedAd();
+        GoogleMobileAdsController.Instance.ShowRewardedAd();
+        GoogleMobileAdsController.Instance.isRewarded = true;
     }
 
     public void UnlockingSurvivalModeWithAds()
     {
         _adButtonForSurvivalMode.gameObject.SetActive(false);
+        PlayerPrefs.SetInt("Tut", 1);
         _survivalModeButton.interactable = true;
     }
 
