@@ -1,36 +1,26 @@
 {
   "project_info": {
-    "project_number": "939742244432",
-    "project_id": "zombie-shooter-e6d1a",
-    "storage_bucket": "zombie-shooter-e6d1a.appspot.com"
+    "project_number": "75128581415",
+    "project_id": "zombie-hunter-107cc",
+    "storage_bucket": "zombie-hunter-107cc.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:939742244432:android:f7cdfea6e7e8f8802beb55",
+        "mobilesdk_app_id": "1:75128581415:android:db3debcb6548c8c1718d02",
         "android_client_info": {
           "package_name": "com.darwin.zombie.shooting"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "939742244432-0ibc038b2rv1tu4u7gs6bifee0h4a7bp.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDDxYK6DgxrG8GqhTmDoKoI0dda56fp3tc"
+          "current_key": "AIzaSyA1azudmC2XKyvna1cFT34wnqQKlNGIgTY"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "939742244432-0ibc038b2rv1tu4u7gs6bifee0h4a7bp.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }

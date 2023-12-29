@@ -41,6 +41,7 @@ public class GameManager : MonoBehaviour
 
     [Header(" UI Elements")]
     public GameObject LevelComplete;
+    public GameObject NextButton;
     public GameObject LevelFailed;
     public GameObject LevelPasued;
     bool isLevelComplete;
@@ -123,8 +124,18 @@ public class GameManager : MonoBehaviour
 
         Bg_Music.volume = PlayerPrefs.GetFloat("Music");
         src.volume = PlayerPrefs.GetFloat("Sounds");
+        _dialogueSound.volume = PlayerPrefs.GetFloat("Music");
         int wav = PlayerPrefs.GetInt("WaveNo") + 1;
         Wave_NO.text = " WAVE NO : " +wav ;
+
+        if(PlayerPrefs.GetInt("WaveNo") < 19)
+        {
+            _skipLevelButton.SetActive(true);
+        }
+        else
+        {
+            _skipLevelButton.SetActive(false);
+        }
 
         //foreach(var beam in LaserBeams)
         //{
@@ -216,7 +227,9 @@ public class GameManager : MonoBehaviour
         LevelComplete.SetActive(true);
         if (PlayerPrefs.GetInt("WaveNo") >= 19)
         {
-            SceneManager.LoadScene("MainMenu");
+            //SceneManager.LoadScene("MainMenu");
+            NextButton.SetActive(false);
+
             return;
         }
         else
@@ -371,7 +384,7 @@ public class GameManager : MonoBehaviour
         if(value == 19)
         {
             Weapons[2].haveWeapon = true;
-            Weapons[4].haveWeapon = true;
+            Weapons[13].haveWeapon = true;
         }
         for (int i = 0; i < Weapons.Length; ++i)
         {
@@ -427,7 +440,7 @@ public class GameManager : MonoBehaviour
         }
         
        
-        if(i==3 || i == 4 || i==14)
+        if(i==1 || i==3 || i == 4 || i==14 || i==17 || i==11 || i==19)
         {
 
             aimBtn.SetActive(false);
@@ -445,8 +458,6 @@ public class GameManager : MonoBehaviour
         {
             AmmoObj.SetActive(true);
         }
-        
-       
     }
    
     public void Open_WeaponWheel()

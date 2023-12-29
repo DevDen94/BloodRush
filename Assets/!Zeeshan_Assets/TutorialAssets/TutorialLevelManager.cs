@@ -19,24 +19,28 @@ public class TutorialLevelManager : MonoBehaviour
     public AudioSource src;
     public AudioClip ReloadingClip;
 
+    public AudioSource[] _chatSounds;
+
     private void Awake()
     {
         if (s_Instance == null)
         {
             s_Instance = this;
         }
-
-
     }
 
     void Start()
     {
+        GoogleMobileAdsController.Instance.ShowSmallBannerAd();
+
         m_allAudios = FindObjectsOfType<AudioSource>();
 
         foreach (AudioSource audios in m_allAudios)
         {
             audios.volume = PlayerPrefs.GetFloat("Music");
         }
+
+        SoundManage();
 
         CharacterDamage.zombieDied += ZombieDied;
     }
@@ -51,5 +55,13 @@ public class TutorialLevelManager : MonoBehaviour
     public void WeaponWheelDeactivator()
     {
         _weaponWheel.SetActive(false);
+    }
+
+    void SoundManage()
+    {
+        for(int i = 0; i < _chatSounds.Length; i++)
+        {
+            _chatSounds[i].volume = PlayerPrefs.GetFloat("Music");
+        }
     }
 }

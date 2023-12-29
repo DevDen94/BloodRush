@@ -217,7 +217,6 @@ public class CharacterDamage : MonoBehaviour {
 			PlayAudioAtPos.PlayClipAt(dieSound, transform.position, 1.0f);
 			if(PlayerPrefs.GetInt("Tut") != 0) 
 			{
-				Debug.Log("Not Tutorial");
                 if (PlayerPrefs.GetInt("Mode") == 1)
                 {
                     Debug.Log("Survival Mode");
@@ -232,13 +231,11 @@ public class CharacterDamage : MonoBehaviour {
                     Debug.Log("Wave Mode");
 
                     WaveManager_.instance.Total_Kills = WaveManager_.instance.Total_Kills + 1;
-                    if (!WaveManager_.instance._isSlomo)
+                    WaveManager_.instance.ZombieDeathCount--;
+                    if (WaveManager_.instance.ZombieDeathCount == 0)
                     {
-                        WaveManager_.instance.ZombieDeathCount--;
-                        if (WaveManager_.instance.ZombieDeathCount == 0)
-                        {
-                            WaveManager_.instance.isLevelComplete = true;
-                        }
+						Debug.Log("WaveComplete");
+                        WaveManager_.instance.isLevelComplete = true;
                     }
                 }
             }

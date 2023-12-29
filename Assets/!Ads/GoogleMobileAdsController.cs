@@ -290,37 +290,40 @@ public class GoogleMobileAdsController : MonoBehaviour, IUnityAdsInitializationL
 
     public void ShowRewardedAd()
     {
-        if (rewardedAd != null && rewardedAd.IsLoaded())
-        {
-            rewardedAd.Show();
+        //Debug.Log("Show AD");
+        Advertisement.Load(REWARDED_VIDEO_PLACEMENT, this);
+        Advertisement.Show(REWARDED_VIDEO_PLACEMENT, this);
+        //if (rewardedAd != null && rewardedAd.IsLoaded())
+        //{
+        //    rewardedAd.Show();
 
-            LoadRewardedAd();
-            MEDIUMLoadRewardedAd();
-            ALLPRICESLoadRewardedAd();
-        }else if (MediumECPMrewardedAd != null && MediumECPMrewardedAd.IsLoaded())
-        {
-            MediumECPMrewardedAd.Show();
+        //    LoadRewardedAd();
+        //    MEDIUMLoadRewardedAd();
+        //    ALLPRICESLoadRewardedAd();
+        //}else if (MediumECPMrewardedAd != null && MediumECPMrewardedAd.IsLoaded())
+        //{
+        //    MediumECPMrewardedAd.Show();
 
-            LoadRewardedAd();
-            MEDIUMLoadRewardedAd();
-            ALLPRICESLoadRewardedAd();
-        }
-        else if (ALLPRICEECPMrewardedAd != null && ALLPRICEECPMrewardedAd.IsLoaded())
-        {
-            ALLPRICEECPMrewardedAd.Show();
+        //    LoadRewardedAd();
+        //    MEDIUMLoadRewardedAd();
+        //    ALLPRICESLoadRewardedAd();
+        //}
+        //else if (ALLPRICEECPMrewardedAd != null && ALLPRICEECPMrewardedAd.IsLoaded())
+        //{
+        //    ALLPRICEECPMrewardedAd.Show();
 
-            LoadRewardedAd();
-            MEDIUMLoadRewardedAd();
-            ALLPRICESLoadRewardedAd();
-        }
-        else
-        {
-            Advertisement.Load(REWARDED_VIDEO_PLACEMENT, this);
-            Advertisement.Show(REWARDED_VIDEO_PLACEMENT, this);
-            LoadRewardedAd();
-            MEDIUMLoadRewardedAd();
-            ALLPRICESLoadRewardedAd();
-        }
+        //    LoadRewardedAd();
+        //    MEDIUMLoadRewardedAd();
+        //    ALLPRICESLoadRewardedAd();
+        //}
+        //else
+        //{
+        //    Advertisement.Load(REWARDED_VIDEO_PLACEMENT, this);
+        //    Advertisement.Show(REWARDED_VIDEO_PLACEMENT, this);
+        //    LoadRewardedAd();
+        //    MEDIUMLoadRewardedAd();
+        //    ALLPRICESLoadRewardedAd();
+        //}
     }
 
     public void ShowSmallBannerAd()
@@ -402,44 +405,44 @@ public class GoogleMobileAdsController : MonoBehaviour, IUnityAdsInitializationL
     
     private void HandleUserEarnedReward(object sender, Reward args)
     {
-        string type = args.Type;
-        double amount = args.Amount;
-        Debug.Log("User Win Reward");
-        Debug.Log("User earned reward of " + amount + " " + type);
-        // You can implement your reward logic here
-
-        if (PlayerPrefs.GetInt("SkipLevel") == 1)
-        {
-            PlayerPrefs.SetInt("SkipLevel", 0);
-            GameManager.instance.SkippingLevel();
-        }
-        if (PlayerPrefs.GetInt("UnlockAllLevels") > 2)
-        {
-            PlayerPrefs.SetInt("UnlockAllLevels", 5);
-            MainMenuScript.instance.UnlockingAllLevels();
-        }
-        if (PlayerPrefs.GetInt("SurvivalModeAd") > 2)
-        {
-            PlayerPrefs.SetInt("SurvivalModeAd", 1);
-            MainMenuScript.instance.UnlockingSurvivalModeWithAds();
-        }
-        if (PlayerPrefs.GetInt("HealthReward") == 1)
-        {
-            PlayerPrefs.SetInt("HealthReward", 0);
-            WaveManager_.instance._giveawayCounterForAd = 0;
-            WaveManager_.instance.GiveawayGiving();
-        }
-        if (PlayerPrefs.GetInt("AmmoReward") == 1)
-        {
-            PlayerPrefs.SetInt("AmmoReward", 0);
-            WaveManager_.instance.GiveawayGiving();
-            WaveManager_.instance._giveawayCounterForAd = 0;
-        }
-        if (PlayerPrefs.GetInt("UnlockNextLevel") == 1)
-        {
-            PlayerPrefs.SetInt("UnlockNextLevel", 0);
-            MainMenuScript.instance.UnlockingNextLevel();
-        }
+        //string type = args.Type;
+        //double amount = args.Amount;
+        //Debug.Log("User Win Reward");
+        //Debug.Log("User earned reward of " + amount + " " + type);
+        //// You can implement your reward logic here
+        //Debug.Log("Complete");
+        //if (PlayerPrefs.GetInt("SkipLevel") == 1)
+        //{
+        //    PlayerPrefs.SetInt("SkipLevel", 0);
+        //    GameManager.instance.SkippingLevel();
+        //}
+        //if (PlayerPrefs.GetInt("UnlockAllLevels") > 2)
+        //{
+        //    PlayerPrefs.SetInt("UnlockAllLevels", 5);
+        //    MainMenuScript.instance.UnlockingAllLevels();
+        //}
+        //if (PlayerPrefs.GetInt("SurvivalModeAd") > 2)
+        //{
+        //    PlayerPrefs.SetInt("SurvivalModeAd", 1);
+        //    MainMenuScript.instance.UnlockingSurvivalModeWithAds();
+        //}
+        //if (PlayerPrefs.GetInt("HealthReward") == 1)
+        //{
+        //    PlayerPrefs.SetInt("HealthReward", 0);
+        //    WaveManager_.instance._giveawayCounterForAd = 0;
+        //    WaveManager_.instance.GiveawayGiving();
+        //}
+        //if (PlayerPrefs.GetInt("AmmoReward") == 1)
+        //{
+        //    PlayerPrefs.SetInt("AmmoReward", 0);
+        //    WaveManager_.instance.GiveawayGiving();
+        //    WaveManager_.instance._giveawayCounterForAd = 0;
+        //}
+        //if (PlayerPrefs.GetInt("UnlockNextLevel") == 1)
+        //{
+        //    PlayerPrefs.SetInt("UnlockNextLevel", 0);
+        //    MainMenuScript.instance.UnlockingNextLevel();
+        //}
     }
 
 
@@ -452,41 +455,44 @@ public class GoogleMobileAdsController : MonoBehaviour, IUnityAdsInitializationL
     public void OnUnityAdsShowClick(string _adUnitId) { }
     public void OnUnityAdsShowComplete(string _adUnitId, UnityAdsShowCompletionState showCompletionState) {
 
-        if(isRewarded)
-        {
-            if (PlayerPrefs.GetInt("SkipLevel") == 1)
+        
+            Debug.Log("Complete");
+            if (isRewarded)
             {
-                PlayerPrefs.SetInt("SkipLevel", 0);
-                GameManager.instance.SkippingLevel();
+                if (PlayerPrefs.GetInt("SkipLevel") == 1)
+                {
+                    PlayerPrefs.SetInt("SkipLevel", 0);
+                    GameManager.instance.SkippingLevel();
+                }
+                if (PlayerPrefs.GetInt("ShowLevelsAd") == 1)
+                {
+                    PlayerPrefs.SetInt("ShowLevelsAd", 0);
+                    MainMenuScript.instance.UnlockingAllLevels();
+                }
+                if (PlayerPrefs.GetInt("ShowModeAd") == 1)
+                {
+                    PlayerPrefs.SetInt("ShowModeAd", 0);
+                    MainMenuScript.instance.UnlockingSurvivalModeWithAds();
+                }
+                if (PlayerPrefs.GetInt("HealthReward") == 1)
+                {
+                    PlayerPrefs.SetInt("HealthReward", 0);
+                    WaveManager_.instance._giveawayCounterForAd = 0;
+                    WaveManager_.instance.GiveawayGiving();
+                }
+                if (PlayerPrefs.GetInt("AmmoReward") == 1)
+                {
+                    PlayerPrefs.SetInt("AmmoReward", 0);
+                    WaveManager_.instance.GiveawayGiving();
+                    WaveManager_.instance._giveawayCounterForAd = 0;
+                }
+                if (PlayerPrefs.GetInt("UnlockNextLevel") == 1)
+                {
+                    PlayerPrefs.SetInt("UnlockNextLevel", 0);
+                    MainMenuScript.instance.UnlockingNextLevel();
+                }
             }
-            if (PlayerPrefs.GetInt("UnlockAllLevels") > 2)
-            {
-                PlayerPrefs.SetInt("UnlockAllLevels", 5);
-                MainMenuScript.instance.UnlockingAllLevels();
-            }
-            if (PlayerPrefs.GetInt("SurvivalModeAd") > 2)
-            {
-                PlayerPrefs.SetInt("SurvivalModeAd", 1);
-                MainMenuScript.instance.UnlockingSurvivalModeWithAds();
-            }
-            if (PlayerPrefs.GetInt("HealthReward") == 1)
-            {
-                PlayerPrefs.SetInt("HealthReward", 0);
-                WaveManager_.instance._giveawayCounterForAd = 0;
-                WaveManager_.instance.GiveawayGiving();
-            }
-            if (PlayerPrefs.GetInt("AmmoReward") == 1)
-            {
-                PlayerPrefs.SetInt("AmmoReward", 0);
-                WaveManager_.instance.GiveawayGiving();
-                WaveManager_.instance._giveawayCounterForAd = 0;
-            }
-            if (PlayerPrefs.GetInt("UnlockNextLevel") == 1)
-            {
-                PlayerPrefs.SetInt("UnlockNextLevel", 0);
-                MainMenuScript.instance.UnlockingNextLevel();
-            }
-        }
+        
         isRewarded = false;
     }
 

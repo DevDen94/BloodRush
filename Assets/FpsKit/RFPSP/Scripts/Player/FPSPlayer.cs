@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using ControlFreak2;
+using UnityEngine.SceneManagement;
 
 public class FPSPlayer : MonoBehaviour {
 	[HideInInspector]
@@ -848,15 +849,20 @@ public class FPSPlayer : MonoBehaviour {
 				}
 				
 				if(hit.collider.gameObject.tag == "Usable"){//if the object hit by the raycast is a pickup item and has the "Usable" tag
-					
-					if (pickUpBtnState && usePressTime - useReleaseTime < 0.4f && usePressTime + 0.4f > Time.time && objToPickup == hit.collider){
+
+                    if (PlayerPrefs.GetInt("Tut") == 1 && PlayerPrefs.GetInt("Mode") == 2)
+                    {
+                        WaveManager_.instance.crossHair.enabled = true;
+                    }
+
+                    if (pickUpBtnState && usePressTime - useReleaseTime < 0.4f && usePressTime + 0.4f > Time.time && objToPickup == hit.collider){
 						//run the PickUpItem function in the pickup object's script
 						hit.collider.SendMessageUpwards("PickUpItem", myTransform.gameObject, SendMessageOptions.DontRequireReceiver);
 						//run the ActivateObject function of this object's script if it has the "Usable" tag
 						hit.collider.SendMessageUpwards("ActivateObject", SendMessageOptions.DontRequireReceiver);
 						pickUpBtnState = false;
 						//FPSWalkerComponent.cancelSprint = true;
-						Debug.Log("isko Remove krdy kam hojayga");
+						//Debug.Log("isko Remove krdy kam hojayga");
 						usePressTime = -8f;
 						objToPickup = null;
 					}
@@ -959,7 +965,13 @@ public class FPSPlayer : MonoBehaviour {
 					UpdateReticle(false);//show pickupReticle if raycast hits a pickup item
 
 				}else{
-					objToPickup = null;//cancel use press if player moves away
+
+					if(PlayerPrefs.GetInt("Tut") == 1 && PlayerPrefs.GetInt("Mode") == 2)
+                    {
+                        WaveManager_.instance.crossHair.enabled = false;
+                    }
+
+                    objToPickup = null;//cancel use press if player moves away
 					if(hit.collider.gameObject.layer == 13){//switch to pickup reticle if this NPC can be interacted with
 						if(hit.collider.gameObject.GetComponent<AI>() 
 						|| hit.collider.gameObject.GetComponent<LocationDamage>()){

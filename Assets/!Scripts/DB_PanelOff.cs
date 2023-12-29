@@ -6,7 +6,12 @@ public class DB_PanelOff : MonoBehaviour
 {
     private void OnEnable()
     {
-        Invoke("Disabling", 2f);
+        //Invoke("Disabling", 2f);
+    }
+
+    public void CallingOther()
+    {
+        Invoke("Disabling", 1f);
     }
 
     void Disabling()

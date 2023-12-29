@@ -1,3 +1,4 @@
+using ControlFreak2;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -97,7 +98,10 @@ public class WaveManager_ : MonoBehaviour
     public Button grenadeButton;
 
     public GameObject _dialogueBoxPanel;
+    public GameObject _startDialogueBoxPanel;
     public Text _DB_Text;
+
+    public TouchButton crossHair;
 
     public GameObject _giveawayClaimAdButton;
     [HideInInspector] public int _giveawayCounterForAd;
@@ -120,6 +124,7 @@ public class WaveManager_ : MonoBehaviour
         Invoke("Delay", 1.5f);
         Bg_Music.volume = PlayerPrefs.GetFloat("Music");
         src.volume = PlayerPrefs.GetFloat("Sounds");
+        //_dialogueBoxPanel.GetComponent<AudioSource>().volume = PlayerPrefs.GetFloat("Music");
 
         //To make the Giveaway Rewarded ad reset everytime when restart the game
         PlayerPrefs.SetInt("Health", 0);
@@ -162,7 +167,7 @@ public class WaveManager_ : MonoBehaviour
         src.PlayOneShot(Btnclick);
         Objective_Panel.SetActive(false);
         _DB_Text.text = Wave_._dialogueText;
-        _dialogueBoxPanel.SetActive(true);
+        _startDialogueBoxPanel.SetActive(true);
         //timer_Script.StartTimer();
         //Time.timeScale = 1f;
         
@@ -172,7 +177,7 @@ public class WaveManager_ : MonoBehaviour
     {
         EmptyPanel.SetActive(false);
         src.PlayOneShot(Btnclick);
-        _dialogueBoxPanel.SetActive(false);
+        _startDialogueBoxPanel.SetActive(false);
         timer_Script.StartTimer();
         Time.timeScale = 1f;
     }
@@ -251,7 +256,7 @@ public class WaveManager_ : MonoBehaviour
             is_Gernade = true;
         }
         Kills.text =  Total_Kills.ToString();
-        if (ZombieDeathCount == 0 && isLevelComplete  )
+        if (ZombieDeathCount == 0 && isLevelComplete)
         {
             Invoke("WaveComplete", 1.5f);
             isLevelComplete = false;
@@ -445,7 +450,7 @@ public class WaveManager_ : MonoBehaviour
         }
 
 
-        if (i==3 || i == 4 || i==14)
+        if (i==3 || i == 4 || i== 5 || i == 14 || i == 17 || i == 21)
         {
             aimBtn.SetActive(false);
         }
@@ -486,6 +491,7 @@ public class WaveManager_ : MonoBehaviour
 
     IEnumerator Call_Zombies_Coroutine(Level_Data level)
     {
+        Debug.Log("Calling Zombies");
         // Call Normal Zombies
         for (int i = 1; i <= level.NormalZombies_Count; i++)
         {

@@ -10,6 +10,7 @@ public class MainMenuScript : MonoBehaviour
     public GameObject LoaddingPanel;
     public AudioSource src;
     public AudioSource _buttonClickSrc;
+    public AudioSource _buttonClickSrc2;
     public AudioClip BtnClickSound;
     public GameObject[] LockedImages;
     public Button[] LevelBtns;
@@ -98,10 +99,21 @@ public class MainMenuScript : MonoBehaviour
 
         //GoogleAdMobController.instance.ShowSmallBannerAd();
 
-        if(PlayerPrefs.GetInt("WaveUnlock") < LevelBtns.Length - 2)
+        Cursor.lockState = CursorLockMode.None;
+
+        Cursor.visible = true;
+
+        if (PlayerPrefs.GetInt("WaveUnlock") < LevelBtns.Length - 2)
         {
             CheckingAdButton();
         }
+
+        if (PlayerPrefs.GetInt("SurvivalModeAd") > 2)
+        {
+            _adButtonForSurvivalMode.gameObject.SetActive(false);
+        }
+
+        _survivalModeUnlockAdsCounterText.text = PlayerPrefs.GetInt("SurvivalModeAd") + "/3";
 
         _UnlockAllLevelCounterText.text = PlayerPrefs.GetInt("UnlockAllLevels") + "/3";
 
@@ -135,6 +147,7 @@ public class MainMenuScript : MonoBehaviour
      
         src.volume= PlayerPrefs.GetFloat("Music");
         _buttonClickSrc.volume = PlayerPrefs.GetFloat("Sounds");
+        _buttonClickSrc2.volume = PlayerPrefs.GetFloat("Sounds");
 
         //if (GoogleAdMobController.instance.IsAppOpen)
         //{
@@ -174,6 +187,7 @@ public class MainMenuScript : MonoBehaviour
         PlayerPrefs.SetFloat("Sounds", MusicSlider[1].value);
         src.volume = PlayerPrefs.GetFloat("Music");
         _buttonClickSrc.volume = PlayerPrefs.GetFloat("Sounds");
+        _buttonClickSrc2.volume = PlayerPrefs.GetFloat("Sounds");
     }
 
     public void SoundBehaviour()
@@ -186,6 +200,7 @@ public class MainMenuScript : MonoBehaviour
     {
         src.volume = PlayerPrefs.GetFloat("Music");
         _buttonClickSrc.volume = PlayerPrefs.GetFloat("Sounds");
+        _buttonClickSrc2.volume = PlayerPrefs.GetFloat("Sounds");
 
         MusicSlider[0].value = PlayerPrefs.GetFloat("Music");
         MusicSlider[1].value = PlayerPrefs.GetFloat("Sounds");
@@ -239,6 +254,16 @@ public class MainMenuScript : MonoBehaviour
         Application.Quit();
     }
 
+    public void ResetLevelsPanel()
+    {
+        foreach(GameObject L_panels in _levelPanels)
+        {
+            L_panels.SetActive(false);
+        }
+        _levelPanels[0].SetActive(true);
+        _currentLevelPanelsIndex = 0;
+    }
+
     public void LevelsRight()
     {
         _levelPanels[_currentLevelPanelsIndex].SetActive(false);
@@ -288,31 +313,40 @@ public class MainMenuScript : MonoBehaviour
     {
         if (Application.internetReachability != NetworkReachability.NotReachable)
         {
-            PlayerPrefs.SetInt("UnlockAllLevels", PlayerPrefs.GetInt("UnlockAllLevels") + 1);
-            if (PlayerPrefs.GetInt("UnlockAllLevels") > 2)
-            {
-                _unlockAllLevelButton.SetActive(false);
-            }
-            _UnlockAllLevelCounterText.text = PlayerPrefs.GetInt("UnlockAllLevels") + "/3";
+            //PlayerPrefs.SetInt("UnlockAllLevels", PlayerPrefs.GetInt("UnlockAllLevels") + 1);
+            //if (PlayerPrefs.GetInt("UnlockAllLevels") > 2)
+            //{
+            //    _unlockAllLevelButton.SetActive(false);
+            //}
+            //_UnlockAllLevelCounterText.text = PlayerPrefs.GetInt("UnlockAllLevels") + "/3";
+
+            PlayerPrefs.SetInt("ShowLevelsAd", 1);
         }
 
-        //GoogleAdMobController.instance.ShowRewardedAd();
         GoogleMobileAdsController.Instance.ShowRewardedAd();
         GoogleMobileAdsController.Instance.isRewarded = true;
     }
 
     public void UnlockingAllLevels()
     {
-        PlayerPrefs.SetInt("WaveUnlock", LevelBtns.Length - 1);
-
-        foreach (Button b in LevelBtns)
+        PlayerPrefs.SetInt("UnlockAllLevels", PlayerPrefs.GetInt("UnlockAllLevels") + 1);
+        _UnlockAllLevelCounterText.text = PlayerPrefs.GetInt("UnlockAllLevels") + "/3";
+        if (PlayerPrefs.GetInt("UnlockAllLevels") > 2)
         {
-            b.transform.GetChild(2).gameObject.SetActive(false);
+            _unlockAllLevelButton.SetActive(false);
+            PlayerPrefs.SetInt("WaveUnlock", LevelBtns.Length - 1);
+
+            foreach (Button b in LevelBtns)
+            {
+                b.transform.GetChild(2).gameObject.SetActive(false);
+            }
+
+            PlayerPrefs.SetFloat("START", 1);
+
+            EnableButtons(PlayerPrefs.GetInt("WaveUnlock"));
         }
 
-        PlayerPrefs.SetFloat("START", 1);
-
-        EnableButtons(PlayerPrefs.GetInt("WaveUnlock"));
+        
     }
 
     public void UnlockNextLevelRewardedAd()
@@ -322,7 +356,6 @@ public class MainMenuScript : MonoBehaviour
             PlayerPrefs.SetInt("UnlockNextLevel", 1);
         }
 
-        //GoogleAdMobController.instance.ShowRewardedAd();
         GoogleMobileAdsController.Instance.ShowRewardedAd();
         GoogleMobileAdsController.Instance.isRewarded = true;
     }
@@ -345,24 +378,31 @@ public class MainMenuScript : MonoBehaviour
     {
         if(Application.internetReachability != NetworkReachability.NotReachable)
         {
-            PlayerPrefs.SetInt("SurvivalModeAd", PlayerPrefs.GetInt("SurvivalModeAd") + 1);
-            if(PlayerPrefs.GetInt("SurvivalModeAd") > 2)
-            {
-                _adButtonForSurvivalMode.gameObject.SetActive(false);
-            }
-            _survivalModeUnlockAdsCounterText.text = PlayerPrefs.GetInt("SurvivalModeAd") + "/3";
+            //PlayerPrefs.SetInt("SurvivalModeAd", PlayerPrefs.GetInt("SurvivalModeAd") + 1);
+            //if(PlayerPrefs.GetInt("SurvivalModeAd") > 2)
+            //{
+            //    _adButtonForSurvivalMode.gameObject.SetActive(false);
+            //}
+            //_survivalModeUnlockAdsCounterText.text = PlayerPrefs.GetInt("SurvivalModeAd") + "/3";
+            PlayerPrefs.SetInt("ShowModeAd", 1);
         }
 
-        //GoogleAdMobController.instance.ShowRewardedAd();
+
         GoogleMobileAdsController.Instance.ShowRewardedAd();
         GoogleMobileAdsController.Instance.isRewarded = true;
     }
 
     public void UnlockingSurvivalModeWithAds()
     {
-        _adButtonForSurvivalMode.gameObject.SetActive(false);
-        PlayerPrefs.SetInt("Tut", 1);
-        _survivalModeButton.interactable = true;
+        PlayerPrefs.SetInt("SurvivalModeAd", PlayerPrefs.GetInt("SurvivalModeAd") + 1);
+        _survivalModeUnlockAdsCounterText.text = PlayerPrefs.GetInt("SurvivalModeAd") + "/3";
+        if (PlayerPrefs.GetInt("SurvivalModeAd") > 2)
+        {
+            _adButtonForSurvivalMode.gameObject.SetActive(false);
+            _survivalModeButton.interactable = true;
+        }
+        //_adButtonForSurvivalMode.gameObject.SetActive(false);
+        //PlayerPrefs.SetInt("Tut", 1);
     }
 
     #endregion 

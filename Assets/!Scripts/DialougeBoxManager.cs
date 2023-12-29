@@ -8,7 +8,12 @@ public class DialougeBoxManager : MonoBehaviour
 
     private void Start()
     {
-        LoopChecking();
+        //LoopChecking();
+    }
+
+    private void Update()
+    {
+        Debug.Log("Time : " + Time.time);
     }
 
     void LoopChecking()
@@ -21,8 +26,6 @@ public class DialougeBoxManager : MonoBehaviour
                 break;
             }
         }
-
-        return;
 
         Debug.Log("Start");
 
