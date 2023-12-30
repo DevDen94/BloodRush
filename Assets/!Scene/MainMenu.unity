@@ -9154,6 +9154,7 @@ MonoBehaviour:
   src: {fileID: 1935877124}
   _buttonClickSrc: {fileID: 9255458}
   _buttonClickSrc2: {fileID: 1973254492}
+  _buttonClickSrc3: {fileID: 812186896}
   BtnClickSound: {fileID: 8300000, guid: 0746766c74fa7c94b836a4746c9ed6c5, type: 3}
   LockedImages:
   - {fileID: 1041347741}
@@ -24585,6 +24586,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 561688220}
+        m_TargetAssemblyTypeName: MainMenuScript, Assembly-CSharp
+        m_MethodName: ResetLevelsPanel
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

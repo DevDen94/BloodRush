@@ -19,6 +19,8 @@ public class TutorialLevelManager : MonoBehaviour
     public AudioSource src;
     public AudioClip ReloadingClip;
 
+    public GameObject _gunChangeTutTrigger;
+
     public AudioSource[] _chatSounds;
 
     private void Awake()

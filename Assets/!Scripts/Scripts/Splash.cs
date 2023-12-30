@@ -19,7 +19,7 @@ public class Splash : MonoBehaviour
 
     private void Start()
     {
-        //PlayerPrefs.SetInt("Tut", 1);
+        PlayerPrefs.SetInt("Tut", 1);
 
         if (data.data == Application.identifier)
         {

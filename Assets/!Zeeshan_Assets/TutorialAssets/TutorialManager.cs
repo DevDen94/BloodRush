@@ -157,6 +157,8 @@ public class TutorialManager : MonoBehaviour
 
         Time.timeScale = 1.0f;
 
+        TutorialLevelManager.s_Instance._gunChangeTutTrigger.SetActive(true);
+
         TutorialLevelManager.s_Instance.WeaponWheelDeactivator();
     }
 

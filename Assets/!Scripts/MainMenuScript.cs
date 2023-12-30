@@ -11,6 +11,7 @@ public class MainMenuScript : MonoBehaviour
     public AudioSource src;
     public AudioSource _buttonClickSrc;
     public AudioSource _buttonClickSrc2;
+    public AudioSource _buttonClickSrc3;
     public AudioClip BtnClickSound;
     public GameObject[] LockedImages;
     public Button[] LevelBtns;
@@ -148,6 +149,7 @@ public class MainMenuScript : MonoBehaviour
         src.volume= PlayerPrefs.GetFloat("Music");
         _buttonClickSrc.volume = PlayerPrefs.GetFloat("Sounds");
         _buttonClickSrc2.volume = PlayerPrefs.GetFloat("Sounds");
+        _buttonClickSrc3.volume = PlayerPrefs.GetFloat("Sounds");
 
         //if (GoogleAdMobController.instance.IsAppOpen)
         //{
@@ -188,6 +190,7 @@ public class MainMenuScript : MonoBehaviour
         src.volume = PlayerPrefs.GetFloat("Music");
         _buttonClickSrc.volume = PlayerPrefs.GetFloat("Sounds");
         _buttonClickSrc2.volume = PlayerPrefs.GetFloat("Sounds");
+        _buttonClickSrc3.volume = PlayerPrefs.GetFloat("Sounds");
     }
 
     public void SoundBehaviour()
@@ -201,6 +204,7 @@ public class MainMenuScript : MonoBehaviour
         src.volume = PlayerPrefs.GetFloat("Music");
         _buttonClickSrc.volume = PlayerPrefs.GetFloat("Sounds");
         _buttonClickSrc2.volume = PlayerPrefs.GetFloat("Sounds");
+        _buttonClickSrc3.volume = PlayerPrefs.GetFloat("Sounds");
 
         MusicSlider[0].value = PlayerPrefs.GetFloat("Music");
         MusicSlider[1].value = PlayerPrefs.GetFloat("Sounds");

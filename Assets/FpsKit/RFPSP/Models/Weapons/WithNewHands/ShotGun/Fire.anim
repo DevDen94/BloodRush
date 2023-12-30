@@ -17,18 +17,18 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0.125
-        value: {x: 0.1592214, y: -0.063537374, z: 0.1987996, w: 0.96493024}
-        inSlope: {x: 0.0005149841, y: 0.0012915729, z: 0.00782597, w: -0.0016136167}
-        outSlope: {x: 0.0005149841, y: 0.0012915729, z: 0.00782597, w: -0.0016136167}
+        value: {x: 0.15922141, y: -0.06353739, z: 0.19879963, w: 0.9649302}
+        inSlope: {x: 0, y: 0, z: 0, w: 0}
+        outSlope: {x: 0.00050393015, y: 0.001300465, z: 0.007827173, w: -0.0015930695}
         tangentMode: 0
         weightedMode: 0
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334, w: 0.33333334}
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334, w: 0.33333334}
       - serializedVersion: 3
         time: 1.9583334
-        value: {x: 0.16018498, y: -0.06135124, z: 0.21315031, w: 0.96184397}
-        inSlope: {x: 0.0005360847, y: 0.0011022995, z: 0.007826693, w: -0.0017509477}
-        outSlope: {x: 0.0005360847, y: 0.0011022995, z: 0.007826693, w: -0.0017509477}
+        value: {x: 0.16018501, y: -0.061351247, z: 0.21315034, w: 0.96184397}
+        inSlope: {x: 0.0005364418, y: 0.0011053953, z: 0.007827173, w: -0.0017556277}
+        outSlope: {x: 0, y: 0, z: 0, w: 0}
         tangentMode: 0
         weightedMode: 0
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334, w: 0.33333334}
@@ -586,118 +586,6 @@ AnimationClip:
     m_HeightFromFeet: 0
     m_Mirror: 0
   m_EditorCurves:
-  - curve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0.125
-        value: 0.1592214
-        inSlope: 0.0005149841
-        outSlope: 0.0005149841
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 1.9583334
-        value: 0.16018498
-        inSlope: 0.0005360847
-        outSlope: 0.0005360847
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalRotation.x
-    path: export/gun_base/all/LeftArmRoot/AK47Melee:pasted__pasted__pasted__Forearm_LFT/AK47Melee:pasted__pasted__pasted__Palm_LFT/AK47Melee:pasted__pasted__pasted__Ring1_LFT/AK47Melee:pasted__pasted__pasted__Ring2_LFT/AK47Melee:pasted__pasted__pasted__Ring3_LFT
-    classID: 4
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0.125
-        value: -0.063537374
-        inSlope: 0.0012915729
-        outSlope: 0.0012915729
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 1.9583334
-        value: -0.06135124
-        inSlope: 0.0011022995
-        outSlope: 0.0011022995
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalRotation.y
-    path: export/gun_base/all/LeftArmRoot/AK47Melee:pasted__pasted__pasted__Forearm_LFT/AK47Melee:pasted__pasted__pasted__Palm_LFT/AK47Melee:pasted__pasted__pasted__Ring1_LFT/AK47Melee:pasted__pasted__pasted__Ring2_LFT/AK47Melee:pasted__pasted__pasted__Ring3_LFT
-    classID: 4
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0.125
-        value: 0.1987996
-        inSlope: 0.00782597
-        outSlope: 0.00782597
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 1.9583334
-        value: 0.21315031
-        inSlope: 0.007826693
-        outSlope: 0.007826693
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalRotation.z
-    path: export/gun_base/all/LeftArmRoot/AK47Melee:pasted__pasted__pasted__Forearm_LFT/AK47Melee:pasted__pasted__pasted__Palm_LFT/AK47Melee:pasted__pasted__pasted__Ring1_LFT/AK47Melee:pasted__pasted__pasted__Ring2_LFT/AK47Melee:pasted__pasted__pasted__Ring3_LFT
-    classID: 4
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0.125
-        value: 0.96493024
-        inSlope: -0.0016136167
-        outSlope: -0.0016136167
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 1.9583334
-        value: 0.96184397
-        inSlope: -0.0017509477
-        outSlope: -0.0017509477
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalRotation.w
-    path: export/gun_base/all/LeftArmRoot/AK47Melee:pasted__pasted__pasted__Forearm_LFT/AK47Melee:pasted__pasted__pasted__Palm_LFT/AK47Melee:pasted__pasted__pasted__Ring1_LFT/AK47Melee:pasted__pasted__pasted__Ring2_LFT/AK47Melee:pasted__pasted__pasted__Ring3_LFT
-    classID: 4
-    script: {fileID: 0}
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -1571,6 +1459,118 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.z
+    path: export/gun_base/all/LeftArmRoot/AK47Melee:pasted__pasted__pasted__Forearm_LFT/AK47Melee:pasted__pasted__pasted__Palm_LFT/AK47Melee:pasted__pasted__pasted__Ring1_LFT/AK47Melee:pasted__pasted__pasted__Ring2_LFT/AK47Melee:pasted__pasted__pasted__Ring3_LFT
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0.125
+        value: 0.15922141
+        inSlope: 0
+        outSlope: 0.00050393015
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1.9583334
+        value: 0.16018501
+        inSlope: 0.0005364418
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalRotation.x
+    path: export/gun_base/all/LeftArmRoot/AK47Melee:pasted__pasted__pasted__Forearm_LFT/AK47Melee:pasted__pasted__pasted__Palm_LFT/AK47Melee:pasted__pasted__pasted__Ring1_LFT/AK47Melee:pasted__pasted__pasted__Ring2_LFT/AK47Melee:pasted__pasted__pasted__Ring3_LFT
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0.125
+        value: -0.06353739
+        inSlope: 0
+        outSlope: 0.001300465
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1.9583334
+        value: -0.061351247
+        inSlope: 0.0011053953
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalRotation.y
+    path: export/gun_base/all/LeftArmRoot/AK47Melee:pasted__pasted__pasted__Forearm_LFT/AK47Melee:pasted__pasted__pasted__Palm_LFT/AK47Melee:pasted__pasted__pasted__Ring1_LFT/AK47Melee:pasted__pasted__pasted__Ring2_LFT/AK47Melee:pasted__pasted__pasted__Ring3_LFT
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0.125
+        value: 0.19879963
+        inSlope: 0
+        outSlope: 0.007827173
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1.9583334
+        value: 0.21315034
+        inSlope: 0.007827173
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalRotation.z
+    path: export/gun_base/all/LeftArmRoot/AK47Melee:pasted__pasted__pasted__Forearm_LFT/AK47Melee:pasted__pasted__pasted__Palm_LFT/AK47Melee:pasted__pasted__pasted__Ring1_LFT/AK47Melee:pasted__pasted__pasted__Ring2_LFT/AK47Melee:pasted__pasted__pasted__Ring3_LFT
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0.125
+        value: 0.9649302
+        inSlope: 0
+        outSlope: -0.0015930695
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1.9583334
+        value: 0.96184397
+        inSlope: -0.0017556277
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalRotation.w
     path: export/gun_base/all/LeftArmRoot/AK47Melee:pasted__pasted__pasted__Forearm_LFT/AK47Melee:pasted__pasted__pasted__Palm_LFT/AK47Melee:pasted__pasted__pasted__Ring1_LFT/AK47Melee:pasted__pasted__pasted__Ring2_LFT/AK47Melee:pasted__pasted__pasted__Ring3_LFT
     classID: 4
     script: {fileID: 0}
