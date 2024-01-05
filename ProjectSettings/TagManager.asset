@@ -4,24 +4,32 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - 11
   - NoHitMark
   - Usable
-  - NPC
-  - gun
-  - PhysicsObject
-  - Climbable
-  - Water
-  - Dirt
-  - Metal
-  - Wood
-  - Glass
-  - Flesh
-  - Stone
-  - metal
+  - Enemy
   - Hand
+  - ItemManager
+  - Concrete
   - Zombie
+  - Dirt
+  - Flesh
+  - CinemachineTarget
+  - Metal
+  - Remote
+  - IgnoreBullet
+  - Water
+  - gun
+  - Glass
+  - Wood
+  - Climbable
+  - Item
   - Jump
-  - WalkEnd
+  - GameManager
+  - BodyPart
+  - AI
+  - Projectile
+  - WeaponManager
   layers:
   - Default
   - TransparentFX
@@ -31,26 +39,26 @@ TagManager:
   - UI
   - 
   - 
-  - Gun
-  - 
-  - 
+  - Weapons
   - Player
-  - Bullet Shells
-  - NPCs
-  - GUICamera
+  - MiniMap
+  - PostEffects
+  - Local
+  - Zone
+  - 
+  - Vehicle
   - 
   - 
   - 
-  - Liquid Collision
   - 
-  - LeanCollider
-  - Player Clip
-  - drop
   - 
-  - PlayerExit
-  - PathTrigger
-  - Test
-  - Sniper
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
   - 
   - 
   - 
@@ -58,10 +66,4 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: Debris
-    uniqueID: 1561855295
-    locked: 0
-  - name: HitSpark
-    uniqueID: 1452714893
     locked: 0
