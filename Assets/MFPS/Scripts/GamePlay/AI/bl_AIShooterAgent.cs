@@ -129,7 +129,7 @@ public class bl_AIShooterAgent : bl_AIShooter
             }
             else
             {
-                OnCovering();
+               // OnCovering(); by ali
             }
         }
         LookAtControl();
@@ -222,18 +222,22 @@ public class bl_AIShooterAgent : bl_AIShooter
         if (CachedTargetDistance >= soldierSettings.limitRange)
         {
             WhenTargetOutOfRange();
+            Debug.LogError("outaya"+ AgentState);
         }
         else if (CachedTargetDistance > soldierSettings.closeRange && CachedTargetDistance < soldierSettings.mediumRange)
         {
             WhenTargetOnMediumRange();
+            Debug.LogError("mediumaya");
         }
         else if (CachedTargetDistance <= soldierSettings.closeRange)
         {
             WhenTargetOnCloseRange();
+           
         }
         else if (CachedTargetDistance < soldierSettings.limitRange)
         {
             WhenTargetOnLimitRange();
+            Debug.LogError("Limitaya");
         }
         else
         {
@@ -267,6 +271,7 @@ public class bl_AIShooterAgent : bl_AIShooter
                     if (bl_UtilityHelper.Distance(TargetPosition, Agent.destination) > 1)//update the path only if the target has moved substantially
                     {
                         SetDestination(TargetPosition, 3);
+                        Debug.LogError("closeaya");
                     }
                 }
             }
@@ -275,6 +280,7 @@ public class bl_AIShooterAgent : bl_AIShooter
                 //in one team mode, when the target is in the limit range
                 //the bot will start to random patrol instead of following the player.
                 RandomPatrol(true);
+                
             }
             SetDebugState(0, true);
         }
@@ -345,7 +351,7 @@ public class bl_AIShooterAgent : bl_AIShooter
                     {
                         SetDebugState(38, true);
                         SetState(AIAgentState.Following);
-                        SetDestination(TargetPosition, 3);
+                        SetDestination(TargetPosition, 3); 
                     }
                     else
                     {
@@ -366,7 +372,7 @@ public class bl_AIShooterAgent : bl_AIShooter
                             if (AIHealth.GetHealth() <= 30 && CachedTargetDistance < soldierSettings.closeRange)
                             {
                                 SetState(AIAgentState.Following);
-                                SetDestination(GetPositionAround(TargetPosition, 35), 5);
+                                //SetDestination(GetPositionAround(TargetPosition, 35), 5); by ali
                             }
                         }
                         else
@@ -784,7 +790,7 @@ public class bl_AIShooterAgent : bl_AIShooter
         SetLookAtState(AILookAt.Path);
         AIWeapon.IsFiring = false;
 
-        if (!Agent.hasPath || (time - lastPathTime) > 5)
+        if (!Agent.hasPath || (time - lastPathTime) > 1)//5
         {
             SetDebugState(27);
             bool toAnCover = (Random.value <= behaviorSettings.randomCoverProbability);//probability of get a cover point as random destination
@@ -833,9 +839,9 @@ public class bl_AIShooterAgent : bl_AIShooter
     /// <summary>
     /// 
     /// </summary>
-    void CheckConfrontation()
+    void CheckConfrontation() //BY ALI
     {
-        if (AgentState != AIAgentState.Covering)
+       /* if (AgentState != AIAgentState.Covering)
         {
             if (lookTime >= 5)
             {
@@ -848,7 +854,7 @@ public class bl_AIShooterAgent : bl_AIShooter
         }
 
         TriggerFire();
-        SetCrouch(playerInFront && !ObstacleBetweenTarget);
+        SetCrouch(playerInFront && !ObstacleBetweenTarget);*/
     }
 
     /// <summary>
@@ -920,7 +926,7 @@ public class bl_AIShooterAgent : bl_AIShooter
 
         SetCrouch(false);
         SetDestination(TargetPosition, 3);
-        if (CachedTargetDistance <= 3)
+        if (CachedTargetDistance <= 0)//3BY ALI
         {
             CoverTime = 0;
             Speed = soldierSettings.walkSpeed;
@@ -935,7 +941,7 @@ public class bl_AIShooterAgent : bl_AIShooter
             else
             {
                 SetDebugState(34);
-                SetDestination(m_Transform.localPosition - (m_Transform.forward * 3), 0.1f);
+                //SetDestination(m_Transform.localPosition - (m_Transform.forward * 3), 0.1f); BY ALI
             }
             SetState(AIAgentState.Covering);
             CheckConfrontation();
@@ -1035,7 +1041,7 @@ public class bl_AIShooterAgent : bl_AIShooter
     /// </summary>
     public void SetDestination(Vector3 position, float stopedDistance, bool checkRate = false)
     {
-        if (checkRate && (time - lastDestinationTime) < 2) return;
+        //if (checkRate && (time - lastDestinationTime) < 2) return; BY ALI
 
         Agent.stoppingDistance = stopedDistance;
         Agent.SetDestination(position);
@@ -1047,24 +1053,26 @@ public class bl_AIShooterAgent : bl_AIShooter
     /// </summary>
     void SetCrouch(bool crouch)
     {
-        if (IsCrouch == crouch || time - lastCrouchTime < 0.5f) return;
-        lastCrouchTime = time;
-        if (crouch && (AgentState == AIAgentState.Following || AgentState == AIAgentState.Looking))
-        {
-            crouch = false;
-        }
+        // All by ali
 
-        Anim.SetBool(animationHash[0], crouch);
-        Speed = crouch ? soldierSettings.crounchSpeed : soldierSettings.walkSpeed;
-        if (IsCrouch != crouch)
-        {
-            var data = bl_UtilityHelper.CreatePhotonHashTable();
-            data.Add("type", AIRemoteCallType.CrouchState);
-            data.Add("state", crouch);
+        //if (IsCrouch == crouch || time - lastCrouchTime < 0.5f) return;
+        //lastCrouchTime = time;
+        //if (crouch && (AgentState == AIAgentState.Following || AgentState == AIAgentState.Looking))
+        //{
+        //    crouch = false;
+        //}
 
-            photonView.RPC(RPC_NAME, RpcTarget.Others, data);
-            IsCrouch = crouch;
-        }
+        //Anim.SetBool(animationHash[0], crouch);
+        //Speed = crouch ? soldierSettings.crounchSpeed : soldierSettings.walkSpeed;
+        //if (IsCrouch != crouch)
+        //{
+        //    var data = bl_UtilityHelper.CreatePhotonHashTable();
+        //    data.Add("type", AIRemoteCallType.CrouchState);
+        //    data.Add("state", crouch);
+
+        //    photonView.RPC(RPC_NAME, RpcTarget.Others, data);
+        //    IsCrouch = crouch;
+        //}
     }
 
     /// <summary>
@@ -1074,7 +1082,7 @@ public class bl_AIShooterAgent : bl_AIShooter
     void CheckEnemysDistances()
     {
         if (!behaviorSettings.checkEnemysWhenHaveATarget || availableTargets.Count <= 0) return;
-        if (time < nextEnemysCheck) return;
+       // if (time < nextEnemysCheck) return; BY ALI
 
         CachedTargetDistance = bl_UtilityHelper.Distance(m_Transform.localPosition, TargetPosition);
         for (int i = 0; i < availableTargets.Count; i++)
@@ -1355,6 +1363,7 @@ public class bl_AIShooterAgent : bl_AIShooter
                 else { return m_Transform.position + (m_Transform.forward * 3); }
             }
             return Vector3.zero;
+           
         }
     }
 

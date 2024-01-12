@@ -16,7 +16,7 @@ MonoBehaviour:
   runSpeed: 6.5
   crounchSpeed: 2
   rotationSmoothing: 6
-  closeRange: 12
-  mediumRange: 35
-  farRange: 50
-  limitRange: 75
+  closeRange: 0
+  mediumRange: 0
+  farRange: 0
+  limitRange: 0

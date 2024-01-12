@@ -5,22 +5,22 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/AssetsSinglePLayer/!Scene/Splash.unity
     guid: ab14b7d4b82980e4ba0bcafa7af51421
-  - enabled: 1
+  - enabled: 0
     path: Assets/AssetsSinglePLayer/!Scene/MainMenu.unity
     guid: 9bd4be52844f05e48aacf60174718ed4
   - enabled: 1
     path: Assets/AssetsSinglePLayer/!Scene/GamePlay.unity
     guid: 0a7eafcd05585de419de581ed9bfbc0f
-  - enabled: 1
+  - enabled: 0
     path: Assets/AssetsSinglePLayer/!Scene/SurvivalMode.unity
     guid: 56f4129f4eb9a2d45b4aca53939f4348
-  - enabled: 0
+  - enabled: 1
     path: Assets/MFPS/Scenes/MultiPlayerMM.unity
     guid: fcfe9637e4043474a98d431ae71e26c2
-  - enabled: 0
+  - enabled: 1
     path: Assets/MFPS/Scenes/MultiplayerGamePlay.unity
     guid: fb6848e04095b3442aa2c3d786e94b5f
   m_configObjects: {}

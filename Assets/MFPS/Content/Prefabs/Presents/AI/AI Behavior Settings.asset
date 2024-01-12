@@ -15,9 +15,9 @@ MonoBehaviour:
   agentBehave: 0
   weaponAccuracy: 2
   GetRandomTargetOnStart: 1
-  forceFollowAtHalfHealth: 0
+  forceFollowAtHalfHealth: 1
   checkEnemysWhenHaveATarget: 1
-  targetOutRangeBehave: 0
-  maxCoverTime: 10
-  coverColdDown: 15
-  randomCoverProbability: 0.1
+  targetOutRangeBehave: 1
+  maxCoverTime: 0
+  coverColdDown: 0
+  randomCoverProbability: 0
