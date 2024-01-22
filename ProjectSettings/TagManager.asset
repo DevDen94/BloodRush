@@ -4,32 +4,19 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - 11
-  - NoHitMark
-  - Usable
-  - Enemy
-  - Hand
-  - ItemManager
+  - PlayerCollider
   - Concrete
-  - Zombie
   - Dirt
-  - Flesh
-  - CinemachineTarget
   - Metal
-  - Remote
-  - IgnoreBullet
-  - Water
-  - gun
-  - Glass
   - Wood
-  - Climbable
-  - Item
+  - Blood
+  - Water
+  - Zombie
+  - Flesh
+  - Hand
   - Jump
-  - GameManager
-  - BodyPart
-  - AI
-  - Projectile
-  - WeaponManager
+  - gun
+  - Usable
   layers:
   - Default
   - TransparentFX
@@ -39,23 +26,21 @@ TagManager:
   - UI
   - 
   - 
-  - Weapons
-  - Player
-  - MiniMap
-  - PostEffects
-  - Local
-  - Zone
-  - 
-  - Vehicle
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - PlayerRoot
+  - PlayerColliders
+  - IgnoreCollisionWithPlayer
+  - PlayerRagdoll
+  - LoadoutMenu
+  - PlayerBotSpottingCollider
+  - FirstPerson
+  - TriggerForPlayer
+  - BulletShells
+  - Bullet
+  - AIRoot
+  - AI
+  - AIDead
+  - IgnoreRaycastAndPickup
+  - abc
   - 
   - 
   - 
@@ -63,6 +48,8 @@ TagManager:
   - 
   - 
   - 
+  - PostProcessing
+  - Minimap
   m_SortingLayers:
   - name: Default
     uniqueID: 0

@@ -84,8 +84,8 @@
     <file>Assets/Plugins/Android/org.jetbrains.kotlin.kotlin-stdlib-common-1.7.10.jar</file>
   </files>
   <settings>
-    <setting name="androidAbis" value="armeabi-v7a" />
-    <setting name="bundleId" value="com.DefaultCompany.Myprojectmultiple" />
+    <setting name="androidAbis" value="armeabi-v7a,x86" />
+    <setting name="bundleId" value="com.darwin.zombie.shooting" />
     <setting name="explodeAars" value="True" />
     <setting name="gradleBuildEnabled" value="True" />
     <setting name="gradlePropertiesTemplateEnabled" value="False" />

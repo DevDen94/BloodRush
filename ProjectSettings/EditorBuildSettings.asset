@@ -5,22 +5,25 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/AssetsSinglePLayer/!Scene/Splash.unity
+  - enabled: 1
+    path: Assets/!Scene/Splash.unity
     guid: ab14b7d4b82980e4ba0bcafa7af51421
-  - enabled: 0
-    path: Assets/AssetsSinglePLayer/!Scene/MainMenu.unity
+  - enabled: 1
+    path: Assets/!Scene/MainMenu.unity
     guid: 9bd4be52844f05e48aacf60174718ed4
   - enabled: 1
-    path: Assets/AssetsSinglePLayer/!Scene/GamePlay.unity
+    path: Assets/!Scene/GamePlay.unity
     guid: 0a7eafcd05585de419de581ed9bfbc0f
-  - enabled: 0
-    path: Assets/AssetsSinglePLayer/!Scene/SurvivalMode.unity
+  - enabled: 1
+    path: Assets/!Scene/SurvivalMode.unity
     guid: 56f4129f4eb9a2d45b4aca53939f4348
   - enabled: 1
-    path: Assets/MFPS/Scenes/MultiPlayerMM.unity
-    guid: fcfe9637e4043474a98d431ae71e26c2
+    path: Assets/!Scene/Tutorial.unity
+    guid: 71bb8f07d3f2bfd46990113993bf2435
   - enabled: 1
-    path: Assets/MFPS/Scenes/MultiplayerGamePlay.unity
-    guid: fb6848e04095b3442aa2c3d786e94b5f
+    path: Assets/314 Arts/MarsFPSKit/Scenes/Lobby.unity
+    guid: 43be8ab043238de4b97016875c33b883
+  - enabled: 1
+    path: Assets/314 Arts/MarsFPSKit/Scenes/Test_Map_4.unity
+    guid: d6cdfc1604281fb47915f5c763b5471c
   m_configObjects: {}
