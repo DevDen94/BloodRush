@@ -162,18 +162,18 @@ namespace MarsFPSKit
                             DetectPlayer player = affectedByExplosion[i].transform.root.GetComponent<DetectPlayer>();
                             if (!Physics.Linecast(transform.position, player.transform.position, linecastLayers))
                             {
-                                float d = Vector3.Distance(transform.position, player.transform.position) / radius;
-                                player.TakeDamage(d, 1);
+                                float d = Vector3.Distance(transform.position, player.transform.position) / 2;
+                                player.TakeDamage(d, 30);
 
                                 if (!botShot)
                                 {
-                                    PhotonNetwork.RaiseEvent(Kit_EventIDs.hitMarkerEvent, null, new Photon.Realtime.RaiseEventOptions { TargetActors = new int[1] { idWhoShot } }, new ExitGames.Client.Photon.SendOptions { Reliability = false });
+                                    //PhotonNetwork.RaiseEvent(Kit_EventIDs.hitMarkerEvent, null, new Photon.Realtime.RaiseEventOptions { TargetActors = new int[1] { idWhoShot } }, new ExitGames.Client.Photon.SendOptions { Reliability = false });
                                 }
-                                Debug.LogError("ZombieDead");
+                                Debug.Log("ZombieDead"+ d);
                             }
-                            Debug.LogError("if");
+                           
                         }
-                        Debug.LogError("Else");
+                      
                     }
                     else if (affectedByExplosion[i].GetComponentInParent<IKitDamageable>() != null)
                     {
@@ -182,7 +182,7 @@ namespace MarsFPSKit
 
                             if (!botShot)
                             {
-                                PhotonNetwork.RaiseEvent(Kit_EventIDs.hitMarkerEvent, null, new Photon.Realtime.RaiseEventOptions { TargetActors = new int[1] { idWhoShot } }, new ExitGames.Client.Photon.SendOptions { Reliability = false });
+                                //PhotonNetwork.RaiseEvent(Kit_EventIDs.hitMarkerEvent, null, new Photon.Realtime.RaiseEventOptions { TargetActors = new int[1] { idWhoShot } }, new ExitGames.Client.Photon.SendOptions { Reliability = false });
                             }
                         }
                     }

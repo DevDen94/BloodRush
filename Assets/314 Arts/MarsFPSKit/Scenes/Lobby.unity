@@ -3163,6 +3163,11 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7895801722262965568, guid: 97442c01d1b96e14f850f49e3ee19a2c,
+        type: 3}
+      propertyPath: m_UseSpriteMesh
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4236443382943678117, guid: 97442c01d1b96e14f850f49e3ee19a2c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 97442c01d1b96e14f850f49e3ee19a2c, type: 3}
@@ -8174,7 +8179,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &708359505
 RectTransform:
   m_ObjectHideFlags: 0
@@ -17957,7 +17962,7 @@ MonoBehaviour:
   targetGO: {fileID: 0}
   tweenTargetIsTargetGO: 1
   delay: 1
-  duration: 2
+  duration: 1
   easeType: 6
   easeCurve:
     serializedVersion: 2
@@ -26231,6 +26236,11 @@ PrefabInstance:
     - target: {fileID: 6195680869967584387, guid: f68a833f0ba046149a6d4c770b7ab489,
         type: 3}
       propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6195680869967584387, guid: f68a833f0ba046149a6d4c770b7ab489,
+        type: 3}
+      propertyPath: m_UseSpriteMesh
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
