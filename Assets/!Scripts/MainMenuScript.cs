@@ -323,12 +323,12 @@ public class MainMenuScript : MonoBehaviour
     {
         if (Application.internetReachability != NetworkReachability.NotReachable)
         {
-            //PlayerPrefs.SetInt("UnlockAllLevels", PlayerPrefs.GetInt("UnlockAllLevels") + 1);
-            //if (PlayerPrefs.GetInt("UnlockAllLevels") > 2)
-            //{
-            //    _unlockAllLevelButton.SetActive(false);
-            //}
-            //_UnlockAllLevelCounterText.text = PlayerPrefs.GetInt("UnlockAllLevels") + "/3";
+           PlayerPrefs.SetInt("UnlockAllLevels", PlayerPrefs.GetInt("UnlockAllLevels") + 1);
+            if (PlayerPrefs.GetInt("UnlockAllLevels") > 2)
+            {
+                _unlockAllLevelButton.SetActive(false);
+            }
+            _UnlockAllLevelCounterText.text = PlayerPrefs.GetInt("UnlockAllLevels") + "/3";
 
             PlayerPrefs.SetInt("ShowLevelsAd", 1);
         }

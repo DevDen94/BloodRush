@@ -1255,7 +1255,7 @@ namespace MarsFPSKit
             {
                 Debug.Log("Left room!");
                 //We have disconnected from Photon, go to Main Menu
-                Kit_SceneSyncer.instance.LoadScene("MainMenuLobby");
+                Kit_SceneSyncer.instance.LoadScene("MainMenu");
             }
         }
 
