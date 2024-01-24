@@ -2518,10 +2518,8 @@ MonoBehaviour:
   firstPersonArmsPrefab:
     m_keys:
     - Kit
-    - LPSP
     m_values:
     - {fileID: 1528900000547049842, guid: d851bf42f31e36142a11e4febcc77dbb, type: 3}
-    - {fileID: 1528900000547049842, guid: 7bf2b3b8fefe10646bf9f0d62f492b0b, type: 3}
   animatorStates: {fileID: 11400000, guid: 73a1026a74bcc1441be105231917f32f, type: 2}
   fpShadowOnlyRenderers:
   - {fileID: 137043624263989878}
