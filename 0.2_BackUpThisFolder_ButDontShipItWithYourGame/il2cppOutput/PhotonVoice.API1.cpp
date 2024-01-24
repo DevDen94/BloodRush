@@ -13,6 +13,8 @@
 
 // Photon.Voice.AudioOutDelayControl`1<System.Single>
 struct AudioOutDelayControl_1_t58CC345DDDB952B3337C7221D25489E0DF8AE0DE;
+// Photon.Voice.AudioOutDelayControl`1<Unity.IL2CPP.Metadata.__Il2CppFullySharedGenericType>
+struct AudioOutDelayControl_1_t206BC9EF9C3EF04B3D185A25FD42C587BBA7BE83;
 // Photon.Voice.PrimitiveArrayPool`1<System.Single>
 struct PrimitiveArrayPool_1_t097AE3EEAF2DA20A931A3884F76DB71791AD1432;
 // System.Collections.Generic.Queue`1<System.Single[]>
@@ -589,10 +591,10 @@ struct AudioSessionCategoryOptionU5BU5D_tDE452C63A96D619A3AE7D328A5E074AA02BC986
 };
 
 
-// System.Void Photon.Voice.AudioOutDelayControl`1<System.Single>::.ctor(System.Boolean,Photon.Voice.AudioOutDelayControl/PlayDelayConfig,Photon.Voice.ILogger,System.String,System.Boolean)
-IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void AudioOutDelayControl_1__ctor_m445CD773403C6E60856067FD1809DA03773243F0_gshared (AudioOutDelayControl_1_t58CC345DDDB952B3337C7221D25489E0DF8AE0DE* __this, bool ___0_processInService, PlayDelayConfig_t7E2F00F08A8F2A3D47AFDD64347913B6409871E2* ___1_playDelayConfig, RuntimeObject* ___2_logger, String_t* ___3_logPrefix, bool ___4_debugInfo, const RuntimeMethod* method) ;
-// System.Void Photon.Voice.AudioOutDelayControl`1<System.Single>::Stop()
-IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void AudioOutDelayControl_1_Stop_mAC8756D3B2993D7155924C9E9DD692160D111229_gshared (AudioOutDelayControl_1_t58CC345DDDB952B3337C7221D25489E0DF8AE0DE* __this, const RuntimeMethod* method) ;
+// System.Void Photon.Voice.AudioOutDelayControl`1<Unity.IL2CPP.Metadata.__Il2CppFullySharedGenericType>::.ctor(System.Boolean,Photon.Voice.AudioOutDelayControl/PlayDelayConfig,Photon.Voice.ILogger,System.String,System.Boolean)
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void AudioOutDelayControl_1__ctor_m4493F223D18450EE08C49D3C42D05426E541D07F_gshared (AudioOutDelayControl_1_t206BC9EF9C3EF04B3D185A25FD42C587BBA7BE83* __this, bool ___0_processInService, PlayDelayConfig_t7E2F00F08A8F2A3D47AFDD64347913B6409871E2* ___1_playDelayConfig, RuntimeObject* ___2_logger, String_t* ___3_logPrefix, bool ___4_debugInfo, const RuntimeMethod* method) ;
+// System.Void Photon.Voice.AudioOutDelayControl`1<Unity.IL2CPP.Metadata.__Il2CppFullySharedGenericType>::Stop()
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void AudioOutDelayControl_1_Stop_m383FF9D1043F9394C0D7D5A0165D8121603AF409_gshared (AudioOutDelayControl_1_t206BC9EF9C3EF04B3D185A25FD42C587BBA7BE83* __this, const RuntimeMethod* method) ;
 
 // System.Boolean System.String::op_Equality(System.String,System.String)
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool String_op_Equality_m030E1B219352228970A076136E455C4E568C02C1 (String_t* ___0_a, String_t* ___1_b, const RuntimeMethod* method) ;
@@ -601,7 +603,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR String_t* String_Concat_m9E3155FB84015C823606
 // System.Void Photon.Voice.AudioOutDelayControl`1<System.Single>::.ctor(System.Boolean,Photon.Voice.AudioOutDelayControl/PlayDelayConfig,Photon.Voice.ILogger,System.String,System.Boolean)
 inline void AudioOutDelayControl_1__ctor_m445CD773403C6E60856067FD1809DA03773243F0 (AudioOutDelayControl_1_t58CC345DDDB952B3337C7221D25489E0DF8AE0DE* __this, bool ___0_processInService, PlayDelayConfig_t7E2F00F08A8F2A3D47AFDD64347913B6409871E2* ___1_playDelayConfig, RuntimeObject* ___2_logger, String_t* ___3_logPrefix, bool ___4_debugInfo, const RuntimeMethod* method)
 {
-	((  void (*) (AudioOutDelayControl_1_t58CC345DDDB952B3337C7221D25489E0DF8AE0DE*, bool, PlayDelayConfig_t7E2F00F08A8F2A3D47AFDD64347913B6409871E2*, RuntimeObject*, String_t*, bool, const RuntimeMethod*))AudioOutDelayControl_1__ctor_m445CD773403C6E60856067FD1809DA03773243F0_gshared)(__this, ___0_processInService, ___1_playDelayConfig, ___2_logger, ___3_logPrefix, ___4_debugInfo, method);
+	((  void (*) (AudioOutDelayControl_1_t206BC9EF9C3EF04B3D185A25FD42C587BBA7BE83*, bool, PlayDelayConfig_t7E2F00F08A8F2A3D47AFDD64347913B6409871E2*, RuntimeObject*, String_t*, bool, const RuntimeMethod*))AudioOutDelayControl_1__ctor_m4493F223D18450EE08C49D3C42D05426E541D07F_gshared)((AudioOutDelayControl_1_t206BC9EF9C3EF04B3D185A25FD42C587BBA7BE83*)__this, ___0_processInService, ___1_playDelayConfig, ___2_logger, ___3_logPrefix, ___4_debugInfo, method);
 }
 // System.Int32 UnityEngine.AudioSource::get_timeSamples()
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t AudioSource_get_timeSamples_mF230FF8ABBD5A5250CBC487D0E0FCE286BA95B82 (AudioSource_t871AC2272F896738252F04EE949AEF5B241D3299* __this, const RuntimeMethod* method) ;
@@ -620,7 +622,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool AudioClip_SetData_m7B473C614C11953D74677
 // System.Void Photon.Voice.AudioOutDelayControl`1<System.Single>::Stop()
 inline void AudioOutDelayControl_1_Stop_mAC8756D3B2993D7155924C9E9DD692160D111229 (AudioOutDelayControl_1_t58CC345DDDB952B3337C7221D25489E0DF8AE0DE* __this, const RuntimeMethod* method)
 {
-	((  void (*) (AudioOutDelayControl_1_t58CC345DDDB952B3337C7221D25489E0DF8AE0DE*, const RuntimeMethod*))AudioOutDelayControl_1_Stop_mAC8756D3B2993D7155924C9E9DD692160D111229_gshared)(__this, method);
+	((  void (*) (AudioOutDelayControl_1_t206BC9EF9C3EF04B3D185A25FD42C587BBA7BE83*, const RuntimeMethod*))AudioOutDelayControl_1_Stop_m383FF9D1043F9394C0D7D5A0165D8121603AF409_gshared)((AudioOutDelayControl_1_t206BC9EF9C3EF04B3D185A25FD42C587BBA7BE83*)__this, method);
 }
 // System.Boolean UnityEngine.Object::op_Inequality(UnityEngine.Object,UnityEngine.Object)
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool Object_op_Inequality_mD0BE578448EAA61948F25C32F8DD55AB1F778602 (Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C* ___0_x, Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C* ___1_y, const RuntimeMethod* method) ;

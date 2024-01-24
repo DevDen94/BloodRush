@@ -53,18 +53,18 @@ static Il2CppMethodPointer s_methodPointers[12] =
 };
 static const int32_t s_InvokerIndices[12] = 
 {
-	7275,
-	5795,
-	7275,
-	7275,
-	7275,
-	7275,
-	7275,
-	7275,
-	9476,
-	2454,
-	2885,
-	7275,
+	3037,
+	2626,
+	3037,
+	3037,
+	3037,
+	3037,
+	3037,
+	3037,
+	4604,
+	1596,
+	1786,
+	3037,
 };
 IL2CPP_EXTERN_C const Il2CppCodeGenModule g_CodeStage_AFPSCounter_Examples_CodeGenModule;
 const Il2CppCodeGenModule g_CodeStage_AFPSCounter_Examples_CodeGenModule = 
