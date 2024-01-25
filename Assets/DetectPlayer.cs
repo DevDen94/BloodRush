@@ -156,6 +156,7 @@ public class DetectPlayer : MonoBehaviourPunCallbacks
         
        
     }
+    bool ForEvent =false;
     public void TakeDamage(float damage,int GunId)
     {
         // Apply damage to the zombie
@@ -180,9 +181,15 @@ public class DetectPlayer : MonoBehaviourPunCallbacks
     }
     public void DestroyZombie()
     {
-
-        byte evCode = Kit_EventIDs.killEvent;
-        PhotonNetwork.RaiseEvent(evCode, 0, new RaiseEventOptions { Receivers = ReceiverGroup.All }, SendOptions.SendReliable);
+       
+        if (ForEvent == false)
+        {
+            Debug.LogError("destroy");
+            byte evCode = Kit_EventIDs.killEvent;
+            PhotonNetwork.RaiseEvent(evCode, 0, new RaiseEventOptions { Receivers = ReceiverGroup.All }, SendOptions.SendReliable);
+            ForEvent = true;
+        }
+        
         PhotonNetwork.Destroy(gameObject);
     }
 }

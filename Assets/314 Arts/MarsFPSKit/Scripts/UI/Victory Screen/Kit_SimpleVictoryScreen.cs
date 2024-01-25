@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 namespace MarsFPSKit
 {
@@ -167,7 +168,7 @@ namespace MarsFPSKit
             //Enable root
             root.SetActive(true);
         }
-
+        /*  public override void DisplayTeamWinnerWithScores(int winner, int[] scores)*///byte ali
         public override void DisplayTeamWinnerWithScores(int winner, int[] scores)
         {
             //Reset roots
@@ -213,10 +214,13 @@ namespace MarsFPSKit
 
                 if (txt)
                 {
-                    txt.text = scores[i].ToString();
+                    Hashtable myTable = PhotonNetwork.LocalPlayer.CustomProperties;
+                    int kill = (int)myTable["kills"];
+                    txt.text = kill.ToString();
                     txt.enabled = true;
+                   
                 }
-
+                
                 teamActives.Add(go);
             }
 

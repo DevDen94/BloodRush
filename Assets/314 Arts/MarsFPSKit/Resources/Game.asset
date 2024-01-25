@@ -62,7 +62,7 @@ MonoBehaviour:
   allPvpTeams:
   - {fileID: 11400000, guid: c5947a567f6d402418b9193bb3937b5b, type: 2}
   pointsPerKill: 100
-  enableTouchscreenInput: 1
+  enableTouchscreenInput: 0
   perspectiveMode: 2
   defaultPerspective: 1
   thirdPersonAiming: 0

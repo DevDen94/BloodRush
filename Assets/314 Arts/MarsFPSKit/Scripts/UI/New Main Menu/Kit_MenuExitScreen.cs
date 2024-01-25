@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-
+using UnityEngine.SceneManagement;
 namespace MarsFPSKit
 {
     namespace UI
@@ -18,7 +18,7 @@ namespace MarsFPSKit
             public void Exit()
             {
                 //Close game
-                Application.Quit();
+                SceneManager.LoadScene(1);
             }
 
             public void Abort()

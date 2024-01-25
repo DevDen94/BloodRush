@@ -177,6 +177,7 @@ namespace MarsFPSKit
                 optionsNew.CachingOption = EventCaching.AddToRoomCacheGlobal;
                 optionsNew.Receivers = ReceiverGroup.All;
                 PhotonNetwork.RaiseEvent(199, scene, optionsNew, SendOptions.SendReliable);
+                StartCoroutine(LoadSceneAsync(scene));
                 Debug.Log("[Scene Sync] Sending scene load event!");
             }
         }

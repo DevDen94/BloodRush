@@ -32,6 +32,7 @@ namespace MarsFPSKit
         /// <param name="teamOneScore"></param>
         /// <param name="teamTwoScore"></param>
         public abstract void DisplayTeamWinnerWithScores(int winner, int[] scores);
+        /*ublic abstract void DisplayTeamWinnerWithScores(int winner, int[] scores);*/
 
         /// <summary>
         /// Close the UI completely. Called when the Victory Screen is deleted

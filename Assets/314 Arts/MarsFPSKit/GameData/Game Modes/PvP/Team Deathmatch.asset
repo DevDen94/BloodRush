@@ -21,7 +21,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ce8f0bb187976c54ab05dc046451ea9e, type: 2}
   traditionalPlayerLimits: 0404
   traditionalPlayerNeeded: 0100000001000000
-  traditionalDurations: 2c01000058020000b0040000
+  traditionalDurations: 1e00000058020000b0040000
   traditionalPingLimits: 000000003200000064000000c80000002c010000
   traditionalAfkLimits: 000000003c00000078000000b4000000f00000002c010000
   lobbyMaps:
@@ -47,7 +47,7 @@ MonoBehaviour:
   maxTeamDifference: 2
   votingThreshold: 30
   preGameTime: 10
-  endGameTime: 10
-  mapVotingTime: 5
+  endGameTime: 20
+  mapVotingTime: 0
   teamsInitialSpawnLayer: 0100000002000000
   teamsGameplaySpawnLayer: 0000000000000000

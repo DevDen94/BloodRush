@@ -151,6 +151,7 @@ namespace MarsFPSKit
                                     }
                                 }
                             }
+                            Debug.LogError("player");
                            
                         }
                     }
@@ -230,7 +231,7 @@ namespace MarsFPSKit
 
                             if (!botShot)
                             {
-                                PhotonNetwork.RaiseEvent(Kit_EventIDs.hitMarkerEvent, null, new Photon.Realtime.RaiseEventOptions { TargetActors = new int[1] { idWhoShot } }, new ExitGames.Client.Photon.SendOptions { Reliability = false });
+                                //PhotonNetwork.RaiseEvent(Kit_EventIDs.hitMarkerEvent, null, new Photon.Realtime.RaiseEventOptions { TargetActors = new int[1] { idWhoShot } }, new ExitGames.Client.Photon.SendOptions { Reliability = false });by ali
                             }
                         }
                     }

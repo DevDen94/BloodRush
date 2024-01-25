@@ -1,6 +1,6 @@
 ﻿using Photon.Pun;
 using UnityEngine;
-
+using Hashtable = ExitGames.Client.Photon.Hashtable;
 namespace MarsFPSKit
 {
     /// <summary>
@@ -25,7 +25,7 @@ namespace MarsFPSKit
             }
             //Disable scoreboard
             main.scoreboard.Disable();
-
+           
             //Get instantiation data
             object[] instData = photonView.InstantiationData;
             //Get the type
@@ -66,6 +66,7 @@ namespace MarsFPSKit
             {
                 //Check which team won
                 int winner = (int)instData[1];
+
                 if (winner < 0)
                 {
                     //Draw
@@ -81,13 +82,13 @@ namespace MarsFPSKit
                 {
                     int size = (int)instData[2];
                     int[] scores = new int[size];
-
+                     //score = new int[size];
                     //Get scores
                     for (int i = 0; i < size; i++)
                     {
                         scores[i] = (int)instData[3 + i];
                     }
-
+                   
                     //Display UI
                     main.victoryScreenUI.DisplayTeamWinnerWithScores(winner, scores);
                 }

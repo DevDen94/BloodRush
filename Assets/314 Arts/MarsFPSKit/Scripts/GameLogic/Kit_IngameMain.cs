@@ -950,6 +950,7 @@ namespace MarsFPSKit
                             if (currentPvPGameModeBehaviour)
                                 //Call the game mode callback
                                 currentPvPGameModeBehaviour.TimeRunOut(this);
+                           
                         }
                     }
                     #endregion
@@ -2111,6 +2112,7 @@ namespace MarsFPSKit
 
                 //Call Event System
                 Kit_Events.onEndGameTeamWinWithScore.Invoke(winner, scores);
+              
             }
         }
 
@@ -2173,6 +2175,7 @@ namespace MarsFPSKit
                     }
                     currentBotManager.enabled = false;
                 }
+                //Kit_SceneSyncer.instance.LoadScene("MainMenu");
             }
         }
 

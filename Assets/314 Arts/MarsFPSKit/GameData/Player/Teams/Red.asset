@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   teamName: Red
   teamColor: {r: 1, g: 0, b: 0, a: 1}
-  teamImage: {fileID: 21300000, guid: f349f64b76f786a4c858b5deae7038a3, type: 3}
+  teamImage: {fileID: 21300000, guid: 3c8a08bd90fc89b4cab6fdb9414f55c4, type: 3}
   playerModelDefault: 0
   playerModels:
   - {fileID: 11400000, guid: 344b762e8b076bc40a660c0444347c85, type: 2}

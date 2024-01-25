@@ -468,14 +468,16 @@ namespace MarsFPSKit
                 if (Kit_GameSettings.currentNetworkingMode == KitNetworkingMode.Traditional)
                 {
                     //Set time and stage
-                    main.timer = mapVotingTime;
-                    main.gameModeStage = 3;
+                    //main.timer = mapVotingTime;
+                    //main.gameModeStage = 3;
                     //Open the voting menu
                     //main.OpenVotingMenu();
                     //Delete all players
+                 
                     main.DeleteAllPlayers();
                     PhotonNetwork.LeaveRoom();
-                    Kit_SceneSyncer.instance.LoadScene("Splash");
+                    Kit_SceneSyncer.instance.LoadScene("MainMenu");
+                    
                 }
                 else if (Kit_GameSettings.currentNetworkingMode == KitNetworkingMode.Lobby)
                 {

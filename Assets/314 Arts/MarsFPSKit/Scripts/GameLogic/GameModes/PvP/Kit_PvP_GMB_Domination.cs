@@ -881,12 +881,14 @@ namespace MarsFPSKit
                     main.OpenVotingMenu();
                     //Delete all players
                     main.DeleteAllPlayers();
+                    Debug.LogError("Traditional");
                 }
                 else if (Kit_GameSettings.currentNetworkingMode == KitNetworkingMode.Lobby)
                 {
                     //Delete all players
                     main.DeleteAllPlayers();
                     main.gameModeStage = 5;
+                    Debug.LogError("Lobby");
                     //Load MM
                     Kit_SceneSyncer.instance.LoadScene("MainMenu");
                 }
