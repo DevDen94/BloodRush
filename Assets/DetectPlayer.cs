@@ -12,7 +12,7 @@ public class DetectPlayer : MonoBehaviourPunCallbacks
 {
     public static DetectPlayer Instance;
     private List<GameObject> players = new List<GameObject>();
-    private NavMeshAgent navMeshAgent;
+    public NavMeshAgent navMeshAgent;
     private Animator AnimatorComponent;
     public float attackRange = 2f;
     public int MaxHealth = 100;
@@ -48,41 +48,52 @@ public class DetectPlayer : MonoBehaviourPunCallbacks
            // rb.isKinematic = true;
             AnimatorComponent.enabled = true;
         }
-       
+        PlayerPrefs.SetInt("ForStopZombie", 0);
     }
     void Delay()
     {
         Wait = true;
+        PlayerPrefs.SetInt("ForStopZombie", 0);
     }
     void Update()
     {
         if (Wait)
         {
-            if (!PhotonNetwork.IsConnected)
-                return;
-
-            // Update the list of players
-            UpdatePlayersList();
-
-            // Find the nearest player
-            GameObject nearestPlayer = GetNearestPlayer();
-
-            // Do something with the nearest player (e.g., follow or target)
-            if (nearestPlayer != null)
+            if (PlayerPrefs.GetInt("ForStopZombie")== 0)
             {
-                float distanceToPlayer = Vector3.Distance(transform.position, nearestPlayer.transform.position);
+                if (!PhotonNetwork.IsConnected)
+                    return;
 
-                if (distanceToPlayer <= attackRange)
-                {
-                    // Player is within attack range, perform attack
-                    AttackPlayer(nearestPlayer);
-                }
-                else
-                {
-                    MoveTowardsPlayer(nearestPlayer.transform.position);
-                }
-                // Your logic here
+                // Update the list of players
+                UpdatePlayersList();
 
+                // Find the nearest player
+                GameObject nearestPlayer = GetNearestPlayer();
+
+                // Do something with the nearest player (e.g., follow or target)
+                if (nearestPlayer != null)
+                {
+                    float distanceToPlayer = Vector3.Distance(transform.position, nearestPlayer.transform.position);
+
+                    if (distanceToPlayer <= attackRange)
+                    {
+                        // Player is within attack range, perform attack
+                        AttackPlayer(nearestPlayer);
+                    }
+                    else
+                    {
+                        MoveTowardsPlayer(nearestPlayer.transform.position);
+                    }
+                    // Your logic here
+                  
+                }
+                Debug.LogError("|if");
+            }
+            else
+            {
+                navMeshAgent.isStopped = true;
+                Wait = false;
+                AnimatorComponent.SetInteger("AnimState",0);
             }
         }
     }

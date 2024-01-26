@@ -16,7 +16,7 @@ public class VolumeControlerInMultiplayer : MonoBehaviour
     public IEnumerator MusicCouroutine()
     {
         
-        yield return new WaitForSeconds(0.05f);
+        yield return new WaitForSeconds(0.0001f);
         foreach (AudioSource a in FindObjectsOfType<AudioSource>())
         {
             a.volume = PlayerPrefs.GetFloat("Sounds");

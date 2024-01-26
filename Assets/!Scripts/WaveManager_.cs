@@ -655,7 +655,7 @@ public class WaveManager_ : MonoBehaviour
         }
 
         //GoogleAdMobController.instance.ShowRewardedAd();
-        GoogleMobileAdsController.Instance.ShowRewardedAd();
+        GoogleMobileAdsController.Instance.ShowRewardedAd_();
         GoogleMobileAdsController.Instance.isRewarded = true;
     }
 

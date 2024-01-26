@@ -193,9 +193,12 @@ namespace MarsFPSKit
                         //Set game stage
                         main.timer = endGameTime;
                         main.gameModeStage = 2;
+                       
+                        
                         break;
                     }
                 }
+                
             }
         }
 

@@ -950,7 +950,7 @@ namespace MarsFPSKit
                             if (currentPvPGameModeBehaviour)
                                 //Call the game mode callback
                                 currentPvPGameModeBehaviour.TimeRunOut(this);
-                           
+                            PlayerPrefs.SetInt("ForStopZombie", 1);
                         }
                     }
                     #endregion

@@ -647,7 +647,7 @@ public class GameManager : MonoBehaviour
             PlayerPrefs.SetInt("SkipLevel", 1);
         }
         //GoogleAdMobController.instance.ShowRewardedAd();
-        GoogleMobileAdsController.Instance.ShowRewardedAd();
+        GoogleMobileAdsController.Instance.ShowRewardedAd_();
         GoogleMobileAdsController.Instance.isRewarded = true;
     }
 

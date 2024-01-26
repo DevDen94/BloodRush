@@ -3348,6 +3348,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 888f76ab29effab4b9172869c6e35874, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  navMeshAgent: {fileID: 0}
   attackRange: 1.2
   MaxHealth: 150
   DamageMultiplier: 1
