@@ -35,9 +35,9 @@ MonoBehaviour:
   - Melee
   - Lethal
   - NonLethal
-  defaultWeaponsInSlot: 0100000004000000050000000700000006000000
+  defaultWeaponsInSlot: 000000000400000005000000070000000600000001000000
   allWeapons:
-  - {fileID: 11400000, guid: 900c2e883e439f1459d459014af3090f, type: 2}
+  - {fileID: 11400000, guid: c97ff7010ff15db43b5cbcd5d686cbee, type: 2}
   - {fileID: 11400000, guid: 16b8d1d78a64500488993d5cd05b28d2, type: 2}
   - {fileID: 11400000, guid: 1a1e6c6a7ee01ff49abcc71e9f3c1be7, type: 2}
   - {fileID: 11400000, guid: 68e94cf33a825294d8dd533544672171, type: 2}
@@ -46,6 +46,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a9fdf8255d18e02479f299759cfb0ee3, type: 2}
   - {fileID: 11400000, guid: 32577b1534dfec74ea41828f3c1e9339, type: 2}
   - {fileID: 11400000, guid: c79be11517e20f14aa9a73dcdb5c13ea, type: 2}
+  - {fileID: 11400000, guid: 2d2e7d47a0cde8a4faa07b07e847419e, type: 2}
+  - {fileID: 11400000, guid: 900c2e883e439f1459d459014af3090f, type: 2}
   allAnimatorAnimationSets:
   - prefix: Rifle
     type: 0
@@ -62,7 +64,7 @@ MonoBehaviour:
   allPvpTeams:
   - {fileID: 11400000, guid: c5947a567f6d402418b9193bb3937b5b, type: 2}
   pointsPerKill: 100
-  enableTouchscreenInput: 1
+  enableTouchscreenInput: 0
   perspectiveMode: 2
   defaultPerspective: 1
   thirdPersonAiming: 0

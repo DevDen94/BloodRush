@@ -3,7 +3,27 @@ guid: d0d7ba54978709643bcba7710e7a908e
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: arms
+    second: {fileID: 2100000, guid: cf8c3658884888c41bbdad1ef0c55196, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pasted__phong1
+    second: {fileID: 2100000, guid: fa10f1291f18680408f84b2a0d0a51af, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pasted__phong2
+    second: {fileID: 2100000, guid: b222a35f66fc2d84c9428021699208a9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: phong1
+    second: {fileID: 2100000, guid: 23980b75c6d9d6440a1827b5a2878fc8, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
