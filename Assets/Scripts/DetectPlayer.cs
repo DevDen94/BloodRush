@@ -87,7 +87,7 @@ public class DetectPlayer : MonoBehaviourPunCallbacks
                     // Your logic here
                   
                 }
-                Debug.LogError("|if");
+               
             }
             else
             {

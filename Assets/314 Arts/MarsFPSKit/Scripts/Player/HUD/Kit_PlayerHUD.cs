@@ -523,8 +523,11 @@ namespace MarsFPSKit
         /// </summary>
         public override void DisplayHitmarker()
         {
-            hitmarkerLastDisplay = Time.time + hitmarkerTime; //Set time of the hitmarker, which makes it visible automatically
-            //Play sound
+            hitmarkerLastDisplay = Time.time + 2;
+            //hitmarkerLastDisplay = Time.time + hitmarkerTime; //Set time of the hitmarker, which makes it visible automatically//by ali
+
+            //hitmarkerLastDisplay = 150f;
+            //Play sound 
             if (hitmarkerSound)
             {
                 hitmarkerAudioSource.clip = hitmarkerSound;

@@ -2516,10 +2516,8 @@ MonoBehaviour:
       - {fileID: 114282255991927560}
   information: {fileID: 0}
   firstPersonArmsPrefab:
-    m_keys:
-    - Kit
-    m_values:
-    - {fileID: 1528900000547049842, guid: d851bf42f31e36142a11e4febcc77dbb, type: 3}
+    m_keys: []
+    m_values: []
   animatorStates: {fileID: 11400000, guid: 73a1026a74bcc1441be105231917f32f, type: 2}
   fpShadowOnlyRenderers:
   - {fileID: 137043624263989878}

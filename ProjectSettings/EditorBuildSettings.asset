@@ -21,9 +21,9 @@ EditorBuildSettings:
     path: Assets/!Scene/Tutorial.unity
     guid: 71bb8f07d3f2bfd46990113993bf2435
   - enabled: 1
-    path: Assets/314 Arts/MarsFPSKit/Scenes/Lobby.unity
+    path: Assets/!Scene/Lobby.unity
     guid: 43be8ab043238de4b97016875c33b883
   - enabled: 1
-    path: Assets/314 Arts/MarsFPSKit/Scenes/Test_Map_4.unity
+    path: Assets/!Scene/Test_Map_4.unity
     guid: d6cdfc1604281fb47915f5c763b5471c
   m_configObjects: {}

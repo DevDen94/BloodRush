@@ -446,7 +446,7 @@ namespace MarsFPSKit
 
                                 DetectPlayer hitPb = hit.transform.root.GetComponent<DetectPlayer>();
                                 //First check if we can actually damage that player
-
+                                
                                 //Check if he has spawn protection
 
                                 //Apply local damage, sample damage dropoff via distance
@@ -458,13 +458,14 @@ namespace MarsFPSKit
                             {
                                 GameObject hitPb = hit.transform.gameObject;
                                 hitPb.transform.root.GetComponent<DetectPlayer>().TakeDamage(settings.damage, settings.gameGunID);
-                               
+                                main.hud.DisplayHitmarker();
                             }
-
+                           
                             main.impactProcessor.ProcessImpact(main, hit.point, hit.normal, "PlayerCollider", hit.transform);
                             //byali
 
                         }
+                        main.hud.DisplayHitmarker();
                     }
                             //Send to hit processor
                            

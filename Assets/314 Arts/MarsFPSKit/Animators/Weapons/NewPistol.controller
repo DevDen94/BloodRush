@@ -267,7 +267,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 1268e465221b99b4c907ce58aee30532, type: 2}
+  m_Motion: {fileID: 7400000, guid: 4bbadd1b1266b6249b415a5855ea8c76, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -372,7 +372,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 1268e465221b99b4c907ce58aee30532, type: 2}
+  m_Motion: {fileID: 7400000, guid: 4bbadd1b1266b6249b415a5855ea8c76, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -399,7 +399,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 1268e465221b99b4c907ce58aee30532, type: 2}
+  m_Motion: {fileID: 7400000, guid: 4bbadd1b1266b6249b415a5855ea8c76, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -453,7 +453,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 1268e465221b99b4c907ce58aee30532, type: 2}
+  m_Motion: {fileID: 7400000, guid: 4bbadd1b1266b6249b415a5855ea8c76, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -560,7 +560,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 1268e465221b99b4c907ce58aee30532, type: 2}
+  m_Motion: {fileID: 7400000, guid: 4bbadd1b1266b6249b415a5855ea8c76, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -604,7 +604,7 @@ AnimatorStateMachine:
     m_Position: {x: 576, y: 24, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102992989775530496}
-    m_Position: {x: 156, y: 276, z: 0}
+    m_Position: {x: 160, y: 270, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102393211312938646}
     m_Position: {x: 156, y: 324, z: 0}
