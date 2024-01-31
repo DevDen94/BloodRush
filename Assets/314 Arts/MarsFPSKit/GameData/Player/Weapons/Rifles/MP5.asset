@@ -265,4 +265,4 @@ MonoBehaviour:
     type: 3}
   useGenericWalkAnim: 1
   useGenericRunAnim: 1
-  gameGunID: 0
+  gameGunID: 12

@@ -266,7 +266,7 @@ Transform:
   m_GameObject: {fileID: 314846290610837195}
   m_LocalRotation: {x: -7.275985e-12, y: -0, z: -9.313223e-10, w: 1}
   m_LocalPosition: {x: 0.1031, y: -0.0866, z: 0.805}
-  m_LocalScale: {x: 0.99227184, y: 0.9922714, z: 0.99227095}
+  m_LocalScale: {x: 0.42159545, y: 0.42159528, z: 0.42159504}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 312329081687326021}
@@ -5120,6 +5120,7 @@ MonoBehaviour:
   - {fileID: 1721789560643781523}
   - {fileID: 6948837195852520660}
   - {fileID: 2327366091540996953}
+  - {fileID: 6008328202481582112}
   hideInCustomiazionMenu: []
   playerModelDependentArmsEnabled: 1
   playerModelDependentArmsKey: Kit

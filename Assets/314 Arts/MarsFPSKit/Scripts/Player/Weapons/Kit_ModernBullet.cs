@@ -489,6 +489,7 @@ namespace MarsFPSKit
                                 {
                                     //Since we hit a player, show the hitmarker
                                     main.hud.DisplayHitmarker();
+                                    
                                 }
                                
                             }

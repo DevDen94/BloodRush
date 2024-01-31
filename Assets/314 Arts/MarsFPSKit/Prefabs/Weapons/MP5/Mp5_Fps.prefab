@@ -2441,6 +2441,7 @@ MonoBehaviour:
   - {fileID: 1570207142809911183}
   - {fileID: 1553191210107783963}
   - {fileID: 8251206006771393312}
+  - {fileID: 968862462655801380}
   hideInCustomiazionMenu: []
   playerModelDependentArmsEnabled: 1
   playerModelDependentArmsKey: Kit

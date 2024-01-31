@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: 2
   m_EditorClassIdentifier: 
   displayName: Random Player Model
-  prefab: {fileID: 509699043797901670, guid: 995021ea15cacaa488188200c3977a16, type: 3}
-  voices: []
+  prefab: {fileID: 5123823586472493677, guid: a9875367eb209f14e93bc99abd0eaeb0, type: 3}
+  voices:
+  - {fileID: 11400000, guid: 1d8236ae17efc22438c85c1d4a58848f, type: 2}
   killFeedConfig: []

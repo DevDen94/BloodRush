@@ -5730,7 +5730,6 @@ MonoBehaviour:
   - {fileID: 7311477057324131024}
   - {fileID: 4625757459207037329}
   - {fileID: 6157247817062066934}
-  - {fileID: 9130058491152472469}
   shellEjectTransform: {fileID: 4707716459900280213}
   muzzleFlash: {fileID: 4865690521411876901}
   leftHandIK:
