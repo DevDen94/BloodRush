@@ -70,7 +70,7 @@ MonoBehaviour:
   pointsPerKill: 100
   enableTouchscreenInput: 0
   perspectiveMode: 2
-  defaultPerspective: 1
+  defaultPerspective: 3
   thirdPersonAiming: 0
   thirdPersonCameraShooting: 1
   enableDropWeaponOnSceneSpawnedWeapons: 0

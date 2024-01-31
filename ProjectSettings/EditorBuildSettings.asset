@@ -24,6 +24,6 @@ EditorBuildSettings:
     path: Assets/!Scene/Lobby.unity
     guid: 43be8ab043238de4b97016875c33b883
   - enabled: 1
-    path: Assets/!Scene/Test_Map_4.unity
+    path: Assets/!Scene/MultiPlayerGamePLay.unity
     guid: d6cdfc1604281fb47915f5c763b5471c
   m_configObjects: {}
