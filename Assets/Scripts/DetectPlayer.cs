@@ -41,14 +41,16 @@ public class DetectPlayer : MonoBehaviourPunCallbacks
             Debug.LogError("NavMeshAgent component not found on the object.");
             return;
         }
-        Invoke(nameof(Delay), 20f);
-        foreach(Rigidbody rb in this.gameObject.GetComponentsInChildren<Rigidbody>())
+        //Invoke(nameof(Delay), 20f);
+        Wait = true;
+        foreach (Rigidbody rb in this.gameObject.GetComponentsInChildren<Rigidbody>())
         {
             rigidbodies.Add(rb);
            // rb.isKinematic = true;
             AnimatorComponent.enabled = true;
         }
         PlayerPrefs.SetInt("ForStopZombie", 0);
+        Delay();
     }
     void Delay()
     {
@@ -139,7 +141,7 @@ public class DetectPlayer : MonoBehaviourPunCallbacks
         navMeshAgent.isStopped = false;
         // Set the destination for the NavMeshAgent
         AnimatorComponent.SetInteger("AnimState", 2);
-        navMeshAgent.speed = 2f;
+        navMeshAgent.speed = 1.5f;
         navMeshAgent.SetDestination(targetPosition);
         
     }

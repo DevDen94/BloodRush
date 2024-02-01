@@ -925,6 +925,7 @@ namespace MarsFPSKit
             {
                 Debug.LogError("No Game Information assigned. Game will not work.");
             }
+            PlayerPrefs.SetInt("TeamSelection", 0);
         }
 
         void Update()
@@ -950,8 +951,11 @@ namespace MarsFPSKit
                             if (currentPvPGameModeBehaviour)
                                 //Call the game mode callback
                                 currentPvPGameModeBehaviour.TimeRunOut(this);
-                            PlayerPrefs.SetInt("ForStopZombie", 1);
+                           
+                            
+                           
                         }
+                        
                     }
                     #endregion
                 }

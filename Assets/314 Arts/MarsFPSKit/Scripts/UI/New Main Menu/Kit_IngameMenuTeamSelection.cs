@@ -42,7 +42,7 @@ namespace MarsFPSKit
 
                     btn.onClick.AddListener(delegate { main.JoinTeam(id); });
                     //txt.text = main.gameInformation.allPvpTeams[id].teamName;//ByAli
-
+                    Debug.LogError(id);
                     //Move to right pos
                     go.transform.SetSiblingIndex(id);
                 }
@@ -60,6 +60,10 @@ namespace MarsFPSKit
                     //Move to right pos
                     go.transform.SetSiblingIndex(Mathf.Clamp(main.gameInformation.allPvpTeams.Length, 0, main.currentPvPGameModeBehaviour.maximumAmountOfTeams));*/
                 }
+            }
+            public void JoinTeam(int id)
+            {
+                main.JoinTeam(id);
             }
         }
     }

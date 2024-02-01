@@ -467,12 +467,12 @@ namespace MarsFPSKit
                         }
                         main.hud.DisplayHitmarker();
                     }
-                            //Send to hit processor
-                           
-                        
+                    //Send to hit processor
+
+                    main.hud.DisplayHitmarker();
 
 
-                    }
+                }
                 
                 else
                 {

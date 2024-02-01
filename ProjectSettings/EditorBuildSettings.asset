@@ -22,7 +22,7 @@ EditorBuildSettings:
     guid: 71bb8f07d3f2bfd46990113993bf2435
   - enabled: 1
     path: Assets/!Scene/Lobby.unity
-    guid: 43be8ab043238de4b97016875c33b883
+    guid: 8d6b719857f59a640b0654f7a3f44b2c
   - enabled: 1
     path: Assets/!Scene/MultiPlayerGamePlay.unity
     guid: d6cdfc1604281fb47915f5c763b5471c

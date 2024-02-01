@@ -3,8 +3,9 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -18,12 +19,12 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 9960e9ed03c55e14188bf36b4318f553, type: 3}
   - {fileID: 8300000, guid: 6efdf73a8f8b4554d8a31b30275cff71, type: 3}
   damageTakenProjectile:
-  - {fileID: 8300000, guid: 6be6909a406da6545bbe05349d1021de, type: 3}
   - {fileID: 8300000, guid: 62142297ece0a644d9c78846138f55ec, type: 3}
   - {fileID: 8300000, guid: 594165ebfe49ee748a6598f97ddb593b, type: 3}
   - {fileID: 8300000, guid: ef2c02e5a0f3dc7409cbf5256ba06a38, type: 3}
   - {fileID: 8300000, guid: e75281939ea63e64b8a194493964cf52, type: 3}
   - {fileID: 8300000, guid: b69d96091486d844f818d85a8664e6fb, type: 3}
+  - {fileID: 8300000, guid: 5014ae259ad5c1840856a3cfcae18ec4, type: 3}
   - {fileID: 8300000, guid: 5014ae259ad5c1840856a3cfcae18ec4, type: 3}
   damageTakenOthers:
   - {fileID: 8300000, guid: 959d40df37d185a46ac4073147d88ac7, type: 3}

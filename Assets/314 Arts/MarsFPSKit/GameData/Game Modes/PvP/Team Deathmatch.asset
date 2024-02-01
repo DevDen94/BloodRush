@@ -47,7 +47,7 @@ MonoBehaviour:
   maxTeamDifference: 2
   votingThreshold: 30
   preGameTime: 10
-  endGameTime: 20
+  endGameTime: 10
   mapVotingTime: 0
   teamsInitialSpawnLayer: 0100000002000000
   teamsGameplaySpawnLayer: 0000000000000000

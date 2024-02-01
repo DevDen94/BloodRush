@@ -68,7 +68,7 @@ namespace MarsFPSKit
         /// </summary>
         [Tooltip("Spawn layer used for teams during gameplay")]
         public int[] teamsGameplaySpawnLayer;
-
+        
         public override Spectateable GetSpectateable(Kit_IngameMain main)
         {
             if (main.assignedTeamID >= 0) return Spectateable.Friendlies;
@@ -399,15 +399,24 @@ namespace MarsFPSKit
             //Check if a team has won
             CheckForWinner(main);
         }
-
+       
         public override void TimeRunOut(Kit_IngameMain main)
         {
+            if (PlayerPrefs.GetInt("TeamSelection") == 0) 
+            {
+                main.ts.gameObject.SetActive(false);
+                main.JoinTeam(0);
+                Debug.LogError("set");
+                PlayerPrefs.SetInt("TeamSelection", 1);
+            }
+            
             //Ensure we are using the correct runtime data
             if (main.currentGameModeRuntimeData == null || main.currentGameModeRuntimeData.GetType() != typeof(TeamDeathmatchRuntimeData))
             {
                 TeamDeathmatchRuntimeData tdrd = new TeamDeathmatchRuntimeData();
                 tdrd.teamPoints = new int[Mathf.Clamp(main.gameInformation.allPvpTeams.Length, 0, maximumAmountOfTeams)];
                 main.currentGameModeRuntimeData = tdrd;
+                
             }
             TeamDeathmatchRuntimeData drd = main.currentGameModeRuntimeData as TeamDeathmatchRuntimeData;
 
@@ -423,6 +432,7 @@ namespace MarsFPSKit
                 {
                     //Pre game time to main game
                     main.timer = main.currentPvPGameModeBehaviour.lobbyGameDuration;
+                    
                 }
                 main.gameModeStage = 1;
             }
@@ -459,6 +469,11 @@ namespace MarsFPSKit
 
                 //End game according to results
                 main.EndGame(teamWon, drd.teamPoints);
+                if (main.touchScreenCurrent != null)
+                {
+                    main.touchScreenCurrent.gameObject.SetActive(false);
+                }
+                PlayerPrefs.SetInt("ForStopZombie", 1);
             }
             //Victory screen is over. Proceed to map voting.
             else if (main.gameModeStage == 2)
@@ -478,8 +493,9 @@ namespace MarsFPSKit
                     //Delete all players
                  
                     main.DeleteAllPlayers();
-                    PhotonNetwork.LeaveRoom();
                     Kit_SceneSyncer.instance.LoadScene("MainMenu");
+                    PhotonNetwork.LeaveRoom();
+                   
                     
                 }
                 else if (Kit_GameSettings.currentNetworkingMode == KitNetworkingMode.Lobby)
