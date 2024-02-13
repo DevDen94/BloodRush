@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 049afb33f30533f4ebd9affd696426b1, type: 3}
   m_Name: MMGamePLay
   m_EditorClassIdentifier: 
-  mapName: MultiPlayerGamePlay
-  sceneName: MultiPlayerGamePlay
+  mapName: FinalGamePlay
+  sceneName: FinalGamePlay
   mapPicture: {fileID: 0}
   loadingImage: {fileID: 0}

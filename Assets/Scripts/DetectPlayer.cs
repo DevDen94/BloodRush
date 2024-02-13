@@ -116,7 +116,7 @@ public class DetectPlayer : MonoBehaviourPunCallbacks
         }
     }
 
-    GameObject GetNearestPlayer()
+   public GameObject GetNearestPlayer()
     {
         GameObject nearestPlayer = null;
         float minDistance = float.MaxValue;
@@ -204,5 +204,35 @@ public class DetectPlayer : MonoBehaviourPunCallbacks
         }
         
         PhotonNetwork.Destroy(gameObject);
+    }
+    void CutMesh(Vector3 cutPosition, Vector3 cutDirection)
+    {
+        MeshFilter meshFilter = GetComponent<MeshFilter>();
+        if (meshFilter != null)
+        {
+            Mesh mesh = meshFilter.mesh;
+            Plane cutPlane = new Plane(transform.InverseTransformDirection(cutDirection), cutPosition);
+            Vector3[] vertices = mesh.vertices;
+            int[] triangles = mesh.triangles;
+
+            for (int i = 0; i < triangles.Length; i += 3)
+            {
+                Vector3 vertex1 = vertices[triangles[i]];
+                Vector3 vertex2 = vertices[triangles[i + 1]];
+                Vector3 vertex3 = vertices[triangles[i + 2]];
+
+                if (cutPlane.GetSide(transform.TransformPoint(vertex1)) &&
+                    cutPlane.GetSide(transform.TransformPoint(vertex2)) &&
+                    cutPlane.GetSide(transform.TransformPoint(vertex3)))
+                {
+                    // Remove the triangle
+                    triangles[i] = triangles[i + 1] = triangles[i + 2] = -1;
+                }
+            }
+
+            mesh.triangles = triangles;
+            mesh.RecalculateBounds();
+            mesh.RecalculateNormals();
+        }
     }
 }

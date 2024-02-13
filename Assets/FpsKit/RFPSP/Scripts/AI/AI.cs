@@ -8,8 +8,8 @@ using System.Collections.Generic;
 public class AI : MonoBehaviour {
 	[HideInInspector]
 	public bool spawned = false;
-	[HideInInspector]
-	public GameObject playerObj;
+    //[HideInInspector]
+    public GameObject playerObj;
 	[HideInInspector]
 	public Transform playerTransform;
 	[HideInInspector]
@@ -29,7 +29,7 @@ public class AI : MonoBehaviour {
 	public CharacterDamage CharacterDamageComponent;
 	[HideInInspector]
 	public NPCSpawner NPCSpawnerComponent;
-	[HideInInspector]
+	//[HideInInspector]
 	public NPCRegistry NPCRegistryComponent;
 	[HideInInspector]
 	public AI TargetAIComponent;
@@ -541,6 +541,7 @@ public class AI : MonoBehaviour {
 				{
 					if (NPCRegistryComponent)
 					{
+						
 						NPCRegistryComponent.FindClosestTarget(myTransform.gameObject, this, myTransform.position, attackRangeAmt, factionNum);
 					}
 				}
@@ -768,6 +769,7 @@ public class AI : MonoBehaviour {
 						{
 							if (NPCRegistryComponent)
 							{
+								
 								NPCRegistryComponent.FindClosestTarget(myTransform.gameObject, this, myTransform.position, attackRangeAmt, factionNum);
 							}
 							// Move towards our target

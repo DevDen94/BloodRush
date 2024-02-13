@@ -19,7 +19,7 @@ public class NPCRegistry : MonoBehaviour {
 	private RaycastHit hit;
 
 	void Start () {
-		if(SceneManager.GetActiveScene().name == "SurvivalMode")
+		if(SceneManager.GetActiveScene().name == "FinalGamePlay")
         {
 			StartWalaKam();
         }
@@ -73,9 +73,10 @@ public class NPCRegistry : MonoBehaviour {
 	//Find the closest hostile target for this NPC, taking into account faction alignments and player stance
 	public void FindClosestTarget(GameObject NPC, AI NpcAIcomponent, Vector3 myPos, float distance, int myFaction){
 
+		
 		nearestNpcDist = distance;
 		AI nearestNpcAIcomponent = null;
-
+		
 		playerDist = Vector3.Distance(myPos, playerTransform.position);
 
 		//calculate range based on player stance/sneaking

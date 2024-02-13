@@ -30,7 +30,7 @@ public class Splash : MonoBehaviour
 
             activeScene = SceneManager.GetActiveScene();
             Invoke(nameof(ShowBig), 1f);
-            Debug.LogError("start");
+           
         }
         else
         {
@@ -84,11 +84,13 @@ public class Splash : MonoBehaviour
                 {
                     if (PlayerPrefs.GetInt("Mode") == 1)
                     {
-                        SceneManager.LoadSceneAsync("GamePlay");
+                        SceneManager.LoadSceneAsync("FinalGamePlay");
+                        //SceneManager.LoadSceneAsync("GamePlay");
                     }
                     else if (PlayerPrefs.GetInt("Mode") == 2)
                     {
-                        SceneManager.LoadSceneAsync("SurvivalMode");
+                        SceneManager.LoadSceneAsync("FinalGamePlay");
+                        //SceneManager.LoadSceneAsync("SurvivalMode");
                     }
                     else if (PlayerPrefs.GetInt("Mode") == 3)
                     {

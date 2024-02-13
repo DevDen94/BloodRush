@@ -389,7 +389,7 @@ MonoBehaviour:
   spawnProtection: {fileID: 11400000, guid: fcecf2be2b222de4cb7eecc77e3b95ac, type: 2}
   botControls: {fileID: 11400000, guid: 0dfca2c3df6cf1845b370834e1201590, type: 2}
   voiceManager: {fileID: 11400000, guid: d92728dfea3c0ac4297f5dd9cf924bac, type: 2}
-  inputManager: {fileID: 11400000, guid: 9da74df76f580804eb007dada5eff09d, type: 2}
+  inputManager: {fileID: 11400000, guid: cd833e536a9850b418eaad550e1bc11b, type: 2}
   myTeam: -1
   isController: 0
   isBot: 0

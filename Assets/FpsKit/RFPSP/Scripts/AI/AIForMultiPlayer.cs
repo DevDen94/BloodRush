@@ -6,6 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class AIForMultiPlayer : MonoBehaviour {
+	public static AIForMultiPlayer Instance;
 	[HideInInspector]
 	public bool spawned = false;
 	
@@ -19,14 +20,14 @@ public class AIForMultiPlayer : MonoBehaviour {
 	[HideInInspector]
 	public FPSRigidBodyWalker FPSWalker;
 	[HideInInspector]
-	public NPCAttack NPCAttackComponent;
+	public NPCAttack1 NPCAttackComponent;
 	[HideInInspector]
 	public PlayerWeapons PlayerWeaponsComponent;
 	private WeaponBehavior WeaponBehaviorComponent;
 	[HideInInspector]
 	public CharacterDamage TargetCharacterDamageComponent;
 	[HideInInspector]
-	public CharacterDamage CharacterDamageComponent;
+	public CharacterDamage1 CharacterDamageComponent;
 	[HideInInspector]
 	public NPCSpawner NPCSpawnerComponent;
 	[HideInInspector]
@@ -250,6 +251,11 @@ public class AIForMultiPlayer : MonoBehaviour {
 	public bool isTrigger_GameObj;
 	public bool JumpWindow;
 	public int counter;
+    private void Awake()
+    {
+		if (Instance == null)
+			Instance = this;
+    }
     private void Update()
 	{
 		//if (PlayerPrefs.GetInt("Tut") != 0)
@@ -297,7 +303,8 @@ public class AIForMultiPlayer : MonoBehaviour {
 		NPCMgrObj = GameObject.Find("NPC Manager");
 		NPCRegistryComponent = NPCMgrObj.GetComponent<NPCRegistry>();
 		NPCRegistryComponent.Npcs.Add(myTransform.gameObject.GetComponent<AI>());//register this active NPC with the NPCRegistry
-		playerObj = Camera.main.transform.GetComponent<CameraControl>().playerObj;
+		playerObj = GetNearestPlayer();
+		//playerObj = Camera.main.transform.GetComponent<CameraControl>().playerObj;by ali
 		
 		Mathf.Clamp01(randomSpawnChance);
 
@@ -356,14 +363,15 @@ public class AIForMultiPlayer : MonoBehaviour {
 		if(objectWithAnims == null){objectWithAnims = transform;}
 
 		AnimatorComponent = objectWithAnims.GetComponent<Animator>();//set reference to Mecanim animator component
-		
+
 		//initialize AI vars
-		playerObj = Camera.main.transform.GetComponent<CameraControl>().playerObj;
+		playerObj = GetNearestPlayer();
+		//playerObj = Camera.main.transform.GetComponent<CameraControl>().playerObj;by ali
 		playerTransform = playerObj.transform;
-		PlayerWeaponsComponent = Camera.main.transform.GetComponent<CameraControl>().weaponObj.GetComponentInChildren<PlayerWeapons>();
-		FPSWalker = playerObj.GetComponent<FPSRigidBodyWalker>();
-		NPCAttackComponent = GetComponent<NPCAttack>();
-		CharacterDamageComponent = GetComponent<CharacterDamage>();
+		//PlayerWeaponsComponent = Camera.main.transform.GetComponent<CameraControl>().weaponObj.GetComponentInChildren<PlayerWeapons>();
+		//FPSWalker = playerObj.GetComponent<FPSRigidBodyWalker>();
+		NPCAttackComponent = GetComponent<NPCAttack1>();
+		CharacterDamageComponent = GetComponent<CharacterDamage1>();
 
 		//Get all colliders for this NPC's body parts 
 		colliders = GetComponentsInChildren<Collider>();
@@ -1550,5 +1558,25 @@ public class AIForMultiPlayer : MonoBehaviour {
 		target = null;
 		factionNum = factionChange;
 	}
+	private List<GameObject> players = new List<GameObject>();
+	public GameObject GetNearestPlayer()
+	{
+		GameObject nearestPlayer = null;
+		float minDistance = float.MaxValue;
 
+		foreach (var player in players)
+		{
+			if (player != null)
+			{
+				float distance = Vector3.Distance(transform.position, player.transform.position);
+				if (distance < minDistance)
+				{
+					minDistance = distance;
+					nearestPlayer = player;
+				}
+			}
+		}
+
+		return nearestPlayer;
+	}
 }
