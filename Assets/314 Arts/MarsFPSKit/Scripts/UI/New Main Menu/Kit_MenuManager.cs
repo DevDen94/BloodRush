@@ -169,7 +169,8 @@ namespace MarsFPSKit
                 Time.timeScale = 1f;
                 //Photon changed this, we now have to do this in menu
                 ResetStats();
-                GoogleMobileAdsController.Instance.ShowSmallBannerAd();
+                Admob.Instance.ShowSmallBanner();
+                // GoogleMobileAdsController.Instance.ShowSmallBannerAd();
             }
 
             /// <summary>

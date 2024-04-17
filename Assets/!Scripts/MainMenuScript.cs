@@ -89,12 +89,13 @@ public class MainMenuScript : MonoBehaviour
             }
             else if (mode == 2)
             {
-                GoogleMobileAdsController.Instance.ShowInterstitialAd();
+                Admob.Instance.ShowInterstitialAd();
+                //GoogleMobileAdsController.Instance.ShowInterstitialAd();
                 LoaddingPanel.SetActive(true);
             }
             else if (mode == 3)
             {
-                //GoogleMobileAdsController.Instance.ShowInterstitialAd();
+               
                
                 LoaddingPanel.SetActive(true);
             }
@@ -102,9 +103,10 @@ public class MainMenuScript : MonoBehaviour
     }
     void Start()
     {
-        GoogleMobileAdsController.Instance.ShowSmallBannerAd();
+        Admob.Instance.ShowSmallBanner();
+        //GoogleMobileAdsController.Instance.ShowSmallBannerAd();
 
-        //GoogleAdMobController.instance.ShowSmallBannerAd();
+
 
         Cursor.lockState = CursorLockMode.None;
 
@@ -157,11 +159,7 @@ public class MainMenuScript : MonoBehaviour
         _buttonClickSrc2.volume = PlayerPrefs.GetFloat("Sounds");
         _buttonClickSrc3.volume = PlayerPrefs.GetFloat("Sounds");
 
-        //if (GoogleAdMobController.instance.IsAppOpen)
-        //{
-        //    GoogleAdMobController.instance.ShowAppOpenAd();
-        //    GoogleAdMobController.instance.IsAppOpen = false;
-        //}
+        
 
     }
 
@@ -169,7 +167,7 @@ public class MainMenuScript : MonoBehaviour
     {
         if(PlayerPrefs.GetInt("PlayAd") % 2 == 0)
         {
-            //GoogleAdMobController.instance.ShowInterstitialAd();
+            
         }
 
         PlayerPrefs.SetInt("PlayAd", PlayerPrefs.GetInt("PlayAd") + 1);
@@ -177,8 +175,7 @@ public class MainMenuScript : MonoBehaviour
 
     public void showInter()
     {
-        // AdsManager.instance.ShowinterAd();
-        //GoogleAdMobController.instance.ShowInterstitialAd();
+        
     }
 
 
@@ -228,8 +225,8 @@ public class MainMenuScript : MonoBehaviour
     {
         Debug.Log("wave pref is : " + way);
         //AdsManager.instance.ShowinterAd();
-
-        GoogleMobileAdsController.Instance.ShowInterstitialAd();
+        Admob.Instance.ShowInterstitialAd();
+        //GoogleMobileAdsController.Instance.ShowInterstitialAd();
 
         PlayerPrefs.SetInt("WaveNo", way);
 
@@ -321,7 +318,7 @@ public class MainMenuScript : MonoBehaviour
 
     public void UnlockAllLevelsRewardAd()
     {
-        GoogleMobileAdsController.Instance.isRewarded = true;
+        Admob.Instance.isRewarded = true;
         if (Application.internetReachability != NetworkReachability.NotReachable)
         {
            
@@ -329,9 +326,9 @@ public class MainMenuScript : MonoBehaviour
             PlayerPrefs.SetInt("ShowLevelsAd", 1);
         }
 
-       
-        
-        GoogleMobileAdsController.Instance.ShowRewardedAd_();
+
+        Admob.Instance.ShowRewardedAd();
+        // GoogleMobileAdsController.Instance.ShowRewardedAd_();
     }
 
     public void UnlockingAllLevels()
@@ -359,7 +356,7 @@ public class MainMenuScript : MonoBehaviour
             Debug.Log(PlayerPrefs.GetInt("WaveUnlock"));
             EnableButtons(PlayerPrefs.GetInt("WaveUnlock"));
         }
-        GoogleMobileAdsController.Instance.isRewarded = false;
+        Admob.Instance.isRewarded = false;
 
     }
 
@@ -369,9 +366,9 @@ public class MainMenuScript : MonoBehaviour
         {
             PlayerPrefs.SetInt("UnlockNextLevel", 1);
         }
-
-        GoogleMobileAdsController.Instance.ShowRewardedAd_();
-        GoogleMobileAdsController.Instance.isRewarded = true;
+        Admob.Instance.ShowRewardedAd();
+        //GoogleMobileAdsController.Instance.ShowRewardedAd_();
+        Admob.Instance.isRewarded = true;
     }
 
     public void UnlockingNextLevel()
@@ -390,7 +387,8 @@ public class MainMenuScript : MonoBehaviour
 
     public void UnlockSurvivalMode()
     {
-        GoogleMobileAdsController.Instance.ShowRewardedAd_();
+        Admob.Instance.ShowRewardedAd();
+        //GoogleMobileAdsController.Instance.ShowRewardedAd_();
         if (Application.internetReachability != NetworkReachability.NotReachable)
         {
             //PlayerPrefs.SetInt("SurvivalModeAd", PlayerPrefs.GetInt("SurvivalModeAd") + 1);
@@ -404,7 +402,7 @@ public class MainMenuScript : MonoBehaviour
 
 
         //GoogleMobileAdsController.Instance.ShowRewardedAd();
-        GoogleMobileAdsController.Instance.isRewarded = true;
+        Admob.Instance.isRewarded = true;
     }
 
     public void UnlockingSurvivalModeWithAds()

@@ -33,7 +33,8 @@ public class TutorialLevelManager : MonoBehaviour
 
     void Start()
     {
-        GoogleMobileAdsController.Instance.ShowSmallBannerAd();
+        Admob.Instance.ShowSmallBanner();
+        //GoogleMobileAdsController.Instance.ShowSmallBannerAd();
 
         m_allAudios = FindObjectsOfType<AudioSource>();
 

@@ -142,9 +142,9 @@ public class GameManager : MonoBehaviour
         //    beam.gameObject.SetActive(false);
         //}
 
-        //GoogleAdMobController.instance.ShowSmallBannerAd();
-        GoogleMobileAdsController.Instance.ShowSmallBannerAd();
-       
+        Admob.Instance.ShowSmallBanner();
+        //GoogleMobileAdsController.Instance.ShowSmallBannerAd();
+
     }
     void Delay()
     {
@@ -220,8 +220,8 @@ public class GameManager : MonoBehaviour
 
         if(PlayerPrefs.GetInt("CompAd") % 2 == 0)
         {
-            //GoogleAdMobController.instance.ShowInterstitialAd();
-            GoogleMobileAdsController.Instance.ShowInterstitialAd();
+            Admob.Instance.ShowInterstitialAd();
+            //GoogleMobileAdsController.Instance.ShowInterstitialAd();
         }
 
         PlayerPrefs.SetInt("CompAd", PlayerPrefs.GetInt("CompAd") + 1);
@@ -648,9 +648,10 @@ public class GameManager : MonoBehaviour
         {
             PlayerPrefs.SetInt("SkipLevel", 1);
         }
-        //GoogleAdMobController.instance.ShowRewardedAd();
-        GoogleMobileAdsController.Instance.ShowRewardedAd_();
-        GoogleMobileAdsController.Instance.isRewarded = true;
+
+        Admob.Instance.ShowRewardedAd();
+        //GoogleMobileAdsController.Instance.ShowRewardedAd_();
+        Admob.Instance.isRewarded = true;
     }
 
     public void SkippingLevel()

@@ -21,6 +21,7 @@ public class ZombieControler : MonoBehaviourPunCallbacks
         {
             InvokeRepeating("SpawnZombie", 0f, spawnInterval);
         }
+        Admob.Instance.ShowSmallBanner();
 
         //GoogleMobileAdsController.Instance.ShowSmallBannerAd();
     }

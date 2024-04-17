@@ -1417,14 +1417,14 @@ public class FPSPlayer : MonoBehaviour {
 
 		if(PlayerPrefs.GetInt("FailAd") % 2 == 0)
         {
-			//GoogleAdMobController.instance.ShowInterstitialAd();
-			GoogleMobileAdsController.Instance.ShowInterstitialAd();
-        }
+			Admob.Instance.ShowInterstitialAd();
+			
+			//GoogleMobileAdsController.Instance.ShowInterstitialAd();
+		}
 
 		PlayerPrefs.SetInt("FailAd", PlayerPrefs.GetInt("FailAd") + 1);
 	
-		//AdsManager.instance.ShowinterAd();
-		//AdsManager.instance.ShowBigBanner();
+		
 	}
 
 	IEnumerator ReviveCR()

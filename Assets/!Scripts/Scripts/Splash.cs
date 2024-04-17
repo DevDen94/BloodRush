@@ -48,8 +48,8 @@ public class Splash : MonoBehaviour
 
     public void ShowBig()
     {
-        //GoogleAdMobController.instance.ShowBigBannerAd();
-        GoogleMobileAdsController.Instance.ShowBiGBannerAd();
+        Admob.Instance.ShowBigBanner();
+        // GoogleMobileAdsController.Instance.ShowBiGBannerAd();
     }
 
 

@@ -28,9 +28,8 @@ public class HealthText : MonoBehaviour {
 		if(healthGui != oldHealthGui){
 			if(healthGui < 0.0f && !showNegativeHP){
 				guiTextComponent.text = "Health : 0";
-				//GoogleAdMobController.instance.ShowInterstitialAd();
-				//GoogleAdMobController.instance.ShowBigBannerAd();
-				GoogleMobileAdsController.Instance.ShowInterstitialAd();
+				Admob.Instance.ShowInterstitialAd();
+				//GoogleMobileAdsController.Instance.ShowInterstitialAd();
 				GameManager.instance.LevelFailed.SetActive(true);
 				Health.value = 0;
 				Time.timeScale = 0;

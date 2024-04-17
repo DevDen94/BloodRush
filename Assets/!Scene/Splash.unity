@@ -1053,7 +1053,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1194940809}
-  - component: {fileID: 1194940816}
   - component: {fileID: 1194940814}
   - component: {fileID: 1194940815}
   m_Layer: 0
@@ -1100,42 +1099,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 1194940807}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ff5075b543daf345aaa3997291cdfb6, type: 3}
+  m_Script: {fileID: 11500000, guid: c6cee7bd30fd7a54e8a9fce58ae88210, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bannerAdUnitId: ca-app-pub-5227706387493609/7134346414
-  interstitialAdUnitId: ca-app-pub-5227706387493609/2885794427
-  rewardedAdUnitId: ca-app-pub-5227706387493609/5128814385
-  BIGbannerAdUnitId: ca-app-pub-5227706387493609/8014311685
-  MediumBannerAdUnitId: ca-app-pub-5227706387493609/4582019473
-  MediumInterstitialAdUnitId: ca-app-pub-5227706387493609/4390447782
-  MediumRewardedAdUnitId: ca-app-pub-5227706387493609/5821264744
-  BIGbannerMediumAdUnitId: ca-app-pub-5227706387493609/8014311685
-  ALLPriceBannerAdUnitId: ca-app-pub-5227706387493609/6046623899
-  ALLPriceInterstitialAdUnitId: ca-app-pub-5227706387493609/8899583831
-  ALLPriceRewardedAdUnitId: ca-app-pub-5227706387493609/5128814385
-  BIGbannerAllAdUnitId: ca-app-pub-5227706387493609/8014311685
+  Banner1: ca-app-pub-5227706387493609/6046623899
+  BigBanner1: ca-app-pub-5227706387493609/8014311685
+  Interstitial1: ca-app-pub-5227706387493609/8899583831
+  Interstitial2: ca-app-pub-5227706387493609/4390447782
+  Interstitial3: ca-app-pub-5227706387493609/2885794427
+  Rewarded1: ca-app-pub-5227706387493609/5128814385
+  Rewarded2: ca-app-pub-5227706387493609/5821264744
+  Rewarded3: ca-app-pub-5227706387493609/5128814385
+  RewardedInterstatial1: null
+  RewardedInterstatial2: 
+  RewardedInterstatial3: 
+  ShowTestAds: 0
   SmallBannerPosition: 0
   BigBannerPosition: 3
-  ShowTestAds: 0
-  UnityAdsID: null
-  BANNER_PLACEMENT: 
-  InterstatialPlacement: 
-  REWARDED_VIDEO_PLACEMENT: 
-  number: 0
-  isRewarded: 0
---- !u!114 &1194940816
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1194940807}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc0152b0b89c99b4ebb345a601cab14e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1269163454
 GameObject:
   m_ObjectHideFlags: 0

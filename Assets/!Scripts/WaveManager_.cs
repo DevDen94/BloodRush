@@ -130,8 +130,8 @@ public class WaveManager_ : MonoBehaviour
         PlayerPrefs.SetInt("Health", 0);
         PlayerPrefs.SetInt("Ammo", 0);
 
-        //GoogleAdMobController.instance.ShowSmallBannerAd();
-        GoogleMobileAdsController.Instance.ShowSmallBannerAd();
+        Admob.Instance.ShowSmallBanner();
+        // GoogleMobileAdsController.Instance.ShowSmallBannerAd();
 
     }
     
@@ -656,9 +656,9 @@ public class WaveManager_ : MonoBehaviour
             }
         }
 
-        //GoogleAdMobController.instance.ShowRewardedAd();
-        GoogleMobileAdsController.Instance.ShowRewardedAd_();
-        GoogleMobileAdsController.Instance.isRewarded = true;
+        Admob.Instance.ShowRewardedAd();
+        //GoogleMobileAdsController.Instance.ShowRewardedAd_();
+        Admob.Instance.isRewarded = true;
     }
 
     public void GiveawayGiving()
