@@ -296,7 +296,8 @@ public class GameManager : MonoBehaviour
         // AdsManager.instance.ShowSmallBanner();
         //Firebase.Analytics.FirebaseAnalytics.LogEvent("WaveMode_NextBtn_Click", "WaveMode", Wave_.ToString());
         src.PlayOneShot(Btnclick);
-        SceneManager.LoadScene("FinalGamePlay");
+        SceneManager.LoadSceneAsync("GamePlay");
+        //SceneManager.LoadScene("FinalGamePlay");
         //Time.timeScale = 1f;
     }
     public void Restart_Btn()
@@ -305,7 +306,8 @@ public class GameManager : MonoBehaviour
         //Firebase.Analytics.FirebaseAnalytics.LogEvent("WaveMode_RestartBtn_Click", "WaveMode", Wave_.ToString());
         //Time.timeScale = 1f;
         src.PlayOneShot(Btnclick);
-        SceneManager.LoadScene("FinalGamePlay");
+        SceneManager.LoadSceneAsync("GamePlay");
+        //SceneManager.LoadScene("FinalGamePlay");
     }
     public void Home()
     {

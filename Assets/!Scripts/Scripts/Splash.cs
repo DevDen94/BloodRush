@@ -30,7 +30,7 @@ public class Splash : MonoBehaviour
 
             activeScene = SceneManager.GetActiveScene();
             Invoke(nameof(ShowBig), 1f);
-           
+            Invoke(nameof(TimeLoad), 4F);
         }
         else
         {
@@ -38,6 +38,12 @@ public class Splash : MonoBehaviour
         }
         
         // SoundsManager.instance.PlayMainMenuMusic();
+    }
+
+    void TimeLoad()
+    {
+        Value = 51;
+        CheckTime();
     }
 
     public void ShowBig()
@@ -84,13 +90,13 @@ public class Splash : MonoBehaviour
                 {
                     if (PlayerPrefs.GetInt("Mode") == 1)
                     {
-                        SceneManager.LoadSceneAsync("FinalGamePlay");
-                        //SceneManager.LoadSceneAsync("GamePlay");
+                        //SceneManager.LoadSceneAsync("FinalGamePlay");
+                        SceneManager.LoadSceneAsync("GamePlay");
                     }
                     else if (PlayerPrefs.GetInt("Mode") == 2)
                     {
-                        SceneManager.LoadSceneAsync("FinalGamePlay");
-                        //SceneManager.LoadSceneAsync("SurvivalMode");
+                       // SceneManager.LoadSceneAsync("FinalGamePlay");
+                        SceneManager.LoadSceneAsync("SurvivalMode");
                     }
                     else if (PlayerPrefs.GetInt("Mode") == 3)
                     {

@@ -287,7 +287,8 @@ public class WaveManager_ : MonoBehaviour
         //GoogleAdMobController.instance.ShowSmallBannerAd();
         //Firebase.Analytics.FirebaseAnalytics.LogEvent("SurvivalMode_NextBtn", "SurvivalMode", Wave_.ToString());
         src.PlayOneShot(Btnclick);
-        SceneManager.LoadScene("FinalGamePlay");
+        SceneManager.LoadSceneAsync("SurvivalMode");
+        //SceneManager.LoadScene("FinalGamePlay");
         //Time.timeScale = 1f;
     }
     public void Restart_Btn()
@@ -296,7 +297,8 @@ public class WaveManager_ : MonoBehaviour
         //GoogleAdMobController.instance.ShowSmallBannerAd();
         //Firebase.Analytics.FirebaseAnalytics.LogEvent("SurvivalMode_RestartBtn", "SurvivalMode", Wave_.ToString());
         src.PlayOneShot(Btnclick);
-        SceneManager.LoadScene("FinalGamePlay");
+        SceneManager.LoadSceneAsync("SurvivalMode");
+        //SceneManager.LoadScene("FinalGamePlay");
     }
     public void Home()
     {
