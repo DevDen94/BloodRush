@@ -1807,7 +1807,7 @@ GameObject:
   - component: {fileID: 9088069898812540973}
   m_Layer: 13
   m_Name: mixamorig:Hips
-  m_TagString: Zombie
+  m_TagString: Hand
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

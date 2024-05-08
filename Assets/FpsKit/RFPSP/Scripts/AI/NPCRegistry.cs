@@ -19,7 +19,7 @@ public class NPCRegistry : MonoBehaviour {
 	private RaycastHit hit;
 
 	void Start () {
-		if(SceneManager.GetActiveScene().name == "FinalGamePlay")
+		if(SceneManager.GetActiveScene().name == "SurvivalMode")
         {
 			StartWalaKam();
         }
