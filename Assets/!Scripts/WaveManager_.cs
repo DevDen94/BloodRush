@@ -106,6 +106,8 @@ public class WaveManager_ : MonoBehaviour
     public GameObject _giveawayClaimAdButton;
     [HideInInspector] public int _giveawayCounterForAd;
 
+    public SaveMainMenuWeaponData SaveWeaponInMainMenu;
+
     private void Start()
     {
         LoadWeapons_Data();
@@ -339,13 +341,19 @@ public class WaveManager_ : MonoBehaviour
     }
  public  void LoadWeapons_Data()
     {
+
         Slot_bool_Check();
         for (int i = 0; i < Weapons.Length; ++i)
         {
-            if (Weapons[i].haveWeapon == true)
+
+            if (SaveWeaponInMainMenu.HaveInInventory[i] == true)
             {
                 Slot_Weapon_Intialize(WeaponWheelImages[i]);
             }
+            /*if (Weapons[i].haveWeapon == true)
+            {
+                Slot_Weapon_Intialize(WeaponWheelImages[i]);
+            }*/
         }
     
     }

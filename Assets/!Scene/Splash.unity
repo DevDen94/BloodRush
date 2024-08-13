@@ -1116,6 +1116,7 @@ MonoBehaviour:
   ShowTestAds: 0
   SmallBannerPosition: 0
   BigBannerPosition: 3
+  isRewarded: 0
 --- !u!1 &1269163454
 GameObject:
   m_ObjectHideFlags: 0

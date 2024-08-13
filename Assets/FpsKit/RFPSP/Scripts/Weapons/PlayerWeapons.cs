@@ -544,8 +544,9 @@ public class PlayerWeapons : MonoBehaviour {
             {
                 wp.SlotImageParent(ThisWeaponBehavior.Wheel_Btn);
             }
+			
 
-        }
+		}
 
 
 
