@@ -3951,7 +3951,7 @@ MonoBehaviour:
   optionalBool0: 0
   optionalFloat0: 0
   optionalInt0: 0
-  optionalRotationMode: 0
+  optionalRotationMode: 3
   optionalScrambleMode: 0
   optionalString: 
 --- !u!114 &191674695
@@ -43966,7 +43966,7 @@ MonoBehaviour:
   optionalBool0: 0
   optionalFloat0: 0
   optionalInt0: 0
-  optionalRotationMode: 0
+  optionalRotationMode: 3
   optionalScrambleMode: 0
   optionalString: 
 --- !u!114 &1988859910

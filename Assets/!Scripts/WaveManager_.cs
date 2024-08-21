@@ -132,8 +132,8 @@ public class WaveManager_ : MonoBehaviour
         PlayerPrefs.SetInt("Health", 0);
         PlayerPrefs.SetInt("Ammo", 0);
 
-        Admob.Instance.ShowSmallBanner();
-        // GoogleMobileAdsController.Instance.ShowSmallBannerAd();
+        //Admob.Instance.ShowSmallBanner();
+       
 
     }
     
@@ -664,9 +664,9 @@ public class WaveManager_ : MonoBehaviour
             }
         }
 
-        Admob.Instance.ShowRewardedAd();
-        //GoogleMobileAdsController.Instance.ShowRewardedAd_();
-        Admob.Instance.isRewarded = true;
+        //Admob.Instance.ShowRewardedAd();
+       
+        //Admob.Instance.isRewarded = true;
     }
 
     public void GiveawayGiving()

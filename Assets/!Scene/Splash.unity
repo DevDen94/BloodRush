@@ -933,7 +933,7 @@ MonoBehaviour:
   parentObject: {fileID: 1036294690}
   data: {fileID: 11400000, guid: 8964e3cb8172dfd4dba3c32601dc210f, type: 2}
   Value: 0
-  Wait: 5
+  Wait: 1
   FillBar: {fileID: 1126845433}
 --- !u!114 &1058272892
 MonoBehaviour:
@@ -1054,7 +1054,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1194940809}
   - component: {fileID: 1194940814}
-  - component: {fileID: 1194940815}
   m_Layer: 0
   m_Name: AdsManager
   m_TagString: Untagged
@@ -1090,33 +1089,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waitTime: 0.2
---- !u!114 &1194940815
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1194940807}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6cee7bd30fd7a54e8a9fce58ae88210, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Banner1: ca-app-pub-5227706387493609/6046623899
-  BigBanner1: ca-app-pub-5227706387493609/8014311685
-  Interstitial1: ca-app-pub-5227706387493609/8899583831
-  Interstitial2: ca-app-pub-5227706387493609/4390447782
-  Interstitial3: ca-app-pub-5227706387493609/2885794427
-  Rewarded1: ca-app-pub-5227706387493609/5128814385
-  Rewarded2: ca-app-pub-5227706387493609/5821264744
-  Rewarded3: ca-app-pub-5227706387493609/5128814385
-  RewardedInterstatial1: null
-  RewardedInterstatial2: 
-  RewardedInterstatial3: 
-  ShowTestAds: 0
-  SmallBannerPosition: 0
-  BigBannerPosition: 3
-  isRewarded: 0
 --- !u!1 &1269163454
 GameObject:
   m_ObjectHideFlags: 0

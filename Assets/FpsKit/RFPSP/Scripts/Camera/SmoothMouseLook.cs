@@ -71,14 +71,14 @@ public class SmoothMouseLook : MonoBehaviour {
 		sensitivityAmt = sensitivity;//initialize sensitivity amount from var set by player
 		
 		//Hide the cursor
-		ControlFreak2.CFCursor.visible = false;
+		ControlFreak2.CFCursor.visible = true;//false by ali
     }
 
 	#if UNITY_EDITOR || UNITY_WEBPLAYER
 	void OnGUI(){//lock cursor - don't use OnGUI in standalone for performance reasons
 		if(Time.timeScale > 0.0f && FPSPlayerComponent.pauseHidesCursor){
-			ControlFreak2.CFCursor.lockState = CursorLockMode.Locked;
-			ControlFreak2.CFCursor.visible = false;
+			ControlFreak2.CFCursor.lockState = CursorLockMode.None;
+			ControlFreak2.CFCursor.visible = true;//false by ali
 		}
 	}
 	#endif
@@ -88,8 +88,8 @@ public class SmoothMouseLook : MonoBehaviour {
 		if(Time.timeScale > 0.0f && Time.smoothDeltaTime > 0.0f){//allow pausing by setting timescale to 0
 
 			//Hide the cursor
-			ControlFreak2.CFCursor.lockState = CursorLockMode.Locked;
-			ControlFreak2.CFCursor.visible = false;
+			ControlFreak2.CFCursor.lockState = CursorLockMode.None;//locked
+			ControlFreak2.CFCursor.visible = true;//false by ali
 
 			horizontalDelta = rotationX;//old rotationX
 

@@ -73,9 +73,9 @@ public class DisablingConditionSet
 			return false;
 
 		if (this.disableWhenTouchScreenInactive && this.rig.AreTouchControlsSleeping())
-			return true;
+			return true;//true
 		if (this.disableWhenCursorIsUnlocked && !CFScreen.lockCursor)
-			return true;
+			return true;//true by ali
 		if (this.IsDisabledByRigSwitches())
 			return true;
 

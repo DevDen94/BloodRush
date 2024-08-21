@@ -89,8 +89,8 @@ public class MainMenuScript : MonoBehaviour
             }
             else if (mode == 2)
             {
-                Admob.Instance.ShowInterstitialAd();
-                //GoogleMobileAdsController.Instance.ShowInterstitialAd();
+                //Admob.Instance.ShowInterstitialAd();
+                
                 LoaddingPanel.SetActive(true);
             }
             else if (mode == 3)
@@ -103,8 +103,8 @@ public class MainMenuScript : MonoBehaviour
     }
     void Start()
     {
-        Admob.Instance.ShowSmallBanner();
-        //GoogleMobileAdsController.Instance.ShowSmallBannerAd();
+        //Admob.Instance.ShowSmallBanner();
+        
 
 
 
@@ -225,8 +225,8 @@ public class MainMenuScript : MonoBehaviour
     {
         Debug.Log("wave pref is : " + way);
         //AdsManager.instance.ShowinterAd();
-        Admob.Instance.ShowInterstitialAd();
-        //GoogleMobileAdsController.Instance.ShowInterstitialAd();
+        //Admob.Instance.ShowInterstitialAd();
+        
 
         PlayerPrefs.SetInt("WaveNo", way);
 
@@ -318,7 +318,7 @@ public class MainMenuScript : MonoBehaviour
 
     public void UnlockAllLevelsRewardAd()
     {
-        Admob.Instance.isRewarded = true;
+       // Admob.Instance.isRewarded = true;
         if (Application.internetReachability != NetworkReachability.NotReachable)
         {
            
@@ -327,8 +327,8 @@ public class MainMenuScript : MonoBehaviour
         }
 
 
-        Admob.Instance.ShowRewardedAd();
-        // GoogleMobileAdsController.Instance.ShowRewardedAd_();
+        //Admob.Instance.ShowRewardedAd();
+       
     }
 
     public void UnlockingAllLevels()
@@ -356,7 +356,7 @@ public class MainMenuScript : MonoBehaviour
             Debug.Log(PlayerPrefs.GetInt("WaveUnlock"));
             EnableButtons(PlayerPrefs.GetInt("WaveUnlock"));
         }
-        Admob.Instance.isRewarded = false;
+        //Admob.Instance.isRewarded = false;
 
     }
 
@@ -366,9 +366,9 @@ public class MainMenuScript : MonoBehaviour
         {
             PlayerPrefs.SetInt("UnlockNextLevel", 1);
         }
-        Admob.Instance.ShowRewardedAd();
-        //GoogleMobileAdsController.Instance.ShowRewardedAd_();
-        Admob.Instance.isRewarded = true;
+       // Admob.Instance.ShowRewardedAd();
+       
+       // Admob.Instance.isRewarded = true;
     }
 
     public void UnlockingNextLevel()
@@ -387,7 +387,7 @@ public class MainMenuScript : MonoBehaviour
 
     public void UnlockSurvivalMode()
     {
-        Admob.Instance.ShowRewardedAd();
+       // Admob.Instance.ShowRewardedAd();
         //GoogleMobileAdsController.Instance.ShowRewardedAd_();
         if (Application.internetReachability != NetworkReachability.NotReachable)
         {
@@ -401,8 +401,8 @@ public class MainMenuScript : MonoBehaviour
         }
 
 
-        //GoogleMobileAdsController.Instance.ShowRewardedAd();
-        Admob.Instance.isRewarded = true;
+        
+        //Admob.Instance.isRewarded = true;
     }
 
     public void UnlockingSurvivalModeWithAds()

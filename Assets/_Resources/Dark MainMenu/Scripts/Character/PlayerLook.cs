@@ -21,7 +21,7 @@ public class PlayerLook : MonoBehaviour
 
     private void LockCursor()
     {
-        ControlFreak2.CFCursor.lockState = CursorLockMode.Locked;
+        ControlFreak2.CFCursor.lockState = CursorLockMode.None;//lockedbyali
     }
 
     private void Update()

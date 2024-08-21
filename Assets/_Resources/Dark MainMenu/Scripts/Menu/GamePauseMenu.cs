@@ -42,7 +42,7 @@ public class GamePauseMenu : MonoBehaviour {
 	public void ResumeGame () 
 	{
 		Time.timeScale = 1.0f;
-		ControlFreak2.CFCursor.visible = false;
+		ControlFreak2.CFCursor.visible = true;
 		IsPaused = false;
 		pauseMenuUi.SetActive(false);
 	

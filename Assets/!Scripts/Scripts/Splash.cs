@@ -20,9 +20,9 @@ public class Splash : MonoBehaviour
     private void Start()
     {
         PlayerPrefs.SetInt("Tut", 1);
-
-        if (data.data == Application.identifier)
-        {
+        RuntimePlatform platform = Application.platform;
+        //if (data.data == Application.identifier)
+        //{
             Value = 0;
             StartCoroutine(waitforSceneSwitch());
 
@@ -31,11 +31,12 @@ public class Splash : MonoBehaviour
             activeScene = SceneManager.GetActiveScene();
             Invoke(nameof(ShowBig), 1f);
             Invoke(nameof(TimeLoad), 4F);
-        }
-        else
-        {
-            Application.Quit();
-        }
+       // }
+        
+        //else
+       // {
+         //   Application.Quit();
+        //}
         
         // SoundsManager.instance.PlayMainMenuMusic();
     }
@@ -48,8 +49,8 @@ public class Splash : MonoBehaviour
 
     public void ShowBig()
     {
-        Admob.Instance.ShowBigBanner();
-        // GoogleMobileAdsController.Instance.ShowBiGBannerAd();
+        //Admob.Instance.ShowBigBanner();
+        
     }
 
 
@@ -73,6 +74,7 @@ public class Splash : MonoBehaviour
 
     public void CheckTime()
     {
+       
         if (Value >= 50)
         {
             StopCoroutine(waitforSceneSwitch());
@@ -164,7 +166,7 @@ public class Splash : MonoBehaviour
 
         while (!asyncOperation.isDone)
         {
-
+           
             float progress = Mathf.Clamp01(asyncOperation.progress / 0.9f);
             FillBar.fillAmount = progress;
             yield return null;

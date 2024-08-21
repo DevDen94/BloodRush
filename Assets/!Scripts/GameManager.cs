@@ -142,8 +142,8 @@ public class GameManager : MonoBehaviour
         //    beam.gameObject.SetActive(false);
         //}
 
-        Admob.Instance.ShowSmallBanner();
-        //GoogleMobileAdsController.Instance.ShowSmallBannerAd();
+       // Admob.Instance.ShowSmallBanner();
+        
 
     }
     void Delay()
@@ -220,8 +220,8 @@ public class GameManager : MonoBehaviour
 
         if(PlayerPrefs.GetInt("CompAd") % 2 == 0)
         {
-            Admob.Instance.ShowInterstitialAd();
-            //GoogleMobileAdsController.Instance.ShowInterstitialAd();
+            //Admob.Instance.ShowInterstitialAd();
+           
         }
 
         PlayerPrefs.SetInt("CompAd", PlayerPrefs.GetInt("CompAd") + 1);
@@ -649,9 +649,9 @@ public class GameManager : MonoBehaviour
             PlayerPrefs.SetInt("SkipLevel", 1);
         }
 
-        Admob.Instance.ShowRewardedAd();
-        //GoogleMobileAdsController.Instance.ShowRewardedAd_();
-        Admob.Instance.isRewarded = true;
+        //Admob.Instance.ShowRewardedAd();
+        
+        //Admob.Instance.isRewarded = true;
     }
 
     public void SkippingLevel()

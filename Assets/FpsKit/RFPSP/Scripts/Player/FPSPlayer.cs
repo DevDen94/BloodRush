@@ -1417,9 +1417,9 @@ public class FPSPlayer : MonoBehaviour {
 
 		if(PlayerPrefs.GetInt("FailAd") % 2 == 0)
         {
-			Admob.Instance.ShowInterstitialAd();
+			//Admob.Instance.ShowInterstitialAd();
 			
-			//GoogleMobileAdsController.Instance.ShowInterstitialAd();
+			
 		}
 
 		PlayerPrefs.SetInt("FailAd", PlayerPrefs.GetInt("FailAd") + 1);
