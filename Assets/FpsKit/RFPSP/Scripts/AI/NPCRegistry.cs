@@ -19,7 +19,7 @@ public class NPCRegistry : MonoBehaviour {
 	private RaycastHit hit;
 
 	void Start () {
-		if(SceneManager.GetActiveScene().name == "SurvivalMode")
+		if(SceneManager.GetActiveScene().name == "SurvivalMode"|| SceneManager.GetActiveScene().name == "SurvivalModeForDemo")
         {
 			StartWalaKam();
         }
@@ -37,6 +37,7 @@ public class NPCRegistry : MonoBehaviour {
         playerObj = Camera.main.transform.GetComponent<CameraControl>().playerObj;
         FPSWalker = playerObj.GetComponent<FPSRigidBodyWalker>();
         playerTransform = playerObj.transform;
+		Debug.LogError("Start");
     }
 
 

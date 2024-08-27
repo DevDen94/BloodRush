@@ -99,6 +99,12 @@ public class MainMenuScript : MonoBehaviour
                
                 LoaddingPanel.SetActive(true);
             }
+            else if (mode == 4)
+            {
+
+
+                LoaddingPanel.SetActive(true);
+            }
         }
     }
     void Start()

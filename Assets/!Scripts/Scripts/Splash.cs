@@ -103,6 +103,12 @@ public class Splash : MonoBehaviour
                     else if (PlayerPrefs.GetInt("Mode") == 3)
                     {
                         SceneManager.LoadSceneAsync("Lobby");
+                        
+                    }
+                    else if (PlayerPrefs.GetInt("Mode") == 4)
+                    {
+                        // SceneManager.LoadSceneAsync("FinalGamePlay");
+                        SceneManager.LoadSceneAsync("SurvivalModeForDemo");
                     }
                 }
             }

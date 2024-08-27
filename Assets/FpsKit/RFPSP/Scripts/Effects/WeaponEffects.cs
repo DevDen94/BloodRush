@@ -129,24 +129,16 @@ public class WeaponEffects : MonoBehaviour {
 	//Draw Impact Effects
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	public bool ImpactEffects ( Collider hitcol, Vector3 hitPoint, bool NpcAttack, bool meleeAttack, Vector3 rayNormal = default(Vector3)){
+	public bool ImpactEffects(Collider hitcol, Vector3 hitPoint, bool NpcAttack, bool meleeAttack, Vector3 rayNormal = default(Vector3))
+	{
 		WeaponBehaviorComponent = PlayerWeaponsComponent.CurrentWeaponBehaviorComponent;
 		//find the tag name of the hit game object and emit the particle effects for the surface type
-		switch(hitcol.gameObject.tag){
-		case "Dirt":
-			impactObj = dirtImpact;//set impactObj to the particle effect game object group for this surface type
-			rotateParticle = true;
-			if(!meleeAttack){
-				if(defaultImpactSounds[0]){
-					hitSound = defaultImpactSounds[Random.Range(0, defaultImpactSounds.Length)];//select random impact sound for this surface type
-				}
-			}else{
-				if(defaultImpactSoundsMelee[0]){
-					hitSound = defaultImpactSoundsMelee[Random.Range(0, defaultImpactSoundsMelee.Length)];//select random impact sound for this surface type
-				}
-			}
-			break;
-		case "Zombie":
+		switch (hitcol.gameObject.layer)//Tag
+		{
+
+			
+
+			case 13:
 				impactObj = BloodImpact;//set impactObj to the particle effect game object group for this surface type
 				rotateParticle = true;
 				if (!meleeAttack)
@@ -164,94 +156,225 @@ public class WeaponEffects : MonoBehaviour {
 					}
 				}
 				break;
+
+			default:
+				impactObj = metalImpact;
+				rotateParticle = false;
+				if (!meleeAttack)
+				{
+					if (defaultImpactSounds[0])
+					{
+						hitSound = defaultImpactSounds[Random.Range(0, defaultImpactSounds.Length)];//select random impact sound for this surface type
+					}
+				}
+				else
+				{
+					if (defaultImpactSoundsMelee[0])
+					{
+						hitSound = defaultImpactSoundsMelee[Random.Range(0, defaultImpactSoundsMelee.Length)];//select random impact sound for this surface type
+					}
+				}
+				break;
+		}
+
+
+		impactObj.SetActive(true);
+		impactObj.transform.position = hitPoint;
+
+		foreach (Transform child in impactObj.transform)
+		{//emit all particles in the particle effect game object group stored in impactObj var
+			partSys = child.GetComponent<ParticleSystem>();
+			EmitRotatedParticle(partSys, rayNormal);
+		}
+
+		//modify the weapon impact sounds based on the weapon type, so the multiple shotgun impacts and automatic weapons aren't so loud
+		if (!NpcAttack && !WeaponBehaviorComponent.meleeActive)
+		{
+			if (WeaponBehaviorComponent.projectileCount > 1)
+			{
+				hitVolumeAmt = 0.2f;
+			}
+			else if (!WeaponBehaviorComponent.semiAuto)
+			{
+				hitVolumeAmt = 0.8f;
+			}
+			else
+			{
+				hitVolumeAmt = 1.0f;
+			}
+		}
+		else
+		{
+			hitVolumeAmt = 1.0f;
+		}
+
+		//play sounds of bullets hitting surface/ricocheting
+		PlayAudioAtPos.PlayClipAt(hitSound, hitPoint, hitVolumeAmt, 1.0f, 1.0f, 3.0f);
+		return true;
+	}
+	/*public bool ImpactEffects ( Collider hitcol, Vector3 hitPoint, bool NpcAttack, bool meleeAttack, Vector3 rayNormal = default(Vector3)){
+		WeaponBehaviorComponent = PlayerWeaponsComponent.CurrentWeaponBehaviorComponent;
+		//find the tag name of the hit game object and emit the particle effects for the surface type
+		switch (hitcol.gameObject.tag)//Tag
+		{
+
+			case "Dirt":
+				impactObj = dirtImpact;//set impactObj to the particle effect game object group for this surface type
+				rotateParticle = true;
+				if (!meleeAttack)
+				{
+					if (defaultImpactSounds[0])
+					{
+						hitSound = defaultImpactSounds[Random.Range(0, defaultImpactSounds.Length)];//select random impact sound for this surface type
+					}
+				}
+				else
+				{
+					if (defaultImpactSoundsMelee[0])
+					{
+						hitSound = defaultImpactSoundsMelee[Random.Range(0, defaultImpactSoundsMelee.Length)];//select random impact sound for this surface type
+					}
+				}
+				break;
+
+			case "Zombie":
+				impactObj = BloodImpact;//set impactObj to the particle effect game object group for this surface type
+				rotateParticle = true;
+				if (!meleeAttack)
+				{
+					if (defaultImpactSounds[0])
+					{
+						hitSound = defaultImpactSounds[Random.Range(0, defaultImpactSounds.Length)];//select random impact sound for this surface type
+					}
+				}
+				else
+				{
+					if (defaultImpactSoundsMelee[0])
+					{
+						hitSound = defaultImpactSoundsMelee[Random.Range(0, defaultImpactSoundsMelee.Length)];//select random impact sound for this surface type
+					}
+				}
+				break;
+
 			case "Metal":
-			impactObj = metalImpact;
-			rotateParticle = true;
-			if(!meleeAttack){
-				if(metalImpactSounds[0]){
-                        if (PlayerWeaponsComponent.currentWeapon == 3)
-                        {
+				impactObj = metalImpact;
+				rotateParticle = true;
+				if (!meleeAttack)
+				{
+					if (metalImpactSounds[0])
+					{
+						if (PlayerWeaponsComponent.currentWeapon == 3)
+						{
 							hitSound = BladeSnd;
-                        }
-                        else
-                        {
+						}
+						else
+						{
 							hitSound = metalImpactSounds[Random.Range(0, metalImpactSounds.Length)];//select random impact sound for this surface type
 
 						}
 					}
-			}else{
-				if(metalImpactSoundsMelee[0]){
-					hitSound = metalImpactSoundsMelee[Random.Range(0, metalImpactSoundsMelee.Length)];//select random impact sound for this surface type
 				}
-			}
-			break;
-		case "Wood":
-			impactObj = woodImpact;
-			rotateParticle = true;
-			if(!meleeAttack){
-				if(woodImpactSounds[0]){
-					hitSound = woodImpactSounds[Random.Range(0, woodImpactSounds.Length)];//select random impact sound for this surface type
+				else
+				{
+					if (metalImpactSoundsMelee[0])
+					{
+						hitSound = metalImpactSoundsMelee[Random.Range(0, metalImpactSoundsMelee.Length)];//select random impact sound for this surface type
+					}
 				}
-			}else{
-				if(woodImpactSoundsMelee[0]){
-					hitSound = woodImpactSoundsMelee[Random.Range(0, woodImpactSoundsMelee.Length)];//select random impact sound for this surface type
+				break;
+
+			case "Wood":
+				impactObj = woodImpact;
+				rotateParticle = true;
+				if (!meleeAttack)
+				{
+					if (woodImpactSounds[0])
+					{
+						hitSound = woodImpactSounds[Random.Range(0, woodImpactSounds.Length)];//select random impact sound for this surface type
+					}
 				}
-			}
-			break;
-		case "Water":
-			impactObj = waterImpact;
-			rotateParticle = false;
-			if(waterImpactSounds[0]){
-				hitSound = waterImpactSounds[Random.Range(0, waterImpactSounds.Length)];
-			}
-			break;
-		case "Glass":
-			impactObj = glassImpact;
-			rotateParticle = false;
-			if(glassImpactSounds[0]){
-				hitSound = glassImpactSounds[Random.Range(0, glassImpactSounds.Length)];
-			}
-			break;
-		case "Flesh":
-			impactObj = fleshImpact;
-			rotateParticle = false;
-			if(!meleeAttack){
-				if(fleshImpactSounds[0]){
-					hitSound = fleshImpactSounds[Random.Range(0, fleshImpactSounds.Length)];//select random impact sound for this surface type
+				else
+				{
+					if (woodImpactSoundsMelee[0])
+					{
+						hitSound = woodImpactSoundsMelee[Random.Range(0, woodImpactSoundsMelee.Length)];//select random impact sound for this surface type
+					}
 				}
-			}else{
-				if(fleshImpactSoundsMelee[0]){
-					hitSound = fleshImpactSoundsMelee[Random.Range(0, fleshImpactSoundsMelee.Length)];//select random impact sound for this surface type
+				break;
+			case "Water":
+				impactObj = waterImpact;
+				rotateParticle = false;
+				if (waterImpactSounds[0])
+				{
+					hitSound = waterImpactSounds[Random.Range(0, waterImpactSounds.Length)];
 				}
-			}
-			break;
-		case "Stone":
-			impactObj = stoneImpact;
-			rotateParticle = true;
-			if(!meleeAttack){
-				if(stoneImpactSounds[0]){
-					hitSound = stoneImpactSounds[Random.Range(0, stoneImpactSounds.Length)];//select random impact sound for this surface type
+				break;
+			case "Glass":
+				impactObj = glassImpact;
+				rotateParticle = false;
+				if (glassImpactSounds[0])
+				{
+					hitSound = glassImpactSounds[Random.Range(0, glassImpactSounds.Length)];
 				}
-			}else{
-				if(stoneImpactSoundsMelee[0]){
-					hitSound = stoneImpactSoundsMelee[Random.Range(0, stoneImpactSoundsMelee.Length)];//select random impact sound for this surface type
+				break;
+			case "Flesh":
+				impactObj = fleshImpact;
+				rotateParticle = false;
+				if (!meleeAttack)
+				{
+					if (fleshImpactSounds[0])
+					{
+						hitSound = fleshImpactSounds[Random.Range(0, fleshImpactSounds.Length)];//select random impact sound for this surface type
+					}
 				}
-			}
-			break;
-		default:
-			impactObj = metalImpact;
-			rotateParticle = false;
-			if(!meleeAttack){
-				if(defaultImpactSounds[0]){
-					hitSound = defaultImpactSounds[Random.Range(0, defaultImpactSounds.Length)];//select random impact sound for this surface type
+				else
+				{
+					if (fleshImpactSoundsMelee[0])
+					{
+						hitSound = fleshImpactSoundsMelee[Random.Range(0, fleshImpactSoundsMelee.Length)];//select random impact sound for this surface type
+					}
 				}
-			}else{
-				if(defaultImpactSoundsMelee[0]){
-					hitSound = defaultImpactSoundsMelee[Random.Range(0, defaultImpactSoundsMelee.Length)];//select random impact sound for this surface type
+				break;
+			case "Stone":
+				impactObj = stoneImpact;
+				rotateParticle = true;
+				if (!meleeAttack)
+				{
+					if (stoneImpactSounds[0])
+					{
+						hitSound = stoneImpactSounds[Random.Range(0, stoneImpactSounds.Length)];//select random impact sound for this surface type
+					}
 				}
-			}
-			break;
+				else
+				{
+					if (stoneImpactSoundsMelee[0])
+					{
+						hitSound = stoneImpactSoundsMelee[Random.Range(0, stoneImpactSoundsMelee.Length)];//select random impact sound for this surface type
+					}
+				}
+				break;
+
+
+			default:
+				impactObj = metalImpact;
+				rotateParticle = false;
+				if (!meleeAttack)
+				{
+					if (defaultImpactSounds[0])
+					{
+						hitSound = defaultImpactSounds[Random.Range(0, defaultImpactSounds.Length)];//select random impact sound for this surface type
+					}
+				}
+				else
+				{
+					if (defaultImpactSoundsMelee[0])
+					{
+						hitSound = defaultImpactSoundsMelee[Random.Range(0, defaultImpactSoundsMelee.Length)];//select random impact sound for this surface type
+					}
+				}
+				break;
 		}
+		
 			
 		impactObj.SetActive(true);
 		impactObj.transform.position = hitPoint;
@@ -277,7 +400,7 @@ public class WeaponEffects : MonoBehaviour {
 		//play sounds of bullets hitting surface/ricocheting
 		PlayAudioAtPos.PlayClipAt(hitSound, hitPoint, hitVolumeAmt, 1.0f, 1.0f, 3.0f);
 		return true;
-	}
+	}*/
 
 	//emit the particles and also rotate their velocities to be perpendicular to surface angle hit
 	//by doing this, only one particle system needs to be used for each projectile impact type to save memory
