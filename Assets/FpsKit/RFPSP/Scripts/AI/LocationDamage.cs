@@ -80,7 +80,7 @@ public class LocationDamage : MonoBehaviour {
 					
                     if (IsLegs)
                     {
-						anim.runtimeAnimatorController = Resources.Load("CrawlController") as RuntimeAnimatorController;
+						//anim.runtimeAnimatorController = Resources.Load("CrawlController") as RuntimeAnimatorController;ali
 					}
 				}
 				AIComponent.CharacterDamageComponent.ApplyDamage(DamageCount.Damage[weaponNumber] * damageMultiplier, attackDir, attackerPos, attacker, isPlayer, isExplosion, thisRigidBody, damageForce);

@@ -89,7 +89,7 @@ public class CharacterDamage : MonoBehaviour {
 					foreach(Rigidbody rb in bodies){
 						rb.isKinematic = true;
 					}
-
+					
 					AIComponent.AnimatorComponent.enabled = true;
 					
 					if(gunObj){
@@ -105,7 +105,7 @@ public class CharacterDamage : MonoBehaviour {
 
 					AIComponent.AnimatorComponent.enabled = false;
 					
-					foreach(Collider col in AIComponent.colliders){
+					foreach (Collider col in AIComponent.colliders){
 //						foreach(Collider col2 in AIComponent.colliders){
 //							Physics.IgnoreCollision(col, col2, false);//ignore collisions with other body part colliders (is this even needed???)
 //						}
@@ -136,7 +136,7 @@ public class CharacterDamage : MonoBehaviour {
 	}
 	
 	//damage NPC
-	public void ApplyDamage ( float damage, Vector3 attackDir, Vector3 attackerPos, Transform attacker, bool isPlayer, bool isExplosion, Rigidbody hitBody = null, float bodyForce = 0.0f ){
+	public void ApplyDamage ( float damage, Vector3 attackDir, Vector3 attackerPos, Transform attacker, bool isPlayer, bool isExplosion, Rigidbody hitBody = null, float bodyForce  = 0.0f){//0.0f
 		//Debug.LogError(damage);
 		TextDemage.SetActive(true);
 	
@@ -202,16 +202,21 @@ public class CharacterDamage : MonoBehaviour {
 				AIComponent.PlayerWeaponsComponent.FPSPlayerComponent.StartCoroutine(AIComponent.PlayerWeaponsComponent.FPSPlayerComponent.ActivateBulletTime(sloMoDeathTime));
 			}
 			if(bodies.Length < 2){//if NPC is only using one capsule collider for collision, instantiate ragdoll, instead of activating existing body part rigidbodies
-				Die();
-			}else{
+                Die();
+				
+				
+			}
+			else{
 				if(!ragdollActive){
-					RagDollDie(hitBody, bodyForce);
+					RagDollDie(hitBody, 100);//bodyForce
+					
 				}
 			}
 		}
 	}
-	
+
 	//this method called if NPC has died and has more than one capsule collider for collision, so transition to ragdoll
+	
 	void RagDollDie(Rigidbody hitBody, float bodyForce) {
 		if (dieSound){
 			PlayAudioAtPos.PlayClipAt(dieSound, transform.position, 1.0f);
@@ -263,6 +268,9 @@ public class CharacterDamage : MonoBehaviour {
         {
             zombieDied?.Invoke();
         }
+		Debug.LogError("HIt" + bodyForce);
+		
+		
 		StartCoroutine(ApplyForce(hitBody, bodyForce));
 		//initialize the RemoveBody.cs script attached to the NPC ragdoll
 		if(RemoveBodyComponent){
@@ -279,13 +287,18 @@ public class CharacterDamage : MonoBehaviour {
 		yield return new WaitForSeconds(0.02f);
 		if(!explosionCheck){
 			//apply damage force to the ragdoll rigidbody
-			body.AddForce(attackDir2 * attackForce, ForceMode.Impulse);
+			body.AddForce(attackDir2 * force, ForceMode.Impulse);
+			//body.AddForce(attackDir2 * attackForce, ForceMode.Impulse);
+			Debug.LogError("ExplosionCheck");
 		}else{
 			//apply explosive damage force to the ragdoll rigidbodies
 			foreach(Rigidbody rb in bodies) {
 				rb.AddForce((myTransform.position - (attackerPos2 + (Vector3.up * -2.5f))).normalized * UnityEngine.Random.Range(2.5f, 4.5f), ForceMode.Impulse);
+				Debug.LogError("npc");
 			}
 		}
+		
+		
 	}
 	
 	//this method called if the NPC dies and only has one capsule collider for collision

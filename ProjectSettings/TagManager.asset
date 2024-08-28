@@ -17,6 +17,8 @@ TagManager:
   - Jump
   - gun
   - Usable
+  - Bullet
+  - NoHitMark
   layers:
   - Default
   - TransparentFX
@@ -42,7 +44,7 @@ TagManager:
   - IgnoreRaycastAndPickup
   - abc
   - BulletPass
-  - 
+  - BulletVisible
   - 
   - 
   - 

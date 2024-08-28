@@ -155,6 +155,16 @@ public class WeaponEffects : MonoBehaviour {
 						hitSound = defaultImpactSoundsMelee[Random.Range(0, defaultImpactSoundsMelee.Length)];//select random impact sound for this surface type
 					}
 				}
+				impactObj.SetActive(true);
+				impactObj.transform.position = hitPoint;
+
+				foreach (Transform child in impactObj.transform)
+				{//emit all particles in the particle effect game object group stored in impactObj var
+					partSys = child.GetComponent<ParticleSystem>();
+					partSys.Play();
+					Invoke(nameof(BloodEffects),1f);
+				}
+
 				break;
 
 			default:
@@ -174,19 +184,21 @@ public class WeaponEffects : MonoBehaviour {
 						hitSound = defaultImpactSoundsMelee[Random.Range(0, defaultImpactSoundsMelee.Length)];//select random impact sound for this surface type
 					}
 				}
+				impactObj.SetActive(true);
+				impactObj.transform.position = hitPoint;
+
+				foreach (Transform child in impactObj.transform)
+				{//emit all particles in the particle effect game object group stored in impactObj var
+					partSys = child.GetComponent<ParticleSystem>();
+
+					EmitRotatedParticle(partSys, rayNormal);
+				}
+
 				break;
 		}
 
 
-		impactObj.SetActive(true);
-		impactObj.transform.position = hitPoint;
-
-		foreach (Transform child in impactObj.transform)
-		{//emit all particles in the particle effect game object group stored in impactObj var
-			partSys = child.GetComponent<ParticleSystem>();
-			EmitRotatedParticle(partSys, rayNormal);
-		}
-
+		
 		//modify the weapon impact sounds based on the weapon type, so the multiple shotgun impacts and automatic weapons aren't so loud
 		if (!NpcAttack && !WeaponBehaviorComponent.meleeActive)
 		{
@@ -419,7 +431,10 @@ public class WeaponEffects : MonoBehaviour {
 			partSysToRotate.SetParticles(activeParticles, numParticlesAlive);//apply velocity changes to particles for this impact emission
 		}
 	}
-
+	public void BloodEffects()
+    {
+		impactObj.SetActive(false);
+    }
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//Draw Bullet Marks
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

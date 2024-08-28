@@ -712,7 +712,9 @@ public class WeaponBehavior : MonoBehaviour {
 	public float pointRange2Cam = 8.0f;
 	[Tooltip("Range of point light shining on weapon model when flashlight/attachment light is on for 1 camera mode.")]
 	public float pointRange1Cam = 0.2f;
-	
+
+	public GameObject BulletVfx;
+	public Transform BulletTransform;
 	void Start (){
 		fireVol= PlayerPrefs.GetFloat("Sounds");
 		timer = 0f;
@@ -1875,7 +1877,7 @@ public class WeaponBehavior : MonoBehaviour {
 		
 		hitCount = 0;//reset hitCount so flesh impacts are counted from zero again for this shot
 		
-		if(meleeSwingDelay == 0 && !meleeActive){//if this is not a melee weapon
+		if (meleeSwingDelay == 0 && !meleeActive){//if this is not a melee weapon
 			
 			if(useWeaponKick){
 				//make view recoil with shot
@@ -1895,6 +1897,8 @@ public class WeaponBehavior : MonoBehaviour {
 
 			if(PlayerModelAnim){
 				PlayerModelAnim.SetTrigger("Fire");
+				
+				
 			}
 			if(tpUseShotgunAnims && tpShotgunAnim && tpShotgunAnim.isInitialized){
 				tpShotgunAnim.SetTrigger("Pump");
@@ -1960,6 +1964,8 @@ public class WeaponBehavior : MonoBehaviour {
 		for(float i = 0; i < projectileCount; i++){
 			direction = SprayDirection();
 			RaycastHit hit;
+			
+				ShootBullet(i);
 			
 			//set up weapon look direction and origin
 			Vector3 shotOrigin = playerObj.transform.position + playerObj.transform.up * 0.8f;
@@ -2116,7 +2122,10 @@ public class WeaponBehavior : MonoBehaviour {
 						break;//don't fire multiple offhand melee shots if projectile count is greater than 1
 					}
 				}
+
+				
 			}
+			
 		}
 		
 	}
@@ -2126,6 +2135,7 @@ public class WeaponBehavior : MonoBehaviour {
 		// Apply a force to the rigidbody we hit
 		if (hit.rigidbody && hit.rigidbody.useGravity){
 			hit.rigidbody.AddForceAtPosition(force * directionArg / (Time.fixedDeltaTime * 100.0f), hit.point);//scale the force with the Fixed Timestep setting
+			print("Body" + hit.rigidbody);
 		}
 		
 		if(meleeActive){
@@ -2166,6 +2176,7 @@ public class WeaponBehavior : MonoBehaviour {
 			if(hit.collider.gameObject.GetComponent<LocationDamage>() && hit.collider.gameObject.GetComponent<LocationDamage>().AIComponent.enabled){
 				hit.collider.gameObject.GetComponent<LocationDamage>().ApplyDamage(Weapon_Number, directionArg, mainCamTransform.position, myTransform, true, false);
 				FPSPlayerComponent.UpdateHitTime();//used for hitmarker
+					
 			}
 			break;
 		default:
@@ -2182,6 +2193,7 @@ public class WeaponBehavior : MonoBehaviour {
 					}else{
 						WeaponEffectsComponent.ImpactEffects(hit.collider, hit.point - mainCamTransform.forward * 0.2f, false, true, hit.normal);//draw flesh impact effects where the weapon hit NPC
 					}
+					
 				}
 			}else{
 				if(meleeSwingDelay == 0 && !meleeActive){
@@ -2822,5 +2834,48 @@ public class WeaponBehavior : MonoBehaviour {
 			WeaponAnimatorComponent.SetTrigger("Neutral");
 		}
 	}
-	
+
+	void ShootBullet(float fire)
+	{
+		// Cast a ray from the camera to the mouse position
+
+
+
+		// If the ray hits something
+		if (fire == 1)
+		{
+			// Spawn the bullet at the ray's origin
+			GameObject bullet = Instantiate(BulletVfx, BulletTransform.transform.position, Quaternion.identity);
+
+			// Calculate the direction from the bullet's position to the hit point
+			
+
+			// Move the bullet towards the hit point
+			bullet.GetComponent<Rigidbody>().velocity = BulletTransform.transform.forward * 35f;
+			print("IFfire" + fire);
+		}
+		else
+		{
+			for (int i = 0; i < fire; i++)
+			{
+				// Calculate random spread within the defined spread angle
+				
+
+				// Calculate a random spread within the defined spread angle
+				float angleY = Random.Range(-5, 5);
+				float angleX = Random.Range(-5, 5);
+				Quaternion spreadRotation = Quaternion.Euler(angleX, angleY, 0);
+
+
+				// Spawn the bullet with the spread rotation
+				GameObject bullet1 = Instantiate(BulletVfx, BulletTransform.transform.position, BulletTransform.rotation * spreadRotation);
+
+
+				// Move the bullet forward along its modified forward axis
+				bullet1.GetComponent<Rigidbody>().velocity = bullet1.transform.forward * 35f;
+				print("fire" + fire);
+			}
+		}
+
+	}
 }
