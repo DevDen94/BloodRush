@@ -289,12 +289,12 @@ public class CharacterDamage : MonoBehaviour {
 			//apply damage force to the ragdoll rigidbody
 			body.AddForce(attackDir2 * force, ForceMode.Impulse);
 			//body.AddForce(attackDir2 * attackForce, ForceMode.Impulse);
-			Debug.LogError("ExplosionCheck");
+			
 		}else{
 			//apply explosive damage force to the ragdoll rigidbodies
 			foreach(Rigidbody rb in bodies) {
 				rb.AddForce((myTransform.position - (attackerPos2 + (Vector3.up * -2.5f))).normalized * UnityEngine.Random.Range(2.5f, 4.5f), ForceMode.Impulse);
-				Debug.LogError("npc");
+				
 			}
 		}
 		
