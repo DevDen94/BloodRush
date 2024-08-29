@@ -20,7 +20,7 @@ public class Splash : MonoBehaviour
     private void Start()
     {
         PlayerPrefs.SetInt("Tut", 1);
-        RuntimePlatform platform = Application.platform;
+        //RuntimePlatform platform = Application.platform;
         //if (data.data == Application.identifier)
         //{
             Value = 0;
@@ -77,7 +77,7 @@ public class Splash : MonoBehaviour
        
         if (Value >= 50)
         {
-            StopCoroutine(waitforSceneSwitch());
+           
             if (activeScene.name == "Splash")
             {
                 SceneManager.LoadSceneAsync("MainMenu");
@@ -87,9 +87,11 @@ public class Splash : MonoBehaviour
                 if (PlayerPrefs.GetInt("Tut") == 0)
                 {
                     SceneManager.LoadSceneAsync("Tutorial");
+                   
                 }
                 else
                 {
+                   
                     if (PlayerPrefs.GetInt("Mode") == 1)
                     {
                         //SceneManager.LoadSceneAsync("FinalGamePlay");
@@ -108,9 +110,11 @@ public class Splash : MonoBehaviour
                     else if (PlayerPrefs.GetInt("Mode") == 4)
                     {
                         // SceneManager.LoadSceneAsync("FinalGamePlay");
+                        
                         SceneManager.LoadSceneAsync("SurvivalModeForDemo");
                     }
                 }
+                StopCoroutine(waitforSceneSwitch());
             }
             else if (activeScene.name == "Tutorial")
             {

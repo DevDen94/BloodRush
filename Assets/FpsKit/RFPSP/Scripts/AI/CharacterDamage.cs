@@ -3,6 +3,7 @@
 using UnityEngine;
 using System.Collections;
 using System;
+using Dan.Demo;
 
 public class CharacterDamage : MonoBehaviour {
 	public UnityEngine.Events.UnityEvent onDie; // for save addon by PixelCrushers
@@ -236,13 +237,18 @@ public class CharacterDamage : MonoBehaviour {
                     Debug.Log("Wave Mode");
 
                     WaveManager_.instance.Total_Kills = WaveManager_.instance.Total_Kills + 1;
-                    WaveManager_.instance.ZombieDeathCount--;
+					
+
+					WaveManager_.instance.ZombieDeathCount--;
                     if (WaveManager_.instance.ZombieDeathCount == 0)
                     {
 						Debug.Log("WaveComplete");
                         WaveManager_.instance.isLevelComplete = true;
                     }
-                }
+					PlayerPrefs.SetInt("LeaderBoardScore", PlayerPrefs.GetInt("LeaderBoardScore") + 1);
+					
+					LeaderboardShowcase.Instance._playerScore = PlayerPrefs.GetInt("LeaderBoardScore");
+				}
             }
 		}
 		
@@ -268,7 +274,7 @@ public class CharacterDamage : MonoBehaviour {
         {
             zombieDied?.Invoke();
         }
-		Debug.LogError("HIt" + bodyForce);
+		
 		
 		
 		StartCoroutine(ApplyForce(hitBody, bodyForce));

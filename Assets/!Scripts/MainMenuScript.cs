@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
+using Dan.Demo;
 public class MainMenuScript : MonoBehaviour
 {
     public static MainMenuScript instance;
@@ -18,7 +20,7 @@ public class MainMenuScript : MonoBehaviour
     public Slider[] MusicSlider;
     public VersionNumber number;
     public Text VersionNumber;
-
+    
     public GameObject _levelsPanel;
 
     public GameObject[] _levelPanels;
@@ -32,6 +34,9 @@ public class MainMenuScript : MonoBehaviour
     public Button _survivalModeButton;
     public Button _adButtonForSurvivalMode;
     public Text _survivalModeUnlockAdsCounterText;
+    public GameObject NamePanel,MainMenuPanel;
+    public Text PlayerNameTXt;
+    public TMP_InputField UserNameTXt;
 
     private void Awake()
     {
@@ -71,7 +76,7 @@ public class MainMenuScript : MonoBehaviour
 
         //Firebase.Analytics.FirebaseAnalytics.LogEvent("Mode_Selection", "mode_Number", mode.ToString());
 
-        if(PlayerPrefs.GetInt("Tut") == 0)
+        if(PlayerPrefs.GetInt("Tut") == 3)//0
         {
             LoaddingPanel.SetActive(true);
             PlayerPrefs.SetInt("ModeForTut", mode);
@@ -79,6 +84,7 @@ public class MainMenuScript : MonoBehaviour
         else
         {
             PlayerPrefs.SetInt("Mode", mode);
+           
             if (mode == 1)
             {
                 if(PlayerPrefs.GetInt("WaveUnlock") < LevelBtns.Length - 2)
@@ -148,10 +154,19 @@ public class MainMenuScript : MonoBehaviour
 
         if (!PlayerPrefs.HasKey("Zero"))
         {
-            PlayerPrefs.SetInt("Zero", 1);
+           
             
             PlayerPrefs.SetFloat("Music", 0.5f);
             PlayerPrefs.SetFloat("Sounds", 0.5f);
+            NamePanel.SetActive(true);
+            MainMenuPanel.SetActive(false);
+        }
+        else
+        {
+            NamePanel.SetActive(false);
+            PlayerNameTXt.text = PlayerPrefs.GetString("PlayerName").ToString();
+            MainMenuPanel.SetActive(true);
+            LeaderboardShowcase.Instance.Submit();
         }
         DisableAll();
         Debug.Log("wave unlock " + PlayerPrefs.GetInt("WaveUnlock")); 
@@ -242,6 +257,19 @@ public class MainMenuScript : MonoBehaviour
         }
     }
 
+
+    public void SaveName()
+    {
+        if (string.IsNullOrEmpty(UserNameTXt.text))
+            return;
+       
+        NamePanel.SetActive(false);
+       MainMenuPanel.SetActive(true);
+        PlayerPrefs.SetString("PlayerName", UserNameTXt.text);
+        PlayerPrefs.SetInt("Zero", 1);
+        PlayerNameTXt.text = PlayerPrefs.GetString("PlayerName").ToString();
+        
+    }
     public void ModeSelection()
     {
 

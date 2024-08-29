@@ -524,10 +524,11 @@ public class PlayerWeapons : MonoBehaviour {
 		
 		//we are not dropping a weapon anymore if one has been selected
 		dropWeapon = false;
-		
+
 		//do not proceed with selecting weapon if player doesn't have it in their inventory
 		//but make an exception for the null/unarmed weapon for when the player presses the holster button
 		//also dont allow weapon switch if player is climbing, swimming, or holding object and their weapon is lowered
+		Debug.LogError("index" + index);
 		WeaponBehavior ThisWeaponBehavior = weaponOrder[index].GetComponent<WeaponBehavior>();
 
         if (PlayerPrefs.GetInt("Mode") == 1)

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Dan.Demo;
 public class WaveManager_ : MonoBehaviour
 {
     public static WaveManager_ instance;
@@ -258,6 +259,7 @@ public class WaveManager_ : MonoBehaviour
             is_Gernade = true;
         }
         Kills.text =  Total_Kills.ToString();
+       
         if (ZombieDeathCount == 0 && isLevelComplete)
         {
             Invoke("WaveComplete", 1.5f);
@@ -289,7 +291,7 @@ public class WaveManager_ : MonoBehaviour
         //GoogleAdMobController.instance.ShowSmallBannerAd();
         //Firebase.Analytics.FirebaseAnalytics.LogEvent("SurvivalMode_NextBtn", "SurvivalMode", Wave_.ToString());
         src.PlayOneShot(Btnclick);
-        SceneManager.LoadSceneAsync("SurvivalMode");
+        SceneManager.LoadSceneAsync("SurvivalModeForDemo");
         //SceneManager.LoadScene("FinalGamePlay");
         //Time.timeScale = 1f;
     }
@@ -299,7 +301,7 @@ public class WaveManager_ : MonoBehaviour
         //GoogleAdMobController.instance.ShowSmallBannerAd();
         //Firebase.Analytics.FirebaseAnalytics.LogEvent("SurvivalMode_RestartBtn", "SurvivalMode", Wave_.ToString());
         src.PlayOneShot(Btnclick);
-        SceneManager.LoadSceneAsync("SurvivalMode");
+        SceneManager.LoadSceneAsync("SurvivalModeForDemo");
         //SceneManager.LoadScene("FinalGamePlay");
     }
     public void Home()
