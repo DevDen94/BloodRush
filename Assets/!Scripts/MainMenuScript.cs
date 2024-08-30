@@ -36,7 +36,7 @@ public class MainMenuScript : MonoBehaviour
     public Text _survivalModeUnlockAdsCounterText;
     public GameObject NamePanel,MainMenuPanel;
     public Text PlayerNameTXt;
-    public TMP_InputField UserNameTXt;
+    public InputField UserNameTXt;
 
     private void Awake()
     {
@@ -160,6 +160,7 @@ public class MainMenuScript : MonoBehaviour
             PlayerPrefs.SetFloat("Sounds", 0.5f);
             NamePanel.SetActive(true);
             MainMenuPanel.SetActive(false);
+            OnInputFieldSelected(UserNameTXt.text);
         }
         else
         {
@@ -179,8 +180,8 @@ public class MainMenuScript : MonoBehaviour
         _buttonClickSrc.volume = PlayerPrefs.GetFloat("Sounds");
         _buttonClickSrc2.volume = PlayerPrefs.GetFloat("Sounds");
         _buttonClickSrc3.volume = PlayerPrefs.GetFloat("Sounds");
-
         
+
 
     }
 
@@ -260,8 +261,8 @@ public class MainMenuScript : MonoBehaviour
 
     public void SaveName()
     {
-        if (string.IsNullOrEmpty(UserNameTXt.text))
-            return;
+        /*if (string.IsNullOrEmpty(UserNameTXt.text))
+            return;*/
        
         NamePanel.SetActive(false);
        MainMenuPanel.SetActive(true);
@@ -275,6 +276,13 @@ public class MainMenuScript : MonoBehaviour
 
     }
 
+    public void OnInputFieldSelected(string text)
+    {
+#if UNITY_WEBGL && !UNITY_EDITOR
+            // Trigger Unity's built-in keyboard for WebGL on mobile browsers
+            TouchScreenKeyboard.Open(UserNameTXt.text, TouchScreenKeyboardType.Default);
+#endif
+    }
     public void RateUs()
     {
         Application.OpenURL("https://play.google.com/store/apps/details?id=com.darwin.zombie.shooting");
