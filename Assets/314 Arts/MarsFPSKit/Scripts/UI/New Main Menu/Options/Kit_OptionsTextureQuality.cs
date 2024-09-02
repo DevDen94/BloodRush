@@ -45,7 +45,7 @@ namespace MarsFPSKit
             public override void OnDropdowChange(TextMeshProUGUI txt, int newValue)
             {
                 //Set
-                QualitySettings.masterTextureLimit = newValue;
+                QualitySettings.globalTextureMipmapLimit = newValue;
                 //Save
                 PlayerPrefs.SetInt("textureResolution", newValue);
             }

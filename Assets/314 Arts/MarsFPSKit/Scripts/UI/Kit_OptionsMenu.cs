@@ -246,7 +246,7 @@ namespace MarsFPSKit
 
         private void TextureQualityValueChanged(int value)
         {
-            QualitySettings.masterTextureLimit = value;
+            QualitySettings.globalTextureMipmapLimit = value;
             Save();
         }
 
